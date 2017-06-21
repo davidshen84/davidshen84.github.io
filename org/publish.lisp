@@ -8,5 +8,12 @@
          :publishing-function org-html-publish-to-html
          :auto-preamble)
 
-        ("org" :components ("blog"))
-        ))
+	("static"
+         :base-directory "./js"
+         :base-extension "js"
+         :publishing-directory "../js"
+         :recursive t
+         :publishing-function org-publish-attachment)
+
+        ("org" :components ("blog" "static"))
+	))

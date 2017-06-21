@@ -25,11 +25,11 @@
 #+HTML_HEAD:
 #+HTML_HEAD_EXTRA:
 #+SUBTITLE: private; random; no period;
-#+INFOJS_OPT: view:info
+#+INFOJS_OPT: path:js/org-info.js view:info
 #+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0.8)
 #+LATEX_HEADER:
 
-* Beginning
+* <2017-06-16 Fri> Beginning
 My first blog on github.io.
 
 *At the beginning, there is not much to say.*
