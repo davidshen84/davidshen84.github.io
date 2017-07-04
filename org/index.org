@@ -55,3 +55,9 @@ The default =org-html-postamble-format= looks ugly.
 #+BEGIN_EXAMPLE
   html-postamble:nil
 #+END_EXAMPLE
+
+** My GnuPGP fingerprint
+
+#+BEGIN_VERSE
+2ACF 7CFF E569 A57C 46A9  3494 2E7C EF39 DC1E 3599
+#+END_VERSE
