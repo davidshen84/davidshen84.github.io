@@ -1,6 +1,5 @@
 (setq org-publish-project-alist
-      '(
-        ("blog"
+      '(("blog"
          :base-directory "./"
          :base-extension "org"
          :publishing-directory "../"
@@ -8,12 +7,11 @@
          :publishing-function org-html-publish-to-html
          :auto-preamble)
 
-	("static"
+        ("static"
          :base-directory "./js"
          :base-extension "js"
          :publishing-directory "../js"
          :recursive t
          :publishing-function org-publish-attachment)
 
-        ("org" :components ("blog" "static"))
-	))
+        ("org" :components ("blog" "static"))))
