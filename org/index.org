@@ -66,3 +66,6 @@ The default =org-html-postamble-format= looks ugly.
 The free [[https://www.coursera.org/learn/machine-learning/home/welcome][Machine Learning]] course on Coursera is awesome. I implemented
 all excise code (/not finished/) using Python 3.6 and Jupyter
 notebook. You can find the code at my [[https://github.com/davidshen84/machine-learning/tree/coursera][github]] repository.
+
+** My TODO list
+*** TODO Move [[https://davidshen84.appspot.com/blog][old blog]] to here.
