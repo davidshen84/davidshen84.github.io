@@ -29,754 +29,743 @@
 #+CREATOR: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.1.2)
 #+LATEX_HEADER:
 
-| Vocabulary          | Re-type    |
-|---------------------+------------|
-| abstract            | abstract   |
-| academic            | academic   |
-| accept              | accept     |
-| acceptable          | acceptable |
-| accurate            | accurate   |
-| achieve             | achieve    |
-| acquire             | acquire    |
-| active              | active     |
-| actively            | actively   |
-| acutely             | acutely    |
-| add                 |            |
-| additional          |            |
-| address (an)        |            |
-| administrative      |            |
-| adopt (a)           |            |
-| adopt (an)          |            |
-| advanced            |            |
-| adverse             |            |
-| adversely           |            |
-| affect (the)        |            |
-| affect (the)        |            |
-| allocate            |            |
-| allow               |            |
-| almost              |            |
-| alternative         |            |
-| ample               |            |
-| analytical          |            |
-| anecdotal           |            |
-| annual              |            |
-| apply               |            |
-| apply (a)           |            |
-| apply (the)         |            |
-| appropriate         |            |
-| armed               |            |
-| artificial          |            |
-| assess (the)        |            |
-| assessment          |            |
-| associated          |            |
-| assume              |            |
-| assume (the)        |            |
-| atomic              |            |
-| attend (a)          |            |
-| available           |            |
-| average             |            |
-| background          |            |
-| basic               |            |
-| bear                |            |
-| become              |            |
-| become (a)          |            |
-| become (the)        |            |
-| begin (a)           |            |
-| behave              |            |
-| beneficial          |            |
-| best                |            |
-| binary              |            |
-| biological          |            |
-| brief               |            |
-| briefly             |            |
-| broad               |            |
-| broader             |            |
-| broadly             |            |
-| business            |            |
-| capitalist          |            |
-| career              |            |
-| careful             |            |
-| carefully           |            |
-| carry               |            |
-| carry out           |            |
-| carry out (the)     |            |
-| cast                |            |
-| causal              |            |
-| cause               |            |
-| central             |            |
-| certain             |            |
-| change              |            |
-| change (an)         |            |
-| changing            |            |
-| characteristic      |            |
-| chemical            |            |
-| civil               |            |
-| class               |            |
-| classic             |            |
-| classical           |            |
-| clear               |            |
-| clearly             |            |
-| climate             |            |
-| climatic            |            |
-| close               |            |
-| closely             |            |
-| closer              |            |
-| cognitive           |            |
-| collaborative       |            |
-| collect             |            |
-| collective          |            |
-| combined            |            |
-| come into           |            |
-| come into           |            |
-| commercial          |            |
-| commit (a)          |            |
-| commit (an)         |            |
-| common              |            |
-| commonly            |            |
-| communicate         |            |
-| comparative         |            |
-| compelling          |            |
-| competitive         |            |
-| complete (a)        |            |
-| complex             |            |
-| comprehensive       |            |
-| conceptual          |            |
-| concerted           |            |
-| concluding          |            |
-| conditional         |            |
-| conduct             |            |
-| conduct (a)         |            |
-| conduct (an)        |            |
-| conflict            |            |
-| conflicting         |            |
-| consider            |            |
-| consider (a)        |            |
-| consider (an)       |            |
-| consider (the)      |            |
-| considerable        |            |
-| consistent          |            |
-| constant            |            |
-| constituent         |            |
-| contain             |            |
-| contain (an)        |            |
-| contemporary        |            |
-| contextual          |            |
-| continued           |            |
-| continuous          |            |
-| contribute          |            |
-| contribute to (the) |            |
-| controversial       |            |
-| conventional        |            |
-| convey              |            |
-| convey (a)          |            |
-| convincing          |            |
-| coping              |            |
-| core                |            |
-| correct             |            |
-| correct (an)        |            |
-| counter             |            |
-| cover (a)           |            |
-| cover (an)          |            |
-| create              |            |
-| create (an)         |            |
-| creative            |            |
-| criminal            |            |
-| critical            |            |
-| critically          |            |
-| crucial             |            |
-| cultural            |            |
-| culturally          |            |
-| current             |            |
-| currently           |            |
-| daily               |            |
-| data                |            |
-| deal (with an)      |            |
-| deem                |            |
-| deep                |            |
-| deeper              |            |
-| deeply              |            |
-| defining            |            |
-| deliberate          |            |
-| democratic          |            |
-| demographic         |            |
-| demonstrate         |            |
-| densely             |            |
-| deny                |            |
-| dependent           |            |
-| describe (a)        |            |
-| describe (a)        |            |
-| descriptive         |            |
-| desired             |            |
-| detailed            |            |
-| develop (a)         |            |
-| develop (an)        |            |
-| develop (an)        |            |
-| developmental       |            |
-| diagnostic          |            |
-| differ              |            |
-| digital             |            |
-| direct              |            |
-| directly            |            |
-| disclose            |            |
-| discuss (a)         |            |
-| discuss (an)        |            |
-| disposable          |            |
-| distinct            |            |
-| distinctive         |            |
-| distinguishing      |            |
-| diverse             |            |
-| dividing            |            |
-| documentary         |            |
-| domestic            |            |
-| dominant            |            |
-| dramatic            |            |
-| draw                |            |
-| draw (a)            |            |
-| driving             |            |
-| due                 |            |
-| dynamic             |            |
-| earlier             |            |
-| early               |            |
-| easily              |            |
-| easy                |            |
-| economic            |            |
-| educational         |            |
-| effective           |            |
-| electronic          |            |
-| emotional           |            |
-| empirical           |            |
-| employ (a)          |            |
-| employment          |            |
-| encounter           |            |
-| encourage (the)     |            |
-| engage in (an)      |            |
-| enhance             |            |
-| enormous            |            |
-| entire              |            |
-| entirely            |            |
-| environmental       |            |
-| equal               |            |
-| equally             |            |
-| essential           |            |
-| establish (a)       |            |
-| established         |            |
-| ethical             |            |
-| ethnic              |            |
-| ever                |            |
-| evolutionary        |            |
-| examine (the)       |            |
-| exceptional         |            |
-| exercise            |            |
-| existing            |            |
-| expand              |            |
-| experience          |            |
-| experiential        |            |
-| experimental        |            |
-| expert              |            |
-| explanatory         |            |
-| explore             |            |
-| explore (an)        |            |
-| extended            |            |
-| extensive           |            |
-| extensively         |            |
-| external            |            |
-| extract             |            |
-| extremely           |            |
-| face                |            |
-| face (a)            |            |
-| facial              |            |
-| facilitate (the)    |            |
-| factual             |            |
-| fair                |            |
-| fairly              |            |
-| fall into (the)     |            |
-| far                 |            |
-| federal             |            |
-| feminist            |            |
-| field               |            |
-| final               |            |
-| financial           |            |
-| find                |            |
-| find                |            |
-| finite              |            |
-| firmly              |            |
-| first               |            |
-| flexible            |            |
-| focal               |            |
-| focus               |            |
-| focus on (an)       |            |
-| follow (a)          |            |
-| follow              |            |
-| following           |            |
-| foreign             |            |
-| formal              |            |
-| free                |            |
-| freely              |            |
-| frequently          |            |
-| fulfil (an)         |            |
-| full                |            |
-| fuller              |            |
-| fully               |            |
-| functional          |            |
-| fundamental         |            |
-| fundamentally       |            |
-| further             |            |
-| future              |            |
-| gain                |            |
-| gather              |            |
-| gender              |            |
-| general             |            |
-| generally           |            |
-| genetic             |            |
-| geographic(al)      |            |
-| get                 |            |
-| give                |            |
-| give                |            |
-| give (a)            |            |
-| give (an)           |            |
-| give (sb an)        |            |
-| give (sb)           |            |
-| given               |            |
-| global              |            |
-| government          |            |
-| graphical           |            |
-| great               |            |
-| greater             |            |
-| greatly             |            |
-| grow                |            |
-| growing             |            |
-| guiding             |            |
-| hardly              |            |
-| have                |            |
-| have (a)            |            |
-| have (an)           |            |
-| heated              |            |
-| heavily             |            |
-| hierarchical        |            |
-| high                |            |
-| high/er             |            |
-| higher              |            |
-| highly              |            |
-| historical          |            |
-| historically        |            |
-| hold (a)            |            |
-| holistic            |            |
-| homogeneous         |            |
-| huge                |            |
-| human               |            |
-| ideally             |            |
-| identify            |            |
-| identify (a)        |            |
-| identify (an)       |            |
-| immediate           |            |
-| immediately         |            |
-| imported            |            |
-| impose              |            |
-| improved            |            |
-| increase            |            |
-| increase (the)      |            |
-| increased           |            |
-| increasing          |            |
-| increasingly        |            |
-| independent         |            |
-| indigenous          |            |
-| individual          |            |
-| industrial          |            |
-| industrialized      |            |
-| inextricably        |            |
-| infinite            |            |
-| information         |            |
-| informed            |            |
-| initial             |            |
-| institutional       |            |
-| integral            |            |
-| integrated          |            |
-| intellectual        |            |
-| intensive           |            |
-| interested          |            |
-| internal            |            |
-| international       |            |
-| internet            |            |
-| interpersonal       |            |
-| interpret           |            |
-| intimate            |            |
-| intimately          |            |
-| intrinsic           |            |
-| introduce           |            |
-| introductory        |            |
-| keenly              |            |
-| key                 |            |
-| large               |            |
-| largely             |            |
-| later               |            |
-| lead to (the)       |            |
-| leading             |            |
-| learning            |            |
-| legal               |            |
-| legislative         |            |
-| liberal             |            |
-| lifelong            |            |
-| likely              |            |
-| limited             |            |
-| linear              |            |
-| literal             |            |
-| literary            |            |
-| little              |            |
-| living              |            |
-| local               |            |
-| logical             |            |
-| long                |            |
-| longitudinal        |            |
-| low                 |            |
-| low/er              |            |
-| lower               |            |
-| main                |            |
-| mainly              |            |
-| maintain            |            |
-| major               |            |
-| make                |            |
-| make (a)            |            |
-| make (an)           |            |
-| make(a)             |            |
-| male                |            |
-| manual              |            |
-| manufacturing       |            |
-| marked              |            |
-| markedly            |            |
-| maximum             |            |
-| mean                |            |
-| meaningful          |            |
-| media               |            |
-| medical             |            |
-| meet                |            |
-| meet (a)            |            |
-| meet (a)            |            |
-| meet (an)           |            |
-| mental              |            |
-| methodological      |            |
-| metropolitan        |            |
-| middle              |            |
-| migrant             |            |
-| military            |            |
-| minimum             |            |
-| minor               |            |
-| minority            |            |
-| missing             |            |
-| modern              |            |
-| modified            |            |
-| moral               |            |
-| multiple            |            |
-| municipal           |            |
-| mutual              |            |
-| mutually            |            |
-| narrow              |            |
-| national            |            |
-| native              |            |
-| natural             |            |
-| naturally           |            |
-| necessary           |            |
-| negative            |            |
-| negatively          |            |
-| new                 |            |
-| newly               |            |
-| next                |            |
-| normal              |            |
-| notable             |            |
-| nuclear             |            |
-| numerical           |            |
-| numerous            |            |
-| objective           |            |
-| obtain              |            |
-| obtain (a)          |            |
-| obvious             |            |
-| occur               |            |
-| offer               |            |
-| offer (an)          |            |
-| official            |            |
-| once                |            |
-| ongoing             |            |
-| online              |            |
-| open                |            |
-| opening             |            |
-| opinion             |            |
-| optimal             |            |
-| oral                |            |
-| organising          |            |
-| organizational      |            |
-| original            |            |
-| originally          |            |
-| overall             |            |
-| overwhelming        |            |
-| paid                |            |
-| paramount           |            |
-| particular          |            |
-| particularly        |            |
-| partly              |            |
-| party               |            |
-| past                |            |
-| peace               |            |
-| perceived           |            |
-| perform (a)         |            |
-| personal            |            |
-| physical            |            |
-| pilot               |            |
-| pioneering          |            |
-| pivotal             |            |
-| place               |            |
-| planning            |            |
-| plausible           |            |
-| play (a)            |            |
-| political           |            |
-| politically         |            |
-| poorly              |            |
-| popular             |            |
-| pose (a)            |            |
-| positive            |            |
-| positively          |            |
-| possible            |            |
-| potential           |            |
-| potentially         |            |
-| powerful            |            |
-| practical           |            |
-| preceding           |            |
-| precise             |            |
-| predictive          |            |
-| preferential        |            |
-| preliminary         |            |
-| premature           |            |
-| present             |            |
-| present (a)         |            |
-| present (an)        |            |
-| presidential        |            |
-| previous            |            |
-| previously          |            |
-| primarily           |            |
-| primary             |            |
-| prime               |            |
-| principal           |            |
-| prior               |            |
-| private             |            |
-| privileged          |            |
-| problem             |            |
-| process             |            |
-| professional        |            |
-| profound            |            |
-| prominent           |            |
-| promote             |            |
-| promote (the)       |            |
-| properly            |            |
-| proposed            |            |
-| prove               |            |
-| provide             |            |
-| provide             |            |
-| provide (a)         |            |
-| provide (an)        |            |
-| public              |            |
-| publicly            |            |
-| publish             |            |
-| publish (a)         |            |
-| publish (an)        |            |
-| published           |            |
-| purchasing          |            |
-| qualitative         |            |
-| qualitatively       |            |
-| quantitative        |            |
-| racial              |            |
-| radical             |            |
-| radically           |            |
-| raise               |            |
-| raise (a)           |            |
-| raise (an)          |            |
-| random              |            |
-| randomly            |            |
-| rapid               |            |
-| rapidly             |            |
-| raw                 |            |
-| reach (a)           |            |
-| reach (an)          |            |
-| readily             |            |
-| ready               |            |
-| real                |            |
-| receive             |            |
-| recent              |            |
-| reciprocal          |            |
-| record              |            |
-| recurrent           |            |
-| reduce              |            |
-| reduce (the)        |            |
-| reflective          |            |
-| regional            |            |
-| regulatory          |            |
-| related             |            |
-| relative            |            |
-| relatively          |            |
-| relevant            |            |
-| reliable            |            |
-| religious           |            |
-| rely                |            |
-| remain              |            |
-| remarkably          |            |
-| renewable           |            |
-| renewed             |            |
-| report              |            |
-| representative      |            |
-| require             |            |
-| research            |            |
-| resolve (a)         |            |
-| respond             |            |
-| review (a)          |            |
-| revised             |            |
-| rich                |            |
-| rising              |            |
-| risk                |            |
-| roughly             |            |
-| ruling              |            |
-| rural               |            |
-| safe                |            |
-| salient             |            |
-| scarce              |            |
-| schematic           |            |
-| scholarly           |            |
-| scientific          |            |
-| secondary           |            |
-| security            |            |
-| seek                |            |
-| seem                |            |
-| seminal             |            |
-| senior              |            |
-| separate            |            |
-| serious             |            |
-| serve (a)           |            |
-| service             |            |
-| set (a)             |            |
-| set (an)            |            |
-| set (the)           |            |
-| severely            |            |
-| sexual              |            |
-| share               |            |
-| shared              |            |
-| sharp               |            |
-| shift               |            |
-| short               |            |
-| show                |            |
-| show (a)            |            |
-| sign (a)            |            |
-| significant         |            |
-| significantly       |            |
-| similar             |            |
-| simple              |            |
-| simplified          |            |
-| single              |            |
-| skilled             |            |
-| slightly            |            |
-| slow                |            |
-| small               |            |
-| social              |            |
-| socially            |            |
-| socioeconomic       |            |
-| solar               |            |
-| source              |            |
-| sovereign           |            |
-| sparsely            |            |
-| special             |            |
-| specific            |            |
-| specifically        |            |
-| standard            |            |
-| stark               |            |
-| start (a)           |            |
-| state               |            |
-| statistical         |            |
-| statistically       |            |
-| store               |            |
-| strategic           |            |
-| stress              |            |
-| striking            |            |
-| strong              |            |
-| strongly            |            |
-| structural          |            |
-| subject             |            |
-| subsequent          |            |
-| substantial         |            |
-| substantially       |            |
-| successful          |            |
-| sufficient          |            |
-| superior            |            |
-| support (an)        |            |
-| supporting          |            |
-| survey              |            |
-| symbiotic           |            |
-| systematic          |            |
-| tacit               |            |
-| take                |            |
-| take (a)            |            |
-| take (an)           |            |
-| take into           |            |
-| take on (the) role  |            |
-| take up (the)       |            |
-| target              |            |
-| teaching            |            |
-| technical           |            |
-| technological       |            |
-| test                |            |
-| test (a)            |            |
-| textual             |            |
-| thematic            |            |
-| theoretical         |            |
-| think               |            |
-| thinking            |            |
-| third               |            |
-| thought             |            |
-| tightly             |            |
-| top                 |            |
-| total               |            |
-| totally             |            |
-| traditional         |            |
-| transferable        |            |
-| transmit            |            |
-| transport           |            |
-| treat               |            |
-| typical             |            |
-| ultimate            |            |
-| undergo             |            |
-| underlying          |            |
-| undertake           |            |
-| undertake (an)      |            |
-| unequal             |            |
-| unfair              |            |
-| unintended          |            |
-| unique              |            |
-| universally         |            |
-| unlimited           |            |
-| unskilled           |            |
-| urban               |            |
-| use                 |            |
-| use (a)             |            |
-| use (an)            |            |
-| use (the)           |            |
-| use (the) concept   |            |
-| use (the) data      |            |
-| useful              |            |
-| valid               |            |
-| valuable            |            |
-| various             |            |
-| vary                |            |
-| varying             |            |
-| vast                |            |
-| verbal              |            |
-| vested              |            |
-| virtual             |            |
-| virtually           |            |
-| visual              |            |
-| vital               |            |
-| vulnerable          |            |
-| welfare             |            |
-| well                |            |
-| western             |            |
-| whole               |            |
-| wide                |            |
-| widely              |            |
-| wider               |            |
-| widespread          |            |
-| work                |            |
-| written             |            |
-| younger             |            |
+| Vocabulary          | Re-type        |
+|---------------------+----------------|
+| abstract            | abstract       |
+| academic            | academic       |
+| accept              | accept         |
+| acceptable          | acceptable     |
+| accurate            | accurate       |
+| achieve             | achieve        |
+| acquire             | acquire        |
+| active              | active         |
+| actively            | actively       |
+| acutely             | acutely        |
+| add                 | add            |
+| additional          | additional     |
+| address             | address        |
+| administrative      | administrative |
+| adopt               | adopt          |
+| advanced            | advanced       |
+| adverse             | adverse        |
+| adversely           | adversely      |
+| affect              | affect         |
+| allocate            | allocate       |
+| allow               | allow          |
+| almost              | almost         |
+| alternative         | alternative    |
+| ample               | ample          |
+| analytical          | analytical     |
+| anecdotal           | anecdotal      |
+| annual              | annual         |
+| apply               | apply          |
+| appropriate         | appropriate    |
+| armed               | armed          |
+| artificial          | artificial     |
+| assess              | assess         |
+| assessment          | assessment     |
+| associated          | associated     |
+| assume              | assume         |
+| atomic              | atomic         |
+| attend              | attend         |
+| available           | available      |
+| average             | average        |
+| background          | background     |
+| basic               | basic          |
+| bear                | bear           |
+| become              | become         |
+| begin               | begin          |
+| behave              | behave         |
+| beneficial          | beneficial     |
+| best                | best           |
+| binary              | binary         |
+| biological          | biological     |
+| brief               | brief          |
+| briefly             | briefly        |
+| broad               | broad          |
+| broader             | broader        |
+| broadly             | broadly        |
+| business            | busniess       |
+| capitalist          | capitalist     |
+| career              | career         |
+| careful             | careful        |
+| carefully           | carefully      |
+| carry               | carry          |
+| carry out           | carry out      |
+| cast                | cast           |
+| causal              | causal         |
+| cause               | cause          |
+| central             | central        |
+| certain             | certain        |
+| change              | change         |
+| changing            | changing       |
+| characteristic      | characteristic |
+| chemical            | chemical       |
+| civil               | civil          |
+| class               | class          |
+| classic             | classic        |
+| classical           | classical      |
+| clear               | clear          |
+| clearly             | clearly        |
+| climate             | climate        |
+| climatic            | climatic       |
+| close               | close          |
+| closely             | closely        |
+| closer              | closer         |
+| cognitive           | cognitive      |
+| collaborative       | collaborative  |
+| collect             | collect        |
+| collective          | collective     |
+| combined            | combined       |
+| come into           | come into      |
+| commercial          | commercial     |
+| commit              | commit         |
+| common              | common         |
+| commonly            | commonly       |
+| communicate         | communicate    |
+| comparative         | comparative    |
+| compelling          | compelling     |
+| competitive         | competitive    |
+| complete            | complete       |
+| complex             | complex        |
+| comprehensive       |                |
+| conceptual          |                |
+| concerted           |                |
+| concluding          |                |
+| conditional         |                |
+| conduct             |                |
+| conduct (a)         |                |
+| conduct (an)        |                |
+| conflict            |                |
+| conflicting         |                |
+| consider            |                |
+| consider (a)        |                |
+| consider (an)       |                |
+| consider (the)      |                |
+| considerable        |                |
+| consistent          |                |
+| constant            |                |
+| constituent         |                |
+| contain             |                |
+| contain (an)        |                |
+| contemporary        |                |
+| contextual          |                |
+| continued           |                |
+| continuous          |                |
+| contribute          |                |
+| contribute to (the) |                |
+| controversial       |                |
+| conventional        |                |
+| convey              |                |
+| convey (a)          |                |
+| convincing          |                |
+| coping              |                |
+| core                |                |
+| correct             |                |
+| correct (an)        |                |
+| counter             |                |
+| cover (a)           |                |
+| cover (an)          |                |
+| create              |                |
+| create (an)         |                |
+| creative            |                |
+| criminal            |                |
+| critical            |                |
+| critically          |                |
+| crucial             |                |
+| cultural            |                |
+| culturally          |                |
+| current             |                |
+| currently           |                |
+| daily               |                |
+| data                |                |
+| deal (with an)      |                |
+| deem                |                |
+| deep                |                |
+| deeper              |                |
+| deeply              |                |
+| defining            |                |
+| deliberate          |                |
+| democratic          |                |
+| demographic         |                |
+| demonstrate         |                |
+| densely             |                |
+| deny                |                |
+| dependent           |                |
+| describe (a)        |                |
+| describe (a)        |                |
+| descriptive         |                |
+| desired             |                |
+| detailed            |                |
+| develop (a)         |                |
+| develop (an)        |                |
+| develop (an)        |                |
+| developmental       |                |
+| diagnostic          |                |
+| differ              |                |
+| digital             |                |
+| direct              |                |
+| directly            |                |
+| disclose            |                |
+| discuss (a)         |                |
+| discuss (an)        |                |
+| disposable          |                |
+| distinct            |                |
+| distinctive         |                |
+| distinguishing      |                |
+| diverse             |                |
+| dividing            |                |
+| documentary         |                |
+| domestic            |                |
+| dominant            |                |
+| dramatic            |                |
+| draw                |                |
+| draw (a)            |                |
+| driving             |                |
+| due                 |                |
+| dynamic             |                |
+| earlier             |                |
+| early               |                |
+| easily              |                |
+| easy                |                |
+| economic            |                |
+| educational         |                |
+| effective           |                |
+| electronic          |                |
+| emotional           |                |
+| empirical           |                |
+| employ (a)          |                |
+| employment          |                |
+| encounter           |                |
+| encourage (the)     |                |
+| engage in (an)      |                |
+| enhance             |                |
+| enormous            |                |
+| entire              |                |
+| entirely            |                |
+| environmental       |                |
+| equal               |                |
+| equally             |                |
+| essential           |                |
+| establish (a)       |                |
+| established         |                |
+| ethical             |                |
+| ethnic              |                |
+| ever                |                |
+| evolutionary        |                |
+| examine (the)       |                |
+| exceptional         |                |
+| exercise            |                |
+| existing            |                |
+| expand              |                |
+| experience          |                |
+| experiential        |                |
+| experimental        |                |
+| expert              |                |
+| explanatory         |                |
+| explore             |                |
+| explore (an)        |                |
+| extended            |                |
+| extensive           |                |
+| extensively         |                |
+| external            |                |
+| extract             |                |
+| extremely           |                |
+| face                |                |
+| face (a)            |                |
+| facial              |                |
+| facilitate (the)    |                |
+| factual             |                |
+| fair                |                |
+| fairly              |                |
+| fall into (the)     |                |
+| far                 |                |
+| federal             |                |
+| feminist            |                |
+| field               |                |
+| final               |                |
+| financial           |                |
+| find                |                |
+| find                |                |
+| finite              |                |
+| firmly              |                |
+| first               |                |
+| flexible            |                |
+| focal               |                |
+| focus               |                |
+| focus on (an)       |                |
+| follow (a)          |                |
+| follow              |                |
+| following           |                |
+| foreign             |                |
+| formal              |                |
+| free                |                |
+| freely              |                |
+| frequently          |                |
+| fulfil (an)         |                |
+| full                |                |
+| fuller              |                |
+| fully               |                |
+| functional          |                |
+| fundamental         |                |
+| fundamentally       |                |
+| further             |                |
+| future              |                |
+| gain                |                |
+| gather              |                |
+| gender              |                |
+| general             |                |
+| generally           |                |
+| genetic             |                |
+| geographic(al)      |                |
+| get                 |                |
+| give                |                |
+| give                |                |
+| give (a)            |                |
+| give (an)           |                |
+| give (sb an)        |                |
+| give (sb)           |                |
+| given               |                |
+| global              |                |
+| government          |                |
+| graphical           |                |
+| great               |                |
+| greater             |                |
+| greatly             |                |
+| grow                |                |
+| growing             |                |
+| guiding             |                |
+| hardly              |                |
+| have                |                |
+| have (a)            |                |
+| have (an)           |                |
+| heated              |                |
+| heavily             |                |
+| hierarchical        |                |
+| high                |                |
+| high/er             |                |
+| higher              |                |
+| highly              |                |
+| historical          |                |
+| historically        |                |
+| hold (a)            |                |
+| holistic            |                |
+| homogeneous         |                |
+| huge                |                |
+| human               |                |
+| ideally             |                |
+| identify            |                |
+| identify (a)        |                |
+| identify (an)       |                |
+| immediate           |                |
+| immediately         |                |
+| imported            |                |
+| impose              |                |
+| improved            |                |
+| increase            |                |
+| increase (the)      |                |
+| increased           |                |
+| increasing          |                |
+| increasingly        |                |
+| independent         |                |
+| indigenous          |                |
+| individual          |                |
+| industrial          |                |
+| industrialized      |                |
+| inextricably        |                |
+| infinite            |                |
+| information         |                |
+| informed            |                |
+| initial             |                |
+| institutional       |                |
+| integral            |                |
+| integrated          |                |
+| intellectual        |                |
+| intensive           |                |
+| interested          |                |
+| internal            |                |
+| international       |                |
+| internet            |                |
+| interpersonal       |                |
+| interpret           |                |
+| intimate            |                |
+| intimately          |                |
+| intrinsic           |                |
+| introduce           |                |
+| introductory        |                |
+| keenly              |                |
+| key                 |                |
+| large               |                |
+| largely             |                |
+| later               |                |
+| lead to (the)       |                |
+| leading             |                |
+| learning            |                |
+| legal               |                |
+| legislative         |                |
+| liberal             |                |
+| lifelong            |                |
+| likely              |                |
+| limited             |                |
+| linear              |                |
+| literal             |                |
+| literary            |                |
+| little              |                |
+| living              |                |
+| local               |                |
+| logical             |                |
+| long                |                |
+| longitudinal        |                |
+| low                 |                |
+| low/er              |                |
+| lower               |                |
+| main                |                |
+| mainly              |                |
+| maintain            |                |
+| major               |                |
+| make                |                |
+| make (a)            |                |
+| make (an)           |                |
+| make(a)             |                |
+| male                |                |
+| manual              |                |
+| manufacturing       |                |
+| marked              |                |
+| markedly            |                |
+| maximum             |                |
+| mean                |                |
+| meaningful          |                |
+| media               |                |
+| medical             |                |
+| meet                |                |
+| meet (a)            |                |
+| meet (a)            |                |
+| meet (an)           |                |
+| mental              |                |
+| methodological      |                |
+| metropolitan        |                |
+| middle              |                |
+| migrant             |                |
+| military            |                |
+| minimum             |                |
+| minor               |                |
+| minority            |                |
+| missing             |                |
+| modern              |                |
+| modified            |                |
+| moral               |                |
+| multiple            |                |
+| municipal           |                |
+| mutual              |                |
+| mutually            |                |
+| narrow              |                |
+| national            |                |
+| native              |                |
+| natural             |                |
+| naturally           |                |
+| necessary           |                |
+| negative            |                |
+| negatively          |                |
+| new                 |                |
+| newly               |                |
+| next                |                |
+| normal              |                |
+| notable             |                |
+| nuclear             |                |
+| numerical           |                |
+| numerous            |                |
+| objective           |                |
+| obtain              |                |
+| obtain (a)          |                |
+| obvious             |                |
+| occur               |                |
+| offer               |                |
+| offer (an)          |                |
+| official            |                |
+| once                |                |
+| ongoing             |                |
+| online              |                |
+| open                |                |
+| opening             |                |
+| opinion             |                |
+| optimal             |                |
+| oral                |                |
+| organising          |                |
+| organizational      |                |
+| original            |                |
+| originally          |                |
+| overall             |                |
+| overwhelming        |                |
+| paid                |                |
+| paramount           |                |
+| particular          |                |
+| particularly        |                |
+| partly              |                |
+| party               |                |
+| past                |                |
+| peace               |                |
+| perceived           |                |
+| perform (a)         |                |
+| personal            |                |
+| physical            |                |
+| pilot               |                |
+| pioneering          |                |
+| pivotal             |                |
+| place               |                |
+| planning            |                |
+| plausible           |                |
+| play (a)            |                |
+| political           |                |
+| politically         |                |
+| poorly              |                |
+| popular             |                |
+| pose (a)            |                |
+| positive            |                |
+| positively          |                |
+| possible            |                |
+| potential           |                |
+| potentially         |                |
+| powerful            |                |
+| practical           |                |
+| preceding           |                |
+| precise             |                |
+| predictive          |                |
+| preferential        |                |
+| preliminary         |                |
+| premature           |                |
+| present             |                |
+| present (a)         |                |
+| present (an)        |                |
+| presidential        |                |
+| previous            |                |
+| previously          |                |
+| primarily           |                |
+| primary             |                |
+| prime               |                |
+| principal           |                |
+| prior               |                |
+| private             |                |
+| privileged          |                |
+| problem             |                |
+| process             |                |
+| professional        |                |
+| profound            |                |
+| prominent           |                |
+| promote             |                |
+| promote (the)       |                |
+| properly            |                |
+| proposed            |                |
+| prove               |                |
+| provide             |                |
+| provide             |                |
+| provide (a)         |                |
+| provide (an)        |                |
+| public              |                |
+| publicly            |                |
+| publish             |                |
+| publish (a)         |                |
+| publish (an)        |                |
+| published           |                |
+| purchasing          |                |
+| qualitative         |                |
+| qualitatively       |                |
+| quantitative        |                |
+| racial              |                |
+| radical             |                |
+| radically           |                |
+| raise               |                |
+| raise (a)           |                |
+| raise (an)          |                |
+| random              |                |
+| randomly            |                |
+| rapid               |                |
+| rapidly             |                |
+| raw                 |                |
+| reach (a)           |                |
+| reach (an)          |                |
+| readily             |                |
+| ready               |                |
+| real                |                |
+| receive             |                |
+| recent              |                |
+| reciprocal          |                |
+| record              |                |
+| recurrent           |                |
+| reduce              |                |
+| reduce (the)        |                |
+| reflective          |                |
+| regional            |                |
+| regulatory          |                |
+| related             |                |
+| relative            |                |
+| relatively          |                |
+| relevant            |                |
+| reliable            |                |
+| religious           |                |
+| rely                |                |
+| remain              |                |
+| remarkably          |                |
+| renewable           |                |
+| renewed             |                |
+| report              |                |
+| representative      |                |
+| require             |                |
+| research            |                |
+| resolve (a)         |                |
+| respond             |                |
+| review (a)          |                |
+| revised             |                |
+| rich                |                |
+| rising              |                |
+| risk                |                |
+| roughly             |                |
+| ruling              |                |
+| rural               |                |
+| safe                |                |
+| salient             |                |
+| scarce              |                |
+| schematic           |                |
+| scholarly           |                |
+| scientific          |                |
+| secondary           |                |
+| security            |                |
+| seek                |                |
+| seem                |                |
+| seminal             |                |
+| senior              |                |
+| separate            |                |
+| serious             |                |
+| serve (a)           |                |
+| service             |                |
+| set (a)             |                |
+| set (an)            |                |
+| set (the)           |                |
+| severely            |                |
+| sexual              |                |
+| share               |                |
+| shared              |                |
+| sharp               |                |
+| shift               |                |
+| short               |                |
+| show                |                |
+| show (a)            |                |
+| sign (a)            |                |
+| significant         |                |
+| significantly       |                |
+| similar             |                |
+| simple              |                |
+| simplified          |                |
+| single              |                |
+| skilled             |                |
+| slightly            |                |
+| slow                |                |
+| small               |                |
+| social              |                |
+| socially            |                |
+| socioeconomic       |                |
+| solar               |                |
+| source              |                |
+| sovereign           |                |
+| sparsely            |                |
+| special             |                |
+| specific            |                |
+| specifically        |                |
+| standard            |                |
+| stark               |                |
+| start (a)           |                |
+| state               |                |
+| statistical         |                |
+| statistically       |                |
+| store               |                |
+| strategic           |                |
+| stress              |                |
+| striking            |                |
+| strong              |                |
+| strongly            |                |
+| structural          |                |
+| subject             |                |
+| subsequent          |                |
+| substantial         |                |
+| substantially       |                |
+| successful          |                |
+| sufficient          |                |
+| superior            |                |
+| support (an)        |                |
+| supporting          |                |
+| survey              |                |
+| symbiotic           |                |
+| systematic          |                |
+| tacit               |                |
+| take                |                |
+| take (a)            |                |
+| take (an)           |                |
+| take into           |                |
+| take on (the) role  |                |
+| take up (the)       |                |
+| target              |                |
+| teaching            |                |
+| technical           |                |
+| technological       |                |
+| test                |                |
+| test (a)            |                |
+| textual             |                |
+| thematic            |                |
+| theoretical         |                |
+| think               |                |
+| thinking            |                |
+| third               |                |
+| thought             |                |
+| tightly             |                |
+| top                 |                |
+| total               |                |
+| totally             |                |
+| traditional         |                |
+| transferable        |                |
+| transmit            |                |
+| transport           |                |
+| treat               |                |
+| typical             |                |
+| ultimate            |                |
+| undergo             |                |
+| underlying          |                |
+| undertake           |                |
+| undertake (an)      |                |
+| unequal             |                |
+| unfair              |                |
+| unintended          |                |
+| unique              |                |
+| universally         |                |
+| unlimited           |                |
+| unskilled           |                |
+| urban               |                |
+| use                 |                |
+| use (a)             |                |
+| use (an)            |                |
+| use (the)           |                |
+| use (the) concept   |                |
+| use (the) data      |                |
+| useful              |                |
+| valid               |                |
+| valuable            |                |
+| various             |                |
+| vary                |                |
+| varying             |                |
+| vast                |                |
+| verbal              |                |
+| vested              |                |
+| virtual             |                |
+| virtually           |                |
+| visual              |                |
+| vital               |                |
+| vulnerable          |                |
+| welfare             |                |
+| well                |                |
+| western             |                |
+| whole               |                |
+| wide                |                |
+| widely              |                |
+| wider               |                |
+| widespread          |                |
+| work                |                |
+| written             |                |
+| younger             |                |
