@@ -69,5 +69,3 @@ notebook. You can find the code at my [[https://github.com/davidshen84/machine-l
 
 ** My TODO list
 *** TODO Move [[https://davidshen84.appspot.com/blog][old blog]] to here.
-** [[file:pte.org][PTE Materials]]
-PTE Acedamic vocabulary list.
