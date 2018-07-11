@@ -4,15 +4,19 @@ import { NgModule } from '@angular/core';
 
 import { MaterialModules } from './material.modules';
 import { AppComponent } from './app.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NavComponent } from './nav/nav.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    LayoutModule,
     MaterialModules
   ],
   providers: [],
