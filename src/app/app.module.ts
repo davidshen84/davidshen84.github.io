@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
 
-import { MaterialModules } from './material.modules';
-import { AppComponent } from './app.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { NavComponent } from './nav/nav.component';
+import {AppComponent} from './app.component';
+import {LayoutModule} from '@angular/cdk/layout';
+import {NavComponent} from './nav/nav.component';
+import {MaterialModules} from './material.modules';
 
 
 @NgModule({
@@ -22,4 +22,5 @@ import { NavComponent } from './nav/nav.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

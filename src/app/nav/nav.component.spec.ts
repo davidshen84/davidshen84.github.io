@@ -1,7 +1,8 @@
+import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
+import {NavComponent} from './nav.component';
 
-import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { NavComponent } from './nav.component';
+import {MaterialModules} from '../material.modules';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -9,10 +10,10 @@ describe('NavComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MatSidenavModule],
+      imports: [BrowserAnimationsModule, MaterialModules],
       declarations: [NavComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
