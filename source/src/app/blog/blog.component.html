@@ -1,3 +1,7 @@
-<p>
-  blog {{ id$ | async}} component works!
+<p *ngIf="(id$ | async) === undefined ">
+  Default blog content.
+</p>
+
+<p *ngIf="(id$ | async) !== undefined ">
+  blog {{ id$ | async }} component works!
 </p>

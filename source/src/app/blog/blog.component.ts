@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-blog',
@@ -17,7 +17,7 @@ export class BlogComponent implements OnInit {
   ngOnInit() {
     this.id$ = this._route.params.pipe(
       map(p => p['id']),
-      tap(console.log));
+    );
   }
 
 }
