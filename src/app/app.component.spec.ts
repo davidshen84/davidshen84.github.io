@@ -3,14 +3,17 @@ import {AppComponent} from './app.component';
 import {NavComponent} from './nav/nav.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModules} from './material.modules';
+import {BlogComponent} from './blog/blog.component';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, MaterialModules],
+      imports: [BrowserAnimationsModule, MaterialModules, RouterTestingModule],
       declarations: [
         AppComponent,
-        NavComponent
+        NavComponent,
+        BlogComponent
       ],
     }).compileComponents();
   }));

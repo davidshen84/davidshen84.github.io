@@ -3,6 +3,8 @@ import {NavComponent} from './nav.component';
 
 import {MaterialModules} from '../material.modules';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BlogComponent} from '../blog/blog.component';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -10,8 +12,8 @@ describe('NavComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, MaterialModules],
-      declarations: [NavComponent]
+      imports: [BrowserAnimationsModule, MaterialModules, RouterTestingModule],
+      declarations: [NavComponent, BlogComponent]
     })
       .compileComponents();
 
