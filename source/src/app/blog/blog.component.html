@@ -1,7 +1,11 @@
-<p *ngIf="(id$ | async) === undefined ">
-  Default blog content.
-</p>
+<markdown ngPreserveWhitespaces *ngIf="(id$ | async) === undefined">
+  # Default blog
 
-<p *ngIf="(id$ | async) !== undefined ">
-  blog {{ id$ | async }} component works!
-</p>
+  Default blog content.
+
+  ## TODO
+  - [ ] Synchronize the blog title to the navigation bar.
+</markdown>
+
+<markdown ngPreserveWhitespaces *ngIf="(id$ | async) !== undefined" [src]="id$ | async">
+</markdown>

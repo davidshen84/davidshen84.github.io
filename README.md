@@ -6,8 +6,8 @@ Welcome to my blog repository!!!
 - The source code is under the `source` directory.
 
 
-## TODO
+## Features
 
-1. Support Markdown content.
-2. Support PWA.
-3. Animation support
+- [x] Support Markdown content.
+- [ ] Support PWA.
+- [ ] Animation support

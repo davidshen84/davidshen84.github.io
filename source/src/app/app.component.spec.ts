@@ -5,11 +5,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModules} from './material.modules';
 import {BlogComponent} from './blog/blog.component';
 import {RouterTestingModule} from '@angular/router/testing';
+import { MarkdownModule } from 'ngx-markdown';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, MaterialModules, RouterTestingModule],
+      imports: [
+        BrowserAnimationsModule,
+        MaterialModules,
+        RouterTestingModule,
+        MarkdownModule.forRoot()
+      ],
       declarations: [
         AppComponent,
         NavComponent,

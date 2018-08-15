@@ -1,8 +1,10 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 
 import {BlogComponent} from './blog.component';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
+import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('BlogComponent', () => {
   let component: BlogComponent;
@@ -10,7 +12,13 @@ describe('BlogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [{provide: ActivatedRoute, useValue: {params: of({id: 'x'})}}],
+      imports: [
+        HttpClientTestingModule,
+        MarkdownModule.forRoot()
+      ],
+      providers: [
+        {provide: ActivatedRoute, useValue: {params: of({id: 'x'})}},
+      ],
       declarations: [BlogComponent]
     })
       .compileComponents();
@@ -22,7 +30,9 @@ describe('BlogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', inject([HttpTestingController], (httpMock: HttpTestingController) => {
     expect(component).toBeTruthy();
-  });
+    httpMock.expectOne('assets/x.md');
+    httpMock.verify();
+  }));
 });

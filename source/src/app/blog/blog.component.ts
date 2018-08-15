@@ -1,3 +1,4 @@
+
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -16,7 +17,7 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     this.id$ = this._route.params.pipe(
-      map(p => p['id']),
+      map(p => 'assets/' + p['id'] + '.md'),
     );
   }
 
