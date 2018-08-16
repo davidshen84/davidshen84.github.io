@@ -2,7 +2,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-blog',
@@ -10,14 +10,23 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  public id$: Observable<string>;
+  public blogPath$: Observable<string>;
+  public showDefault$: Observable<boolean>;
 
   constructor(private _route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.id$ = this._route.params.pipe(
-      map(p => 'assets/' + p['id'] + '.md'),
+    let paramId$ = this._route.params.pipe(
+      map(p => p['id'])
+    );
+
+    this.showDefault$ = paramId$.pipe(
+      map(p => p === undefined)
+    );
+
+    this.blogPath$ = paramId$.pipe(
+      map(p => `assets/${p}.md`),
     );
   }
 
