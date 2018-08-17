@@ -3,8 +3,8 @@ import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 import {BlogComponent} from './blog.component';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
-import { MarkdownModule } from 'ngx-markdown';
-import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {MarkdownModule} from 'ngx-markdown';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('BlogComponent', () => {
   let component: BlogComponent;
@@ -32,7 +32,7 @@ describe('BlogComponent', () => {
 
   it('should create', inject([HttpTestingController], (httpMock: HttpTestingController) => {
     expect(component).toBeTruthy();
-    httpMock.expectOne('assets/x.md');
+    httpMock.expectOne('assets/blogs/x.md');
     httpMock.verify();
   }));
 });

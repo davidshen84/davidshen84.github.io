@@ -38,6 +38,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('span').textContent).toContain('Welcome to my blog');
+    expect(compiled.querySelector('span').textContent).toBe('');
   }));
 });

@@ -1,19 +1,20 @@
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {Observable, Subscription} from 'rxjs';
+import {map, tap, filter} from 'rxjs/operators';
+import {TitleService} from '../title.service';
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss']
 })
-export class BlogComponent implements OnInit {
+export class BlogComponent implements OnInit, OnDestroy {
   public blogPath$: Observable<string>;
-  public showDefault$: Observable<boolean>;
+  private _paramIdSubscription: Subscription;
 
-  constructor(private _route: ActivatedRoute) {
+  constructor(private _route: ActivatedRoute, private _titleService: TitleService) {
   }
 
   ngOnInit() {
@@ -21,13 +22,17 @@ export class BlogComponent implements OnInit {
       map(p => p['id'])
     );
 
-    this.showDefault$ = paramId$.pipe(
-      map(p => p === undefined)
-    );
+    this._paramIdSubscription = paramId$.pipe(
+      filter(p => p !== undefined),
+    ).subscribe(this._titleService.setTitle);
 
     this.blogPath$ = paramId$.pipe(
-      map(p => `assets/${p}.md`),
+      map(p => `assets/blogs/${p}.md`),
     );
   }
 
+  ngOnDestroy() {
+    if(this._paramIdSubscription != null)
+      this._paramIdSubscription.unsubscribe();
+  }
 }

@@ -1,11 +1,2 @@
-<markdown ngPreserveWhitespaces *ngIf="showDefault$ | async">
-  # Default blog
-
-  Default blog content.
-
-  ## TODO
-  - [ ] Synchronize the blog title to the navigation bar.
-</markdown>
-
-<markdown ngPreserveWhitespaces *ngIf="!(showDefault$ | async)" [src]="blogPath$ | async">
+<markdown ngPreserveWhitespaces [src]="blogPath$ | async">
 </markdown>

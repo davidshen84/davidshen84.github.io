@@ -2,9 +2,10 @@ import {NgModule} from '@angular/core';
 
 import {RouterModule, Routes} from '@angular/router';
 import {BlogComponent} from '../blog/blog.component';
+import { HomePageComponent } from '../home-page/home-page.component';
 
 export const routes: Routes = [
-  {path: '', component: BlogComponent},
+  {path: '', component: HomePageComponent},
   {path: ':id', component: BlogComponent}
 ];
 

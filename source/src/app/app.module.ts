@@ -9,6 +9,7 @@ import {MaterialModules} from './material.modules';
 import {RoutingModule} from './routing/routing.module';
 import {BlogComponent} from './blog/blog.component';
 import {HttpClientModule} from '@angular/common/http';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 
@@ -17,6 +18,7 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent,
     NavComponent,
     BlogComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
