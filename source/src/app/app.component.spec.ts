@@ -3,7 +3,6 @@ import {AppComponent} from './app.component';
 import {NavComponent} from './nav/nav.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModules} from './material.modules';
-import {BlogComponent} from './blog/blog.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -19,7 +18,6 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         NavComponent,
-        BlogComponent
       ],
     }).compileComponents();
   }));
@@ -34,7 +32,7 @@ describe('AppComponent', () => {
     expect(app.title).not.toBeNull();
     expect(app.title).not.toBe('');
   }));
-  it('should render title in a h1 tag', async(() => {
+  it('should render empty title', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;

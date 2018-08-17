@@ -7,9 +7,9 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {NavComponent} from './nav/nav.component';
 import {MaterialModules} from './material.modules';
 import {RoutingModule} from './routing/routing.module';
-import {BlogComponent} from './blog/blog.component';
 import {HttpClientModule} from '@angular/common/http';
 import { HomePageComponent } from './home-page/home-page.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
 
 
 
@@ -17,8 +17,8 @@ import { HomePageComponent } from './home-page/home-page.component';
   declarations: [
     AppComponent,
     NavComponent,
-    BlogComponent,
     HomePageComponent,
+    BlogPageComponent,
   ],
   imports: [
     BrowserModule,

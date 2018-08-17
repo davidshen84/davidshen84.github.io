@@ -1,14 +1,15 @@
-import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
-
-import {BlogComponent} from './blog.component';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
+
 import {MarkdownModule} from 'ngx-markdown';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
-describe('BlogComponent', () => {
-  let component: BlogComponent;
-  let fixture: ComponentFixture<BlogComponent>;
+import { BlogPageComponent } from './blog-page.component';
+
+describe('BlogPageComponent', () => {
+  let component: BlogPageComponent;
+  let fixture: ComponentFixture<BlogPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -19,13 +20,13 @@ describe('BlogComponent', () => {
       providers: [
         {provide: ActivatedRoute, useValue: {params: of({id: 'x'})}},
       ],
-      declarations: [BlogComponent]
+      declarations: [ BlogPageComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BlogComponent);
+    fixture = TestBed.createComponent(BlogPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

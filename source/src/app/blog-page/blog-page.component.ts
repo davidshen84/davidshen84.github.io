@@ -6,11 +6,11 @@ import {map, tap, filter} from 'rxjs/operators';
 import {TitleService} from '../title.service';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  selector: 'app-blog-page',
+  templateUrl: './blog-page.component.html',
+  styleUrls: ['./blog-page.component.scss']
 })
-export class BlogComponent implements OnInit, OnDestroy {
+export class BlogPageComponent implements OnInit, OnDestroy {
   public blogPath$: Observable<string>;
   private _paramIdSubscription: Subscription;
 
