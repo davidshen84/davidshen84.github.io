@@ -9,5 +9,6 @@ Welcome to my blog repository!!!
 ## Features
 
 - [x] Support Markdown content.
-- [ ] Support PWA.
+  - [x] Fix 404 error: Handle the *(error)* event.
+- [x] Support PWA.
 - [ ] Animation support

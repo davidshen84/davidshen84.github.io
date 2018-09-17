@@ -10,6 +10,8 @@ import {RoutingModule} from './routing/routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { HomePageComponent } from './home-page/home-page.component';
 import { BlogPageComponent } from './blog-page/blog-page.component';
+import { BlogPageNotFoundComponent } from './blog-page-not-found/blog-page-not-found.component';
+
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -21,6 +23,7 @@ import { environment } from '../environments/environment';
     NavComponent,
     HomePageComponent,
     BlogPageComponent,
+    BlogPageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

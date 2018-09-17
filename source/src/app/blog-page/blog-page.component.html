@@ -1,2 +1,2 @@
-<markdown ngPreserveWhitespaces [src]="blogPath$ | async">
+<markdown ngPreserveWhitespaces [src]="blogPath$ | async" (error)="onBlogLoadError($event)">
 </markdown>
