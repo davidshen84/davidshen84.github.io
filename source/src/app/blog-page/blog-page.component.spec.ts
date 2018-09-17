@@ -11,6 +11,7 @@ import { BlogPageNotFoundComponent } from '../blog-page-not-found/blog-page-not-
 
 import { RouterTestingModule } from '@angular/router/testing';
 import {routes } from '../routing/routing.module';
+import { BlogHomePageComponent } from '../blog-home-page/blog-home-page.component';
 
 
 
@@ -30,7 +31,10 @@ describe('BlogPageComponent', () => {
       providers: [
         {provide: ActivatedRoute, useValue: {params: of({id: 'x'})}},
       ],
-      declarations: [ HomePageComponent, BlogPageComponent, BlogPageNotFoundComponent ]
+      declarations: [ HomePageComponent,
+                      BlogPageComponent,
+                      BlogHomePageComponent,
+                      BlogPageNotFoundComponent ]
     })
       .compileComponents();
 
