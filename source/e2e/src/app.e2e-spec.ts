@@ -9,6 +9,6 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toContain('Welcome to my blog');
+    expect(page.getParagraphText()).toContain('Welcome To My Blog');
   });
 });
