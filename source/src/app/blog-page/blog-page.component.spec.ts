@@ -1,18 +1,17 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
+import {routes } from '../routing/routing.module';
 import { HomePageComponent } from '../home-page/home-page.component';
 import { BlogPageComponent } from './blog-page.component';
 import { BlogPageNotFoundComponent } from '../blog-page-not-found/blog-page-not-found.component';
-
-import { RouterTestingModule } from '@angular/router/testing';
-import {routes } from '../routing/routing.module';
 import { BlogHomePageComponent } from '../blog-home-page/blog-home-page.component';
-
+import { RandomCharacterGeneratorComponent } from '../random-character-generator/random-character-generator.component';
 
 
 describe('BlogPageComponent', () => {
@@ -34,7 +33,8 @@ describe('BlogPageComponent', () => {
       declarations: [ HomePageComponent,
                       BlogPageComponent,
                       BlogHomePageComponent,
-                      BlogPageNotFoundComponent ]
+                      BlogPageNotFoundComponent,
+                      RandomCharacterGeneratorComponent]
     })
       .compileComponents();
 

@@ -1,0 +1,37 @@
+<mat-card>
+  <mat-card-title>
+    Generate Randome Characters
+  </mat-card-title>
+
+  <mat-card-content>
+    <form #form="ngForm">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <mat-checkbox [(ngModel)]="HasLowerCases" name="hasLowerCases">Lower Cases</mat-checkbox>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <mat-checkbox [(ngModel)]="HasUpperCases" name="hasUpperCases">Upper Cases</mat-checkbox>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <mat-checkbox [(ngModel)]="HasDigits" name="hasDigits">Digits</mat-checkbox>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <mat-checkbox [(ngModel)]="HasSpecials" name="hasSpecials">Specials</mat-checkbox>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <mat-slider min="1" max="99" step="1" value="{{Count}}" thumbLabel="true" displayValue="number" name="Count" [(ngModel)]="Count"></mat-slider>
+        </mat-list-item>
+      </mat-list>
+    </form>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card class="result">
+    {{ Result$ | async | async }}
+  </mat-card>
+
+  <mat-card-actions>
+    <button #generate mat-button class="mat-button mat-primary">Generate</button>
+  </mat-card-actions>
+</mat-card>
