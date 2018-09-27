@@ -1,5 +1,18 @@
-mat-card.result {
-  margin: 2em 0 0 0;
-  padding: 1em;
-  height: 1em;
+.center {
+  width: 50%;
+  margin: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.result-container {
+  mat-form-field {
+    width: 100%;
+  }
+
+  input {
+    text-align: center;
+  }
 }

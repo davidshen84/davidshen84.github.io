@@ -19,6 +19,7 @@
           <mat-checkbox [(ngModel)]="HasSpecials" name="hasSpecials">Specials</mat-checkbox>
         </mat-list-item>
         <mat-list-item role="listitem">
+          Length:
           <mat-slider min="1" max="99" step="1" value="{{Count}}" thumbLabel="true" displayValue="number" name="Count" [(ngModel)]="Count"></mat-slider>
         </mat-list-item>
       </mat-list>
@@ -27,11 +28,14 @@
 
   <mat-divider></mat-divider>
 
-  <mat-card class="result">
-    {{ Result$ | async | async }}
-  </mat-card>
+  <div class="result-container" [class.center]="(isHandset$ | async) ? false : true" [class.full-width]="(isHandset$ | async) ? true : false">
+    <mat-form-field>
+      <input #copyTarget matInput readonly="true" value="{{ result$ | async | async }}">
+    </mat-form-field>
+  </div>
 
   <mat-card-actions>
-    <button #generate mat-button class="mat-button mat-primary">Generate</button>
+    <button #generate mat-button class="mat-raised-button mat-primary">Generate</button>
+    <button mat-button class="mat-raised-button mat-accent" [ngxClipboard]="copyTarget">Copy</button>
   </mat-card-actions>
 </mat-card>

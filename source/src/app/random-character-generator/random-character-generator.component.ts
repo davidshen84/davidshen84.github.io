@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable, of, fromEvent } from 'rxjs';
 import { map, scan, filter, repeat } from 'rxjs/operators';
 import { MatButton } from '@angular/material';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
 @Component({
@@ -10,9 +11,12 @@ import { MatButton } from '@angular/material';
   styleUrls: ['./random-character-generator.component.scss']
 })
 export class RandomCharacterGeneratorComponent implements OnInit {
-  private static prime: number = 21001;
+  private static readonly prime: number = 21001;
 
-  public Result$: Observable<Observable<string>>;
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(result => result.matches));
+
+  public result$: Observable<Observable<string>>;
   public Count: number = 6;
   public HasLowerCases: boolean = true;
   public HasUpperCases: boolean = true;
@@ -22,11 +26,11 @@ export class RandomCharacterGeneratorComponent implements OnInit {
   @ViewChild('generate', {read: ElementRef})
   private _button: ElementRef;
 
-  constructor() {
+  constructor(private breakpointObserver: BreakpointObserver) {
   }
 
   ngOnInit() {
-    this.Result$ = fromEvent(this._button.nativeElement, 'click').pipe(
+    this.result$ = fromEvent(this._button.nativeElement, 'click').pipe(
       filter(_ => this.HasDigits || this.HasLowerCases || this.HasSpecials || this.HasUpperCases),
       map(_ => of(''
                   + (this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : '')
