@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable, of, fromEvent } from 'rxjs';
 import { map, scan, filter, repeat } from 'rxjs/operators';
-import { MatButton } from '@angular/material';
+import { MatButton, MatSnackBar } from '@angular/material';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
@@ -26,7 +26,7 @@ export class RandomCharacterGeneratorComponent implements OnInit {
   @ViewChild('generate', {read: ElementRef})
   private _button: ElementRef;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private matSnackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -41,6 +41,10 @@ export class RandomCharacterGeneratorComponent implements OnInit {
                     repeat(this.Count),
                     scan((acc: string, value: string) => acc + value, '')))
     );
+  }
+
+  public openSnackBar() {
+    this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
   }
 
 }

@@ -36,6 +36,6 @@
 
   <mat-card-actions>
     <button #generate mat-button class="mat-raised-button mat-primary">Generate</button>
-    <button mat-button class="mat-raised-button mat-accent" [ngxClipboard]="copyTarget">Copy</button>
+    <button mat-button class="mat-raised-button mat-accent" [ngxClipboard]="copyTarget" (click)="openSnackBar()">Copy</button>
   </mat-card-actions>
 </mat-card>
