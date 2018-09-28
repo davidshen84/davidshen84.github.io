@@ -5,10 +5,10 @@
     "installMode": "prefetch",
     "resources": {
       "files": [
-        "/favicon.ico",
-        "/index.html",
-        "/*.css",
-        "/*.js"
+	"/favicon.ico",
+	"/index.html",
+	"/*.css",
+	"/*.js"
       ]
     }
   }, {
@@ -17,7 +17,8 @@
     "updateMode": "prefetch",
     "resources": {
       "files": [
-        "/assets/**"
+	"/assets/**",
+	"!/assets/blogs/*"
       ]
     }
   }]
