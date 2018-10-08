@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-import {of} from 'rxjs';
 import { TitleService } from './title.service';
 
 describe('TitleService', () => {

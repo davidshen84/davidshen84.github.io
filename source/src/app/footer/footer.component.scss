@@ -1,0 +1,12 @@
+@import "../../global-variables";
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  height: $footer-height;
+  text-align: center;
+}

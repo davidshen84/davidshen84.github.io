@@ -22,6 +22,7 @@ import { BlogPageComponent } from './blog-page/blog-page.component';
 import { BlogPageNotFoundComponent } from './blog-page-not-found/blog-page-not-found.component';
 import { BlogHomePageComponent } from './blog-home-page/blog-home-page.component';
 import { RandomCharacterGeneratorComponent } from './random-character-generator/random-character-generator.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { RandomCharacterGeneratorComponent } from './random-character-generator/
     BlogPageNotFoundComponent,
     BlogHomePageComponent,
     RandomCharacterGeneratorComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,12 @@
+@import "../../global-variables";
+
 .sidenav-container {
   height: 100%;
 }
 
 .sidenav {
   width: 200px;
+  margin-bottom: $footer-height;
 }
 
 .mat-toolbar.mat-primary {
