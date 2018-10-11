@@ -21,7 +21,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { BlogPageComponent } from './blog-page/blog-page.component';
 import { BlogPageNotFoundComponent } from './blog-page-not-found/blog-page-not-found.component';
 import { BlogHomePageComponent } from './blog-home-page/blog-home-page.component';
-import { RandomCharacterGeneratorComponent } from './random-character-generator/random-character-generator.component';
+import { PasswordGeneratorComponent } from './password-generator/password-generator.component';
 import { FooterComponent } from './footer/footer.component';
 
 
@@ -33,8 +33,8 @@ import { FooterComponent } from './footer/footer.component';
     BlogPageComponent,
     BlogPageNotFoundComponent,
     BlogHomePageComponent,
-    RandomCharacterGeneratorComponent,
-    FooterComponent,
+    PasswordGeneratorComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

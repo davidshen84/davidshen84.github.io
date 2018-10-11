@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import 'hammerjs';
 
-import { RandomCharacterGeneratorComponent } from './random-character-generator.component';
+import { PasswordGeneratorComponent } from './password-generator.component';
 import { MaterialModules } from '../material.modules';
 import { FormsModule } from '@angular/forms';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -9,16 +9,16 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBar } from '@angular/material';
 
 
-describe('RandomCharacterGeneratorComponent', () => {
-  let component: RandomCharacterGeneratorComponent;
-  let fixture: ComponentFixture<RandomCharacterGeneratorComponent>;
+describe('PasswordGeneratorComponent', () => {
+  let component: PasswordGeneratorComponent;
+  let fixture: ComponentFixture<PasswordGeneratorComponent>;
   let matSnackBar: MatSnackBar;
   let openSpy: jasmine.Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ NoopAnimationsModule, FormsModule, MaterialModules, ClipboardModule ],
-      declarations: [ RandomCharacterGeneratorComponent ]
+      declarations: [ PasswordGeneratorComponent ]
     })
       .compileComponents();
 
@@ -27,7 +27,7 @@ describe('RandomCharacterGeneratorComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RandomCharacterGeneratorComponent);
+    fixture = TestBed.createComponent(PasswordGeneratorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

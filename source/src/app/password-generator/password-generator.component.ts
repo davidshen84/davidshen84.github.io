@@ -6,11 +6,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
 @Component({
-  selector: 'app-random-character-generator',
-  templateUrl: './random-character-generator.component.html',
-  styleUrls: ['./random-character-generator.component.scss']
+  selector: 'app-password-generator',
+  templateUrl: './password-generator.component.html',
+  styleUrls: ['./password-generator.component.scss']
 })
-export class RandomCharacterGeneratorComponent implements OnInit {
+export class PasswordGeneratorComponent implements OnInit {
   private static readonly prime: number = 21001;
 
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -71,5 +71,5 @@ export class RandomCharacterGeneratorComponent implements OnInit {
     this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
   }
 
-  private pickOne = (s: string): string => (s && s.length > 0) ? s[Math.ceil(Math.random() * RandomCharacterGeneratorComponent.prime) % s.length] : null
+  private pickOne = (s: string): string => (s && s.length > 0) ? s[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % s.length] : null
 }
