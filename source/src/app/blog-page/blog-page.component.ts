@@ -1,4 +1,3 @@
-
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
@@ -34,11 +33,12 @@ export class BlogPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this._paramIdSubscriptions.length > 0)
+    if (this._paramIdSubscriptions.length > 0) {
       this._paramIdSubscriptions.forEach(s => s.unsubscribe());
+    }
   }
 
-  onBlogLoadError(event: HttpErrorResponse){
+  onBlogLoadError(event: HttpErrorResponse) {
     this._paramIdSubscriptions.push(
       this._paramId$.subscribe(id => this._router.navigate(['blog/notfound', id]))
     );

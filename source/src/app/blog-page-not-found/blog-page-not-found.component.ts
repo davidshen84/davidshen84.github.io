@@ -11,7 +11,7 @@ import { TitleService } from '../title.service';
 })
 export class BlogPageNotFoundComponent implements OnInit {
 
-  public BlogId$ : Observable<string>;
+  public BlogId$: Observable<string>;
 
   constructor(private _route: ActivatedRoute, private _titleService: TitleService) {
     this.BlogId$ = _route.params.pipe(

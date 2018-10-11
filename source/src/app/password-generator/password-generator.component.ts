@@ -19,13 +19,13 @@ export class PasswordGeneratorComponent implements OnInit {
   public result$: Observable<Observable<string>>;
 
   // Default length of characters to generate.
-  public Length: number = 6;
+  public Length = 6;
 
   // Turn on all character types by default.
-  public HasLowerCases: boolean = true;
-  public HasUpperCases: boolean = true;
-  public HasDigits: boolean = true;
-  public HasSpecials: boolean = true;
+  public HasLowerCases = true;
+  public HasUpperCases = true;
+  public HasDigits = true;
+  public HasSpecials = true;
 
   @ViewChild('generate')
   private _button: MatButton;
@@ -67,9 +67,9 @@ export class PasswordGeneratorComponent implements OnInit {
                                         scan((acc: string, value: string) => acc + value, ''))));
   }
 
-  public openSnackBar() {
-    this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
-  }
+  public openSnackBar = () => this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
 
-  private pickOne = (s: string): string => (s && s.length > 0) ? s[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % s.length] : null
+  private pickOne = (s: string): string => (s && s.length > 0)
+    ? s[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % s.length]
+    : null
 }
