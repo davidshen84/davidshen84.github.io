@@ -7,20 +7,20 @@
     <form #form="ngForm">
       <mat-list role="list">
         <mat-list-item role="listitem">
-          <mat-checkbox [(ngModel)]="HasLowerCases" name="hasLowerCases">Lower Cases</mat-checkbox>
+          <mat-checkbox #lowerCases [(ngModel)]="HasLowerCases" name="hasLowerCases">Lower Cases</mat-checkbox>
         </mat-list-item>
         <mat-list-item role="listitem">
-          <mat-checkbox [(ngModel)]="HasUpperCases" name="hasUpperCases">Upper Cases</mat-checkbox>
+          <mat-checkbox #upperCases [(ngModel)]="HasUpperCases" name="hasUpperCases">Upper Cases</mat-checkbox>
         </mat-list-item>
         <mat-list-item role="listitem">
-          <mat-checkbox [(ngModel)]="HasDigits" name="hasDigits">Digits</mat-checkbox>
+          <mat-checkbox #digits [(ngModel)]="HasDigits" name="hasDigits">Digits</mat-checkbox>
         </mat-list-item>
         <mat-list-item role="listitem">
-          <mat-checkbox [(ngModel)]="HasSpecials" name="hasSpecials">Specials</mat-checkbox>
+          <mat-checkbox #specials [(ngModel)]="HasSpecials" name="hasSpecials">Specials</mat-checkbox>
         </mat-list-item>
         <mat-list-item role="listitem">
           Length:
-          <mat-slider min="1" max="99" step="1" value="{{Count}}" thumbLabel="true" displayValue="number" name="Count" [(ngModel)]="Count"></mat-slider>
+          <mat-slider #slider min="1" max="99" step="1" thumbLabel="true" displayValue="number" value="{{Length}}"></mat-slider>
         </mat-list-item>
       </mat-list>
     </form>
@@ -28,7 +28,7 @@
 
   <mat-divider></mat-divider>
 
-  <div class="result-container" [class.center]="(isHandset$ | async) ? false : true" [class.full-width]="(isHandset$ | async) ? true : false">
+  <div class="result-container" [class.center]="!(isHandset$ | async)" [class.full-width]="isHandset$ | async">
     <mat-form-field>
       <input #copyTarget matInput readonly="true" value="{{ result$ | async | async }}">
     </mat-form-field>

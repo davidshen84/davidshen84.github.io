@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Observable, of, fromEvent } from 'rxjs';
-import { map, scan, filter, repeat } from 'rxjs/operators';
-import { MatButton, MatSnackBar } from '@angular/material';
+import { Observable, of, fromEvent, merge } from 'rxjs';
+import { map, scan, repeat, startWith } from 'rxjs/operators';
+import { MatButton, MatSnackBar, MatSlider, MatCheckbox } from '@angular/material';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
@@ -17,34 +17,59 @@ export class RandomCharacterGeneratorComponent implements OnInit {
     map(result => result.matches));
 
   public result$: Observable<Observable<string>>;
-  public Count: number = 6;
+
+  // Default length of characters to generate.
+  public Length: number = 6;
+
+  // Turn on all character types by default.
   public HasLowerCases: boolean = true;
   public HasUpperCases: boolean = true;
   public HasDigits: boolean = true;
   public HasSpecials: boolean = true;
 
-  @ViewChild('generate', {read: ElementRef})
-  private _button: ElementRef;
+  @ViewChild('generate')
+  private _button: MatButton;
+
+  @ViewChild('lowerCases')
+  private _checkboxLowerCases: MatCheckbox;
+
+  @ViewChild('upperCases')
+  private _checkboxUpperCases: MatCheckbox;
+
+  @ViewChild('digits')
+  private _checkboxDigits: MatCheckbox;
+
+  @ViewChild('specials')
+  private _checkboxSpecials: MatCheckbox;
+
+  @ViewChild('slider')
+  private _slider: MatSlider;
 
   constructor(private breakpointObserver: BreakpointObserver, private matSnackBar: MatSnackBar) {
   }
 
   ngOnInit() {
-    this.result$ = fromEvent(this._button.nativeElement, 'click').pipe(
-      filter(_ => this.HasDigits || this.HasLowerCases || this.HasSpecials || this.HasUpperCases),
-      map(_ => of(''
-                  + (this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : '')
-                  + (this.HasUpperCases ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '')
-                  + (this.HasDigits ? '0123456789' : '')
-                  + (this.HasSpecials ? '`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : '')).pipe(
-                    map(s => s[Math.ceil(Math.random() * RandomCharacterGeneratorComponent.prime) % s.length]),
-                    repeat(this.Count),
-                    scan((acc: string, value: string) => acc + value, '')))
-    );
+    this.result$ = merge(fromEvent(this._button._elementRef.nativeElement, 'click'),
+                         this._checkboxDigits.change,
+                         this._checkboxLowerCases.change,
+                         this._checkboxUpperCases.change,
+                         this._checkboxSpecials.change,
+                         this._slider.input,
+                        ).pipe(
+                          startWith(undefined),
+                          map(_ => of(''
+                                      + (this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : '')
+                                      + (this.HasUpperCases ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '')
+                                      + (this.HasDigits ? '0123456789' : '')
+                                      + (this.HasSpecials ? '`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : '')).pipe(
+                                        map(s => this.pickOne(s) || '😂'),
+                                        repeat(this._slider.value),
+                                        scan((acc: string, value: string) => acc + value, ''))));
   }
 
   public openSnackBar() {
     this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
   }
 
+  private pickOne = (s: string): string => (s && s.length > 0) ? s[Math.ceil(Math.random() * RandomCharacterGeneratorComponent.prime) % s.length] : null
 }
