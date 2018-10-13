@@ -1,0 +1,9 @@
+<div>
+
+  <ul>
+    <li *ngFor="let blog  of blogs$ | async">
+      <a routerLink="/blog/gae/{{ blog.urlsafe }}">{{ blog.title }}</a>
+    </li>
+  </ul>
+
+</div>

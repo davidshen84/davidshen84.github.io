@@ -34,8 +34,9 @@ export class BlogPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this._paramIdSubscriptions.length > 0)
+    if (this._paramIdSubscriptions.length > 0) {
       this._paramIdSubscriptions.forEach(s => s.unsubscribe());
+    }
   }
 
   onBlogLoadError(event: HttpErrorResponse){

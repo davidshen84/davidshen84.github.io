@@ -23,6 +23,8 @@ import { BlogPageNotFoundComponent } from './blog-page-not-found/blog-page-not-f
 import { BlogHomePageComponent } from './blog-home-page/blog-home-page.component';
 import { RandomCharacterGeneratorComponent } from './random-character-generator/random-character-generator.component';
 import { FooterComponent } from './footer/footer.component';
+import { GaeBlogHomePageComponent } from './gae-blog-home-page/gae-blog-home-page.component';
+import { GaeBlogPageComponent } from './gae-blog-page/gae-blog-page.component';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { FooterComponent } from './footer/footer.component';
     BlogHomePageComponent,
     RandomCharacterGeneratorComponent,
     FooterComponent,
+    GaeBlogHomePageComponent,
+    GaeBlogPageComponent,
   ],
   imports: [
     BrowserModule,

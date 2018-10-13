@@ -1,19 +1,19 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
+import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {ActivatedRoute, Router} from '@angular/router';
+import {of} from 'rxjs';
 
-import { MarkdownModule } from 'ngx-markdown';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {MarkdownModule} from 'ngx-markdown';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
-import { BlogPageComponent } from './blog-page.component';
+import {BlogPageComponent} from './blog-page.component';
 
 
 describe('BlogPageComponent', () => {
   let component: BlogPageComponent;
   let fixture: ComponentFixture<BlogPageComponent>;
   let router: Router;
-  let routerSpy: any;
+  let routerSpy: jasmine.Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,7 +27,7 @@ describe('BlogPageComponent', () => {
       providers: [
         {provide: ActivatedRoute, useValue: {params: of({id: 'x'})}},
       ],
-      declarations: [ BlogPageComponent ]
+      declarations: [BlogPageComponent]
     })
       .compileComponents();
 

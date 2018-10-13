@@ -1,8 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BlogHomePageComponent } from './blog-home-page.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MarkdownModule } from 'ngx-markdown';
+import {BlogHomePageComponent} from './blog-home-page.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {MarkdownModule} from 'ngx-markdown';
+import {GaeBlogHomePageComponent} from '../gae-blog-home-page/gae-blog-home-page.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('BlogHomePageComponent', () => {
   let component: BlogHomePageComponent;
@@ -10,11 +12,16 @@ describe('BlogHomePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule,
-                 MarkdownModule.forRoot()],
-      declarations: [ BlogHomePageComponent ]
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MarkdownModule.forRoot()
+      ],
+      declarations: [BlogHomePageComponent,
+        GaeBlogHomePageComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
