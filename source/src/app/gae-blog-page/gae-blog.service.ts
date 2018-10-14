@@ -23,11 +23,11 @@ export class GaeBlogService {
 
   private _endpoint = 'https://davidshen84.appspot.com/blog/resources';
 
-  public GetBlogs() {
+  public getBlogs() {
     return this.httpClient.get<BlogMeta[]>(`${this._endpoint}/blogs`);
   }
 
-  public GetBlog(urlsafe: string) {
+  public getBlog(urlsafe: string) {
     return this.httpClient.get<Blog>(`${this._endpoint}/blogs/${urlsafe}`);
   }
 }

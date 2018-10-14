@@ -12,7 +12,7 @@ export class GaeBlogHomePageComponent implements OnInit {
   public blogs$: Observable<BlogMeta[]>;
 
   constructor(private gaeBlog: GaeBlogService) {
-    this.blogs$ = gaeBlog.GetBlogs();
+    this.blogs$ = gaeBlog.getBlogs();
   }
 
   ngOnInit() {

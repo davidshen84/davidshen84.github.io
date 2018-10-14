@@ -15,14 +15,14 @@ describe('GaeBlogService', () => {
 
   it('should make http request to resources/blogs', async(
     inject([HttpTestingController, GaeBlogService], (httpMock: HttpTestingController, service: GaeBlogService) => {
-      service.GetBlogs().subscribe();
+      service.getBlogs().subscribe();
       httpMock.expectOne('https://davidshen84.appspot.com/blog/resources/blogs');
       httpMock.verify();
     })));
 
   it('should make http request to resources/blogs/x', async(
     inject([GaeBlogService, HttpTestingController], (service: GaeBlogService, httpMock: HttpTestingController) => {
-      service.GetBlog('x').subscribe();
+      service.getBlog('x').subscribe();
       httpMock.expectOne('https://davidshen84.appspot.com/blog/resources/blogs/x');
       httpMock.verify();
     })));

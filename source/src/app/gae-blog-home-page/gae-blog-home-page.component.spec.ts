@@ -4,6 +4,7 @@ import {GaeBlogHomePageComponent} from './gae-blog-home-page.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {GaeBlogPageComponent} from '../gae-blog-page/gae-blog-page.component';
+import {MarkdownModule} from 'ngx-markdown';
 
 describe('GaeBlogHomePageComponent', () => {
   let component: GaeBlogHomePageComponent;
@@ -11,10 +12,13 @@ describe('GaeBlogHomePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule,
+      imports: [
+        HttpClientTestingModule,
         RouterTestingModule.withRoutes([
           {path: 'blog/gae/:id', component: GaeBlogPageComponent}
-        ])],
+        ]),
+        MarkdownModule.forRoot()
+      ],
       declarations: [GaeBlogHomePageComponent, GaeBlogPageComponent]
     })
       .compileComponents();

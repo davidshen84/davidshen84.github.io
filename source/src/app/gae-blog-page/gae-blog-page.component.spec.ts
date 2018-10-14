@@ -5,6 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {GaeBlogService} from './gae-blog.service';
+import {TitleService} from '../title.service';
+import {MarkdownModule} from 'ngx-markdown';
 
 describe('GaeBlogPageComponent', () => {
   let component: GaeBlogPageComponent;
@@ -12,9 +14,12 @@ describe('GaeBlogPageComponent', () => {
   let gaeBlogService: GaeBlogService;
   let getBlogSpy: jasmine.Spy;
 
+  let titleService: TitleService;
+  let setTitleSpy: jasmine.Spy;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, MarkdownModule.forRoot()],
       declarations: [GaeBlogPageComponent],
       providers: [
         {provide: ActivatedRoute, useValue: {params: of({id: 'x'})}}
@@ -23,7 +28,11 @@ describe('GaeBlogPageComponent', () => {
       .compileComponents();
 
     gaeBlogService = TestBed.get(GaeBlogService);
-    getBlogSpy = spyOn(gaeBlogService, 'GetBlog');
+    getBlogSpy = spyOn(gaeBlogService, 'getBlog');
+    getBlogSpy.and.returnValue(of({title: 'title'}));
+
+    titleService = TestBed.get(TitleService);
+    setTitleSpy = spyOn(titleService, 'setTitle');
   }));
 
   beforeEach(() => {
@@ -36,7 +45,11 @@ describe('GaeBlogPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should invoke GaeBlogService.GetBlog', () => {
+  it('should invoke GaeBlogService.getBlog', () => {
     expect(getBlogSpy).toHaveBeenCalledWith('x');
+  });
+
+  it('should invoke TitleService.SetTitle', () => {
+    expect(setTitleSpy).toHaveBeenCalled();
   });
 });
