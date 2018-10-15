@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable, of, fromEvent, merge } from 'rxjs';
-import { map, scan, repeat, startWith } from 'rxjs/operators';
+import { map, scan, repeat, startWith, flatMap } from 'rxjs/operators';
 import { MatButton, MatSnackBar, MatSlider, MatCheckbox } from '@angular/material';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
@@ -16,7 +16,7 @@ export class PasswordGeneratorComponent implements OnInit {
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches));
 
-  public result$: Observable<Observable<string>>;
+  public result$: Observable<string>;
 
   // Default length of characters to generate.
   public Length = 6;
@@ -57,14 +57,15 @@ export class PasswordGeneratorComponent implements OnInit {
                          this._slider.input,
                         ).pipe(
                           startWith(undefined),
-                          map(_ => of(''
-                                      + (this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : '')
-                                      + (this.HasUpperCases ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '')
-                                      + (this.HasDigits ? '0123456789' : '')
-                                      + (this.HasSpecials ? '`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : '')).pipe(
-                                        map(s => this.pickOne(s) || '😂'),
-                                        repeat(this._slider.value),
-                                        scan((acc: string, value: string) => acc + value, ''))));
+                          flatMap(_ => of(`\
+${this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : ''}\
+${this.HasUpperCases ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : ''}\
+${this.HasDigits ? '0123456789' : ''}\
+${this.HasSpecials ? '\`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : ''}`
+                                         ).pipe(
+                                           map(s => this.pickOne(s) || '😂'),
+                                           repeat(this._slider.value),
+                                           scan((acc: string, value: string) => acc + value, ''))));
   }
 
   public openSnackBar = () => this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
