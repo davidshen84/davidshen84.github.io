@@ -1,10 +1,9 @@
-
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
-import {map, tap, filter} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import {TitleService} from '../title.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-blog-page',
@@ -39,7 +38,7 @@ export class BlogPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  onBlogLoadError(event: HttpErrorResponse){
+  onBlogLoadError(event: HttpErrorResponse) {
     this._paramIdSubscriptions.push(
       this._paramId$.subscribe(id => this._router.navigate(['blog/notfound', id]))
     );

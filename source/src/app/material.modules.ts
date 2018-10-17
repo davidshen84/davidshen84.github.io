@@ -1,8 +1,49 @@
-import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCheckboxModule, MatSliderModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSnackBarModule } from '@angular/material';
+import {NgModule} from '@angular/core';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+} from '@angular/material';
 
 @NgModule({
-  imports: [MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCheckboxModule, MatSliderModule, MatListModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSnackBarModule],
-  exports: [MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCheckboxModule, MatSliderModule, MatListModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatInputModule, MatSnackBarModule]
+  imports: [
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatListModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+  ],
+  exports: [
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatListModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+  ]
 })
 export class MaterialModules {}
