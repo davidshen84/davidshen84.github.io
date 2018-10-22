@@ -1,12 +1,14 @@
+@import "~@angular/material/theming";
 @import "../../global-variables";
+
+$primary: mat-palette($mat-indigo);
 
 .footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: blue;
-  color: white;
+  background-color: mat-color($primary);
   height: $footer-height;
   text-align: center;
 }
