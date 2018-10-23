@@ -25,6 +25,7 @@ import {PasswordGeneratorComponent} from './password-generator/password-generato
 import {FooterComponent} from './footer/footer.component';
 import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.component';
 import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
+import {QRCodeModule} from 'angularx-qrcode';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
     HttpClientModule,
     MarkdownModule.forRoot(),
     ClipboardModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

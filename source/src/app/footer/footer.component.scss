@@ -11,4 +11,9 @@ $primary: mat-palette($mat-indigo);
   background-color: mat-color($primary);
   height: $footer-height;
   text-align: center;
+
+  .qrcode-container {
+    margin: 10px auto auto 10px;
+    width: min-content;
+  }
 }
