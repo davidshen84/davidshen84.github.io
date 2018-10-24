@@ -13,6 +13,5 @@ export class TitleService {
 
   public getTitle = (): Observable<string> => this._title$.asObservable();
 
-
   public setTitle = (s: string) => this._title$.next(s);
 }
