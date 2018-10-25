@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.com/davidshen84/davidshen84.github.io.svg?branch=master)](https://travis-ci.com/davidshen84/davidshen84.github.io)
+
 Welcome to my blog repository!!!
 
 - The blog is published at (https://davidshen84.github.io/)[https://davidshen84.github.io/]
