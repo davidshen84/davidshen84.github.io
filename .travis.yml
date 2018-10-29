@@ -16,4 +16,5 @@ before_script:
   - npm install
 
 script:
-  - ng test --karma-config $TRAVIS_BUILD_DIR/source/src/karma.travis.conf.js
+  - ng test --karma-config $TRAVIS_BUILD_DIR/source/src/karma.headless.conf.js
+  - ng e2e --protractor-config $TRAVIS_BUILD_DIR/source/e2e/protractor.headless.conf.js
