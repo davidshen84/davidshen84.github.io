@@ -8,15 +8,15 @@ import { WebcamImage } from 'ngx-webcam';
   styleUrls: ['./webcam.component.scss']
 })
 export class WebcamComponent implements OnInit {
-  private snapshotTrigger = new Subject();
-  private image: WebcamImage;
+  public snapshotTrigger = new Subject();
+  public image: WebcamImage;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  private takeSnapshot(image: WebcamImage) {
+  public takeSnapshot(image: WebcamImage) {
     this.image = image;
   }
 }
