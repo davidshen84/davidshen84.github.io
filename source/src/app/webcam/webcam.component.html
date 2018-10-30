@@ -1,0 +1,3 @@
+<webcam [trigger]="snapshotTrigger.asObservable()" (imageCapture)="takeSnapshot($event)" (imageClick)="snapshotTrigger.next()"></webcam>
+
+<img *ngIf="image" [src]="image.imageAsDataUrl" />

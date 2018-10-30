@@ -74,7 +74,7 @@ export class PasswordGeneratorComponent implements OnInit {
 ${this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : ''}\
 ${this.HasUpperCases ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : ''}\
 ${this.HasDigits ? '0123456789' : ''}\
-${this.HasSpecials ? '\`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : ''}`;
+${this.HasSpecials ? '\`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : ''}`
 
   private pickOne = (s: string): string => (s && s.length > 0)
     ? s[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % s.length]

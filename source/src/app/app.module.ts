@@ -26,6 +26,8 @@ import {FooterComponent} from './footer/footer.component';
 import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.component';
 import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 import {QRCodeModule} from 'angularx-qrcode';
+import { WebcamComponent } from './webcam/webcam.component';
+import {WebcamModule} from 'ngx-webcam';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import {QRCodeModule} from 'angularx-qrcode';
     GaeBlogHomePageComponent,
     GaeBlogPageComponent,
     PasswordGeneratorComponent,
-    FooterComponent
+    FooterComponent,
+    WebcamComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import {QRCodeModule} from 'angularx-qrcode';
     MarkdownModule.forRoot(),
     ClipboardModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-    QRCodeModule
+    QRCodeModule,
+    WebcamModule
   ],
   providers: [],
   bootstrap: [AppComponent]
