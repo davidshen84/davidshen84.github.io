@@ -10,10 +10,18 @@ branches:
   only:
     - master
 
-before_script:
+cache:
+  directories:
+    - ./node_modules
+
+install:
   - npm install -g @angular/cli
+
+before_script:
   - cd $TRAVIS_BUILD_DIR/source
   - npm install
+  - npm build
 
 script:
-  - ng test --karma-config $TRAVIS_BUILD_DIR/source/src/karma.travis.conf.js
+  - ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
+#  - ng e2e --protractor-config=$TRAVIS_BUILD_DIR/source/e2e/protractor.ci.conf.js
