@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
-import { WebcamImage } from 'ngx-webcam';
+import { WebcamImage } from '@davidshen84/ngx-webcam';
 
 @Component({
   selector: 'app-webcam',

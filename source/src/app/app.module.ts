@@ -27,7 +27,7 @@ import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.
 import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 import {QRCodeModule} from 'angularx-qrcode';
 import { WebcamComponent } from './webcam/webcam.component';
-import {WebcamModule} from 'ngx-webcam';
+import {WebcamModule} from '@davidshen84/ngx-webcam';
 
 
 @NgModule({
