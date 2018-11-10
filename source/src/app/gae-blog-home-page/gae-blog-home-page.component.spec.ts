@@ -5,6 +5,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {GaeBlogPageComponent} from '../gae-blog-page/gae-blog-page.component';
 import {MarkdownModule} from 'ngx-markdown';
+import { MatListModule } from '@angular/material';
 
 describe('GaeBlogHomePageComponent', () => {
   let component: GaeBlogHomePageComponent;
@@ -17,7 +18,8 @@ describe('GaeBlogHomePageComponent', () => {
         RouterTestingModule.withRoutes([
           {path: 'blog/gae/:id', component: GaeBlogPageComponent}
         ]),
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
+        MatListModule
       ],
       declarations: [GaeBlogHomePageComponent, GaeBlogPageComponent]
     })

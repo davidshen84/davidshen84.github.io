@@ -1,9 +1,5 @@
-<div>
+<mat-nav-list role="list">
 
-  <ul>
-    <li *ngFor="let blog  of blogs$ | async">
-      <a routerLink="/blog/gae/{{ blog.urlsafe }}">{{ blog.title }}</a>
-    </li>
-  </ul>
+  <a mat-list-item *ngFor="let blog  of blogs$ | async" routerLink="/blog/gae/{{ blog.urlsafe }}">{{ blog.title }}</a>
 
-</div>
+</mat-nav-list>
