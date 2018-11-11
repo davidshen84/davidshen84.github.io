@@ -28,6 +28,7 @@ import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 import {QRCodeModule} from 'angularx-qrcode';
 import { WebcamComponent } from './webcam/webcam.component';
 import {WebcamModule} from '@davidshen84/ngx-webcam';
+import { CanvasShowcaseComponent } from './canvas-showcase/canvas-showcase.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {WebcamModule} from '@davidshen84/ngx-webcam';
     GaeBlogPageComponent,
     PasswordGeneratorComponent,
     FooterComponent,
-    WebcamComponent
+    WebcamComponent,
+    CanvasShowcaseComponent
   ],
   imports: [
     BrowserModule,
