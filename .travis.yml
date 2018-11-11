@@ -24,4 +24,4 @@ before_script:
 
 script:
   - ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
-#  - ng e2e --protractor-config=$TRAVIS_BUILD_DIR/source/e2e/protractor.ci.conf.js
+  - ng e2e --protractor-config=$TRAVIS_BUILD_DIR/source/e2e/protractor.ci.conf.js
