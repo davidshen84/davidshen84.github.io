@@ -1,1 +1,5 @@
-<canvas #canvas (click)="onClick($event)" (mousedown)="onMouseDown()"></canvas>
+<canvas #canvas (mousedown)="onMouseDown()"></canvas>
+
+<ul>
+  <li *ngFor="let p of _points.reverse().slice(0, 10)">{{ p | json }}</li>
+</ul>

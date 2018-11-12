@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Subject } from 'rxjs';
-import { WebcamImage } from '@davidshen84/ngx-webcam';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Subject} from 'rxjs';
+import {WebcamImage} from '@davidshen84/ngx-webcam';
 
 @Component({
   selector: 'app-webcam',
@@ -17,7 +17,8 @@ export class WebcamComponent implements OnInit {
   private canvasRef: ElementRef;
   private canvas: HTMLCanvasElement;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.canvas = this.canvasRef.nativeElement;
@@ -31,12 +32,12 @@ export class WebcamComponent implements OnInit {
     this.image = image;
 
     // Invert the color for fun!!!
-    let context2d = this.canvas.getContext('2d');
+    const context2d = this.canvas.getContext('2d');
     this.canvas.height = image.imageData.height;
     this.canvas.width = image.imageData.width;
 
-    for(let i = 0, d = image.imageData.data; i< d.length; i += 4) {
-      d[i + 0] = 255 - d[i + 0];
+    for (let i = 0, d = image.imageData.data; i < d.length; i += 4) {
+      d[i] = 255 - d[i];
       d[i + 1] = 255 - d[i + 1];
       d[i + 2] = 255 - d[i + 2];
       d[i + 3] = 255;
