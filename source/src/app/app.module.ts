@@ -29,6 +29,7 @@ import {QRCodeModule} from 'angularx-qrcode';
 import { WebcamComponent } from './webcam/webcam.component';
 import {WebcamModule} from '@davidshen84/ngx-webcam';
 import { CanvasShowcaseComponent } from './canvas-showcase/canvas-showcase.component';
+import { TfjsComponent } from './tfjs/tfjs.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CanvasShowcaseComponent } from './canvas-showcase/canvas-showcase.compo
     PasswordGeneratorComponent,
     FooterComponent,
     WebcamComponent,
-    CanvasShowcaseComponent
+    CanvasShowcaseComponent,
+    TfjsComponent
   ],
   imports: [
     BrowserModule,

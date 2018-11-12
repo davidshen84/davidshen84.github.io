@@ -9,6 +9,8 @@ import {PasswordGeneratorComponent} from '../password-generator/password-generat
 import {GaeBlogPageComponent} from '../gae-blog-page/gae-blog-page.component';
 import { WebcamComponent } from '../webcam/webcam.component';
 import {CanvasShowcaseComponent} from '../canvas-showcase/canvas-showcase.component';
+import { TfjsComponent } from '../tfjs/tfjs.component';
+
 
 export const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -18,7 +20,8 @@ export const routes: Routes = [
   {path: 'blog/notfound/:id', component: BlogPageNotFoundComponent},
   {path: 'password-generator', component: PasswordGeneratorComponent},
   {path: 'webcam', component: WebcamComponent},
-  {path: 'canvas', component: CanvasShowcaseComponent}
+  {path: 'canvas', component: CanvasShowcaseComponent},
+  {path: 'tfjs', component: TfjsComponent}
 ];
 
 
