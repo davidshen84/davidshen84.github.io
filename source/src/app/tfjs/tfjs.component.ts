@@ -1,7 +1,7 @@
 import * as tf from '@tensorflow/tfjs';
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CanvasDrawService} from '../canvas-showcase/canvas-draw.service';
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {distinctUntilChanged, throttleTime} from 'rxjs/operators';
 
 const normalize = (n: number, in_min: number, in_max: number, out_min: number, out_max: number): number =>
@@ -12,7 +12,7 @@ const normalize = (n: number, in_min: number, in_max: number, out_min: number, o
   templateUrl: './tfjs.component.html',
   styleUrls: ['./tfjs.component.scss']
 })
-export class TfjsComponent implements OnInit, OnDestroy {
+export class TfjsComponent implements OnInit {
 
   // Input data normalized between 0 and 1.
   private _xs: number[] = [];
@@ -23,8 +23,6 @@ export class TfjsComponent implements OnInit, OnDestroy {
   private _canvas: HTMLCanvasElement;
 
   private _lossSubject: BehaviorSubject<number> = new BehaviorSubject<number>(NaN);
-
-  private _trainingSubscription: Subscription;
 
   constructor(private _canvasDraw: CanvasDrawService) {
   }
@@ -70,10 +68,6 @@ export class TfjsComponent implements OnInit, OnDestroy {
       this._a.mul(tf.tensor1d(x)) // a * x
         .add(this._b) // + b
     );
-  }
-
-  ngOnDestroy(): void {
-    this._trainingSubscription.unsubscribe();
   }
 
   private _normalizeX(offsetX: number): number {

@@ -50,6 +50,7 @@ describe('BlogPageComponent', () => {
     httpMock.expectOne('assets/blogs/x.md');
 
     httpMock.verify();
+    expect().nothing();
   }));
 
   it('should redirect to blog/notfound/x', inject([HttpTestingController], (httpMock: HttpTestingController) => {

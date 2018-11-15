@@ -18,6 +18,7 @@ describe('GaeBlogService', () => {
       service.getBlogs().subscribe();
       httpMock.expectOne('https://davidshen84.appspot.com/blog/resources/blogs');
       httpMock.verify();
+      expect().nothing();
     })));
 
   it('should make http request to resources/blogs/x', async(
@@ -25,5 +26,6 @@ describe('GaeBlogService', () => {
       service.getBlog('x').subscribe();
       httpMock.expectOne('https://davidshen84.appspot.com/blog/resources/blogs/x');
       httpMock.verify();
+      expect().nothing();
     })));
 });
