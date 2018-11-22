@@ -15,6 +15,7 @@ import {environment} from '../environments/environment';
 
 import {MarkdownModule} from 'ngx-markdown';
 import {ClipboardModule} from 'ngx-clipboard';
+import {MathJaxModule} from 'ngx-mathjax';
 
 import {NavComponent} from './nav/nav.component';
 import {HomePageComponent} from './home-page/home-page.component';
@@ -60,7 +61,8 @@ import { TfjsComponent } from './tfjs/tfjs.component';
     ClipboardModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     QRCodeModule,
-    WebcamModule
+    WebcamModule,
+    MathJaxModule.config()
   ],
   providers: [],
   bootstrap: [AppComponent]

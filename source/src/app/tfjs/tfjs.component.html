@@ -1,6 +1,5 @@
-<div>model: Y = {{ a | number: '1.1-3' }} * X + {{ b | number: '1.1-3' }}</div>
-<div>loss = {{ loss$ | async }}</div>
-<!--<div>Ys = {{ Ys }}</div>-->
+<div [mathjax]="model$ | async" class="fixed-height">model: \( {{ '{}' }} \)</div>
+<div [mathjax]="loss$ | async" class="fixed-height">loss = \( {{ '{}' }} \)</div>
 <div>
   <canvas #canvas (click)="onMouseClick($event)"></canvas>
 </div>

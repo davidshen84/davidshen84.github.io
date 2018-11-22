@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TfjsComponent } from './tfjs.component';
+import {TfjsComponent} from './tfjs.component';
+import {MathJaxModule} from 'ngx-mathjax';
 
 describe('TfjsComponent', () => {
   let component: TfjsComponent;
@@ -8,9 +9,10 @@ describe('TfjsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TfjsComponent ]
+      declarations: [TfjsComponent],
+      imports: [MathJaxModule.config()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

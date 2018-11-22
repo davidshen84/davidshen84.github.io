@@ -1,9 +1,17 @@
 import * as tf from '@tensorflow/tfjs';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CanvasDrawService} from '../canvas-showcase/canvas-draw.service';
-import {BehaviorSubject} from 'rxjs';
-import {distinctUntilChanged, throttleTime} from 'rxjs/operators';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {auditTime, distinctUntilChanged, map} from 'rxjs/operators';
 
+/**
+ * Maps @param {n} within range @param {in_min} to @param {in_max} to another number in the range @param {out_min} to @param {out_max}.
+ * @param n input number
+ * @param in_min The lower bound of the input number.
+ * @param in_max The upper bound of the input number.
+ * @param out_min The lower bound of the output number.
+ * @param out_max The upper bound of the output number.
+ */
 const normalize = (n: number, in_min: number, in_max: number, out_min: number, out_max: number): number =>
   (n - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 
@@ -14,21 +22,29 @@ const normalize = (n: number, in_min: number, in_max: number, out_min: number, o
 })
 export class TfjsComponent implements OnInit {
 
+  private _modelSubject = new BehaviorSubject<{ a: number, b: number }>({a: NaN, b: NaN});
+  public readonly model$ = this._modelSubject.pipe(
+    auditTime(1000),
+    map(({a, b}) => ({a: a.toFixed(3), b: b.toFixed(3)})),
+    map(({a, b}) => `Y = ${a}X + ${b}`),
+    distinctUntilChanged());
+
+  private _lossSubject: Subject<number> = new BehaviorSubject<number>(NaN);
+  public readonly loss$ = this._lossSubject.pipe(
+    auditTime(1000),
+    map(v => v.toFixed(3)),
+    distinctUntilChanged());
+
   // Input data normalized between 0 and 1.
   private _xs: number[] = [];
   // Label data normalized between 0 and 1.
   private _ys: number[] = [];
+
   @ViewChild('canvas')
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
 
-  private _lossSubject: BehaviorSubject<number> = new BehaviorSubject<number>(NaN);
-
   constructor(private _canvasDraw: CanvasDrawService) {
-  }
-
-  public get loss$() {
-    return this._lossSubject.pipe(throttleTime(500), distinctUntilChanged());
   }
 
   private _a = tf.variable(tf.scalar(Math.random()));
@@ -59,7 +75,7 @@ export class TfjsComponent implements OnInit {
     this._xs.push(x);
     this._ys.push(y);
 
-    await this.train(200);
+    await this.train(75);
     await this._updateCanvas();
   }
 
@@ -116,12 +132,19 @@ export class TfjsComponent implements OnInit {
     const learningRate = 0.5;
     const optimizer = tf.train.sgd(learningRate);
 
+    // Initialize variable
+    this._a.assign(tf.scalar(Math.random()));
+    this._b.assign(tf.scalar(Math.random()));
+
+    // The training loop
     for (let i = 0; i < numIter; i++) {
       optimizer.minimize(() => {
         const ys = tf.tensor1d(this._ys);
         const predicts = this.predict(this._xs);
         const loss = tf.losses.meanSquaredError(ys, predicts) as tf.Scalar;
+
         this._lossSubject.next(loss.dataSync()[0]);
+        this._modelSubject.next({a: this._a.dataSync()[0], b: this._b.dataSync()[0]});
 
         return loss;
       });
