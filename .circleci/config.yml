@@ -12,6 +12,9 @@ jobs:
       - run:
           name: Install angular-cli
           command: npm install -g angular-cli
+      - run:
+          name: Install dependencies
+          command: npm install
       - save_cache:
           key: node-modules-cache-{{ checksum "package-lock.json" }}
           paths:
