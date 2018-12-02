@@ -26,8 +26,6 @@ import {FooterComponent} from './footer/footer.component';
 import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.component';
 import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 import {QRCodeModule} from 'angularx-qrcode';
-import {WebcamComponent} from './webcam/webcam.component';
-import {WebcamModule} from '@davidshen84/ngx-webcam';
 import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.component';
 
 
@@ -43,7 +41,6 @@ import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.compone
     GaeBlogPageComponent,
     PasswordGeneratorComponent,
     FooterComponent,
-    WebcamComponent,
     CanvasShowcaseComponent,
   ],
   imports: [
@@ -58,8 +55,6 @@ import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.compone
     ClipboardModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     QRCodeModule,
-    WebcamModule,
-    // MathJaxModule.config()
   ],
   providers: [],
   bootstrap: [AppComponent]

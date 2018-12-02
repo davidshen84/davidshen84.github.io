@@ -7,7 +7,6 @@ import {BlogPageNotFoundComponent} from './blog-page-not-found/blog-page-not-fou
 import {BlogHomePageComponent} from './blog-home-page/blog-home-page.component';
 import {PasswordGeneratorComponent} from './password-generator/password-generator.component';
 import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
-import {WebcamComponent} from './webcam/webcam.component';
 import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.component';
 
 
@@ -18,7 +17,7 @@ export const routes: Routes = [
   {path: 'blog/gae/:id', component: GaeBlogPageComponent},
   {path: 'blog/notfound/:id', component: BlogPageNotFoundComponent},
   {path: 'password-generator', component: PasswordGeneratorComponent},
-  {path: 'webcam', component: WebcamComponent},
+  {path: 'webcam', loadChildren: './webcam/webcam.module#WebcamModule'},
   {path: 'canvas', component: CanvasShowcaseComponent},
   {path: 'tfjs', loadChildren: './tfjs/tfjs.module#TfjsModule'}
 ];
