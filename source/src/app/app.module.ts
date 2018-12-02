@@ -15,7 +15,6 @@ import {environment} from '../environments/environment';
 
 import {MarkdownModule} from 'ngx-markdown';
 import {ClipboardModule} from 'ngx-clipboard';
-import {MathJaxModule} from 'ngx-mathjax';
 
 import {NavComponent} from './nav/nav.component';
 import {HomePageComponent} from './home-page/home-page.component';
@@ -27,10 +26,9 @@ import {FooterComponent} from './footer/footer.component';
 import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.component';
 import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 import {QRCodeModule} from 'angularx-qrcode';
-import { WebcamComponent } from './webcam/webcam.component';
+import {WebcamComponent} from './webcam/webcam.component';
 import {WebcamModule} from '@davidshen84/ngx-webcam';
-import { CanvasShowcaseComponent } from './canvas-showcase/canvas-showcase.component';
-import { TfjsComponent } from './tfjs/tfjs.component';
+import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.component';
 
 
 @NgModule({
@@ -47,7 +45,6 @@ import { TfjsComponent } from './tfjs/tfjs.component';
     FooterComponent,
     WebcamComponent,
     CanvasShowcaseComponent,
-    TfjsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +59,7 @@ import { TfjsComponent } from './tfjs/tfjs.component';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     QRCodeModule,
     WebcamModule,
-    MathJaxModule.config()
+    // MathJaxModule.config()
   ],
   providers: [],
   bootstrap: [AppComponent]

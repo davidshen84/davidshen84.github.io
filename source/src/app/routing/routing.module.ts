@@ -7,9 +7,8 @@ import {BlogPageNotFoundComponent} from '../blog-page-not-found/blog-page-not-fo
 import {BlogHomePageComponent} from '../blog-home-page/blog-home-page.component';
 import {PasswordGeneratorComponent} from '../password-generator/password-generator.component';
 import {GaeBlogPageComponent} from '../gae-blog-page/gae-blog-page.component';
-import { WebcamComponent } from '../webcam/webcam.component';
+import {WebcamComponent} from '../webcam/webcam.component';
 import {CanvasShowcaseComponent} from '../canvas-showcase/canvas-showcase.component';
-import { TfjsComponent } from '../tfjs/tfjs.component';
 
 
 export const routes: Routes = [
@@ -21,7 +20,7 @@ export const routes: Routes = [
   {path: 'password-generator', component: PasswordGeneratorComponent},
   {path: 'webcam', component: WebcamComponent},
   {path: 'canvas', component: CanvasShowcaseComponent},
-  {path: 'tfjs', component: TfjsComponent}
+  {path: 'tfjs', loadChildren: '../tfjs/tfjs.module#TfjsModule'}
 ];
 
 
