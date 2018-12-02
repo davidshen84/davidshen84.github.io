@@ -9,9 +9,6 @@ jobs:
           path: ~/project
       - restore_cache:
           key: node-modules-cache-{{ checksum "package-lock.json" }}
-#      - run:
-#          name: Install angular-cli
-#          command: npm install -g angular-cli
       - run:
           name: Install dependencies
           command: npm install
@@ -21,10 +18,10 @@ jobs:
             - ./node_modules
       - run:
           name: build
-          command: ng build
+          command: ./node_modules/.bin/ng build
       - run:
           name: unit test
-          command: ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
+          command: ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
       - run:
           name: e2e test
-          command: ng e2e --protractor-config=./e2e/protractor.ci.conf.js
+          command: ./node_modules/.bin/ng e2e --protractor-config=./e2e/protractor.ci.conf.js
