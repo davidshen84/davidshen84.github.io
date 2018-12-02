@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MaterialModules} from './material.modules';
 
-import {RoutingModule} from './routing/routing.module';
+import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 
 import {ServiceWorkerModule} from '@angular/service-worker';
@@ -52,7 +52,7 @@ import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.compone
     FormsModule,
     LayoutModule,
     MaterialModules,
-    RoutingModule,
+    AppRoutingModule,
     HttpClientModule,
     MarkdownModule.forRoot(),
     ClipboardModule,
