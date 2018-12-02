@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/project/source
     docker:
-      - image: circleci/node:11-browers
+      - image: circleci/node:11-browsers
     steps:
       - checkout:
           path: ~/project
