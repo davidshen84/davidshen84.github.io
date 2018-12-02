@@ -9,9 +9,9 @@ jobs:
           path: ~/project
       - restore_cache:
           key: node-modules-cache-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install angular-cli
-          command: npm install -g angular-cli
+#      - run:
+#          name: Install angular-cli
+#          command: npm install -g angular-cli
       - run:
           name: Install dependencies
           command: npm install
