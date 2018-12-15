@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-prod": "( rm -r ../3rdpartylicenses.txt ../assets/ ../favicon.ico ../index.html ../*.*.js ../*.json ../*.css || true ) && ng build --prod && cp -r dist/blog/* .."
+    "build-prod": "( rm -r ../3rdpartylicenses.txt ../assets/ ../favicon.ico ../index.html ../*.*.js ../*.json ../*.css || true ) && ng build --prod --aot && cp -r dist/blog/* .."
   },
   "private": true,
   "dependencies": {
