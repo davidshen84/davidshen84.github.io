@@ -24,6 +24,7 @@ import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.
 import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 import {QRCodeModule} from 'angularx-qrcode';
 import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.component';
+import {CryptoModule} from './crypto/crypto.module';
 
 
 @NgModule({
@@ -47,8 +48,9 @@ import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.compone
     AppRoutingModule,
     HttpClientModule,
     MarkdownModule.forRoot(),
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     QRCodeModule,
+    CryptoModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

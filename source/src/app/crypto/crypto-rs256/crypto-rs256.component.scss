@@ -1,0 +1,13 @@
+@import "../../gae-blog-page/gae-blog-page.component";
+
+mat-form-field {
+  width: 50%;
+
+  textarea {
+    max-height: 100px;
+  }
+
+  input {
+    width: 100%;
+  }
+}

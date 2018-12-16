@@ -18,7 +18,8 @@ export const routes: Routes = [
   {path: 'password-generator', loadChildren: './password-generator/password-generator.module#PasswordGeneratorModule'},
   {path: 'webcam', loadChildren: './webcam/webcam.module#WebcamModule'},
   {path: 'canvas', component: CanvasShowcaseComponent},
-  {path: 'tfjs', loadChildren: './tfjs/tfjs.module#TfjsModule'}
+  {path: 'tfjs', loadChildren: './tfjs/tfjs.module#TfjsModule'},
+  {path: 'crypto', loadChildren: './crypto/crypto.module#CryptoModule'}
 ];
 
 
