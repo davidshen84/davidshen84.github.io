@@ -1,27 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
-import {catchError, flatMap, map} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, merge, Observable, Subject} from 'rxjs';
+import {filter, flatMap, map, mapTo, share, tap} from 'rxjs/operators';
 import {fromPromise} from 'rxjs/internal-compatibility';
-
-function fromBase64(str) {
-  const bin = atob(str);
-  const buf = new ArrayBuffer(bin.length);
-  const bufView = new Uint8Array(buf);
-
-  for (let i = 0; i < bin.length; i++) {
-    bufView[i] = bin.charCodeAt(i);
-  }
-
-  return buf;
-}
-
-function base64urlEncode(s: string): string {
-  return btoa(s)
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '')
-    ;
-}
+import {base64UrlEncode, encodeString, fromBase64} from '../string.utility';
+import {Algorithms} from '../crypto';
+import {tag} from 'rxjs-spy/operators';
 
 @Component({
   selector: 'app-crypto-rs256',
@@ -30,11 +13,6 @@ function base64urlEncode(s: string): string {
 })
 export class CryptoRS256Component implements OnInit {
 
-  private static algorithm = {
-    name: 'RSASSA-PKCS1-v1_5',
-    hash: {name: 'SHA-256'},
-  };
-
   // Define header
   public header = JSON.stringify({
     'alg': 'RS256',
@@ -42,11 +20,10 @@ export class CryptoRS256Component implements OnInit {
   }, null, 2);
   public headerSubject = new BehaviorSubject<string>(this.header);
   public encodedHeader$ = this.headerSubject.pipe(
-    map(s => new TextEncoder().encode(s)),
+    map(s => encodeString(s)),
     map(a => String.fromCharCode(...Array.from(a))),
-    map(base64urlEncode)
+    map(base64UrlEncode)
   );
-
   // Define payload
   public payload = JSON.stringify({
     'sub': '1234567890',
@@ -56,48 +33,88 @@ export class CryptoRS256Component implements OnInit {
   }, null, 2);
   public payloadSubject = new BehaviorSubject<string>(this.payload);
   public encodedPayload$ = this.payloadSubject.pipe(
-    map(s => new TextEncoder().encode(s)),
+    map(s => encodeString(s)),
     map(a => String.fromCharCode(...Array.from(a))),
-    map(base64urlEncode)
+    map(base64UrlEncode)
   );
 
   // Define private key
-  public base64PrivateKey: string;
-  private privateKeySubject = new Subject<string>();
-  private privateKey$: Observable<CryptoKey> = this.privateKeySubject.pipe(
-    map(k => k.replace('-----BEGIN PRIVATE KEY-----', '')
-      .replace('-----END PRIVATE KEY-----', '')
-      .replace(/\n/g, '')
-    ),
-    map(fromBase64),
-    catchError((_, source$) => source$),
-    flatMap(buf =>
-      fromPromise(crypto.subtle.importKey('pkcs8', buf, CryptoRS256Component.algorithm, false, ['sign']))),
+  public base64Input: string;
+  private privateKeyInputSubject = new Subject<string>();
+  private privateKeyBuf$: Observable<ArrayBuffer> = this.privateKeyInputSubject.pipe(
+    tag('pkBuf'),
+    tap(console.log),
+    map(k => CryptoRS256Component.cleanInputPrivateKey(k)),
+    map(k => {
+      try {
+        return fromBase64(k);
+      } catch (e) {
+        return null;
+      }
+    }),
+    share()
   );
+  private privateCryptoKey$: Observable<CryptoKey> = merge(
+    this.privateKeyBuf$.pipe(
+      filter(k => k !== null),
+      flatMap(buf =>
+        fromPromise(crypto.subtle.importKey('pkcs8', buf, Algorithms.RS256, false, ['sign'])
+          .then(undefined, () => null)))
+    ),
+    this.privateKeyBuf$.pipe(
+      filter(k => !k),
+      mapTo(null)
+    )
+  ).pipe(share());
 
   // Define signature
-  public sig$: Observable<string> = combineLatest(this.encodedHeader$, this.encodedPayload$, this.privateKey$).pipe(
-    flatMap(([h, p, k]) =>
-      fromPromise(crypto.subtle.sign(CryptoRS256Component.algorithm, k, new TextEncoder().encode(`${h}.${p}`)))),
-    map(sig => String.fromCharCode(...Array.from(new Uint8Array(sig)))),
-    map(base64urlEncode),
-  );
+  private signatureBuf$: Observable<ArrayBuffer> = merge(
+    combineLatest(this.encodedHeader$, this.encodedPayload$, this.privateCryptoKey$).pipe(
+      filter(([_, __, k]) => k !== null),
+      flatMap(([h, p, k]) =>
+        fromPromise(crypto.subtle.sign(Algorithms.RS256, k, encodeString(`${h}.${p}`))
+          .then(undefined, () => null)))
+    ),
+    this.privateCryptoKey$.pipe(
+      filter(k => !k),
+      mapTo(null)
+    )
+  ).pipe(share());
+
+  public signature$: Observable<string> = merge(
+    this.signatureBuf$.pipe(
+      filter(b => b && b.byteLength > 0),
+      map(sig => String.fromCharCode(...Array.from(new Uint8Array(sig)))),
+      map(base64UrlEncode)
+    ),
+    this.signatureBuf$.pipe(
+      filter(b => !b),
+      mapTo('')
+    )
+  ).pipe(share());
 
   // Define JWT
-  public jwt$: Observable<string> = combineLatest(this.encodedHeader$, this.encodedPayload$, this.sig$).pipe(
-    map(([h, p, s]) => `${h}.${p}.${s}`)
+  public jwt$: Observable<string> = merge(
+    combineLatest(this.encodedHeader$, this.encodedPayload$, this.signature$).pipe(
+      filter(([_, __, s]) => s && s !== ''),
+      map(([h, p, s]) => `${h}.${p}.${s}`)
+    ),
+    this.signature$.pipe(
+      filter(s => !s),
+      mapTo('')
+    )
   );
 
   constructor() {
   }
 
-  ngOnInit() {
+  private static cleanInputPrivateKey(k) {
+    return k.replace('-----BEGIN PRIVATE KEY-----', '')
+      .replace('-----END PRIVATE KEY-----', '')
+      .replace(/\n/g, '');
   }
 
-  headerChanged = (header: string) => this.headerSubject.next(header);
-
-  payloadChanged = (payload: string) => this.payloadSubject.next(payload);
-
-  keyChanged = (inputKey: string) => this.privateKeySubject.next(inputKey);
+  ngOnInit() {
+  }
 
 }
