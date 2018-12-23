@@ -16,15 +16,11 @@ import {MarkdownModule} from 'ngx-markdown';
 
 import {NavComponent} from './nav/nav.component';
 import {HomePageComponent} from './home-page/home-page.component';
-import {BlogPageComponent} from './blog-page/blog-page.component';
-import {BlogPageNotFoundComponent} from './blog-page-not-found/blog-page-not-found.component';
-import {BlogHomePageComponent} from './blog-home-page/blog-home-page.component';
 import {FooterComponent} from './footer/footer.component';
-import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.component';
-import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 import {QRCodeModule} from 'angularx-qrcode';
 import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.component';
 import {CryptoModule} from './crypto/crypto.module';
+import {BlogModule} from './blog/blog.module';
 
 
 @NgModule({
@@ -32,11 +28,6 @@ import {CryptoModule} from './crypto/crypto.module';
     AppComponent,
     NavComponent,
     HomePageComponent,
-    BlogPageComponent,
-    BlogPageNotFoundComponent,
-    BlogHomePageComponent,
-    GaeBlogHomePageComponent,
-    GaeBlogPageComponent,
     FooterComponent,
     CanvasShowcaseComponent,
   ],
@@ -51,6 +42,7 @@ import {CryptoModule} from './crypto/crypto.module';
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     QRCodeModule,
     CryptoModule,
+    BlogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

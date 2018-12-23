@@ -5,8 +5,9 @@ import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {GaeBlogService} from './gae-blog.service';
-import {TitleService} from '../title.service';
+import {TitleService} from '../../title.service';
 import {MarkdownModule} from 'ngx-markdown';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('GaeBlogPageComponent', () => {
   let component: GaeBlogPageComponent;
@@ -19,7 +20,11 @@ describe('GaeBlogPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MarkdownModule.forRoot()],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MarkdownModule.forRoot()
+      ],
       declarations: [GaeBlogPageComponent],
       providers: [
         {provide: ActivatedRoute, useValue: {params: of({id: 'x'})}}

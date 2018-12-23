@@ -18,10 +18,10 @@ export interface Blog {
 })
 export class GaeBlogService {
 
+  private _endpoint = 'https://davidshen84.appspot.com/blog/resources';
+
   constructor(private httpClient: HttpClient) {
   }
-
-  private _endpoint = 'https://davidshen84.appspot.com/blog/resources';
 
   public getBlogs() {
     return this.httpClient.get<BlogMeta[]>(`${this._endpoint}/blogs`);
