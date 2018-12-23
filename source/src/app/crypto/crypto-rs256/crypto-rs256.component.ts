@@ -40,7 +40,7 @@ export class CryptoRS256Component implements OnInit {
 
   // Define private key
   public base64Input: string;
-  private privateKeyInputSubject = new Subject<string>();
+  public privateKeyInputSubject = new Subject<string>();
   private privateKeyBuf$: Observable<ArrayBuffer> = this.privateKeyInputSubject.pipe(
     tag('pkBuf'),
     tap(console.log),
