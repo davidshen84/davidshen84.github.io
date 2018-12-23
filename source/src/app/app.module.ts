@@ -1,5 +1,4 @@
 import {LayoutModule} from '@angular/cdk/layout';
-import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -38,7 +37,6 @@ import {SettingsModule} from './settings/settings.module';
     LayoutModule,
     MaterialModules,
     AppRoutingModule,
-    HttpClientModule,
     MarkdownModule.forRoot(),
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     QRCodeModule,
