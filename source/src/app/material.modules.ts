@@ -29,7 +29,8 @@ import {
     MatSliderModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule
   ],
   exports: [
     MatButtonModule,
@@ -44,7 +45,8 @@ import {
     MatSliderModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule
   ]
 })
 export class MaterialModules {}

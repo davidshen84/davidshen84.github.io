@@ -4,6 +4,7 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {filter, flatMap, map, mapTo, share} from 'rxjs/operators';
 import {Algorithms} from '../crypto/crypto';
 import {cleanInputPrivateKey, fromBase64} from '../crypto/string.utility';
+import {LocalStorageService} from 'ngx-store';
 
 @Component({
   selector: 'app-settings',
@@ -11,41 +12,38 @@ import {cleanInputPrivateKey, fromBase64} from '../crypto/string.utility';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  pkInput: string;
-  pkChangedSubject: Subject<string> = new Subject<string>();
+  private pkInput: string;
+  private pkChangedSubject: Subject<string> = new Subject<string>();
 
-  cryptoKeyBuf$ = this.pkChangedSubject.pipe(
+  private cryptoKeyBuf$ = this.pkChangedSubject.pipe(
     map(i => cleanInputPrivateKey(i)),
     map(i => {
       try {
         return fromBase64(i);
       } catch (e) {
-        return e;
+        return <Error>e;
       }
     }),
     share()
   );
 
-  cryptoKey$ = this.cryptoKeyBuf$.pipe(
-    filter(o => !(o instanceof DOMException)),
+  private cryptoKey$ = this.cryptoKeyBuf$.pipe(
+    filter(x => !(x instanceof Error)),
     flatMap((buf: ArrayBuffer) =>
       fromPromise(crypto.subtle.importKey('pkcs8', buf, Algorithms.RS256, false, ['sign'])
-        .then(undefined, () => new Error())))
+        .then(undefined, r => new Error(r)))),
   );
 
-  cryptoKeyStored$ = this.cryptoKey$.pipe(
-    filter(i => !(i instanceof Error)),
+  private cryptoKeyStored$ = this.pkChangedSubject.pipe(
+    map(i => this.localStorageService.set('private-key', i)),
     mapTo(true)
   );
 
-  cryptoKeyErrored$ = this.cryptoKeyBuf$.pipe(
-    filter(i => i instanceof Error),
-    mapTo(false)
-  );
+  private cryptoKeyError$ = merge(this.cryptoKeyBuf$, this.cryptoKey$)
+    .pipe(map(x => x instanceof Error));
 
-  cryptoKeyResult$ = merge(this.cryptoKeyStored$, this.cryptoKeyErrored$);
 
-  constructor() {
+  constructor(private localStorageService: LocalStorageService) {
   }
 
   ngOnInit() {
