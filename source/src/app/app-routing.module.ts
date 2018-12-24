@@ -12,7 +12,8 @@ export const routes: Routes = [
   {path: 'webcam', loadChildren: './webcam/webcam.module#WebcamModule'},
   {path: 'canvas', component: CanvasShowcaseComponent},
   {path: 'tfjs', loadChildren: './tfjs/tfjs.module#TfjsModule'},
-  {path: 'crypto', loadChildren: './crypto/crypto.module#CryptoModule'}
+  {path: 'crypto', loadChildren: './crypto/crypto.module#CryptoModule'},
+  {path: 'settings', loadChildren: './settings/settings.module#SettingsModule'}
 ];
 
 

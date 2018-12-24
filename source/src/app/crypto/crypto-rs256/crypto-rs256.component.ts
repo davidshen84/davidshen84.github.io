@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, combineLatest, merge, Observable, Subject} from 'rxjs';
-import {filter, flatMap, map, mapTo, share, tap} from 'rxjs/operators';
 import {fromPromise} from 'rxjs/internal-compatibility';
-import {base64UrlEncode, encodeString, fromBase64} from '../string.utility';
+import {filter, flatMap, map, mapTo, share} from 'rxjs/operators';
 import {Algorithms} from '../crypto';
-import {tag} from 'rxjs-spy/operators';
+import {base64UrlEncode, cleanInputPrivateKey, encodeString, fromBase64} from '../string.utility';
+
 
 @Component({
   selector: 'app-crypto-rs256',
@@ -42,9 +42,7 @@ export class CryptoRS256Component implements OnInit {
   public base64Input: string;
   public privateKeyInputSubject = new Subject<string>();
   private privateKeyBuf$: Observable<ArrayBuffer> = this.privateKeyInputSubject.pipe(
-    tag('pkBuf'),
-    tap(console.log),
-    map(k => CryptoRS256Component.cleanInputPrivateKey(k)),
+    map(k => cleanInputPrivateKey(k)),
     map(k => {
       try {
         return fromBase64(k);
@@ -106,12 +104,6 @@ export class CryptoRS256Component implements OnInit {
   );
 
   constructor() {
-  }
-
-  private static cleanInputPrivateKey(k) {
-    return k.replace('-----BEGIN PRIVATE KEY-----', '')
-      .replace('-----END PRIVATE KEY-----', '')
-      .replace(/\n/g, '');
   }
 
   ngOnInit() {

@@ -1,0 +1,8 @@
+mat-form-field {
+  width: 100%;
+
+  textarea[name="pkInput"] {
+    width: 50%;
+    max-height: 200px;
+  }
+}

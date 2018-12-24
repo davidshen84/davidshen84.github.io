@@ -1,0 +1,15 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Private Key</mat-panel-title>
+      <mat-panel-description>Save a private key in the browser's local storage.</mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <textarea (ngModelChange)="pkChangedSubject.next(pkInput)" [(ngModel)]="pkInput" matInput matTextareaAutosize
+                name="pkInput"
+                placeholder="RS256 Private Key"></textarea>
+      <div>{{ cryptoKeyResult$ | async }}</div>
+    </mat-form-field>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,26 +1,27 @@
+import {LayoutModule} from '@angular/cdk/layout';
+import {HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
-
-import {AppComponent} from './app.component';
-import {LayoutModule} from '@angular/cdk/layout';
-import {MaterialModules} from './material.modules';
-
-import {AppRoutingModule} from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http';
 
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {environment} from '../environments/environment';
+import {QRCodeModule} from 'angularx-qrcode';
 
 import {MarkdownModule} from 'ngx-markdown';
+import {environment} from '../environments/environment';
 
-import {NavComponent} from './nav/nav.component';
-import {HomePageComponent} from './home-page/home-page.component';
-import {FooterComponent} from './footer/footer.component';
-import {QRCodeModule} from 'angularx-qrcode';
+import {AppRoutingModule} from './app-routing.module';
+
+import {AppComponent} from './app.component';
+import {BlogModule} from './blog/blog.module';
 import {CanvasShowcaseComponent} from './canvas-showcase/canvas-showcase.component';
 import {CryptoModule} from './crypto/crypto.module';
-import {BlogModule} from './blog/blog.module';
+import {FooterComponent} from './footer/footer.component';
+import {HomePageComponent} from './home-page/home-page.component';
+import {MaterialModules} from './material.modules';
+
+import {NavComponent} from './nav/nav.component';
+import {SettingsModule} from './settings/settings.module';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {BlogModule} from './blog/blog.module';
     QRCodeModule,
     CryptoModule,
     BlogModule,
+    SettingsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

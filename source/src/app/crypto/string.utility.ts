@@ -21,3 +21,9 @@ export function base64UrlEncode(s: string): string {
 export function encodeString(s: string): Uint8Array {
   return new TextEncoder().encode(s);
 }
+
+export function cleanInputPrivateKey(k) {
+  return k.replace('-----BEGIN PRIVATE KEY-----', '')
+    .replace('-----END PRIVATE KEY-----', '')
+    .replace(/\n/g, '');
+}

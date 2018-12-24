@@ -4,6 +4,7 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -24,11 +25,11 @@ import {
     MatIconModule,
     MatInputModule,
     MatListModule,
-    MatListModule,
     MatSidenavModule,
     MatSliderModule,
     MatSnackBarModule,
     MatToolbarModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
@@ -39,11 +40,11 @@ import {
     MatIconModule,
     MatInputModule,
     MatListModule,
-    MatListModule,
     MatSidenavModule,
     MatSliderModule,
     MatSnackBarModule,
     MatToolbarModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModules {}
