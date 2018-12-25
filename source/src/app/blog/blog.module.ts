@@ -10,7 +10,8 @@ import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 import {MaterialModules} from '../material.modules';
 import {MarkdownModule} from 'ngx-markdown';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {AuthorizationInterceptor} from './authorization-interceptor';
+import {WebStorageModule} from 'ngx-store';
+import {AuthorizationInterceptorService} from './authorization-interceptor.service';
 
 
 @NgModule({
@@ -26,12 +27,13 @@ import {AuthorizationInterceptor} from './authorization-interceptor';
     HttpClientModule,
     MaterialModules,
     MarkdownModule.forChild(),
-    BlogRoutingModule
+    BlogRoutingModule,
+    WebStorageModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthorizationInterceptor,
+      useClass: AuthorizationInterceptorService,
       multi: true
     },
   ]

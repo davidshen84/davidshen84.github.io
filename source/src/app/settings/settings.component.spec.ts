@@ -3,7 +3,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {SettingsComponent} from './settings.component';
 import {FormsModule} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatExpansionModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {WebStorageModule} from 'ngx-store';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
@@ -16,7 +17,9 @@ describe('SettingsComponent', () => {
         MatExpansionModule,
         MatFormFieldModule,
         MatInputModule,
-        FormsModule
+        MatIconModule,
+        FormsModule,
+        WebStorageModule
       ],
       declarations: [SettingsComponent]
     })
