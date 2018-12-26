@@ -1,11 +1,12 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MarkdownModule} from 'ngx-markdown';
+import {MaterialModules} from '../../material.modules';
+import {RS256CryptoService} from '../rs256-crypto.service';
 
 import {CryptoRS256Component} from './crypto-rs256.component';
-import {MarkdownModule} from 'ngx-markdown';
-import {FormsModule} from '@angular/forms';
-import {MaterialModules} from '../../material.modules';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('CryptoRS256Component', () => {
   let component: CryptoRS256Component;
@@ -20,7 +21,10 @@ describe('CryptoRS256Component', () => {
         HttpClientTestingModule,
         MarkdownModule.forRoot()
       ],
-      declarations: [CryptoRS256Component]
+      declarations: [CryptoRS256Component],
+      providers: [
+        RS256CryptoService
+      ]
     })
       .compileComponents();
   }));

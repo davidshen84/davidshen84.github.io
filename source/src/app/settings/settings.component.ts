@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {LocalStorageService} from 'ngx-store';
 import {merge, Subject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {filter, flatMap, map, mapTo, share} from 'rxjs/operators';
-import {Algorithms} from '../crypto/crypto';
 import {cleanInputPrivateKey, fromBase64} from '../crypto/string.utility';
-import {LocalStorageService} from 'ngx-store';
 
 @Component({
   selector: 'app-settings',
@@ -12,9 +11,12 @@ import {LocalStorageService} from 'ngx-store';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  private pkInput: string;
-  private pkChangedSubject: Subject<string> = new Subject<string>();
-
+  public pkInput: string;
+  public pkChangedSubject: Subject<string> = new Subject<string>();
+  public cryptoKeyStored$ = this.pkChangedSubject.pipe(
+    map(i => this.localStorageService.set('private-key', i)),
+    mapTo(true)
+  );
   private cryptoKeyBuf$ = this.pkChangedSubject.pipe(
     map(i => cleanInputPrivateKey(i)),
     map(i => {
@@ -26,22 +28,18 @@ export class SettingsComponent implements OnInit {
     }),
     share()
   );
-
+  private readonly algorithm: RsaHashedImportParams = {
+    name: 'RSASSA-PKCS1-v1_5',
+    hash: 'SHA-256'
+  };
   private cryptoKey$ = this.cryptoKeyBuf$.pipe(
     filter(x => !(x instanceof Error)),
     flatMap((buf: ArrayBuffer) =>
-      fromPromise(crypto.subtle.importKey('pkcs8', buf, Algorithms.RS256, false, ['sign'])
+      fromPromise(crypto.subtle.importKey('pkcs8', buf, this.algorithm, false, ['sign'])
         .then(undefined, r => new Error(r)))),
   );
-
-  private cryptoKeyStored$ = this.pkChangedSubject.pipe(
-    map(i => this.localStorageService.set('private-key', i)),
-    mapTo(true)
-  );
-
-  private cryptoKeyError$ = merge(this.cryptoKeyBuf$, this.cryptoKey$)
+  public cryptoKeyError$ = merge(this.cryptoKeyBuf$, this.cryptoKey$)
     .pipe(map(x => x instanceof Error));
-
 
   constructor(private localStorageService: LocalStorageService) {
   }

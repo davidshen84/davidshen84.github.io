@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import 'hammerjs';
 
-import { CanvasShowcaseComponent } from './canvas-showcase.component';
+import {CanvasShowcaseComponent} from './canvas-showcase.component';
 
 describe('CanvasShowcaseComponent', () => {
   let component: CanvasShowcaseComponent;
@@ -8,9 +9,9 @@ describe('CanvasShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CanvasShowcaseComponent ]
+      declarations: [CanvasShowcaseComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

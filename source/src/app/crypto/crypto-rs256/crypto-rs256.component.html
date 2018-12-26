@@ -23,8 +23,8 @@
 
   <mat-card>
     <mat-form-field>
-        <textarea matInput matTextareaAutosize [(ngModel)]="base64Input" name="base64Input"
-                  placeholder="Private Key" (ngModelChange)="privateKeyInputSubject.next(base64Input)"></textarea>
+        <textarea matInput matTextareaAutosize [(ngModel)]="privateKeyInput" name="base64Input"
+                  placeholder="Private Key" (ngModelChange)="privateKeyInputSubject.next(privateKeyInput)"></textarea>
     </mat-form-field>
   </mat-card>
 

@@ -22,6 +22,12 @@ export function encodeString(s: string): Uint8Array {
   return new TextEncoder().encode(s);
 }
 
+export function encodeJSON(json: object): string {
+  const buf = encodeString(JSON.stringify(json));
+
+  return base64UrlEncode(String.fromCharCode(...Array.from(buf)));
+}
+
 export function cleanInputPrivateKey(k) {
   return k.replace('-----BEGIN PRIVATE KEY-----', '')
     .replace('-----END PRIVATE KEY-----', '')

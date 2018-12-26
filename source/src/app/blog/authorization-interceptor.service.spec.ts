@@ -1,12 +1,19 @@
+import {HttpHandler, HttpRequest} from '@angular/common/http';
 import {async, TestBed} from '@angular/core/testing';
+import {LocalStorageService} from 'ngx-store';
+import {of} from 'rxjs';
+import {RS256CryptoService} from '../crypto/rs256-crypto.service';
 
 import {AuthorizationInterceptorService} from './authorization-interceptor.service';
-import {LocalStorageService} from 'ngx-store';
-import {HttpHandler, HttpRequest} from '@angular/common/http';
-import * as stringUtil from '../crypto/string.utility';
-import {Observable} from 'rxjs';
+import createSpy = jasmine.createSpy;
+import stringMatching = jasmine.stringMatching;
 
 describe('AuthorizationInterceptorService', () => {
+  const cryptoServiceMock = {
+    sign: () => {
+    }
+  };
+
   beforeEach(() => TestBed.configureTestingModule({
     imports: [],
     providers: [
@@ -15,6 +22,9 @@ describe('AuthorizationInterceptorService', () => {
         provide: LocalStorageService, useValue: {
           get: () => 'empty'
         }
+      },
+      {
+        provide: RS256CryptoService, useValue: cryptoServiceMock
       }
     ]
   }));
@@ -24,28 +34,33 @@ describe('AuthorizationInterceptorService', () => {
     expect(service).toBeTruthy();
   });
 
-  xit('should sign the request', async(() => {
-    const fromBase64Spy = spyOn(stringUtil, 'fromBase64').and.returnValue(new ArrayBuffer(0));
+  it('should sign the request', async(() => {
+    const signSpy = spyOn(cryptoServiceMock, 'sign').and.returnValue(Promise.resolve('sign'));
     const service: AuthorizationInterceptorService = TestBed.get(AuthorizationInterceptorService);
-    const importKeySpy = spyOn(crypto.subtle, 'importKey');
+    const handleSpy = createSpy('handle').and.returnValue(of(''));
 
-    const handleSpy = jasmine.createSpy('handle').and.returnValue(new Observable());
+    const reqClone = <HttpRequest<any>>{};
 
 
+    const reqMock = <HttpRequest<any>>{
+      method: 'GET',
+      clone: () => {
+      }
+    };
+    const cloneSpy = spyOn(reqMock, 'clone').and.returnValue(reqClone);
     service.intercept(
-      <HttpRequest<any>>{
-        method: 'GET',
-        clone: () => {
-          return <HttpRequest<any>>{};
-        }
-      },
+      reqMock,
       <HttpHandler>{
         handle: handleSpy
       }
-    ).subscribe(x => {
-      expect(fromBase64Spy).toHaveBeenCalled();
-      expect(importKeySpy).toHaveBeenCalled();
-      expect(handleSpy).toHaveBeenCalled();
+    ).subscribe(req => {
+      expect(signSpy).toHaveBeenCalled();
+      expect(cloneSpy).toHaveBeenCalledWith({
+        setHeaders: {
+          Authorization: stringMatching(/Bearer .*\.sign/)
+        }
+      });
+      expect(handleSpy).toHaveBeenCalledWith(reqClone);
     });
   }));
 });

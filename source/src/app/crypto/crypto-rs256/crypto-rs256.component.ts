@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, combineLatest, merge, Observable, Subject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {filter, flatMap, map, mapTo, share} from 'rxjs/operators';
-import {Algorithms} from '../crypto';
-import {base64UrlEncode, cleanInputPrivateKey, encodeString, fromBase64} from '../string.utility';
+import {RS256CryptoService} from '../rs256-crypto.service';
+import {base64UrlEncode, encodeString} from '../string.utility';
 
 
 @Component({
@@ -39,57 +39,15 @@ export class CryptoRS256Component implements OnInit {
   );
 
   // Define private key
-  public base64Input: string;
+  public privateKeyInput: string;
   public privateKeyInputSubject = new Subject<string>();
-  private privateKeyBuf$: Observable<ArrayBuffer> = this.privateKeyInputSubject.pipe(
-    map(k => cleanInputPrivateKey(k)),
-    map(k => {
-      try {
-        return fromBase64(k);
-      } catch (e) {
-        return null;
-      }
-    }),
-    share()
-  );
-  private privateCryptoKey$: Observable<CryptoKey> = merge(
-    this.privateKeyBuf$.pipe(
-      filter(k => k !== null),
-      flatMap(buf =>
-        fromPromise(crypto.subtle.importKey('pkcs8', buf, Algorithms.RS256, false, ['sign'])
-          .then(undefined, () => null)))
-    ),
-    this.privateKeyBuf$.pipe(
-      filter(k => !k),
-      mapTo(null)
-    )
-  ).pipe(share());
 
   // Define signature
-  private signatureBuf$: Observable<ArrayBuffer> = merge(
-    combineLatest(this.encodedHeader$, this.encodedPayload$, this.privateCryptoKey$).pipe(
-      filter(([_, __, k]) => k !== null),
-      flatMap(([h, p, k]) =>
-        fromPromise(crypto.subtle.sign(Algorithms.RS256, k, encodeString(`${h}.${p}`))
-          .then(undefined, () => null)))
-    ),
-    this.privateCryptoKey$.pipe(
-      filter(k => !k),
-      mapTo(null)
-    )
-  ).pipe(share());
-
-  public signature$: Observable<string> = merge(
-    this.signatureBuf$.pipe(
-      filter(b => b && b.byteLength > 0),
-      map(sig => String.fromCharCode(...Array.from(new Uint8Array(sig)))),
-      map(base64UrlEncode)
-    ),
-    this.signatureBuf$.pipe(
-      filter(b => !b),
-      mapTo('')
-    )
-  ).pipe(share());
+  public signature$ = combineLatest(this.encodedHeader$, this.encodedPayload$, this.privateKeyInputSubject).pipe(
+    flatMap(([h, p, k]) => fromPromise(this.cryptoService.sign(k, `${h}.${p}`)
+      .then(undefined, () => ''))),
+    share()
+  );
 
   // Define JWT
   public jwt$: Observable<string> = merge(
@@ -103,7 +61,7 @@ export class CryptoRS256Component implements OnInit {
     )
   );
 
-  constructor() {
+  constructor(private cryptoService: RS256CryptoService) {
   }
 
   ngOnInit() {

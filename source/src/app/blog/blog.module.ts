@@ -1,17 +1,18 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {MarkdownModule} from 'ngx-markdown';
+import {WebStorageModule} from 'ngx-store';
+import {RS256CryptoService} from '../crypto/rs256-crypto.service';
+import {MaterialModules} from '../material.modules';
+import {AuthorizationInterceptorService} from './authorization-interceptor.service';
+import {BlogHomePageComponent} from './blog-home-page/blog-home-page.component';
+import {BlogPageNotFoundComponent} from './blog-page-not-found/blog-page-not-found.component';
+import {BlogPageComponent} from './blog-page/blog-page.component';
 
 import {BlogRoutingModule} from './blog-routing.module';
-import {BlogHomePageComponent} from './blog-home-page/blog-home-page.component';
-import {BlogPageComponent} from './blog-page/blog-page.component';
-import {BlogPageNotFoundComponent} from './blog-page-not-found/blog-page-not-found.component';
 import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.component';
 import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
-import {MaterialModules} from '../material.modules';
-import {MarkdownModule} from 'ngx-markdown';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {WebStorageModule} from 'ngx-store';
-import {AuthorizationInterceptorService} from './authorization-interceptor.service';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {AuthorizationInterceptorService} from './authorization-interceptor.servi
       useClass: AuthorizationInterceptorService,
       multi: true
     },
+    RS256CryptoService
   ]
 })
 export class BlogModule {
