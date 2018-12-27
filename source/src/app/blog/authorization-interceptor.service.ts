@@ -26,10 +26,14 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const ts = Math.floor(Date.now() / 1000);
+    const halfMin = 30;
     const encodedPayload = encodeJSON({
-      method: req.method
+      iss: req.url,
+      exp: ts + halfMin,
+      nbf: ts - halfMin,
+      aud: [req.method, req.urlWithParams]
     });
-
     const data = `${AuthorizationInterceptorService._encodedHeader}.${encodedPayload}`;
     const signature$ = fromPromise(this.cryptoService.sign(this.privateKeyData, data)
       .then(undefined, () => null))

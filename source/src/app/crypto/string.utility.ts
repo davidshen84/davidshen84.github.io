@@ -18,6 +18,12 @@ export function base64UrlEncode(s: string): string {
     ;
 }
 
+export function base64UrlDecode(s: string): string {
+  return atob(`${s}====`.slice(0, s.length + s.length % 4)
+    .replace(/-/g, '+')
+    .replace(/_/g, '/'));
+}
+
 export function encodeString(s: string): Uint8Array {
   return new TextEncoder().encode(s);
 }
