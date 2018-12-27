@@ -1,4 +1,11 @@
-<canvas #canvas></canvas>
+<div class="markdown-container">
+  <markdown src="assets/blogs/how-to-compute-coordinates-in-a-canvas-element.md"></markdown>
+</div>
+
+<div>
+  <div>Drag & Drop in this box.</div>
+  <canvas #canvas></canvas>
+</div>
 
 <ul>
   <li *ngFor="let p of _points.reverse().slice(0, 10)">{{ p | json }}</li>
