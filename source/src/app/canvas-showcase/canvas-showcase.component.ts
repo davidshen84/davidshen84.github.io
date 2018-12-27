@@ -29,9 +29,10 @@ export class CanvasShowcaseComponent implements OnInit, OnDestroy {
     // Set a point at the center of the canvas.
     this._canvasDraw.setPointOnCanvas(this._canvas.clientWidth / 2, this._canvas.clientHeight / 2, 255, 0, 0, 255);
 
-    // Define the drag-drop observable.
-    const target = new Hammer(this._canvas);
-    target.get('pan').set({direction: Hammer.DIRECTION_ALL});
+    // Define the drag & drop observable.
+    const target = new Hammer(this._canvas, {
+      recognizers: [[Hammer.Pan, {direction: Hammer.DIRECTION_ALL}]]
+    });
 
     const _dragDrop$ = fromEvent(target, 'panstart').pipe(
       switchMap(() =>
