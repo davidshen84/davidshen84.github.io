@@ -8,5 +8,5 @@
 </div>
 
 <ul>
-  <li *ngFor="let p of _points.reverse().slice(0, 10)">{{ p | json }}</li>
+  <li *ngFor="let p of _points.slice().reverse()">{{ p | json }}</li>
 </ul>

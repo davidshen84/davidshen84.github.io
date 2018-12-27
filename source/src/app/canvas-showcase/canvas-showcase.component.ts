@@ -11,7 +11,7 @@ import {CanvasDrawService} from './canvas-draw.service';
 })
 export class CanvasShowcaseComponent implements OnInit, OnDestroy {
 
-  public _points: Array<{}> = [];
+  public _points: Array<{ x, y }> = [];
   @ViewChild('canvas')
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
@@ -34,14 +34,19 @@ export class CanvasShowcaseComponent implements OnInit, OnDestroy {
     target.get('pan').set({direction: Hammer.DIRECTION_ALL});
 
     const _dragDrop$ = fromEvent(target, 'panstart').pipe(
-      switchMap(() => fromEvent(target, 'panmove').pipe(
-        throttleTime(500),
-        takeUntil(fromEvent(target, 'panend')))),
+      switchMap(() =>
+        fromEvent(target, 'panmove').pipe(
+          throttleTime(500),
+          takeUntil(fromEvent(target, 'panend'))
+        )),
       map((e: HammerInput) => e.changedPointers[0] as PointerEvent)
     );
 
     this._dragDropSubscription = _dragDrop$.subscribe(({offsetX: x, offsetY: y}: PointerEvent) => {
-      this._points.push({x: x, y: y});
+      if (this._points.length > 10) {
+        this._points = this._points.slice(1, this._points.length);
+      }
+      this._points.push({x: Math.floor(x), y: Math.floor(y)});
       this._canvasDraw.setPointOnCanvas(x, y, 255, 0, 0, 255);
     });
   }
