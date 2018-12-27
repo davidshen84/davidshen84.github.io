@@ -1,5 +1,7 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import 'hammerjs';
+import {MarkdownModule} from 'ngx-markdown';
 
 import {CanvasShowcaseComponent} from './canvas-showcase.component';
 
@@ -9,7 +11,11 @@ describe('CanvasShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CanvasShowcaseComponent]
+      declarations: [CanvasShowcaseComponent],
+      imports: [
+        HttpClientTestingModule,
+        MarkdownModule.forRoot()
+      ]
     })
       .compileComponents();
   }));
