@@ -1,20 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LocalStorageService} from 'ngx-store';
 import {merge, Subject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
-import {filter, flatMap, map, mapTo, share} from 'rxjs/operators';
+import {filter, flatMap, map, mapTo, share, tap} from 'rxjs/operators';
 import {cleanInputPrivateKey, fromBase64} from '../crypto/string.utility';
+
+const KEY_NAME = 'private-key';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, AfterViewInit {
   public pkInput: string;
   public pkChangedSubject: Subject<string> = new Subject<string>();
   public cryptoKeyStored$ = this.pkChangedSubject.pipe(
-    map(i => this.localStorageService.set('private-key', i)),
+    map(i => this.localStorageService.set(KEY_NAME, i)),
     mapTo(true)
   );
   private cryptoKeyBuf$ = this.pkChangedSubject.pipe(
@@ -23,7 +25,7 @@ export class SettingsComponent implements OnInit {
       try {
         return fromBase64(i);
       } catch (e) {
-        return <Error>e;
+        return new Error(e.toString());
       }
     }),
     share()
@@ -38,13 +40,24 @@ export class SettingsComponent implements OnInit {
       fromPromise(crypto.subtle.importKey('pkcs8', buf, this.algorithm, false, ['sign'])
         .then(undefined, r => new Error(r)))),
   );
-  public cryptoKeyError$ = merge(this.cryptoKeyBuf$, this.cryptoKey$)
-    .pipe(map(x => x instanceof Error));
+  public cryptoKeyError$ = merge(this.cryptoKeyBuf$, this.cryptoKey$).pipe(
+    tap(x => {
+      if (x instanceof Error) {
+        // TODO: Toast the error.
+        console.error(x);
+      }
+    }),
+    map(x => x instanceof Error));
 
   constructor(private localStorageService: LocalStorageService) {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit(): void {
+    this.pkInput = this.localStorageService.get(KEY_NAME);
+    this.pkChangedSubject.next(this.pkInput);
   }
 
 }
