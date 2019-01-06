@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from 'ngx-store';
-import {merge, Subject} from 'rxjs';
+import {merge, Observable, of, Subject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {filter, flatMap, map, mapTo, share, tap} from 'rxjs/operators';
 import {cleanInputPrivateKey, fromBase64} from '../crypto/string.utility';
@@ -12,13 +12,11 @@ const KEY_NAME = 'private-key';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit, AfterViewInit {
+export class SettingsComponent implements OnInit {
   public pkInput: string;
   public pkChangedSubject: Subject<string> = new Subject<string>();
-  public cryptoKeyStored$ = this.pkChangedSubject.pipe(
-    map(i => this.localStorageService.set(KEY_NAME, i)),
-    mapTo(true)
-  );
+  public cryptoKeyStored$: Observable<boolean>;
+
   private cryptoKeyBuf$ = this.pkChangedSubject.pipe(
     map(i => cleanInputPrivateKey(i)),
     map(i => {
@@ -50,14 +48,16 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     map(x => x instanceof Error));
 
   constructor(private localStorageService: LocalStorageService) {
+    this.pkInput = this.localStorageService.get(KEY_NAME);
+    this.cryptoKeyStored$ = merge(
+      of(this.pkInput).pipe(map(x => x !== null)),
+      this.pkChangedSubject.pipe(
+        map(i => this.localStorageService.set(KEY_NAME, i)),
+        mapTo(true)
+      ));
   }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit(): void {
-    this.pkInput = this.localStorageService.get(KEY_NAME);
-    this.pkChangedSubject.next(this.pkInput);
   }
 
 }
