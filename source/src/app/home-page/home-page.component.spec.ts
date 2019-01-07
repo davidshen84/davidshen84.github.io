@@ -1,7 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MarkdownModule} from 'ngx-markdown';
 
-import { HomePageComponent } from './home-page.component';
-import { MarkdownModule } from 'ngx-markdown';
+import {HomePageComponent} from './home-page.component';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -9,10 +10,13 @@ describe('HomePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MarkdownModule.forRoot()],
-      declarations: [ HomePageComponent ]
+      imports: [
+        HttpClientTestingModule,
+        MarkdownModule.forRoot()
+      ],
+      declarations: [HomePageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

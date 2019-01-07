@@ -50,7 +50,7 @@ export class SettingsComponent implements OnInit {
   constructor(private localStorageService: LocalStorageService) {
     this.pkInput = this.localStorageService.get(KEY_NAME);
     this.cryptoKeyStored$ = merge(
-      of(this.pkInput).pipe(map(x => x !== null)),
+      of(this.pkInput !== null),
       this.pkChangedSubject.pipe(
         map(i => this.localStorageService.set(KEY_NAME, i)),
         mapTo(true)
