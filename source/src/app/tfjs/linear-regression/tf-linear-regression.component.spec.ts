@@ -1,7 +1,9 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MarkdownModule} from 'ngx-markdown';
+import {MathJaxModule} from 'ngx-mathjax';
 
 import {TfLinearRegressionComponent} from './tf-linear-regression.component';
-import {MathJaxModule} from 'ngx-mathjax';
 
 describe('TfLinearRegressionComponent', () => {
   let component: TfLinearRegressionComponent;
@@ -10,7 +12,11 @@ describe('TfLinearRegressionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TfLinearRegressionComponent],
-      imports: [MathJaxModule.config()]
+      imports: [
+        HttpClientTestingModule,
+        MathJaxModule.config(),
+        MarkdownModule.forRoot()
+      ]
     })
       .compileComponents();
   }));
