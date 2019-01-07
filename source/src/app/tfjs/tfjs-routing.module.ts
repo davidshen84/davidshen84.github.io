@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {TfjsComponent} from './tfjs.component';
+import {TfLinearRegressionComponent} from './linear-regression/tf-linear-regression.component';
 
 const routes: Routes = [
-  {path: '', component: TfjsComponent}
+  {path: '', component: TfLinearRegressionComponent}
 ];
 
 @NgModule({

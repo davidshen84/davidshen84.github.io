@@ -1,16 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {MarkdownModule} from 'ngx-markdown';
 
 import {TfjsRoutingModule} from './tfjs-routing.module';
-import {TfjsComponent} from './tfjs.component';
+import {TfLinearRegressionComponent} from './linear-regression/tf-linear-regression.component';
 import {MathJaxModule} from 'ngx-mathjax';
 
 @NgModule({
-  declarations: [TfjsComponent],
+  declarations: [TfLinearRegressionComponent],
   imports: [
     CommonModule,
     TfjsRoutingModule,
     MathJaxModule.config(),
+    MarkdownModule.forChild()
   ],
 })
 export class TfjsModule {

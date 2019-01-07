@@ -1,8 +1,9 @@
 import * as tf from '@tensorflow/tfjs';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {CanvasDrawService} from '../canvas-showcase/canvas-draw.service';
+import {CanvasDrawService} from '../../canvas-showcase/canvas-draw.service';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {auditTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {TitleService} from '../../title.service';
 
 /**
  * Maps @param {n} within range @param {in_min} to @param {in_max} to another number in the range @param {out_min} to @param {out_max}.
@@ -16,11 +17,11 @@ const normalize = (n: number, in_min: number, in_max: number, out_min: number, o
   (n - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 
 @Component({
-  selector: 'app-tfjs',
-  templateUrl: './tfjs.component.html',
-  styleUrls: ['./tfjs.component.scss']
+  selector: 'app-tfjs-linear-regression',
+  templateUrl: './tf-linear-regression.component.html',
+  styleUrls: ['./tf-linear-regression.component.scss']
 })
-export class TfjsComponent implements OnInit {
+export class TfLinearRegressionComponent implements OnInit {
 
   private _modelSubject = new BehaviorSubject<{ a: number, b: number }>({a: NaN, b: NaN});
   public readonly model$ = this._modelSubject.pipe(
@@ -44,7 +45,8 @@ export class TfjsComponent implements OnInit {
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
 
-  constructor(private _canvasDraw: CanvasDrawService) {
+  constructor(private _canvasDraw: CanvasDrawService, private _titleService: TitleService) {
+    _titleService.setTitle('Linear Regression with Tensorflow');
   }
 
   private _a = tf.variable(tf.scalar(Math.random()));

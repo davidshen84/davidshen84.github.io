@@ -1,22 +1,22 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TfjsComponent} from './tfjs.component';
+import {TfLinearRegressionComponent} from './tf-linear-regression.component';
 import {MathJaxModule} from 'ngx-mathjax';
 
-describe('TfjsComponent', () => {
-  let component: TfjsComponent;
-  let fixture: ComponentFixture<TfjsComponent>;
+describe('TfLinearRegressionComponent', () => {
+  let component: TfLinearRegressionComponent;
+  let fixture: ComponentFixture<TfLinearRegressionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TfjsComponent],
+      declarations: [TfLinearRegressionComponent],
       imports: [MathJaxModule.config()]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TfjsComponent);
+    fixture = TestBed.createComponent(TfLinearRegressionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
