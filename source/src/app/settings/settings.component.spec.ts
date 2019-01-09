@@ -1,6 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
-import {MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatSnackBarModule
+} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {WebStorageModule} from 'ngx-store';
 import {RS256CryptoService} from '../crypto/rs256-crypto.service';
@@ -19,6 +25,7 @@ describe('SettingsComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
+        MatSnackBarModule,
         FormsModule,
         WebStorageModule
       ],

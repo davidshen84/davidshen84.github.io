@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {MatSnackBar} from '@angular/material';
 import {LocalStorageService} from 'ngx-store';
 import {merge, Observable, of, Subject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -20,20 +21,21 @@ export class SettingsComponent implements OnInit {
   private cryptoKey$ = this.pkChangedSubject.pipe(
     filter(x => x !== ''),
     flatMap(key => fromPromise(this._cryptoService.importKey(key)
-      .then(undefined, r => new Error(r))))
+      .then(undefined, r => new Error(r.message))))
   );
 
   public cryptoKeyError$ = this.cryptoKey$.pipe(
     tap(x => {
       if (x instanceof Error) {
-        // TODO: Toast the error.
-        console.error(x);
+        this._snackBar.open(x.message, '❌', {duration: 1000});
       }
     }),
     map(x => x instanceof Error)
   );
 
-  constructor(private _localStorageService: LocalStorageService, private _cryptoService: RS256CryptoService) {
+  constructor(private _localStorageService: LocalStorageService,
+              private _cryptoService: RS256CryptoService,
+              private _snackBar: MatSnackBar) {
     this.pkInput = this._localStorageService.get(KEY_NAME);
     this.cryptoKeyStored$ = merge(
       of(this.pkInput !== null),
