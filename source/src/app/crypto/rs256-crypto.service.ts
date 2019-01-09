@@ -27,8 +27,13 @@ interface CryptoService {
    * @param data {string} Data to be signed.
    */
   sign(key: string, data: string): Promise<string>;
-}
 
+  /**
+   * Create a {CryptoKey} instance from a RSA256 private key output.
+   * @param key The RSA256 private key text.
+   */
+  importKey(key: string): PromiseLike<CryptoKey>;
+}
 
 @Injectable()
 export class RS256CryptoService implements CryptoService {
@@ -38,25 +43,45 @@ export class RS256CryptoService implements CryptoService {
   };
   public readonly usage = ['sign'];
   public readonly format = 'pkcs8';
-  private readonly keyImportParams: RsaHashedImportParams = {
+  private readonly _keyImportParams: RsaHashedImportParams = {
     ...this.algorithm,
     hash: 'SHA-256',
   };
-  private readonly rsaPssParams: RsaPssParams = {
+  private readonly _rsaPssParams: RsaPssParams = {
     ...this.algorithm,
     saltLength: 256
   };
+  private readonly _errorName = 'CryptoService Error';
 
   constructor() {
   }
 
   async sign(key: string, data: string): Promise<string> {
-    key = cleanInputPrivateKey(key);
-    const keyBuf = fromBase64(key);
-    const dataBuf = encodeString(data);
-    const cryptoKey = await crypto.subtle.importKey(this.format, keyBuf, this.keyImportParams, false, this.usage);
+    const cryptoKey = await this.importKey(key);
 
-    return crypto.subtle.sign(this.rsaPssParams, cryptoKey, dataBuf)
-      .then(buf => base64UrlEncode(String.fromCharCode(...Array.from(new Uint8Array(buf)))));
+    let dataBuf;
+    try {
+      dataBuf = encodeString(data);
+    } catch (e) {
+      return Promise.reject({name: this._errorName, message: e});
+    }
+
+    return crypto.subtle.sign(this._rsaPssParams, cryptoKey, dataBuf)
+      .then(buf => base64UrlEncode(String.fromCharCode(...Array.from(new Uint8Array(buf)))),
+        r => Promise.reject({name: this._errorName, message: r}));
+  }
+
+  importKey(key: string): PromiseLike<CryptoKey> {
+    key = cleanInputPrivateKey(key);
+    let keyBuf;
+
+    try {
+      keyBuf = fromBase64(key);
+    } catch (e) {
+      return Promise.reject({name: this._errorName, message: e});
+    }
+
+    return crypto.subtle.importKey(this.format, keyBuf, this._keyImportParams, false, this.usage)
+      .then(undefined, r => Promise.reject({name: this._errorName, message: r}));
   }
 }

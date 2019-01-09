@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from 'ngx-store';
 import {merge, Observable, of, Subject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
-import {filter, flatMap, map, mapTo, share, tap} from 'rxjs/operators';
-import {cleanInputPrivateKey, fromBase64} from '../crypto/string.utility';
+import {filter, flatMap, map, mapTo, tap} from 'rxjs/operators';
+import {RS256CryptoService} from '../crypto/rs256-crypto.service';
 
 const KEY_NAME = 'private-key';
 
@@ -17,42 +17,28 @@ export class SettingsComponent implements OnInit {
   public pkChangedSubject: Subject<string> = new Subject<string>();
   public cryptoKeyStored$: Observable<boolean>;
 
-  private cryptoKeyBuf$ = this.pkChangedSubject.pipe(
-    map(i => cleanInputPrivateKey(i)),
-    map(i => {
-      try {
-        return fromBase64(i);
-      } catch (e) {
-        return new Error(e.toString());
-      }
-    }),
-    share()
+  private cryptoKey$ = this.pkChangedSubject.pipe(
+    filter(x => x !== ''),
+    flatMap(key => fromPromise(this._cryptoService.importKey(key)
+      .then(undefined, r => new Error(r))))
   );
-  private readonly algorithm: RsaHashedImportParams = {
-    name: 'RSASSA-PKCS1-v1_5',
-    hash: 'SHA-256'
-  };
-  private cryptoKey$ = this.cryptoKeyBuf$.pipe(
-    filter(x => !(x instanceof Error)),
-    flatMap((buf: ArrayBuffer) =>
-      fromPromise(crypto.subtle.importKey('pkcs8', buf, this.algorithm, false, ['sign'])
-        .then(undefined, r => new Error(r)))),
-  );
-  public cryptoKeyError$ = merge(this.cryptoKeyBuf$, this.cryptoKey$).pipe(
+
+  public cryptoKeyError$ = this.cryptoKey$.pipe(
     tap(x => {
       if (x instanceof Error) {
         // TODO: Toast the error.
         console.error(x);
       }
     }),
-    map(x => x instanceof Error));
+    map(x => x instanceof Error)
+  );
 
-  constructor(private localStorageService: LocalStorageService) {
-    this.pkInput = this.localStorageService.get(KEY_NAME);
+  constructor(private _localStorageService: LocalStorageService, private _cryptoService: RS256CryptoService) {
+    this.pkInput = this._localStorageService.get(KEY_NAME);
     this.cryptoKeyStored$ = merge(
       of(this.pkInput !== null),
       this.pkChangedSubject.pipe(
-        map(i => this.localStorageService.set(KEY_NAME, i)),
+        map(i => this._localStorageService.set(KEY_NAME, i)),
         mapTo(true)
       ));
   }

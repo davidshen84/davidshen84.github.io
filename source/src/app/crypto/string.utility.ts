@@ -28,12 +28,20 @@ export function encodeString(s: string): Uint8Array {
   return new TextEncoder().encode(s);
 }
 
+/**
+ * Encode a JSON object into a Base64 Url encoded string.
+ * @param json The JSON object.
+ */
 export function encodeJSON(json: object): string {
   const buf = encodeString(JSON.stringify(json));
 
   return base64UrlEncode(String.fromCharCode(...Array.from(buf)));
 }
 
+/**
+ * Remove the header and footer section of a RSA private key output.
+ * @param {string} k The private key text.
+ */
 export function cleanInputPrivateKey(k) {
   return k.replace('-----BEGIN PRIVATE KEY-----', '')
     .replace('-----END PRIVATE KEY-----', '')
