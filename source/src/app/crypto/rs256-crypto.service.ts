@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {base64UrlEncode, cleanInputPrivateKey, encodeString, fromBase64} from './string.utility';
+import {base64UrlEncode, encodeString, fromBase64} from './string.utility';
 
 
 /**
@@ -56,6 +56,16 @@ export class RS256CryptoService implements CryptoService {
   constructor() {
   }
 
+  /**
+   * Remove the header and footer section of a RSA private key output.
+   * @param {string} k The private key text.
+   */
+  private static cleanInputPrivateKey(k) {
+    return k.replace('-----BEGIN PRIVATE KEY-----', '')
+      .replace('-----END PRIVATE KEY-----', '')
+      .replace(/\n/g, '');
+  }
+
   async sign(key: string, data: string): Promise<string> {
     const cryptoKey = await this.importKey(key);
 
@@ -72,10 +82,10 @@ export class RS256CryptoService implements CryptoService {
   }
 
   importKey(key: string): PromiseLike<CryptoKey> {
-    key = cleanInputPrivateKey(key);
     let keyBuf;
 
     try {
+      key = RS256CryptoService.cleanInputPrivateKey(key);
       keyBuf = fromBase64(key);
     } catch (e) {
       return Promise.reject({name: this._errorName, message: e});
@@ -84,4 +94,5 @@ export class RS256CryptoService implements CryptoService {
     return crypto.subtle.importKey(this.format, keyBuf, this._keyImportParams, false, this.usage)
       .then(undefined, r => Promise.reject({name: this._errorName, message: r}));
   }
+
 }

@@ -8,8 +8,7 @@
     <mat-form-field>
       <textarea matInput matTextareaAutosize name="pkInput" placeholder="RS256 Private Key"
                 [(ngModel)]="pkInput" (ngModelChange)="pkChangedSubject.next(pkInput)"></textarea>
-      <mat-icon [color]="(cryptoKeyStored$ | async) ? 'primary' : 'warn'">save</mat-icon>
-      <mat-icon [color]="(cryptoKeyError$ | async) ? 'warn' : 'primary'">vpn_key</mat-icon>
-    </mat-form-field>
+      <mat-icon [color]="(cryptoKey$ | async) ? 'primary' : 'warn'">save</mat-icon>
+   </mat-form-field>
   </mat-expansion-panel>
 </mat-accordion>

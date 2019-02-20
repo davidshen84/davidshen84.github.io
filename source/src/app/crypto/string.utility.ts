@@ -37,13 +37,3 @@ export function encodeJSON(json: object): string {
 
   return base64UrlEncode(String.fromCharCode(...Array.from(buf)));
 }
-
-/**
- * Remove the header and footer section of a RSA private key output.
- * @param {string} k The private key text.
- */
-export function cleanInputPrivateKey(k) {
-  return k.replace('-----BEGIN PRIVATE KEY-----', '')
-    .replace('-----END PRIVATE KEY-----', '')
-    .replace(/\n/g, '');
-}
