@@ -5,6 +5,7 @@ import {merge, Observable, of, Subject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {filter, flatMap} from 'rxjs/operators';
 import {RS256CryptoService} from '../crypto/rs256-crypto.service';
+import {TitleService} from '../title.service';
 
 const KEY_NAME = 'private-key';
 
@@ -20,7 +21,10 @@ export class SettingsComponent implements OnInit {
 
   constructor(private _localStorageService: LocalStorageService,
               private _cryptoService: RS256CryptoService,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              title: TitleService) {
+    title.setTitle('Settings');
+
     this.pkInput = this._localStorageService.get(KEY_NAME);
     this.cryptoKey$ = merge(
       of(this.pkInput),

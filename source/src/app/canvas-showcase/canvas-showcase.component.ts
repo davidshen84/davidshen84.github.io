@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {fromEvent, Subscription} from 'rxjs';
 import {map, switchMap, takeUntil, throttleTime} from 'rxjs/operators';
+import {TitleService} from '../title.service';
 import {CanvasDrawService} from './canvas-draw.service';
 
 
@@ -15,11 +16,10 @@ export class CanvasShowcaseComponent implements OnInit, OnDestroy {
   @ViewChild('canvas')
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
-  private _canvasDraw: CanvasDrawService;
   private _dragDropSubscription: Subscription;
 
-  constructor(canvasDraw: CanvasDrawService) {
-    this._canvasDraw = canvasDraw;
+  constructor(private _canvasDraw: CanvasDrawService, title: TitleService) {
+    title.setTitle('Canvas Showcase');
   }
 
   ngOnInit() {

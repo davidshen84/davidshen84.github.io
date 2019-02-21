@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Subject} from 'rxjs';
 import {WebcamImage} from '@davidshen84/ngx-webcam';
+import {Subject} from 'rxjs';
+import {TitleService} from '../title.service';
 
 @Component({
   selector: 'app-webcam',
@@ -9,15 +10,22 @@ import {WebcamImage} from '@davidshen84/ngx-webcam';
 })
 export class WebcamComponent implements OnInit {
   private snapshotTrigger = new Subject();
-  private image: WebcamImage;
-
   public snapshotTrigger$ = this.snapshotTrigger.asObservable();
-
+  private image: WebcamImage;
   @ViewChild('canvas')
   private canvasRef: ElementRef;
   private canvas: HTMLCanvasElement;
 
-  constructor() {
+  constructor(title: TitleService) {
+    title.setTitle('Webcam');
+  }
+
+  public get showSnapshot() {
+    return this.image != null;
+  }
+
+  public get imageUrl() {
+    return this.image.imageAsDataUrl;
   }
 
   ngOnInit() {
@@ -43,13 +51,5 @@ export class WebcamComponent implements OnInit {
       d[i + 3] = 255;
     }
     context2d.putImageData(image.imageData, 0, 0);
-  }
-
-  public get showSnapshot() {
-    return this.image != null;
-  }
-
-  public get imageUrl() {
-    return this.image.imageAsDataUrl;
   }
 }

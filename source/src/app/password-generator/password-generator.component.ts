@@ -14,7 +14,7 @@ import { TitleService } from '../title.service';
 export class PasswordGeneratorComponent implements OnInit {
   private static readonly prime: number = 21001;
 
-  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  public isHandset$: Observable<boolean> = this._breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches));
 
   public result$: Observable<string>;
@@ -46,9 +46,9 @@ export class PasswordGeneratorComponent implements OnInit {
   @ViewChild('slider')
   private _slider: MatSlider;
 
-  constructor(private titleService: TitleService,
-              private breakpointObserver: BreakpointObserver,
-              private matSnackBar: MatSnackBar) {
+  constructor(titleService: TitleService,
+              private _breakpointObserver: BreakpointObserver,
+              private _matSnackBar: MatSnackBar) {
     titleService.setTitle('Password Generator');
   }
 
@@ -68,7 +68,7 @@ export class PasswordGeneratorComponent implements OnInit {
                                     scan((acc: string, value: string) => acc + value, ''))));
   }
 
-  public openSnackBar = () => this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
+  public openSnackBar = () => this._matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
 
   private buildDictionary = () => `\
 ${this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : ''}\
