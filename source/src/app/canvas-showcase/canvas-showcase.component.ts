@@ -18,11 +18,11 @@ export class CanvasShowcaseComponent implements OnInit, OnDestroy {
   private _canvas: HTMLCanvasElement;
   private _dragDropSubscription: Subscription;
 
-  constructor(private _canvasDraw: CanvasDrawService, title: TitleService) {
-    title.setTitle('Canvas Showcase');
+  constructor(private _canvasDraw: CanvasDrawService, private _titleService: TitleService) {
   }
 
   ngOnInit() {
+    this._titleService.setTitle('Canvas Showcase');
     this._canvas = this._canvasRef.nativeElement;
     this._canvasDraw.setCanvas(this._canvas);
 

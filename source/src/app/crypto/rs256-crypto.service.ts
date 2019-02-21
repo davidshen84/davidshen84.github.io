@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {TitleService} from '../title.service';
 import {base64UrlEncode, encodeString, fromBase64} from './string.utility';
 
 
@@ -54,8 +53,7 @@ export class RS256CryptoService implements CryptoService {
   };
   private readonly _errorName = 'CryptoService Error';
 
-  constructor(title: TitleService) {
-    title.setTitle('Encryption with RS256');
+  constructor() {
   }
 
   /**

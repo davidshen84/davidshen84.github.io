@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, combineLatest, merge, Observable, Subject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {filter, flatMap, map, mapTo, share} from 'rxjs/operators';
+import {TitleService} from '../../title.service';
 import {RS256CryptoService} from '../rs256-crypto.service';
 import {base64UrlEncode, encodeString} from '../string.utility';
 
@@ -44,7 +45,7 @@ export class CryptoRS256Component implements OnInit {
 
   // Define signature
   public signature$ = combineLatest(this.encodedHeader$, this.encodedPayload$, this.privateKeyInputSubject).pipe(
-    flatMap(([h, p, k]) => fromPromise(this.cryptoService.sign(k, `${h}.${p}`)
+    flatMap(([h, p, k]) => fromPromise(this._cryptoService.sign(k, `${h}.${p}`)
       .then(undefined, () => ''))),
     share()
   );
@@ -61,10 +62,11 @@ export class CryptoRS256Component implements OnInit {
     )
   );
 
-  constructor(private cryptoService: RS256CryptoService) {
+  constructor(private _cryptoService: RS256CryptoService, private _titleService: TitleService) {
   }
 
   ngOnInit() {
+    this._titleService.setTitle('Encryption using RS256');
   }
 
 }

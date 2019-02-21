@@ -9,40 +9,40 @@ import {TitleService} from '../title.service';
   styleUrls: ['./webcam.component.scss']
 })
 export class WebcamComponent implements OnInit {
-  private snapshotTrigger = new Subject();
-  public snapshotTrigger$ = this.snapshotTrigger.asObservable();
-  private image: WebcamImage;
+  private _snapshotTrigger = new Subject();
+  public snapshotTrigger$ = this._snapshotTrigger.asObservable();
+  private _image: WebcamImage;
   @ViewChild('canvas')
-  private canvasRef: ElementRef;
-  private canvas: HTMLCanvasElement;
+  private _canvasRef: ElementRef;
+  private _canvas: HTMLCanvasElement;
 
-  constructor(title: TitleService) {
-    title.setTitle('Webcam');
+  constructor(private _titleService: TitleService) {
   }
 
   public get showSnapshot() {
-    return this.image != null;
+    return this._image != null;
   }
 
   public get imageUrl() {
-    return this.image.imageAsDataUrl;
+    return this._image.imageAsDataUrl;
   }
 
   ngOnInit() {
-    this.canvas = this.canvasRef.nativeElement;
+    this._titleService.setTitle('Webcam');
+    this._canvas = this._canvasRef.nativeElement;
   }
 
   public takeSnapshot() {
-    this.snapshotTrigger.next();
+    this._snapshotTrigger.next();
   }
 
   public captureSnapshot(image: WebcamImage) {
-    this.image = image;
+    this._image = image;
 
     // Invert the color for fun!!!
-    const context2d = this.canvas.getContext('2d');
-    this.canvas.height = image.imageData.height;
-    this.canvas.width = image.imageData.width;
+    const context2d = this._canvas.getContext('2d');
+    this._canvas.height = image.imageData.height;
+    this._canvas.width = image.imageData.width;
 
     for (let i = 0, d = image.imageData.data; i < d.length; i += 4) {
       d[i] = 255 - d[i];
