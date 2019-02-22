@@ -13,7 +13,8 @@ export const routes: Routes = [
   {path: 'canvas', component: CanvasShowcaseComponent},
   {path: 'tfjs', loadChildren: './tfjs/tfjs.module#TfjsModule'},
   {path: 'crypto', loadChildren: './crypto/crypto.module#CryptoModule'},
-  {path: 'settings', loadChildren: './settings/settings.module#SettingsModule'}
+  {path: 'settings', loadChildren: './settings/settings.module#SettingsModule'},
+  {path: 'mdeditor', loadChildren: './markdown-editor/markdown-editor.module#MarkdownEditorModule'}
 ];
 
 

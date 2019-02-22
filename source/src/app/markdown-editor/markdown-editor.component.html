@@ -1,0 +1,8 @@
+<mat-grid-list cols="2" rowHeight="fit">
+  <mat-grid-tile>
+    <textarea matInput matTextareaAutosize [(ngModel)]="text"></textarea>
+  </mat-grid-tile>
+  <mat-grid-tile class="markdown-output">
+    <markdown [data]="text"></markdown>
+  </mat-grid-tile>
+</mat-grid-list>
