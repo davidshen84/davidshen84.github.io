@@ -1,14 +1,26 @@
 mat-grid-list {
-  height: 500px;
+  min-height: 800px;
+
+  @mixin max-size {
+    width: 100%;
+    height: 100%;
+  }
+
+  .container {
+    @include max-size;
+    overflow: hidden;
+    padding-right: 4em; // make room for the scroll bar
+  }
 
   textarea {
-    width: 100%;
-    min-height: 500px;
+    @include max-size;
+    padding: 2em;
+    overflow: scroll;
   }
 
-  markdown {
-    height: 100%;
-    width: 100%;
+  .markdown-container {
+    @include max-size;
+    padding: 2em;
+    overflow: scroll;
   }
-
 }
