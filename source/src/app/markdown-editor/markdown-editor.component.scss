@@ -9,18 +9,16 @@ mat-grid-list {
   .container {
     @include max-size;
     overflow: hidden;
-    padding-right: 4em; // make room for the scroll bar
   }
 
   textarea {
     @include max-size;
-    padding: 2em;
     overflow: scroll;
+    resize: none;
   }
 
   .markdown-container {
     @include max-size;
-    padding: 2em;
     overflow: scroll;
   }
 }
