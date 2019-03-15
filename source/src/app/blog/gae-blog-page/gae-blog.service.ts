@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 export interface BlogMeta {
   urlsafe: string;
@@ -18,7 +19,7 @@ export interface Blog {
 })
 export class GaeBlogService {
 
-  private _endpoint = 'https://davidshen84.appspot.com/blog/resources';
+  private _endpoint = environment.gae_endpoint;
 
   constructor(private httpClient: HttpClient) {
   }
