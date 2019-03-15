@@ -1,13 +1,13 @@
 @import "~@angular/material/theming";
-@import "../../global-variables";
+@import "../app-variables";
 
 $primary: mat-palette($mat-indigo);
 
+.device-desktop {
+  margin-left: $sidenav-width;
+}
+
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
   background-color: mat-color($primary);
   height: $footer-height;
   text-align: center;
@@ -15,5 +15,6 @@ $primary: mat-palette($mat-indigo);
   .qrcode-container {
     margin: 10px auto auto 10px;
     width: min-content;
+    position: absolute;
   }
 }

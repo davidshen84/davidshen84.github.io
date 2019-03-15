@@ -1,11 +1,11 @@
-@import "../../global-variables";
+@import "../app-variables";
 
 .sidenav-container {
   height: 100%;
 }
 
 .sidenav {
-  width: 220px;
+  width: $sidenav-width;
   margin-bottom: $footer-height;
 }
 
