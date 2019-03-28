@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {WebcamImage} from '@davidshen84/ngx-webcam';
+import {WebcamImage} from 'ngx-webcam';
 import {Subject} from 'rxjs';
 import {TitleService} from '../title.service';
 
