@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WebcamComponent } from './webcam.component';
-import { WebcamModule } from '@davidshen84/ngx-webcam';
+import { WebcamModule } from 'ngx-webcam';
 
 
 describe('WebcamComponent', () => {
