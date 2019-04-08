@@ -9,10 +9,7 @@ import {AuthorizationInterceptorService} from './authorization-interceptor.servi
 import {BlogHomePageComponent} from './blog-home-page/blog-home-page.component';
 import {BlogPageNotFoundComponent} from './blog-page-not-found/blog-page-not-found.component';
 import {BlogPageComponent} from './blog-page/blog-page.component';
-
 import {BlogRoutingModule} from './blog-routing.module';
-import {GaeBlogHomePageComponent} from './gae-blog-home-page/gae-blog-home-page.component';
-import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 
 
 @NgModule({
@@ -20,8 +17,6 @@ import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
     BlogHomePageComponent,
     BlogPageComponent,
     BlogPageNotFoundComponent,
-    // GaeBlogHomePageComponent,
-    // GaeBlogPageComponent,
   ],
   imports: [
     CommonModule,
