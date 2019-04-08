@@ -20,7 +20,7 @@ export class PasswordGeneratorComponent implements OnInit {
   public result$: Observable<string>;
 
   // Default length of characters to generate.
-  public Length = 6;
+  public Length = 16;
 
   // Turn on all character types by default.
   public HasLowerCases = true;

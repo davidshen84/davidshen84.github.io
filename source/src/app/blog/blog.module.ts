@@ -20,8 +20,8 @@ import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
     BlogHomePageComponent,
     BlogPageComponent,
     BlogPageNotFoundComponent,
-    GaeBlogHomePageComponent,
-    GaeBlogPageComponent,
+    // GaeBlogHomePageComponent,
+    // GaeBlogPageComponent,
   ],
   imports: [
     CommonModule,

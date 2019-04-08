@@ -8,7 +8,7 @@ import {GaeBlogPageComponent} from './gae-blog-page/gae-blog-page.component';
 const routes: Routes = [
   {path: '', component: BlogHomePageComponent},
   {path: ':id', component: BlogPageComponent},
-  {path: 'gae/:id', component: GaeBlogPageComponent},
+  // {path: 'gae/:id', component: GaeBlogPageComponent},
   {path: 'notfound/:id', component: BlogPageNotFoundComponent},
 
 ];

@@ -22,6 +22,7 @@ export class BlogPageComponent implements OnInit, OnDestroy {
 
     this._paramIdSubscriptions.push(this._paramId$.pipe(
       filter(p => p !== undefined),
+      map(p => p.replace(/-/g, ' '))
     ).subscribe(this._titleService.setTitle));
 
     this.blogPath$ = this._paramId$.pipe(
