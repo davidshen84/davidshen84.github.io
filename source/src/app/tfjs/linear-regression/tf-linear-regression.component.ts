@@ -41,7 +41,7 @@ export class TfLinearRegressionComponent implements OnInit {
   // Label data normalized between 0 and 1.
   private _ys: number[] = [];
 
-  @ViewChild('canvas')
+  @ViewChild('canvas', { static: true })
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
 

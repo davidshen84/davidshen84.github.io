@@ -28,22 +28,22 @@ export class PasswordGeneratorComponent implements OnInit {
   public HasDigits = true;
   public HasSpecials = true;
 
-  @ViewChild('generate')
+  @ViewChild('generate', { static: true })
   private _button: MatButton;
 
-  @ViewChild('lowerCases')
+  @ViewChild('lowerCases', { static: true })
   private _checkboxLowerCases: MatCheckbox;
 
-  @ViewChild('upperCases')
+  @ViewChild('upperCases', { static: true })
   private _checkboxUpperCases: MatCheckbox;
 
-  @ViewChild('digits')
+  @ViewChild('digits', { static: true })
   private _checkboxDigits: MatCheckbox;
 
-  @ViewChild('specials')
+  @ViewChild('specials', { static: true })
   private _checkboxSpecials: MatCheckbox;
 
-  @ViewChild('slider')
+  @ViewChild('slider', { static: true })
   private _slider: MatSlider;
 
   constructor(titleService: TitleService,
