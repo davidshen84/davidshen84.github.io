@@ -1,7 +1,8 @@
-import del = require('del');
 import {task} from 'gulp-shell';
 import {dest, src} from 'vinyl-fs';
 import {parallel, series} from 'gulp';
+import * as del from 'del';
+
 
 export function deleteOld() {
   return del([
@@ -15,8 +16,8 @@ export function deleteOld() {
   ], {force: true});
 }
 
-export function ngBuild(cb) {
-  task('ng build --prod --aot')(cb);
+export function ngBuild() {
+  return task('ng build --prod --aot')();
 }
 
 export function copyDist() {
