@@ -12,10 +12,14 @@ export interface MouseXY {
   providedIn: 'root'
 })
 export class CanvasDrawService {
+
+  constructor() {
+  }
   private _canvas: HTMLCanvasElement;
   private _context2d: CanvasRenderingContext2D;
 
-  constructor() {
+  private static map(n: number, in_min: number, in_max: number, out_min: number, out_max: number): number {
+    return (n - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
   /**
@@ -57,12 +61,9 @@ export class CanvasDrawService {
     this._context2d.putImageData(imageData, 0, 0);
   }
 
-  private map = (n: number, in_min: number, in_max: number, out_min: number, out_max: number): number =>
-    (n - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  private mapX = (offsetX: number) => CanvasDrawService.map(offsetX, 0, this._canvas.clientWidth, 0, this._canvas.width);
 
-  private mapX = (offsetX: number) => this.map(offsetX, 0, this._canvas.clientWidth, 0, this._canvas.width);
-
-  private mapY = (offsetY: number) => this.map(offsetY, 0, this._canvas.clientHeight, 0, this._canvas.height);
+  private mapY = (offsetY: number) => CanvasDrawService.map(offsetY, 0, this._canvas.clientHeight, 0, this._canvas.height);
 
   /**
    * Compute the canvas coordinates from offset coordinates which is relative to the element.

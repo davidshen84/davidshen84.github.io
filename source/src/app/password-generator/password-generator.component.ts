@@ -63,7 +63,7 @@ export class PasswordGeneratorComponent implements OnInit {
       this._checkboxSpecials.change,
       this._slider.input,
     ).pipe(
-      startWith(undefined),
+      startWith('🔑'),
       flatMap(_ =>
         of(this.buildDictionary()).pipe(
           map(s => this.pickOne(s) || '😂'),
@@ -73,11 +73,13 @@ export class PasswordGeneratorComponent implements OnInit {
 
   public openSnackBar = () => this._matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
 
-  private buildDictionary = () => `\
+  private buildDictionary() {
+    return `\
 ${this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : ''}\
 ${this.HasUpperCases ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : ''}\
 ${this.HasDigits ? '0123456789' : ''}\
 ${this.HasSpecials ? '\`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : ''}`;
+  }
 
   private pickOne = (s: string): string => (s && s.length > 0)
     ? s[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % s.length]

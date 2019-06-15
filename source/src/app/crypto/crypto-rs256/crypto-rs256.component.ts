@@ -44,7 +44,7 @@ export class CryptoRS256Component implements OnInit {
   public privateKeyInputSubject = new Subject<string>();
 
   // Define signature
-  public signature$ = combineLatest(this.encodedHeader$, this.encodedPayload$, this.privateKeyInputSubject).pipe(
+  public signature$ = combineLatest([this.encodedHeader$, this.encodedPayload$, this.privateKeyInputSubject]).pipe(
     flatMap(([h, p, k]) => fromPromise(this._cryptoService.sign(k, `${h}.${p}`)
       .then(undefined, () => ''))),
     share()
@@ -52,7 +52,7 @@ export class CryptoRS256Component implements OnInit {
 
   // Define JWT
   public jwt$: Observable<string> = merge(
-    combineLatest(this.encodedHeader$, this.encodedPayload$, this.signature$).pipe(
+    combineLatest([this.encodedHeader$, this.encodedPayload$, this.signature$]).pipe(
       filter(([_, __, s]) => s && s !== ''),
       map(([h, p, s]) => `${h}.${p}.${s}`)
     ),
