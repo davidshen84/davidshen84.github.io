@@ -1,9 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {fromEvent, merge, Observable, of} from 'rxjs';
 import {flatMap, map, repeat, scan, startWith} from 'rxjs/operators';
-import {MatButton, MatCheckbox, MatSlider, MatSnackBar} from '@angular/material';
+import {MatButton} from '@angular/material/button';
+import {MatCheckbox} from '@angular/material/checkbox';
+import {MatSlider} from '@angular/material/slider';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import { TitleService } from '../title.service';
+import {TitleService} from '../title.service';
 
 
 @Component({
@@ -28,22 +31,22 @@ export class PasswordGeneratorComponent implements OnInit {
   public HasDigits = true;
   public HasSpecials = true;
 
-  @ViewChild('generate', { static: true })
+  @ViewChild('generate', {static: true})
   private _button: MatButton;
 
-  @ViewChild('lowerCases', { static: true })
+  @ViewChild('lowerCases', {static: true})
   private _checkboxLowerCases: MatCheckbox;
 
-  @ViewChild('upperCases', { static: true })
+  @ViewChild('upperCases', {static: true})
   private _checkboxUpperCases: MatCheckbox;
 
-  @ViewChild('digits', { static: true })
+  @ViewChild('digits', {static: true})
   private _checkboxDigits: MatCheckbox;
 
-  @ViewChild('specials', { static: true })
+  @ViewChild('specials', {static: true})
   private _checkboxSpecials: MatCheckbox;
 
-  @ViewChild('slider', { static: true })
+  @ViewChild('slider', {static: true})
   private _slider: MatSlider;
 
   constructor(titleService: TitleService,
@@ -54,18 +57,18 @@ export class PasswordGeneratorComponent implements OnInit {
 
   ngOnInit() {
     this.result$ = merge(fromEvent(this._button._elementRef.nativeElement, 'click'),
-                         this._checkboxDigits.change,
-                         this._checkboxLowerCases.change,
-                         this._checkboxUpperCases.change,
-                         this._checkboxSpecials.change,
-                         this._slider.input,
-                        ).pipe(
-                          startWith(undefined),
-                          flatMap(_ =>
-                                  of(this.buildDictionary()).pipe(
-                                    map(s => this.pickOne(s) || '😂'),
-                                    repeat(this._slider.value),
-                                    scan((acc: string, value: string) => acc + value, ''))));
+      this._checkboxDigits.change,
+      this._checkboxLowerCases.change,
+      this._checkboxUpperCases.change,
+      this._checkboxSpecials.change,
+      this._slider.input,
+    ).pipe(
+      startWith(undefined),
+      flatMap(_ =>
+        of(this.buildDictionary()).pipe(
+          map(s => this.pickOne(s) || '😂'),
+          repeat(this._slider.value),
+          scan((acc: string, value: string) => acc + value, ''))));
   }
 
   public openSnackBar = () => this._matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
@@ -74,7 +77,7 @@ export class PasswordGeneratorComponent implements OnInit {
 ${this.HasLowerCases ? 'abcdefghijklmnopqrstuvwxyz' : ''}\
 ${this.HasUpperCases ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : ''}\
 ${this.HasDigits ? '0123456789' : ''}\
-${this.HasSpecials ? '\`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : ''}`
+${this.HasSpecials ? '\`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : ''}`;
 
   private pickOne = (s: string): string => (s && s.length > 0)
     ? s[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % s.length]

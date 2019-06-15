@@ -4,7 +4,7 @@ import {BlogHomePageComponent} from './blog-home-page.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MarkdownModule} from 'ngx-markdown';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {MatListModule} from '@angular/material';
+import {MatListModule} from '@angular/material/list';
 
 describe('BlogHomePageComponent', () => {
   let component: BlogHomePageComponent;

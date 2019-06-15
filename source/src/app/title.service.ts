@@ -11,7 +11,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class TitleService {
   private _title$: BehaviorSubject<string> = new BehaviorSubject('');
 
-  constructor() { }
+  constructor() {
+  }
 
   public getTitle = (): Observable<string> => this._title$.asObservable();
 

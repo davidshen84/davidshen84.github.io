@@ -1,31 +1,31 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
-    class="sidenav"
-    fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
+    [opened]="!(isHandset$ | async)"
+    class="sidenav"
+    fixedInViewport="true">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['blog']">💻&nbsp;Blog</a>
-      <a mat-list-item [routerLink]="['password-generator']">🔑&nbsp;Password Generator</a>
-      <a mat-list-item [routerLink]="['webcam']">📹&nbsp;Webcam Test</a>
-      <a mat-list-item [routerLink]="['canvas']">🖼️&nbsp;Canvas Showcase</a>
-      <a mat-list-item [routerLink]="['tfjs']">🧠&nbsp;Tensorflow JS</a>
-      <a mat-list-item [routerLink]="['crypto']">🔒&nbsp;Crypto Showcase</a>
-      <a mat-list-item [routerLink]="['mdeditor']">⌨️&nbsp;️Markdown Editor</a>
-      <a mat-list-item [routerLink]="['settings']">⚙️&nbsp;Settings</a>
+      <a [routerLink]="['blog']" mat-list-item>💻&nbsp;Blog</a>
+      <a [routerLink]="['password-generator']" mat-list-item>🔑&nbsp;Password Generator</a>
+      <a [routerLink]="['webcam']" mat-list-item>📹&nbsp;Webcam Test</a>
+      <a [routerLink]="['canvas']" mat-list-item>🖼️&nbsp;Canvas Showcase</a>
+      <a [routerLink]="['tfjs']" mat-list-item>🧠&nbsp;Tensorflow JS</a>
+      <a [routerLink]="['crypto']" mat-list-item>🔒&nbsp;Crypto Showcase</a>
+      <a [routerLink]="['mdeditor']" mat-list-item>⌨️&nbsp;️Markdown Editor</a>
+      <a [routerLink]="['settings']" mat-list-item>⚙️&nbsp;Settings</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button
-        type="button"
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        type="button">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{ title$ | async | titlecase }}</span>

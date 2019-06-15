@@ -6,7 +6,7 @@ import {MaterialModules} from '../material.modules';
 import {FormsModule} from '@angular/forms';
 import {ClipboardModule} from 'ngx-clipboard';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 describe('PasswordGeneratorComponent', () => {
@@ -17,8 +17,8 @@ describe('PasswordGeneratorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ NoopAnimationsModule, FormsModule, MaterialModules, ClipboardModule ],
-      declarations: [ PasswordGeneratorComponent ]
+      imports: [NoopAnimationsModule, FormsModule, MaterialModules, ClipboardModule],
+      declarations: [PasswordGeneratorComponent]
     })
       .compileComponents();
 

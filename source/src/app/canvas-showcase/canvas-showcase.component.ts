@@ -13,7 +13,7 @@ import {CanvasDrawService} from './canvas-draw.service';
 export class CanvasShowcaseComponent implements OnInit, OnDestroy {
 
   public _points: Array<{ x, y }> = [];
-  @ViewChild('canvas', { static: true })
+  @ViewChild('canvas', {static: true})
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
   private _dragDropSubscription: Subscription;

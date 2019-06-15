@@ -12,7 +12,7 @@ export class WebcamComponent implements OnInit {
   private _snapshotTrigger = new Subject();
   public snapshotTrigger$ = this._snapshotTrigger.asObservable();
   private _image: WebcamImage;
-  @ViewChild('canvas', { static: true })
+  @ViewChild('canvas', {static: true})
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
 

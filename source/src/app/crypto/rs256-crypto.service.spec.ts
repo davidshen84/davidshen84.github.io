@@ -1,24 +1,31 @@
 import {TestBed} from '@angular/core/testing';
 
 import {RS256CryptoService} from './rs256-crypto.service';
-import * as stringUtil from './string.utility';
-import {base64UrlEncode, encodeString, fromBase64} from './string.utility';
+import {StringUtilityService} from './string.utility';
+
 
 describe('RS256CryptoService', () => {
 
   const key = 'key';
-  const keyBuf = fromBase64(key);
+  const keyBuf = new StringUtilityService().FromBase64(key);
   const importParams = {
     name: 'RSASSA-PKCS1-v1_5',
     hash: 'SHA-256'
   };
   const cryptoKeyMock = <CryptoKey>{};
 
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      RS256CryptoService
-    ]
-  }));
+  let strUtlSvc: StringUtilityService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        RS256CryptoService,
+        StringUtilityService,
+      ]
+    });
+
+    strUtlSvc = TestBed.get(StringUtilityService);
+  });
 
   it('should be created', () => {
     const service: RS256CryptoService = TestBed.get(RS256CryptoService);
@@ -27,7 +34,7 @@ describe('RS256CryptoService', () => {
 
   it('should import key', async () => {
     const service: RS256CryptoService = TestBed.get(RS256CryptoService);
-    const fromBase64Spy = spyOn(stringUtil, 'fromBase64').and.returnValue(keyBuf);
+    const fromBase64Spy = spyOn(strUtlSvc, 'FromBase64').and.returnValue(keyBuf);
     const importKeySpy = spyOn(crypto.subtle, 'importKey').and.returnValue(Promise.resolve(cryptoKeyMock));
 
     spyOn(crypto.subtle, 'sign').and.returnValue(Promise.resolve(keyBuf));
@@ -39,7 +46,7 @@ describe('RS256CryptoService', () => {
 
   it('should throw error when data is not a valid base64 string', async () => {
     const service: RS256CryptoService = TestBed.get(RS256CryptoService);
-    spyOn(stringUtil, 'fromBase64').and.throwError('bad base64');
+    spyOn(strUtlSvc, 'FromBase64').and.throwError('bad base64');
 
     try {
       await service.sign(key, 'data');
@@ -50,7 +57,7 @@ describe('RS256CryptoService', () => {
 
   it('should throw error when failed to import the key', async () => {
     const service: RS256CryptoService = TestBed.get(RS256CryptoService);
-    spyOn(stringUtil, 'fromBase64').and.returnValue(keyBuf);
+    spyOn(strUtlSvc, 'FromBase64').and.returnValue(keyBuf);
 
     try {
       await service.sign(key, 'data');
@@ -68,11 +75,11 @@ describe('RS256CryptoService', () => {
       saltLength: 256
     };
 
-    spyOn(stringUtil, 'fromBase64').and.returnValue(keyBuf);
+    spyOn(strUtlSvc, 'FromBase64').and.returnValue(keyBuf);
     spyOn(crypto.subtle, 'importKey').and.returnValue(Promise.resolve(cryptoKeyMock));
 
     await service.sign('key', 'data');
-    expect(signSpy).toHaveBeenCalledWith(pssParams, cryptoKeyMock, encodeString('data'));
+    expect(signSpy).toHaveBeenCalledWith(pssParams, cryptoKeyMock, strUtlSvc.EncodeString('data'));
   });
 
   it('should return signature', async () => {
@@ -80,18 +87,18 @@ describe('RS256CryptoService', () => {
     const signBuf = new TextEncoder().encode('sign');
 
     spyOn(crypto.subtle, 'sign').and.returnValue(Promise.resolve(signBuf));
-    spyOn(stringUtil, 'fromBase64').and.returnValue(keyBuf);
+    spyOn(strUtlSvc, 'FromBase64').and.returnValue(keyBuf);
     spyOn(crypto.subtle, 'importKey').and.returnValue(Promise.resolve(cryptoKeyMock));
 
     const sign = await service.sign('key', 'data');
 
-    expect(sign).toEqual(base64UrlEncode('sign'));
+    expect(sign).toEqual(strUtlSvc.Base64UrlEncode('sign'));
   });
 
   it('should throw error when the key is invalid', async () => {
     const service: RS256CryptoService = TestBed.get(RS256CryptoService);
 
-    spyOn(stringUtil, 'fromBase64').and.returnValue(keyBuf);
+    spyOn(strUtlSvc, 'FromBase64').and.returnValue(keyBuf);
     spyOn(crypto.subtle, 'importKey').and.returnValue(Promise.resolve(cryptoKeyMock));
 
     try {

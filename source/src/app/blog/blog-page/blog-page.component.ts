@@ -39,7 +39,7 @@ export class BlogPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  onBlogLoadError(event: HttpErrorResponse) {
+  onBlogLoadError(event: string) {
     this._paramIdSubscriptions.push(
       this._paramId$.subscribe(id => this._router.navigate(['blog/notfound', id]))
     );

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {base64UrlEncode, encodeString, fromBase64} from './string.utility';
+import {StringUtilityService} from './string.utility';
 
 
 /**
@@ -53,7 +53,7 @@ export class RS256CryptoService implements CryptoService {
   };
   private readonly _errorName = 'CryptoService Error';
 
-  constructor() {
+  constructor(private _strUtlSvc: StringUtilityService) {
   }
 
   /**
@@ -71,13 +71,13 @@ export class RS256CryptoService implements CryptoService {
 
     let dataBuf;
     try {
-      dataBuf = encodeString(data);
+      dataBuf = this._strUtlSvc.EncodeString(data);
     } catch (e) {
       return Promise.reject({name: this._errorName, message: e});
     }
 
     return crypto.subtle.sign(this._rsaPssParams, cryptoKey, dataBuf)
-      .then(buf => base64UrlEncode(String.fromCharCode(...Array.from(new Uint8Array(buf)))),
+      .then(buf => this._strUtlSvc.Base64UrlEncode(String.fromCharCode(...Array.from(new Uint8Array(buf)))),
         r => Promise.reject({name: this._errorName, message: r}));
   }
 
@@ -86,7 +86,7 @@ export class RS256CryptoService implements CryptoService {
 
     try {
       key = RS256CryptoService.cleanInputPrivateKey(key);
-      keyBuf = fromBase64(key);
+      keyBuf = this._strUtlSvc.FromBase64(key);
     } catch (e) {
       return Promise.reject({name: this._errorName, message: e});
     }

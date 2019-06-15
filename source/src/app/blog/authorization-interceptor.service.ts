@@ -5,7 +5,7 @@ import {merge, Observable} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {filter, flatMap, share} from 'rxjs/operators';
 import {RS256CryptoService} from '../crypto/rs256-crypto.service';
-import {encodeJSON} from '../crypto/string.utility';
+import {StringUtilityService} from '../crypto/string.utility';
 
 @Injectable()
 export class AuthorizationInterceptorService implements HttpInterceptor {
@@ -17,24 +17,25 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
     'alg': 'RS256',
     'typ': 'JWT'
   };
-  private static readonly _encodedHeader =
-    encodeJSON(AuthorizationInterceptorService._jwtHeader);
+  private readonly _encodedHeader =
+    this._strUtlSvc.EncodeJSON(AuthorizationInterceptorService._jwtHeader);
   private readonly privateKeyData: string;
 
-  constructor(localStorageService: LocalStorageService, private cryptoService: RS256CryptoService) {
+  constructor(localStorageService: LocalStorageService, private cryptoService: RS256CryptoService,
+              private _strUtlSvc: StringUtilityService) {
     this.privateKeyData = localStorageService.get('private-key');
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const ts = Math.floor(Date.now() / 1000);
     const halfMin = 30;
-    const encodedPayload = encodeJSON({
+    const encodedPayload = this._strUtlSvc.EncodeJSON({
       iss: req.url,
       exp: ts + halfMin,
       nbf: ts - halfMin,
       aud: [req.method, req.urlWithParams]
     });
-    const data = `${AuthorizationInterceptorService._encodedHeader}.${encodedPayload}`;
+    const data = `${this._encodedHeader}.${encodedPayload}`;
     const signature$ = fromPromise(this.cryptoService.sign(this.privateKeyData, data)
       .then(undefined, () => null))
       .pipe(share());

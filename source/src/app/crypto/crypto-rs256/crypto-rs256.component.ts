@@ -4,7 +4,7 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {filter, flatMap, map, mapTo, share} from 'rxjs/operators';
 import {TitleService} from '../../title.service';
 import {RS256CryptoService} from '../rs256-crypto.service';
-import {base64UrlEncode, encodeString} from '../string.utility';
+import {StringUtilityService} from '../string.utility';
 
 
 @Component({
@@ -21,9 +21,9 @@ export class CryptoRS256Component implements OnInit {
   }, null, 2);
   public headerSubject = new BehaviorSubject<string>(this.header);
   public encodedHeader$ = this.headerSubject.pipe(
-    map(s => encodeString(s)),
+    map(s => this._strUtlSvc.EncodeString(s)),
     map(a => String.fromCharCode(...Array.from(a))),
-    map(base64UrlEncode)
+    map(this._strUtlSvc.Base64UrlEncode)
   );
   // Define payload
   public payload = JSON.stringify({
@@ -34,9 +34,9 @@ export class CryptoRS256Component implements OnInit {
   }, null, 2);
   public payloadSubject = new BehaviorSubject<string>(this.payload);
   public encodedPayload$ = this.payloadSubject.pipe(
-    map(s => encodeString(s)),
+    map(s => this._strUtlSvc.EncodeString(s)),
     map(a => String.fromCharCode(...Array.from(a))),
-    map(base64UrlEncode)
+    map(this._strUtlSvc.Base64UrlEncode)
   );
 
   // Define private key
@@ -62,7 +62,8 @@ export class CryptoRS256Component implements OnInit {
     )
   );
 
-  constructor(private _cryptoService: RS256CryptoService, private _titleService: TitleService) {
+  constructor(private _cryptoService: RS256CryptoService, private _titleService: TitleService,
+              private _strUtlSvc: StringUtilityService) {
   }
 
   ngOnInit() {

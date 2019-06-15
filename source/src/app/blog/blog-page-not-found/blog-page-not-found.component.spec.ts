@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BlogPageNotFoundComponent } from './blog-page-not-found.component';
-import { ActivatedRoute } from '@angular/router';
+import {BlogPageNotFoundComponent} from './blog-page-not-found.component';
+import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
 
 describe('BlogPageNotFoundComponent', () => {
@@ -13,9 +13,9 @@ describe('BlogPageNotFoundComponent', () => {
       providers: [
         {provide: ActivatedRoute, useValue: {params: of({id: 'notfound'})}}
       ],
-      declarations: [ BlogPageNotFoundComponent ]
+      declarations: [BlogPageNotFoundComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

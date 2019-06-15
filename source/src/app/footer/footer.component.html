@@ -1,7 +1,7 @@
-<div class="footer" [class.device-desktop]="!(isHandset$ | async)">
+<div [class.device-desktop]="!(isHandset$ | async)" class="footer">
   <div class="qrcode-container">
     <a href="https://keys.gnupg.net/pks/lookup?search=davidshen84&fingerprint=on" target="_blank">
-      <qrcode [qrdata]="'DC1E3599'" [size]="32" [level]="'M'"></qrcode>
+      <qrcode [level]="'M'" [qrdata]="'DC1E3599'" [size]="32"></qrcode>
     </a>
   </div>
 </div>

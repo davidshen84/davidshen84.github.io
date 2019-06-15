@@ -1,4 +1,4 @@
 <div class="markdown-container">
-  <markdown ngPreserveWhitespaces [src]="blogPath$ | async" (error)="onBlogLoadError($event)">
+  <markdown (error)="onBlogLoadError($event)" [src]="blogPath$ | async" ngPreserveWhitespaces>
   </markdown>
 </div>
