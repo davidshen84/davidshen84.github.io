@@ -1,4 +1,4 @@
-# README
+# README [![CircleCI][2]][3]
 
 [![Build Status](https://travis-ci.com/davidshen84/davidshen84.github.io.svg?branch=master)](https://travis-ci.com/davidshen84/davidshen84.github.io)
 
@@ -20,3 +20,5 @@ Welcome to my blog repository!
   - [ ] Post data
 
 [1]: https://davidshen84.github.io/
+[2]: https://circleci.com/gh/davidshen84/davidshen84.github.io.svg?style=svg
+[3]: https://circleci.com/gh/davidshen84/davidshen84.github.io
