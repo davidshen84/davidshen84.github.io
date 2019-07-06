@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -32,7 +32,7 @@
     "hammerjs": "^2.0.8",
     "ngx-clipboard": "^12.1.2",
     "ngx-markdown": "^8.0.2",
-    "ngx-mathjax": "0.0.4",
+    "ngx-mathjax": "0.0.6",
     "ngx-store": "^2.1.0",
     "ngx-webcam": "^0.2.2",
     "normalize.css": "^8.0.1",
