@@ -1,8 +1,8 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {BlogPageNotFoundComponent} from './blog-page-not-found.component';
-import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
+import { BlogPageNotFoundComponent } from './blog-page-not-found.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('BlogPageNotFoundComponent', () => {
   let component: BlogPageNotFoundComponent;

@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, combineLatest, merge, Observable, Subject} from 'rxjs';
-import {fromPromise} from 'rxjs/internal-compatibility';
-import {filter, flatMap, map, mapTo, share} from 'rxjs/operators';
-import {TitleService} from '../../title.service';
-import {RS256CryptoService} from '../rs256-crypto.service';
-import {StringUtilityService} from '../string.utility';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, combineLatest, merge, Observable, Subject } from 'rxjs';
+import { fromPromise } from 'rxjs/internal-compatibility';
+import { filter, flatMap, map, mapTo, share } from 'rxjs/operators';
+import { TitleService } from '../../title.service';
+import { RS256CryptoService } from '../rs256-crypto.service';
+import { StringUtilityService } from '../string.utility';
 
 
 @Component({

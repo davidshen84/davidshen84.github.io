@@ -2,8 +2,10 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "module": "esnext",
     "types": []
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
   },
   "exclude": [
     "src/test.ts",

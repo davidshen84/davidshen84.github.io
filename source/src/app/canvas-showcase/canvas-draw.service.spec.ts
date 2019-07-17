@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {CanvasDrawService} from './canvas-draw.service';
+import { CanvasDrawService } from './canvas-draw.service';
 
 describe('CanvasDrawService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

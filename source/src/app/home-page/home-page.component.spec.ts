@@ -1,8 +1,8 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {MarkdownModule} from 'ngx-markdown';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MarkdownModule } from 'ngx-markdown';
 
-import {HomePageComponent} from './home-page.component';
+import { HomePageComponent } from './home-page.component';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;

@@ -7,7 +7,8 @@
 
   <mat-card>
     <mat-form-field>
-      <textarea (ngModelChange)="headerSubject.next(header)" [(ngModel)]="header" matInput matTextareaAutosize name="header"
+      <textarea (ngModelChange)="headerSubject.next(header)" [(ngModel)]="header" matInput matTextareaAutosize
+                name="header"
                 placeholder="Header"></textarea>
       <input [value]="encodedHeader$ | async" matInput readonly/>
     </mat-form-field>
@@ -15,7 +16,8 @@
 
   <mat-card>
     <mat-form-field>
-      <textarea (ngModelChange)="payloadSubject.next(payload)" [(ngModel)]="payload" matInput matTextareaAutosize name="payload"
+      <textarea (ngModelChange)="payloadSubject.next(payload)" [(ngModel)]="payload" matInput matTextareaAutosize
+                name="payload"
                 placeholder="Payload"></textarea>
       <input [value]="encodedPayload$ | async" matInput readonly/>
     </mat-form-field>
@@ -23,7 +25,8 @@
 
   <mat-card>
     <mat-form-field>
-        <textarea (ngModelChange)="privateKeyInputSubject.next(privateKeyInput)" [(ngModel)]="privateKeyInput" matInput matTextareaAutosize
+        <textarea (ngModelChange)="privateKeyInputSubject.next(privateKeyInput)" [(ngModel)]="privateKeyInput" matInput
+                  matTextareaAutosize
                   name="base64Input" placeholder="Private Key"></textarea>
     </mat-form-field>
   </mat-card>

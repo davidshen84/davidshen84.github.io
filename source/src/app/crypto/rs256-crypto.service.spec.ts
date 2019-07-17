@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {RS256CryptoService} from './rs256-crypto.service';
-import {StringUtilityService} from './string.utility';
+import { RS256CryptoService } from './rs256-crypto.service';
+import { StringUtilityService } from './string.utility';
 
 
 describe('RS256CryptoService', () => {

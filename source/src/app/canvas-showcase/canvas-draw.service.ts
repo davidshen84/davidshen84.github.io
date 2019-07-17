@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /**
  * Structure to store the X and Y coordinates of the mouse.
@@ -13,10 +13,11 @@ export interface MouseXY {
 })
 export class CanvasDrawService {
 
-  constructor() {
-  }
   private _canvas: HTMLCanvasElement;
   private _context2d: CanvasRenderingContext2D;
+
+  constructor() {
+  }
 
   private static map(n: number, in_min: number, in_max: number, out_min: number, out_max: number): number {
     return (n - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;

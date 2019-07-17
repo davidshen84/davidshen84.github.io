@@ -1,15 +1,15 @@
-import {CommonModule} from '@angular/common';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {NgModule} from '@angular/core';
-import {MarkdownModule} from 'ngx-markdown';
-import {WebStorageModule} from 'ngx-store';
-import {RS256CryptoService} from '../crypto/rs256-crypto.service';
-import {MaterialModules} from '../material.modules';
-import {AuthorizationInterceptorService} from './authorization-interceptor.service';
-import {BlogHomePageComponent} from './blog-home-page/blog-home-page.component';
-import {BlogPageNotFoundComponent} from './blog-page-not-found/blog-page-not-found.component';
-import {BlogPageComponent} from './blog-page/blog-page.component';
-import {BlogRoutingModule} from './blog-routing.module';
+import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { MarkdownModule } from 'ngx-markdown';
+import { WebStorageModule } from 'ngx-store';
+import { RS256CryptoService } from '../crypto/rs256-crypto.service';
+import { MaterialModules } from '../material.modules';
+import { AuthorizationInterceptorService } from './authorization-interceptor.service';
+import { BlogHomePageComponent } from './blog-home-page/blog-home-page.component';
+import { BlogPageNotFoundComponent } from './blog-page-not-found/blog-page-not-found.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
+import { BlogRoutingModule } from './blog-routing.module';
 
 
 @NgModule({

@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {StringUtilityService} from './string.utility';
+import { Injectable } from '@angular/core';
+import { StringUtilityService } from './string.utility';
 
 
 /**

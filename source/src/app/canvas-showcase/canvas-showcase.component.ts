@@ -1,8 +1,8 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {fromEvent, Subscription} from 'rxjs';
-import {map, switchMap, takeUntil, throttleTime} from 'rxjs/operators';
-import {TitleService} from '../title.service';
-import {CanvasDrawService} from './canvas-draw.service';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
+import { map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
+import { TitleService } from '../title.service';
+import { CanvasDrawService } from './canvas-draw.service';
 
 
 @Component({

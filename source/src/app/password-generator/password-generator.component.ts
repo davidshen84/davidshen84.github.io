@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {fromEvent, merge, Observable, of} from 'rxjs';
-import {flatMap, map, repeat, scan, startWith} from 'rxjs/operators';
-import {MatButton} from '@angular/material/button';
-import {MatCheckbox} from '@angular/material/checkbox';
-import {MatSlider} from '@angular/material/slider';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {TitleService} from '../title.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { fromEvent, merge, Observable, of } from 'rxjs';
+import { flatMap, map, repeat, scan, startWith } from 'rxjs/operators';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatSlider } from '@angular/material/slider';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { TitleService } from '../title.service';
 
 
 @Component({

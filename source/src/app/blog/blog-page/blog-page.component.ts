@@ -1,9 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
-import {TitleService} from '../../title.service';
-import {HttpErrorResponse} from '@angular/common/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { TitleService } from '../../title.service';
 
 @Component({
   selector: 'app-blog-page',

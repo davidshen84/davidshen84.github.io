@@ -1,12 +1,12 @@
-import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {ActivatedRoute, Router} from '@angular/router';
-import {of} from 'rxjs';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
 
-import {MarkdownModule} from 'ngx-markdown';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import {BlogPageComponent} from './blog-page.component';
+import { BlogPageComponent } from './blog-page.component';
 
 
 describe('BlogPageComponent', () => {

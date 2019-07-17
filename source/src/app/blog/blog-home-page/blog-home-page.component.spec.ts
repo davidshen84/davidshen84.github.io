@@ -1,10 +1,10 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {BlogHomePageComponent} from './blog-home-page.component';
-import {RouterTestingModule} from '@angular/router/testing';
-import {MarkdownModule} from 'ngx-markdown';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {MatListModule} from '@angular/material/list';
+import { BlogHomePageComponent } from './blog-home-page.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatListModule } from '@angular/material/list';
 
 describe('BlogHomePageComponent', () => {
   let component: BlogHomePageComponent;

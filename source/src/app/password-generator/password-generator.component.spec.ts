@@ -1,12 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import 'hammerjs';
 
-import {PasswordGeneratorComponent} from './password-generator.component';
-import {MaterialModules} from '../material.modules';
-import {FormsModule} from '@angular/forms';
-import {ClipboardModule} from 'ngx-clipboard';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { PasswordGeneratorComponent } from './password-generator.component';
+import { MaterialModules } from '../material.modules';
+import { FormsModule } from '@angular/forms';
+import { ClipboardModule } from 'ngx-clipboard';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 describe('PasswordGeneratorComponent', () => {

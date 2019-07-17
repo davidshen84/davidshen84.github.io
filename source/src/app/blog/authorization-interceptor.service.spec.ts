@@ -1,11 +1,11 @@
-import {HttpHandler, HttpRequest} from '@angular/common/http';
-import {async, TestBed} from '@angular/core/testing';
-import {LocalStorageService} from 'ngx-store';
-import {of} from 'rxjs';
-import {RS256CryptoService} from '../crypto/rs256-crypto.service';
-import {StringUtilityService} from '../crypto/string.utility';
+import { HttpHandler, HttpRequest } from '@angular/common/http';
+import { async, TestBed } from '@angular/core/testing';
+import { LocalStorageService } from 'ngx-store';
+import { of } from 'rxjs';
+import { RS256CryptoService } from '../crypto/rs256-crypto.service';
+import { StringUtilityService } from '../crypto/string.utility';
 
-import {AuthorizationInterceptorService} from './authorization-interceptor.service';
+import { AuthorizationInterceptorService } from './authorization-interceptor.service';
 import createSpy = jasmine.createSpy;
 import stringMatching = jasmine.stringMatching;
 

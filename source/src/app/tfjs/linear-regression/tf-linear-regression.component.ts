@@ -1,9 +1,10 @@
 import * as tf from '@tensorflow/tfjs';
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {CanvasDrawService} from '../../canvas-showcase/canvas-draw.service';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {auditTime, distinctUntilChanged, map} from 'rxjs/operators';
-import {TitleService} from '../../title.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CanvasDrawService } from '../../canvas-showcase/canvas-draw.service';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { auditTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { TitleService } from '../../title.service';
+import { MathJaxDirective } from 'ngx-mathjax';
 
 /**
  * Maps @param {n} within range @param {in_min} to @param {in_max} to another number in the range @param {out_min} to @param {out_max}.
@@ -22,6 +23,9 @@ const normalize = (n: number, in_min: number, in_max: number, out_min: number, o
   styleUrls: ['./tf-linear-regression.component.scss']
 })
 export class TfLinearRegressionComponent implements OnInit {
+
+  @ViewChild('article', {read: MathJaxDirective, static: true})
+  mathJax: MathJaxDirective;
 
   private _modelSubject = new BehaviorSubject<{ a: number, b: number }>({a: NaN, b: NaN});
   public readonly model$ = this._modelSubject.pipe(
@@ -86,6 +90,11 @@ export class TfLinearRegressionComponent implements OnInit {
       this._a.mul(tf.tensor1d(x)) // a * x
         .add(this._b) // + b
     );
+  }
+
+  typeset() {
+    console.log('typeset');
+    this.mathJax.MathJaxTypeset();
   }
 
   private _normalizeX(offsetX: number): number {
@@ -154,5 +163,4 @@ export class TfLinearRegressionComponent implements OnInit {
       await tf.nextFrame();
     }
   }
-
 }

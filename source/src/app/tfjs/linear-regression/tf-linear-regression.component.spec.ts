@@ -1,9 +1,13 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {MarkdownModule} from 'ngx-markdown';
-import {MathJaxModule} from 'ngx-mathjax';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MarkdownModule } from 'ngx-markdown';
+import { MathJaxModule } from 'ngx-mathjax';
 
-import {TfLinearRegressionComponent} from './tf-linear-regression.component';
+import { TfLinearRegressionComponent } from './tf-linear-regression.component';
+import { ElementRef } from '@angular/core';
+
+class MockElementRef extends ElementRef {
+}
 
 describe('TfLinearRegressionComponent', () => {
   let component: TfLinearRegressionComponent;
@@ -16,6 +20,9 @@ describe('TfLinearRegressionComponent', () => {
         HttpClientTestingModule,
         MathJaxModule.config(),
         MarkdownModule.forRoot()
+      ],
+      providers: [
+        {provide: ElementRef, useValue: MockElementRef}
       ]
     })
       .compileComponents();

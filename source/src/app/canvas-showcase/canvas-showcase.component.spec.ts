@@ -1,9 +1,9 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import 'hammerjs';
-import {MarkdownModule} from 'ngx-markdown';
+import { MarkdownModule } from 'ngx-markdown';
 
-import {CanvasShowcaseComponent} from './canvas-showcase.component';
+import { CanvasShowcaseComponent } from './canvas-showcase.component';
 
 describe('CanvasShowcaseComponent', () => {
   let component: CanvasShowcaseComponent;

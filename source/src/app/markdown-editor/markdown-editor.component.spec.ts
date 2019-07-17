@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {FormsModule} from '@angular/forms';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MarkdownModule} from 'ngx-markdown';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MarkdownModule } from 'ngx-markdown';
 
-import {MarkdownEditorComponent} from './markdown-editor.component';
+import { MarkdownEditorComponent } from './markdown-editor.component';
 
 describe('MarkdownEditorComponent', () => {
   let component: MarkdownEditorComponent;
