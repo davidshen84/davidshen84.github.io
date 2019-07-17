@@ -93,7 +93,6 @@ export class TfLinearRegressionComponent implements OnInit {
   }
 
   typeset() {
-    console.log('typeset');
     this.mathJax.MathJaxTypeset();
   }
 
