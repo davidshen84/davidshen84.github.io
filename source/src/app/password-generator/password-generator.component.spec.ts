@@ -1,12 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import 'hammerjs';
-
-import { PasswordGeneratorComponent } from './password-generator.component';
-import { MaterialModules } from '../material.modules';
-import { FormsModule } from '@angular/forms';
-import { ClipboardModule } from 'ngx-clipboard';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import 'hammerjs';
+import { ClipboardModule } from 'ngx-clipboard';
+import { MaterialModules } from '../material.modules';
+import { PasswordGeneratorComponent } from './password-generator.component';
 
 
 describe('PasswordGeneratorComponent', () => {
@@ -17,7 +16,7 @@ describe('PasswordGeneratorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, FormsModule, MaterialModules, ClipboardModule],
+      imports: [NoopAnimationsModule, ReactiveFormsModule, MaterialModules, ClipboardModule],
       declarations: [PasswordGeneratorComponent]
     })
       .compileComponents();
