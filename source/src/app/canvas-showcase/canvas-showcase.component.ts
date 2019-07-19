@@ -3,14 +3,17 @@ import { fromEvent, Subscription } from 'rxjs';
 import { map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
 import { TitleService } from '../title.service';
 import { CanvasDrawService } from './canvas-draw.service';
+import { BaseComponent } from '../base-component';
+import { GaService } from '../ga.service';
 
 
 @Component({
   selector: 'app-canvas-showcase',
   templateUrl: './canvas-showcase.component.html',
-  styleUrls: ['./canvas-showcase.component.scss']
+  styleUrls: ['./canvas-showcase.component.scss'],
+  providers: [GaService]
 })
-export class CanvasShowcaseComponent implements OnInit, OnDestroy {
+export class CanvasShowcaseComponent extends BaseComponent implements OnInit, OnDestroy {
 
   public _points: Array<{ x, y }> = [];
   @ViewChild('canvas', {static: true})
@@ -18,16 +21,17 @@ export class CanvasShowcaseComponent implements OnInit, OnDestroy {
   private _canvas: HTMLCanvasElement;
   private _dragDropSubscription: Subscription;
 
-  constructor(private _canvasDraw: CanvasDrawService, private _titleService: TitleService) {
+  constructor(private canvasDraw: CanvasDrawService, titleService: TitleService, ga: GaService) {
+    super(ga);
+    titleService.setTitle('Canvas Showcase');
   }
 
   ngOnInit() {
-    this._titleService.setTitle('Canvas Showcase');
     this._canvas = this._canvasRef.nativeElement;
-    this._canvasDraw.setCanvas(this._canvas);
+    this.canvasDraw.setCanvas(this._canvas);
 
     // Set a point at the center of the canvas.
-    this._canvasDraw.setPointOnCanvas(this._canvas.clientWidth / 2, this._canvas.clientHeight / 2, 255, 0, 0, 255);
+    this.canvasDraw.setPointOnCanvas(this._canvas.clientWidth / 2, this._canvas.clientHeight / 2, 255, 0, 0, 255);
 
     // Define the drag & drop observable.
     const target = new Hammer(this._canvas, {
@@ -48,7 +52,7 @@ export class CanvasShowcaseComponent implements OnInit, OnDestroy {
         this._points = this._points.slice(1, this._points.length);
       }
       this._points.push({x: Math.floor(x), y: Math.floor(y)});
-      this._canvasDraw.setPointOnCanvas(x, y, 255, 0, 0, 255);
+      this.canvasDraw.setPointOnCanvas(x, y, 255, 0, 0, 255);
     });
   }
 

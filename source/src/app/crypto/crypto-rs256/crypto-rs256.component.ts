@@ -5,14 +5,17 @@ import { filter, flatMap, map, mapTo, share } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
 import { RS256CryptoService } from '../rs256-crypto.service';
 import { StringUtilityService } from '../string.utility';
+import { GaService } from '../../ga.service';
+import { BaseComponent } from '../../base-component';
 
 
 @Component({
   selector: 'app-crypto-rs256',
   templateUrl: './crypto-rs256.component.html',
-  styleUrls: ['./crypto-rs256.component.scss']
+  styleUrls: ['./crypto-rs256.component.scss'],
+  providers: [GaService]
 })
-export class CryptoRS256Component implements OnInit {
+export class CryptoRS256Component extends BaseComponent implements OnInit {
 
   // Define header
   public header = JSON.stringify({
@@ -21,9 +24,9 @@ export class CryptoRS256Component implements OnInit {
   }, null, 2);
   public headerSubject = new BehaviorSubject<string>(this.header);
   public encodedHeader$ = this.headerSubject.pipe(
-    map(s => this._strUtlSvc.EncodeString(s)),
+    map(s => this.strUtlSvc.EncodeString(s)),
     map(a => String.fromCharCode(...Array.from(a))),
-    map(this._strUtlSvc.Base64UrlEncode)
+    map(this.strUtlSvc.Base64UrlEncode)
   );
   // Define payload
   public payload = JSON.stringify({
@@ -34,9 +37,9 @@ export class CryptoRS256Component implements OnInit {
   }, null, 2);
   public payloadSubject = new BehaviorSubject<string>(this.payload);
   public encodedPayload$ = this.payloadSubject.pipe(
-    map(s => this._strUtlSvc.EncodeString(s)),
+    map(s => this.strUtlSvc.EncodeString(s)),
     map(a => String.fromCharCode(...Array.from(a))),
-    map(this._strUtlSvc.Base64UrlEncode)
+    map(this.strUtlSvc.Base64UrlEncode)
   );
 
   // Define private key
@@ -45,7 +48,7 @@ export class CryptoRS256Component implements OnInit {
 
   // Define signature
   public signature$ = combineLatest([this.encodedHeader$, this.encodedPayload$, this.privateKeyInputSubject]).pipe(
-    flatMap(([h, p, k]) => fromPromise(this._cryptoService.sign(k, `${h}.${p}`)
+    flatMap(([h, p, k]) => fromPromise(this.cryptoService.sign(k, `${h}.${p}`)
       .then(undefined, () => ''))),
     share()
   );
@@ -62,12 +65,13 @@ export class CryptoRS256Component implements OnInit {
     )
   );
 
-  constructor(private _cryptoService: RS256CryptoService, private _titleService: TitleService,
-              private _strUtlSvc: StringUtilityService) {
+  constructor(private cryptoService: RS256CryptoService, private titleService: TitleService,
+              private strUtlSvc: StringUtilityService, ga: GaService) {
+    super(ga);
   }
 
   ngOnInit() {
-    this._titleService.setTitle('Encryption using RS256');
+    this.titleService.setTitle('Encryption using RS256');
   }
 
 }

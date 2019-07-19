@@ -5,30 +5,29 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { flatMap, map, repeat, scan, startWith } from 'rxjs/operators';
 import { TitleService } from '../title.service';
+import { GaService } from '../ga.service';
+import { BaseComponent } from '../base-component';
 
 
 @Component({
   selector: 'app-password-generator',
   templateUrl: './password-generator.component.html',
-  styleUrls: ['./password-generator.component.scss']
+  styleUrls: ['./password-generator.component.scss'],
+  providers: [GaService]
 })
-export class PasswordGeneratorComponent implements OnInit {
+export class PasswordGeneratorComponent extends BaseComponent implements OnInit {
   private static readonly prime: number = 21001;
 
-  public isHandset$ = this._breakpointObserver.observe(Breakpoints.Handset).pipe(
+  public isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches));
-
-  // Default length of characters to generate.
-  private length = 16;
-
-  SliderControl = new FormControl(this.length);
   LowerCaseControl = new FormControl(true);
   UpperCaseControl = new FormControl(true);
   DigitControl = new FormControl(true);
   SpecialControl = new FormControl(true);
-
   GenerateSubject = new BehaviorSubject(undefined);
-
+  // Default length of characters to generate.
+  private length = 16;
+  SliderControl = new FormControl(this.length);
   public result$ = combineLatest([
     this.GenerateSubject,
     this.SliderControl.valueChanges.pipe(
@@ -51,24 +50,26 @@ export class PasswordGeneratorComponent implements OnInit {
       map(x => x ? '\`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : '')
     )
   ]).pipe(
-    map(([_, n, ...args]) => [n, args.reduce((p, c) => p.concat(c), '')]),
+    map(([ignore, n, ...args]) => [n, args.reduce((p, c) => p.concat(c), '')]),
     flatMap(([n, x]) => of(x).pipe(
       // pick one character
-      map(x => x.length > 0
-          ? x[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % x.length]
-          : '😂'),
+      map(y => y.length > 0
+        ? y[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % y.length]
+        : '😂'),
       repeat(n),
       scan((acc: string, value: string) => acc + value, ''))));
 
   constructor(titleService: TitleService,
-              private _breakpointObserver: BreakpointObserver,
-              private _matSnackBar: MatSnackBar) {
+              ga: GaService,
+              private breakpointObserver: BreakpointObserver,
+              private matSnackBar: MatSnackBar) {
+    super(ga);
     titleService.setTitle('Password Generator');
   }
 
   ngOnInit() {
   }
 
-  public openSnackBar = () => this._matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
+  public openSnackBar = () => this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
 
 }

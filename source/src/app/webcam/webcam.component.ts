@@ -2,13 +2,16 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
 import { Subject } from 'rxjs';
 import { TitleService } from '../title.service';
+import { GaService } from '../ga.service';
+import { BaseComponent } from '../base-component';
 
 @Component({
   selector: 'app-webcam',
   templateUrl: './webcam.component.html',
-  styleUrls: ['./webcam.component.scss']
+  styleUrls: ['./webcam.component.scss'],
+  providers: [GaService]
 })
-export class WebcamComponent implements OnInit {
+export class WebcamComponent extends BaseComponent implements OnInit {
   private _snapshotTrigger = new Subject();
   public snapshotTrigger$ = this._snapshotTrigger.asObservable();
   private _image: WebcamImage;
@@ -16,7 +19,9 @@ export class WebcamComponent implements OnInit {
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
 
-  constructor(private _titleService: TitleService) {
+  constructor(titleService: TitleService, ga: GaService) {
+    super(ga);
+    titleService.setTitle('Webcam');
   }
 
   public get showSnapshot() {
@@ -28,7 +33,6 @@ export class WebcamComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._titleService.setTitle('Webcam');
     this._canvas = this._canvasRef.nativeElement;
   }
 

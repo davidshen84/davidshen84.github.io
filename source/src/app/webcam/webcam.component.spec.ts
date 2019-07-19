@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WebcamComponent } from './webcam.component';
 import { WebcamModule } from 'ngx-webcam';
+import { RouterTestingModule } from '@angular/router/testing';
+import { GaService } from '../ga.service';
 
 
 describe('WebcamComponent', () => {
@@ -11,7 +13,8 @@ describe('WebcamComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [WebcamComponent],
-      imports: [WebcamModule]
+      imports: [WebcamModule, RouterTestingModule],
+      providers: [GaService]
     })
       .compileComponents();
   }));

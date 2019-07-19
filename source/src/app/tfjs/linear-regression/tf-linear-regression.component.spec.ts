@@ -5,6 +5,8 @@ import { MathJaxModule } from 'ngx-mathjax';
 
 import { TfLinearRegressionComponent } from './tf-linear-regression.component';
 import { ElementRef } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { GaService } from '../../ga.service';
 
 class MockElementRef extends ElementRef {
 }
@@ -18,11 +20,13 @@ describe('TfLinearRegressionComponent', () => {
       declarations: [TfLinearRegressionComponent],
       imports: [
         HttpClientTestingModule,
+        RouterTestingModule,
         MathJaxModule.config(),
         MarkdownModule.forRoot()
       ],
       providers: [
-        {provide: ElementRef, useValue: MockElementRef}
+        {provide: ElementRef, useValue: MockElementRef},
+        GaService
       ]
     })
       .compileComponents();

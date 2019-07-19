@@ -6,6 +6,8 @@ import 'hammerjs';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MaterialModules } from '../material.modules';
 import { PasswordGeneratorComponent } from './password-generator.component';
+import { GaService } from '../ga.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('PasswordGeneratorComponent', () => {
@@ -16,8 +18,15 @@ describe('PasswordGeneratorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, ReactiveFormsModule, MaterialModules, ClipboardModule],
-      declarations: [PasswordGeneratorComponent]
+      imports: [
+        NoopAnimationsModule,
+        ReactiveFormsModule,
+        MaterialModules,
+        ClipboardModule,
+        RouterTestingModule
+      ],
+      declarations: [PasswordGeneratorComponent],
+      providers: [GaService]
     })
       .compileComponents();
 

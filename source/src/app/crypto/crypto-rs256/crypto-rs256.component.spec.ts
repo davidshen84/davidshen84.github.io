@@ -7,6 +7,8 @@ import { MaterialModules } from '../../material.modules';
 import { RS256CryptoService } from '../rs256-crypto.service';
 
 import { CryptoRS256Component } from './crypto-rs256.component';
+import { GaService } from '../../ga.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CryptoRS256Component', () => {
   let component: CryptoRS256Component;
@@ -18,12 +20,14 @@ describe('CryptoRS256Component', () => {
         NoopAnimationsModule,
         FormsModule,
         MaterialModules,
+        RouterTestingModule,
         HttpClientTestingModule,
         MarkdownModule.forRoot()
       ],
       declarations: [CryptoRS256Component],
       providers: [
-        RS256CryptoService
+        RS256CryptoService,
+        GaService
       ]
     })
       .compileComponents();
