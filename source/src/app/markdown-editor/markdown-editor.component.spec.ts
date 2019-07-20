@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -12,7 +12,7 @@ describe('MarkdownEditorComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        FormsModule,
+        ReactiveFormsModule,
         MatGridListModule,
         MarkdownModule.forRoot()
       ],

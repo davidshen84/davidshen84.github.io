@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { MarkdownEditorRoutingModule } from './markdown-editor-routing.module';
 import { MarkdownEditorComponent } from './markdown-editor.component';
+import { MathJaxModule } from 'ngx-mathjax';
 
 @NgModule({
   declarations: [MarkdownEditorComponent],
@@ -16,7 +17,8 @@ import { MarkdownEditorComponent } from './markdown-editor.component';
     MarkdownModule.forChild(),
     MatGridListModule,
     MatInputModule,
-    FormsModule
+    ReactiveFormsModule,
+    MathJaxModule.config(false)
   ]
 })
 export class MarkdownEditorModule {
