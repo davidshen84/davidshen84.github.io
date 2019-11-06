@@ -7,7 +7,6 @@ import { StringUtilityService } from '../crypto/string.utility';
 
 import { AuthorizationInterceptorService } from './authorization-interceptor.service';
 import createSpy = jasmine.createSpy;
-import stringMatching = jasmine.stringMatching;
 
 describe('AuthorizationInterceptorService', () => {
   let strUtlSvc: StringUtilityService;
@@ -55,11 +54,7 @@ describe('AuthorizationInterceptorService', () => {
       }
     ).subscribe(() => {
       expect(signSpy).toHaveBeenCalled();
-      expect(cloneSpy).toHaveBeenCalledWith({
-        setHeaders: {
-          Authorization: stringMatching(/Bearer .*\.sign/)
-        }
-      });
+      expect(cloneSpy.calls.mostRecent().args[0].setHeaders.Authorization).toMatch(/Bearer .*\.sign/);
       expect(handleSpy).toHaveBeenCalledWith(reqClone);
     });
   }));
