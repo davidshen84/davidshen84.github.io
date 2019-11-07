@@ -11,7 +11,7 @@ import { MathJaxModule } from 'ngx-mathjax';
   imports: [
     CommonModule,
     TfjsRoutingModule,
-    MathJaxModule.config(false),
+    MathJaxModule.forChild(),
     MarkdownModule.forChild(),
   ],
 })

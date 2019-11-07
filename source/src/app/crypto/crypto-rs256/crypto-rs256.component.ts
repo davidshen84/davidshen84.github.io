@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest, merge, Observable, Subject } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { filter, flatMap, map, mapTo, share } from 'rxjs/operators';
@@ -13,7 +13,8 @@ import { BaseComponent } from '../../base-component';
   selector: 'app-crypto-rs256',
   templateUrl: './crypto-rs256.component.html',
   styleUrls: ['./crypto-rs256.component.scss'],
-  providers: [GaService]
+  providers: [GaService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CryptoRS256Component extends BaseComponent implements OnInit {
 

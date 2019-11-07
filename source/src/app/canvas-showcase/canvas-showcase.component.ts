@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
 import { TitleService } from '../title.service';
@@ -11,7 +11,8 @@ import { GaService } from '../ga.service';
   selector: 'app-canvas-showcase',
   templateUrl: './canvas-showcase.component.html',
   styleUrls: ['./canvas-showcase.component.scss'],
-  providers: [GaService]
+  providers: [GaService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CanvasShowcaseComponent extends BaseComponent implements OnInit, OnDestroy {
 

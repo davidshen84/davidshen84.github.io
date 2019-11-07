@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TitleService } from '../title.service';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -7,7 +7,8 @@ import { MathJaxDirective } from 'ngx-mathjax';
 @Component({
   selector: 'app-markdown-editor',
   templateUrl: './markdown-editor.component.html',
-  styleUrls: ['./markdown-editor.component.scss']
+  styleUrls: ['./markdown-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownEditorComponent implements OnInit, OnDestroy {
   text = `# Default

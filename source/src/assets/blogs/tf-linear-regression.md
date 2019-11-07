@@ -1,6 +1,6 @@
-# Linear Regression with Tensorflow
+# Linear Regression with TensorFlow
 
-This is an example about how to use Tensorflow JS library to implement a simple linear regression algorithm.
+This is an example about how to use TensorFlow JS library to implement a simple linear regression algorithm.
 In this example we will compute the `a` and `b` variables in this formula.
 
 $$

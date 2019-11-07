@@ -2,9 +2,9 @@
   <markdown #article (load)="typeset()" mathjax src="assets/blogs/tf-linear-regression.md"></markdown>
 </div>
 
-<div [mathjax]="[model$ | async, loss$ | async]">
+<div [mathjax]="[model$ | async, cost$ | async]">
   <div class="fixed-height">model: \( {{ '{}' }} \)</div>
-  <div class="fixed-height">loss = \( {{ '{}' }} \)</div>
+  <div class="fixed-height">cost = \( {{ '{}' }} \)</div>
 </div>
 <div>
   <canvas #canvas (click)="onMouseClick($event)"></canvas>

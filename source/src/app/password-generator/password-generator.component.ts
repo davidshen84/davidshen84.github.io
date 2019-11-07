@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
@@ -8,15 +8,16 @@ import { TitleService } from '../title.service';
 import { GaService } from '../ga.service';
 import { BaseComponent } from '../base-component';
 
+const prime = 21001;
 
 @Component({
   selector: 'app-password-generator',
   templateUrl: './password-generator.component.html',
   styleUrls: ['./password-generator.component.scss'],
-  providers: [GaService]
+  providers: [GaService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PasswordGeneratorComponent extends BaseComponent implements OnInit {
-  private static readonly prime: number = 21001;
 
   public isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches));
@@ -54,7 +55,7 @@ export class PasswordGeneratorComponent extends BaseComponent implements OnInit 
     flatMap(([n, x]) => of(x).pipe(
       // pick one character
       map(y => y.length > 0
-        ? y[Math.ceil(Math.random() * PasswordGeneratorComponent.prime) % y.length]
+        ? y[Math.ceil(Math.random() * prime) % y.length]
         : '😂'),
       repeat(n),
       scan((acc: string, value: string) => acc + value, ''))));
@@ -70,6 +71,8 @@ export class PasswordGeneratorComponent extends BaseComponent implements OnInit 
   ngOnInit() {
   }
 
-  public openSnackBar = () => this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
+  public openSnackBar() {
+    return this.matSnackBar.open('Copied to clipboard!', '😆', {duration: 500});
+  }
 
 }

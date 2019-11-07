@@ -1,5 +1,5 @@
 import * as tf from '@tensorflow/tfjs';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CanvasDrawService } from '../../canvas-showcase/canvas-draw.service';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { auditTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -23,38 +23,39 @@ const normalize = (n: number, in_min: number, in_max: number, out_min: number, o
   selector: 'app-tfjs-linear-regression',
   templateUrl: './tf-linear-regression.component.html',
   styleUrls: ['./tf-linear-regression.component.scss'],
-  providers: [GaService]
+  providers: [GaService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TfLinearRegressionComponent extends BaseComponent implements OnInit {
 
   @ViewChild('article', {read: MathJaxDirective, static: true})
   mathJax: MathJaxDirective;
 
-  private _modelSubject = new BehaviorSubject<{ a: number, b: number }>({a: NaN, b: NaN});
-  public readonly model$ = this._modelSubject.pipe(
+  private modelSubject = new BehaviorSubject<{ a: number, b: number }>({a: NaN, b: NaN});
+  public readonly model$ = this.modelSubject.pipe(
     auditTime(1000),
     map(({a, b}) => ({a: a.toFixed(3), b: b.toFixed(3)})),
     map(({a, b}) => `Y = ${a}X + ${b}`),
     distinctUntilChanged());
 
-  private _lossSubject: Subject<number> = new BehaviorSubject<number>(NaN);
-  public readonly loss$ = this._lossSubject.pipe(
+  private costSubject: Subject<number> = new BehaviorSubject<number>(NaN);
+  public readonly cost$ = this.costSubject.pipe(
     auditTime(1000),
     map(v => v.toFixed(3)),
     distinctUntilChanged());
 
   // Input data normalized between 0 and 1.
-  private _xs: number[] = [];
+  private xs: number[] = [];
   // Label data normalized between 0 and 1.
-  private _ys: number[] = [];
+  private ys: number[] = [];
 
   @ViewChild('canvas', {static: true})
-  private _canvasRef: ElementRef;
-  private _canvas: HTMLCanvasElement;
+  private canvasRef: ElementRef;
+  private canvas: HTMLCanvasElement;
 
   constructor(titleService: TitleService, ga: GaService, private canvasDraw: CanvasDrawService) {
     super(ga);
-    titleService.setTitle('Linear Regression with Tensorflow');
+    titleService.setTitle('Linear Regression with TensorFlow');
   }
 
   private _a = tf.variable(tf.scalar(Math.random()));
@@ -70,23 +71,23 @@ export class TfLinearRegressionComponent extends BaseComponent implements OnInit
   }
 
   public get Ys() {
-    return this._ys;
+    return this.ys;
   }
 
   ngOnInit() {
-    this._canvas = this._canvasRef.nativeElement;
-    this.canvasDraw.setCanvas(this._canvas);
+    this.canvas = this.canvasRef.nativeElement;
+    this.canvasDraw.setCanvas(this.canvas);
   }
 
   public async onMouseClick(e: MouseEvent) {
-    const x = this._normalizeX(e.offsetX);
-    const y = this._normalizeY(e.offsetY);
-    this.canvasDraw.setPointOnCanvas(this._denormalizeX(x), this._denormalizeY(y), 255, 0, 0, 255);
-    this._xs.push(x);
-    this._ys.push(y);
+    const x = this.normalizeX(e.offsetX);
+    const y = this.normalizeY(e.offsetY);
+    this.canvasDraw.setPointOnCanvas(this.denormalizeX(x), this.denormalizeY(y), 255, 0, 0, 255);
+    this.xs.push(x);
+    this.ys.push(y);
 
     await this.train(75);
-    await this._updateCanvas();
+    await this.updateCanvas();
   }
 
   public predict(x: number[]): tf.Tensor {
@@ -100,23 +101,23 @@ export class TfLinearRegressionComponent extends BaseComponent implements OnInit
     this.mathJax.MathJaxTypeset();
   }
 
-  private _normalizeX(offsetX: number): number {
-    return normalize(offsetX, 0, this._canvas.clientWidth, 0, 1);
+  private normalizeX(offsetX: number): number {
+    return normalize(offsetX, 0, this.canvas.clientWidth, 0, 1);
   }
 
-  private _denormalizeX(x: number): number {
-    return normalize(x, 0, 1, 0, this._canvas.clientWidth);
+  private denormalizeX(x: number): number {
+    return normalize(x, 0, 1, 0, this.canvas.clientWidth);
   }
 
-  private _normalizeY(offsetY: number): number {
-    return normalize(offsetY, 0, this._canvas.clientHeight, 1, 0);
+  private normalizeY(offsetY: number): number {
+    return normalize(offsetY, 0, this.canvas.clientHeight, 1, 0);
   }
 
-  private _denormalizeY(y: number): number {
-    return normalize(y, 0, 1, this._canvas.clientHeight, 0);
+  private denormalizeY(y: number): number {
+    return normalize(y, 0, 1, this.canvas.clientHeight, 0);
   }
 
-  private _drawPredictions(xs: ArrayLike<number>, ys: ArrayLike<number>): Promise<void> {
+  private drawPredictions(xs: ArrayLike<number>, ys: ArrayLike<number>): Promise<void> {
     return new Promise<void>(resolve => {
       for (let i = 0; i < xs.length; i++) {
         this.canvasDraw.setPointOnCanvas(xs[i], ys[i], 255, 0, 0, 255);
@@ -125,21 +126,21 @@ export class TfLinearRegressionComponent extends BaseComponent implements OnInit
     });
   }
 
-  private _drawPoint(): void {
-    for (let i = 0; i < this._xs.length; i++) {
-      const x = this._denormalizeX(this._xs[i]);
-      const y = this._denormalizeY(this._ys[i]);
+  private drawPoint(): void {
+    for (let i = 0; i < this.xs.length; i++) {
+      const x = this.denormalizeX(this.xs[i]);
+      const y = this.denormalizeY(this.ys[i]);
 
       this.canvasDraw.setPointOnCanvas(x, y, 255, 0, 0, 255);
     }
   }
 
-  private async _updateCanvas(): Promise<void> {
+  private async updateCanvas(): Promise<void> {
     this.canvasDraw.cleanCanvas();
-    this._drawPoint();
-    const xs = Array.from(Array(this._canvas.clientWidth).keys()).filter(x => x % 2 === 0);
-    const ys = (this.predict(xs.map(this._normalizeX, this)).dataSync() as Float32Array).map(this._denormalizeY, this);
-    await this._drawPredictions(xs, ys);
+    this.drawPoint();
+    const xs = Array.from(Array(this.canvas.clientWidth).keys()).filter(x => x % 2 === 0);
+    const ys = (this.predict(xs.map(this.normalizeX, this)).dataSync() as Float32Array).map(this.denormalizeY, this);
+    await this.drawPredictions(xs, ys);
   }
 
   private async train(numIter = 50) {
@@ -153,14 +154,14 @@ export class TfLinearRegressionComponent extends BaseComponent implements OnInit
     // The training loop
     for (let i = 0; i < numIter; i++) {
       optimizer.minimize(() => {
-        const ys = tf.tensor1d(this._ys);
-        const predicts = this.predict(this._xs);
-        const loss = tf.losses.meanSquaredError(ys, predicts) as tf.Scalar;
+        const ys = tf.tensor1d(this.ys);
+        const predicts = this.predict(this.xs);
+        const cost = tf.losses.meanSquaredError(ys, predicts) as tf.Scalar;
 
-        this._lossSubject.next(loss.dataSync()[0]);
-        this._modelSubject.next({a: this._a.dataSync()[0], b: this._b.dataSync()[0]});
+        this.costSubject.next(cost.dataSync()[0]);
+        this.modelSubject.next({a: this._a.dataSync()[0], b: this._b.dataSync()[0]});
 
-        return loss;
+        return cost;
       });
 
       await tf.nextFrame();
