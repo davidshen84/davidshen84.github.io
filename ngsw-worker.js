@@ -47,7 +47,9 @@
          * Extract the pathname of a URL.
          */
         parseUrl(url, relativeTo) {
-            const parsed = new URL(url, relativeTo);
+            // Workaround a Safari bug, see
+            // https://github.com/angular/angular/issues/31061#issuecomment-503637978
+            const parsed = !relativeTo ? new URL(url) : new URL(url, relativeTo);
             return { origin: parsed.origin, path: parsed.pathname, search: parsed.search };
         }
         /**
@@ -1005,11 +1007,12 @@
      * for caching.
      */
     class DataGroup {
-        constructor(scope, adapter, config, db, prefix) {
+        constructor(scope, adapter, config, db, debugHandler, prefix) {
             this.scope = scope;
             this.adapter = adapter;
             this.config = config;
             this.db = db;
+            this.debugHandler = debugHandler;
             this.prefix = prefix;
             /**
              * Tracks the LRU state of resources in this cache.
@@ -1102,7 +1105,7 @@
                     res = fromCache.res;
                     // Check the age of the resource.
                     if (this.config.refreshAheadMs !== undefined && fromCache.age >= this.config.refreshAheadMs) {
-                        ctx.waitUntil(this.safeCacheResponse(req, this.safeFetch(req)));
+                        ctx.waitUntil(this.safeCacheResponse(req, this.safeFetch(req), lru));
                     }
                 }
                 if (res !== null) {
@@ -1117,10 +1120,12 @@
                     // The request timed out. Return a Gateway Timeout error.
                     res = this.adapter.newResponse(null, { status: 504, statusText: 'Gateway Timeout' });
                     // Cache the network response eventually.
-                    ctx.waitUntil(this.safeCacheResponse(req, networkFetch));
+                    ctx.waitUntil(this.safeCacheResponse(req, networkFetch, lru));
                 }
-                // The request completed in time, so cache it inline with the response flow.
-                yield this.cacheResponse(req, res, lru);
+                else {
+                    // The request completed in time, so cache it inline with the response flow.
+                    yield this.safeCacheResponse(req, res, lru);
+                }
                 return res;
             });
         }
@@ -1138,14 +1143,14 @@
                 }
                 // If the network fetch times out or errors, fall back on the cache.
                 if (res === undefined) {
-                    ctx.waitUntil(this.safeCacheResponse(req, networkFetch));
+                    ctx.waitUntil(this.safeCacheResponse(req, networkFetch, lru, true));
                     // Ignore the age, the network response will be cached anyway due to the
                     // behavior of freshness.
                     const fromCache = yield this.loadFromCache(req, lru);
                     res = (fromCache !== null) ? fromCache.res : null;
                 }
                 else {
-                    yield this.cacheResponse(req, res, lru, true);
+                    yield this.safeCacheResponse(req, res, lru, true);
                 }
                 // Either the network fetch didn't time out, or the cache yielded a usable response.
                 // In either case, use it.
@@ -1153,9 +1158,7 @@
                     return res;
                 }
                 // No response in the cache. No choice but to fall back on the full network fetch.
-                res = yield networkFetch;
-                yield this.cacheResponse(req, res, lru, true);
-                return res;
+                return networkFetch;
             });
         }
         networkFetchWithTimeout(req) {
@@ -1194,13 +1197,24 @@
                 return [networkFetch, networkFetch];
             }
         }
-        safeCacheResponse(req, res) {
+        safeCacheResponse(req, resOrPromise, lru, okToCacheOpaque) {
             return __awaiter$1(this, void 0, void 0, function* () {
                 try {
-                    yield this.cacheResponse(req, yield res, yield this.lru());
+                    const res = yield resOrPromise;
+                    try {
+                        yield this.cacheResponse(req, res, lru, okToCacheOpaque);
+                    }
+                    catch (err) {
+                        // Saving the API response failed. This could be a result of a full storage.
+                        // Since this data is cached lazily and temporarily, continue serving clients as usual.
+                        this.debugHandler.log(err, `DataGroup(${this.config.name}@${this.config.version}).safeCacheResponse(${req.url}, status: ${res.status})`);
+                        // TODO: Better detect/handle full storage; e.g. using
+                        // [navigator.storage](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorStorage/storage).
+                    }
                 }
                 catch (_a) {
-                    // TODO: handle this error somehow?
+                    // Request failed
+                    // TODO: Handle this error somehow?
                 }
             });
         }
@@ -1244,7 +1258,7 @@
         cacheResponse(req, res, lru, okToCacheOpaque = false) {
             return __awaiter$1(this, void 0, void 0, function* () {
                 // Only cache successful responses.
-                if (!res.ok || (okToCacheOpaque && res.type === 'opaque')) {
+                if (!(res.ok || (okToCacheOpaque && res.type === 'opaque'))) {
                     return;
                 }
                 // If caching this response would make the cache exceed its maximum size, evict something
@@ -1343,11 +1357,12 @@
      * that can be installed as an update to any previously installed versions.
      */
     class AppVersion {
-        constructor(scope, adapter, database, idle, manifest, manifestHash) {
+        constructor(scope, adapter, database, idle, debugHandler, manifest, manifestHash) {
             this.scope = scope;
             this.adapter = adapter;
             this.database = database;
             this.idle = idle;
+            this.debugHandler = debugHandler;
             this.manifest = manifest;
             this.manifestHash = manifestHash;
             /**
@@ -1379,8 +1394,9 @@
                 }
             });
             // Process each `DataGroup` declared in the manifest.
-            this.dataGroups = (manifest.dataGroups || [])
-                .map(config => new DataGroup(this.scope, this.adapter, config, this.database, `${adapter.cacheNamePrefix}:${config.version}:data`));
+            this.dataGroups =
+                (manifest.dataGroups || [])
+                    .map(config => new DataGroup(this.scope, this.adapter, config, this.database, this.debugHandler, `${adapter.cacheNamePrefix}:${config.version}:data`));
             // This keeps backwards compatibility with app versions without navigation urls.
             // Fix: https://github.com/angular/angular/issues/27209
             manifest.navigationUrls = manifest.navigationUrls || BACKWARDS_COMPATIBILITY_NAVIGATION_URLS;
@@ -2230,7 +2246,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
                     // If the manifest is newly initialized, an AppVersion may have already been
                     // created for it.
                     if (!this.versions.has(hash)) {
-                        this.versions.set(hash, new AppVersion(this.scope, this.adapter, this.db, this.idle, manifest, hash));
+                        this.versions.set(hash, new AppVersion(this.scope, this.adapter, this.db, this.idle, this.debugger, manifest, hash));
                     }
                 });
                 // Map each client ID to its associated hash. Along the way, verify that the hash
@@ -2457,7 +2473,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
         }
         setupUpdate(manifest, hash) {
             return __awaiter$5(this, void 0, void 0, function* () {
-                const newVersion = new AppVersion(this.scope, this.adapter, this.db, this.idle, manifest, hash);
+                const newVersion = new AppVersion(this.scope, this.adapter, this.db, this.idle, this.debugger, manifest, hash);
                 // Firstly, check if the manifest version is correct.
                 if (manifest.configVersion !== SUPPORTED_CONFIG_VERSION) {
                     yield this.deleteAllCaches();
