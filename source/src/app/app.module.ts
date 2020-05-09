@@ -1,5 +1,5 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { NgModule } from '@angular/core';
+import { NgModule, SecurityContext } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -39,8 +39,8 @@ import { MathJaxModule } from 'ngx-mathjax';
     LayoutModule,
     MaterialModules,
     AppRoutingModule,
-    MathJaxModule.config(),
-    MarkdownModule.forRoot(),
+    MathJaxModule.forRoot(),
+    MarkdownModule.forRoot({sanitize: SecurityContext.NONE}),
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     QRCodeModule,
     CryptoModule,

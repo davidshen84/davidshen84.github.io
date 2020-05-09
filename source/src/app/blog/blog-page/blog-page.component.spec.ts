@@ -31,7 +31,7 @@ describe('BlogPageComponent', () => {
     })
       .compileComponents();
 
-    router = TestBed.get(Router);
+    router = TestBed.inject(Router);
     routerSpy = spyOn(router, 'navigate');
   }));
 

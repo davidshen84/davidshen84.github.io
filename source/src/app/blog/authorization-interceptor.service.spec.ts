@@ -26,18 +26,18 @@ describe('AuthorizationInterceptorService', () => {
       ]
     });
 
-    strUtlSvc = TestBed.get(StringUtilityService);
+    strUtlSvc = TestBed.inject(StringUtilityService);
   });
 
   it('should be created', () => {
-    const service: AuthorizationInterceptorService = TestBed.get(AuthorizationInterceptorService);
+    const service: AuthorizationInterceptorService = TestBed.inject(AuthorizationInterceptorService);
     expect(service).toBeTruthy();
   });
 
   it('should add Authorization header to the request', async(() => {
-    const cryptoService: RS256CryptoService = TestBed.get(RS256CryptoService);
+    const cryptoService: RS256CryptoService = TestBed.inject(RS256CryptoService);
     const signSpy = spyOn(cryptoService, 'sign').and.returnValue(Promise.resolve('sign'));
-    const service: AuthorizationInterceptorService = TestBed.get(AuthorizationInterceptorService);
+    const service: AuthorizationInterceptorService = TestBed.inject(AuthorizationInterceptorService);
     const handleSpy = createSpy('handle').and.returnValue(of(''));
     const reqClone = <HttpRequest<any>>{};
     const req = <HttpRequest<any>>{
@@ -60,9 +60,9 @@ describe('AuthorizationInterceptorService', () => {
   }));
 
   it('should include exp & nbf in the payload', async(() => {
-    const cryptoService: RS256CryptoService = TestBed.get(RS256CryptoService);
+    const cryptoService: RS256CryptoService = TestBed.inject(RS256CryptoService);
     const signSpy = spyOn(cryptoService, 'sign').and.returnValue(Promise.resolve('sign'));
-    const service: AuthorizationInterceptorService = TestBed.get(AuthorizationInterceptorService);
+    const service: AuthorizationInterceptorService = TestBed.inject(AuthorizationInterceptorService);
     const handleSpy = createSpy('handle').and.returnValue(of(''));
     const req = <HttpRequest<any>>{
       method: 'GET',
@@ -87,9 +87,9 @@ describe('AuthorizationInterceptorService', () => {
   }));
 
   it('should not add Authorization header to the request when signature is not available', async(() => {
-    const cryptoService: RS256CryptoService = TestBed.get(RS256CryptoService);
+    const cryptoService: RS256CryptoService = TestBed.inject(RS256CryptoService);
     const signSpy = spyOn(cryptoService, 'sign').and.returnValue(Promise.reject(''));
-    const service: AuthorizationInterceptorService = TestBed.get(AuthorizationInterceptorService);
+    const service: AuthorizationInterceptorService = TestBed.inject(AuthorizationInterceptorService);
     const handleSpy = createSpy('handle').and.returnValue(of(''));
     const reqClone = <HttpRequest<any>>{};
     const req = <HttpRequest<any>>{

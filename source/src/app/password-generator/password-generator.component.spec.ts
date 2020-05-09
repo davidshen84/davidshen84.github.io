@@ -30,7 +30,7 @@ describe('PasswordGeneratorComponent', () => {
     })
       .compileComponents();
 
-    matSnackBar = TestBed.get(MatSnackBar);
+    matSnackBar = TestBed.inject(MatSnackBar);
     openSpy = spyOn(matSnackBar, 'open');
   }));
 

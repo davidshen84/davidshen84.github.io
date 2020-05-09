@@ -21,7 +21,7 @@ describe('TfLinearRegressionComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        MathJaxModule.config(),
+        MathJaxModule.forRoot(),
         MarkdownModule.forRoot()
       ],
       providers: [
