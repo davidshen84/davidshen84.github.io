@@ -21,7 +21,7 @@ export class StringUtilityService {
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
       .replace(/=+$/, '')
-      ;
+    ;
   }
 
   public Base64UrlDecode(s: string): string {

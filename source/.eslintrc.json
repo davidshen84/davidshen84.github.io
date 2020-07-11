@@ -1,0 +1,32 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true,
+    "browser": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "google",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "@typescript-eslint/tslint"
+  ],
+  "rules": {
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "indent": [
+      "error",
+      2
+    ]
+  }
+}

@@ -61,7 +61,7 @@ export class PasswordGeneratorComponent extends BaseComponent implements OnInit 
       scan((acc: string, value: string) => acc + value, ''))));
 
   constructor(titleService: TitleService,
-              ga: GaService,
+    ga: GaService,
               private breakpointObserver: BreakpointObserver,
               private matSnackBar: MatSnackBar) {
     super(ga);
