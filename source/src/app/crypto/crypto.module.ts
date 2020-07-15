@@ -15,11 +15,8 @@ import { RS256CryptoService } from './rs256-crypto.service';
     CryptoRoutingModule,
     MarkdownModule.forRoot(),
     FormsModule,
-    MaterialModules
+    MaterialModules,
   ],
-  providers: [
-    RS256CryptoService
-  ]
+  providers: [RS256CryptoService],
 })
-export class CryptoModule {
-}
+export class CryptoModule {}

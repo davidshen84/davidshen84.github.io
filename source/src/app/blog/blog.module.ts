@@ -11,7 +11,6 @@ import { BlogPageNotFoundComponent } from './blog-page-not-found/blog-page-not-f
 import { BlogPageComponent } from './blog-page/blog-page.component';
 import { BlogRoutingModule } from './blog-routing.module';
 
-
 @NgModule({
   declarations: [
     BlogHomePageComponent,
@@ -24,16 +23,15 @@ import { BlogRoutingModule } from './blog-routing.module';
     MaterialModules,
     MarkdownModule.forChild(),
     BlogRoutingModule,
-    WebStorageModule
+    WebStorageModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationInterceptorService,
-      multi: true
+      multi: true,
     },
-    RS256CryptoService
-  ]
+    RS256CryptoService,
+  ],
 })
-export class BlogModule {
-}
+export class BlogModule {}

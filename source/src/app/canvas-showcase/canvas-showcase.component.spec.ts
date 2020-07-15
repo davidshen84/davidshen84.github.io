@@ -17,11 +17,10 @@ describe('CanvasShowcaseComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
       ],
-      providers: [GaService]
-    })
-      .compileComponents();
+      providers: [GaService],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

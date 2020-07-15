@@ -10,11 +10,8 @@ describe('FooterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FooterComponent],
-      imports: [
-        QRCodeModule
-      ]
-    })
-      .compileComponents();
+      imports: [QRCodeModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

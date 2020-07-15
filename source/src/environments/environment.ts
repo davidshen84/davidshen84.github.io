@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gae_endpoint: 'https://davidshen84.appspot.com/blog/resources'
+  gae_endpoint: 'https://davidshen84.appspot.com/blog/resources',
 };
 
 /*

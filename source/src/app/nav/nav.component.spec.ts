@@ -12,14 +12,14 @@ describe('NavComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule,
+      imports: [
+        BrowserAnimationsModule,
         MaterialModules,
         RouterTestingModule,
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
       ],
-      declarations: [NavComponent]
-    })
-      .compileComponents();
+      declarations: [NavComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;

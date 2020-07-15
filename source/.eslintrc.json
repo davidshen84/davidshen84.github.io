@@ -5,9 +5,10 @@
     "browser": true
   },
   "extends": [
+    "google",
+    "plugin:prettier/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "google",
     "prettier",
     "prettier/@typescript-eslint"
   ],
@@ -16,17 +17,17 @@
     "ecmaVersion": 11
   },
   "plugins": [
+    "prettier",
     "@typescript-eslint",
-    "@typescript-eslint/tslint"
+    "@typescript-eslint/eslint-plugin"
   ],
   "rules": {
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "indent": [
-      "error",
-      2
-    ]
+    "prettier/prettier": ["error", {"singleQuote": true}],
+    "quotes": ["error", "single"],
+    "indent": ["error", 2],
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "require-jsdoc": "off",
+    "new-cap": "off"
   }
 }

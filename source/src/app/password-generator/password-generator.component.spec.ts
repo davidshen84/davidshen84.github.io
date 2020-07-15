@@ -9,7 +9,6 @@ import { PasswordGeneratorComponent } from './password-generator.component';
 import { GaService } from '../ga.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
-
 describe('PasswordGeneratorComponent', () => {
   let component: PasswordGeneratorComponent;
   let fixture: ComponentFixture<PasswordGeneratorComponent>;
@@ -23,12 +22,11 @@ describe('PasswordGeneratorComponent', () => {
         ReactiveFormsModule,
         MaterialModules,
         ClipboardModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [PasswordGeneratorComponent],
-      providers: [GaService]
-    })
-      .compileComponents();
+      providers: [GaService],
+    }).compileComponents();
 
     matSnackBar = TestBed.inject(MatSnackBar);
     openSpy = spyOn(matSnackBar, 'open');
@@ -46,6 +44,10 @@ describe('PasswordGeneratorComponent', () => {
 
   it('should call MatSnackBar.open', () => {
     component.openSnackBar();
-    expect(openSpy).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(String), {duration: 500});
+    expect(openSpy).toHaveBeenCalledWith(
+      jasmine.any(String),
+      jasmine.any(String),
+      { duration: 500 }
+    );
   });
 });

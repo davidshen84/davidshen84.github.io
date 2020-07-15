@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
 import { Subject } from 'rxjs';
 import { TitleService } from '../title.service';
@@ -10,13 +16,13 @@ import { BaseComponent } from '../base-component';
   templateUrl: './webcam.component.html',
   styleUrls: ['./webcam.component.scss'],
   providers: [GaService],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WebcamComponent extends BaseComponent implements OnInit {
   private _snapshotTrigger = new Subject();
   public snapshotTrigger$ = this._snapshotTrigger.asObservable();
   private _image: WebcamImage;
-  @ViewChild('canvas', {static: true})
+  @ViewChild('canvas', { static: true })
   private _canvasRef: ElementRef;
   private _canvas: HTMLCanvasElement;
 

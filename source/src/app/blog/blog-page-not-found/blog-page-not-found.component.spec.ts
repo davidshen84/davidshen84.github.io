@@ -11,11 +11,13 @@ describe('BlogPageNotFoundComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
-        {provide: ActivatedRoute, useValue: {params: of({id: 'notfound'})}}
+        {
+          provide: ActivatedRoute,
+          useValue: { params: of({ id: 'notfound' }) },
+        },
       ],
-      declarations: [BlogPageNotFoundComponent]
-    })
-      .compileComponents();
+      declarations: [BlogPageNotFoundComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

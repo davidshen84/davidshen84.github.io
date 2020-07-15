@@ -7,11 +7,6 @@ import { WebcamModule as webcamModule } from 'ngx-webcam';
 
 @NgModule({
   declarations: [WebcamComponent],
-  imports: [
-    CommonModule,
-    WebcamRoutingModule,
-    webcamModule
-  ]
+  imports: [CommonModule, WebcamRoutingModule, webcamModule],
 })
-export class WebcamModule {
-}
+export class WebcamModule {}

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StringUtilityService } from './string.utility';
 
-
 /**
  * Provide data signing service using asymmetric encryption algorithms.
  */
@@ -37,9 +36,8 @@ interface CryptoService {
 
 @Injectable()
 export class RS256CryptoService implements CryptoService {
-
   public readonly algorithm: Algorithm = {
-    name: 'RSASSA-PKCS1-v1_5'
+    name: 'RSASSA-PKCS1-v1_5',
   };
   public readonly usage = ['sign'];
   public readonly format = 'pkcs8';
@@ -49,19 +47,19 @@ export class RS256CryptoService implements CryptoService {
   };
   private readonly _rsaPssParams: RsaPssParams = {
     ...this.algorithm,
-    saltLength: 256
+    saltLength: 256,
   };
   private readonly _errorName = 'CryptoService Error';
 
-  constructor(private _strUtlSvc: StringUtilityService) {
-  }
+  constructor(private _strUtlSvc: StringUtilityService) {}
 
   /**
    * Remove the header and footer section of a RSA private key output.
    * @param {string} k The private key text.
    */
   private static cleanInputPrivateKey(k) {
-    return k.replace('-----BEGIN PRIVATE KEY-----', '')
+    return k
+      .replace('-----BEGIN PRIVATE KEY-----', '')
       .replace('-----END PRIVATE KEY-----', '')
       .replace(/\n/g, '');
   }
@@ -73,12 +71,16 @@ export class RS256CryptoService implements CryptoService {
     try {
       dataBuf = this._strUtlSvc.EncodeString(data);
     } catch (e) {
-      return Promise.reject({name: this._errorName, message: e});
+      return Promise.reject({ name: this._errorName, message: e });
     }
 
-    return crypto.subtle.sign(this._rsaPssParams, cryptoKey, dataBuf)
-      .then(buf => this._strUtlSvc.Base64UrlEncode(String.fromCharCode(...Array.from(new Uint8Array(buf)))),
-        r => Promise.reject({name: this._errorName, message: r}));
+    return crypto.subtle.sign(this._rsaPssParams, cryptoKey, dataBuf).then(
+      (buf) =>
+        this._strUtlSvc.Base64UrlEncode(
+          String.fromCharCode(...Array.from(new Uint8Array(buf)))
+        ),
+      (r) => Promise.reject({ name: this._errorName, message: r })
+    );
   }
 
   importKey(key: string): PromiseLike<CryptoKey> {
@@ -88,11 +90,13 @@ export class RS256CryptoService implements CryptoService {
       key = RS256CryptoService.cleanInputPrivateKey(key);
       keyBuf = this._strUtlSvc.FromBase64(key);
     } catch (e) {
-      return Promise.reject({name: this._errorName, message: e});
+      return Promise.reject({ name: this._errorName, message: e });
     }
 
-    return crypto.subtle.importKey(this.format, keyBuf, this._keyImportParams, false, this.usage)
-      .then(undefined, r => Promise.reject({name: this._errorName, message: r}));
+    return crypto.subtle
+      .importKey(this.format, keyBuf, this._keyImportParams, false, this.usage)
+      .then(undefined, (r) =>
+        Promise.reject({ name: this._errorName, message: r })
+      );
   }
-
 }

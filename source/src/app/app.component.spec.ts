@@ -16,13 +16,9 @@ describe('AppComponent', () => {
         MaterialModules,
         RouterTestingModule,
         MarkdownModule.forRoot(),
-        QRCodeModule
+        QRCodeModule,
       ],
-      declarations: [
-        AppComponent,
-        NavComponent,
-        FooterComponent
-      ],
+      declarations: [AppComponent, NavComponent, FooterComponent],
     }).compileComponents();
   }));
 
@@ -38,5 +34,4 @@ describe('AppComponent', () => {
     expect(app.title).not.toBeNull();
     expect(app.title).not.toBe('');
   }));
-
 });

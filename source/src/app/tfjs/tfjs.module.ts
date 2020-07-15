@@ -15,5 +15,4 @@ import { MathJaxModule } from 'ngx-mathjax';
     MarkdownModule.forChild(),
   ],
 })
-export class TfjsModule {
-}
+export class TfjsModule {}

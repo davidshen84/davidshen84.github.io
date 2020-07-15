@@ -22,15 +22,11 @@ describe('CryptoRS256Component', () => {
         MaterialModules,
         RouterTestingModule,
         HttpClientTestingModule,
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
       ],
       declarations: [CryptoRS256Component],
-      providers: [
-        RS256CryptoService,
-        GaService
-      ]
-    })
-      .compileComponents();
+      providers: [RS256CryptoService, GaService],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

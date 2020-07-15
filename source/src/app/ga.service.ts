@@ -7,21 +7,21 @@ declare function ga(...args: any);
 
 @Injectable()
 export class GaService {
-
   private done$ = new Subject();
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   SetPageView(): void {
-    this.router.events.pipe(
-      filter(e => e instanceof NavigationEnd),
-      takeUntil(this.done$)
-    ).subscribe((event: NavigationEnd) => {
-      ga('set', 'page', event.urlAfterRedirects);
-      ga('send', 'pageview');
-      this.done$.next();
-      this.done$.complete();
-    });
+    this.router.events
+      .pipe(
+        filter((e) => e instanceof NavigationEnd),
+        takeUntil(this.done$)
+      )
+      .subscribe((event: NavigationEnd) => {
+        ga('set', 'page', event.urlAfterRedirects);
+        ga('send', 'pageview');
+        this.done$.next();
+        this.done$.complete();
+      });
   }
 }

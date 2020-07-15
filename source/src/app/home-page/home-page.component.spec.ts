@@ -10,13 +10,9 @@ describe('HomePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MarkdownModule.forRoot()
-      ],
-      declarations: [HomePageComponent]
-    })
-      .compileComponents();
+      imports: [HttpClientTestingModule, MarkdownModule.forRoot()],
+      declarations: [HomePageComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -25,14 +25,11 @@ describe('SettingsComponent', () => {
         MatIconModule,
         MatSnackBarModule,
         FormsModule,
-        WebStorageModule
+        WebStorageModule,
       ],
-      providers: [
-        RS256CryptoService
-      ],
-      declarations: [SettingsComponent]
-    })
-      .compileComponents();
+      providers: [RS256CryptoService],
+      declarations: [SettingsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

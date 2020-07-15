@@ -6,7 +6,6 @@ import { MaterialModules } from '../material.modules';
 import { PasswordGeneratorRoutingModule } from './password-generator-routing.module';
 import { PasswordGeneratorComponent } from './password-generator.component';
 
-
 @NgModule({
   declarations: [PasswordGeneratorComponent],
   imports: [
@@ -14,8 +13,7 @@ import { PasswordGeneratorComponent } from './password-generator.component';
     PasswordGeneratorRoutingModule,
     ReactiveFormsModule,
     MaterialModules,
-    ClipboardModule
-  ]
+    ClipboardModule,
+  ],
 })
-export class PasswordGeneratorModule {
-}
+export class PasswordGeneratorModule {}

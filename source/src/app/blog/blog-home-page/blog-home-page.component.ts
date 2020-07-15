@@ -6,15 +6,12 @@ import { GaService } from '../../ga.service';
   selector: 'app-blog-home-page',
   templateUrl: './blog-home-page.component.html',
   styleUrls: ['./blog-home-page.component.scss'],
-  providers: [GaService]
+  providers: [GaService],
 })
 export class BlogHomePageComponent implements OnInit {
-
   constructor(private _titleService: TitleService) {
     _titleService.setTitle('Blog Home');
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

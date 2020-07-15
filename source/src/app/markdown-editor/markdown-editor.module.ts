@@ -18,8 +18,7 @@ import { MathJaxModule } from 'ngx-mathjax';
     MatGridListModule,
     MatInputModule,
     ReactiveFormsModule,
-    MathJaxModule.forChild()
-  ]
+    MathJaxModule.forChild(),
+  ],
 })
-export class MarkdownEditorModule {
-}
+export class MarkdownEditorModule {}

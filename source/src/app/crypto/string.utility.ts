@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StringUtilityService {
   public FromBase64(s: string): ArrayBuffer {
@@ -17,17 +17,16 @@ export class StringUtilityService {
   }
 
   public Base64UrlEncode(s: string): string {
-    return btoa(s)
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=+$/, '')
-    ;
+    return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   }
 
   public Base64UrlDecode(s: string): string {
-    return atob(`${s}====`.slice(0, s.length + s.length % 4)
-      .replace(/-/g, '+')
-      .replace(/_/g, '/'));
+    return atob(
+      `${s}====`
+        .slice(0, s.length + (s.length % 4))
+        .replace(/-/g, '+')
+        .replace(/_/g, '/')
+    );
   }
 
   public EncodeString(s: string): Uint8Array {

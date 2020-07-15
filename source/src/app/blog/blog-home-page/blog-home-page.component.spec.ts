@@ -16,11 +16,10 @@ describe('BlogHomePageComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         MarkdownModule.forRoot(),
-        MatListModule
+        MatListModule,
       ],
-      declarations: [BlogHomePageComponent]
-    })
-      .compileComponents();
+      declarations: [BlogHomePageComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

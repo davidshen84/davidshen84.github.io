@@ -13,37 +13,39 @@ const KEY_NAME = 'private-key';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent implements OnInit {
   public pkInput: string;
   public pkChangedSubject: Subject<string> = new Subject<string>();
   public cryptoKey$: Observable<boolean>;
 
-  constructor(private _localStorageService: LocalStorageService,
-              private _cryptoService: RS256CryptoService,
-              private _snackBar: MatSnackBar,
-              title: TitleService) {
+  constructor(
+    private _localStorageService: LocalStorageService,
+    private _cryptoService: RS256CryptoService,
+    private _snackBar: MatSnackBar,
+    title: TitleService
+  ) {
     title.setTitle('Settings');
 
     this.pkInput = this._localStorageService.get(KEY_NAME);
-    this.cryptoKey$ = merge(
-      of(this.pkInput),
-      this.pkChangedSubject
-    ).pipe(
-      filter(x => !!x),
-      flatMap(key => fromPromise(this._cryptoService.importKey(key)
-        .then(() => {
-          return !!this._localStorageService.set(KEY_NAME, key);
-        },
-        (r: Error) => {
-          this._snackBar.open(r.message, '❌', {duration: 1000});
-          return false;
-        })))
+    this.cryptoKey$ = merge(of(this.pkInput), this.pkChangedSubject).pipe(
+      filter((x) => !!x),
+      flatMap((key) =>
+        fromPromise(
+          this._cryptoService.importKey(key).then(
+            () => {
+              return !!this._localStorageService.set(KEY_NAME, key);
+            },
+            (r: Error) => {
+              this._snackBar.open(r.message, '❌', { duration: 1000 });
+              return false;
+            }
+          )
+        )
+      )
     );
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -14,11 +14,10 @@ describe('MarkdownEditorComponent', () => {
       imports: [
         ReactiveFormsModule,
         MatGridListModule,
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
       ],
-      declarations: [MarkdownEditorComponent]
-    })
-      .compileComponents();
+      declarations: [MarkdownEditorComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -24,7 +24,6 @@ import { NavComponent } from './nav/nav.component';
 import { SettingsModule } from './settings/settings.module';
 import { MathJaxModule } from 'ngx-mathjax';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,8 +39,10 @@ import { MathJaxModule } from 'ngx-mathjax';
     MaterialModules,
     AppRoutingModule,
     MathJaxModule.forRoot(),
-    MarkdownModule.forRoot({sanitize: SecurityContext.NONE}),
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+    MarkdownModule.forRoot({ sanitize: SecurityContext.NONE }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production,
+    }),
     QRCodeModule,
     CryptoModule,
     BlogModule,
@@ -49,7 +50,6 @@ import { MathJaxModule } from 'ngx-mathjax';
     MarkdownEditorModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

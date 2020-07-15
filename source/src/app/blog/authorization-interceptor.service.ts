@@ -1,4 +1,9 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-store';
 import { merge, Observable } from 'rxjs';
@@ -9,53 +14,62 @@ import { StringUtilityService } from '../crypto/string.utility';
 
 @Injectable()
 export class AuthorizationInterceptorService implements HttpInterceptor {
-
   /**
    * RSA-SHA256 JWT Header
    */
   private static readonly _jwtHeader = {
-    'alg': 'RS256',
-    'typ': 'JWT'
+    alg: 'RS256',
+    typ: 'JWT',
   };
-  private readonly _encodedHeader =
-    this._strUtlSvc.EncodeJSON(AuthorizationInterceptorService._jwtHeader);
+  private readonly _encodedHeader = this._strUtlSvc.EncodeJSON(
+    AuthorizationInterceptorService._jwtHeader
+  );
   private readonly privateKeyData: string;
 
-  constructor(localStorageService: LocalStorageService, private cryptoService: RS256CryptoService,
-              private _strUtlSvc: StringUtilityService) {
+  constructor(
+    localStorageService: LocalStorageService,
+    private cryptoService: RS256CryptoService,
+    private _strUtlSvc: StringUtilityService
+  ) {
     this.privateKeyData = localStorageService.get('private-key');
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     const ts = Math.floor(Date.now() / 1000);
     const halfMin = 30;
     const encodedPayload = this._strUtlSvc.EncodeJSON({
       iss: req.url,
       exp: ts + halfMin,
       nbf: ts - halfMin,
-      aud: [req.method, req.urlWithParams]
+      aud: [req.method, req.urlWithParams],
     });
     const data = `${this._encodedHeader}.${encodedPayload}`;
-    const signature$ = fromPromise(this.cryptoService.sign(this.privateKeyData, data)
-      .then(undefined, () => null))
-      .pipe(share());
+    const signature$ = fromPromise(
+      this.cryptoService
+        .sign(this.privateKeyData, data)
+        .then(undefined, () => null)
+    ).pipe(share());
 
     return merge(
       signature$.pipe(
-        filter(i => i !== null),
-        flatMap(sig => {
+        filter((i) => i !== null),
+        flatMap((sig) => {
           const request = req.clone({
             setHeaders: {
-              Authorization: `Bearer ${data}.${sig}`
-            }
+              Authorization: `Bearer ${data}.${sig}`,
+            },
           });
 
           return next.handle(request);
         })
       ),
       signature$.pipe(
-        filter(i => i === null),
+        filter((i) => i === null),
         flatMap(() => next.handle(req))
-      ));
+      )
+    );
   }
 }

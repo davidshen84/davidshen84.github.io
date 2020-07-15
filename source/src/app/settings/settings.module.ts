@@ -8,16 +8,13 @@ import { SettingsComponent } from './settings.component';
 import { WebStorageModule } from 'ngx-store';
 
 @NgModule({
-  declarations: [
-    SettingsComponent
-  ],
+  declarations: [SettingsComponent],
   imports: [
     CommonModule,
     MaterialModules,
     FormsModule,
     SettingsRoutingModule,
-    WebStorageModule
-  ]
+    WebStorageModule,
+  ],
 })
-export class SettingsModule {
-}
+export class SettingsModule {}

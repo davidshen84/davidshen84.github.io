@@ -1,13 +1,20 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  inject,
+  TestBed,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { MarkdownModule } from 'ngx-markdown';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
 import { BlogPageComponent } from './blog-page.component';
-
 
 describe('BlogPageComponent', () => {
   let component: BlogPageComponent;
@@ -20,16 +27,15 @@ describe('BlogPageComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([
-          {path: 'blog/:id', component: BlogPageComponent}
+          { path: 'blog/:id', component: BlogPageComponent },
         ]),
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
       ],
       providers: [
-        {provide: ActivatedRoute, useValue: {params: of({id: 'x'})}},
+        { provide: ActivatedRoute, useValue: { params: of({ id: 'x' }) } },
       ],
-      declarations: [BlogPageComponent]
-    })
-      .compileComponents();
+      declarations: [BlogPageComponent],
+    }).compileComponents();
 
     router = TestBed.inject(Router);
     routerSpy = spyOn(router, 'navigate');
@@ -40,23 +46,34 @@ describe('BlogPageComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', inject([HttpTestingController], (httpMock: HttpTestingController) => {
-    expect(component).toBeTruthy();
-  }));
+  it('should create', inject(
+    [HttpTestingController],
+    (httpMock: HttpTestingController) => {
+      expect(component).toBeTruthy();
+    }
+  ));
 
-  it('should make http request to x.md file', inject([HttpTestingController], (httpMock: HttpTestingController) => {
-    fixture.detectChanges();
+  it('should make http request to x.md file', inject(
+    [HttpTestingController],
+    (httpMock: HttpTestingController) => {
+      fixture.detectChanges();
 
-    httpMock.expectOne('assets/blogs/x.md');
+      httpMock.expectOne('assets/blogs/x.md');
 
-    httpMock.verify();
-    expect().nothing();
-  }));
+      httpMock.verify();
+      expect().nothing();
+    }
+  ));
 
-  it('should redirect to blog/notfound/x', inject([HttpTestingController], (httpMock: HttpTestingController) => {
-    fixture.detectChanges();
+  it('should redirect to blog/notfound/x', inject(
+    [HttpTestingController],
+    (httpMock: HttpTestingController) => {
+      fixture.detectChanges();
 
-    httpMock.match('assets/blogs/x.md')[0].error(new ErrorEvent('error'), {status: 404});
-    expect(router.navigate).toHaveBeenCalledWith(['blog/notfound', 'x']);
-  }));
+      httpMock
+        .match('assets/blogs/x.md')[0]
+        .error(new ErrorEvent('error'), { status: 404 });
+      expect(router.navigate).toHaveBeenCalledWith(['blog/notfound', 'x']);
+    }
+  ));
 });

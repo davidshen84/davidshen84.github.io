@@ -8,8 +8,7 @@ import { ElementRef } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GaService } from '../../ga.service';
 
-class MockElementRef extends ElementRef {
-}
+class MockElementRef extends ElementRef {}
 
 describe('TfLinearRegressionComponent', () => {
   let component: TfLinearRegressionComponent;
@@ -22,14 +21,10 @@ describe('TfLinearRegressionComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         MathJaxModule.forRoot(),
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
       ],
-      providers: [
-        {provide: ElementRef, useValue: MockElementRef},
-        GaService
-      ]
-    })
-      .compileComponents();
+      providers: [{ provide: ElementRef, useValue: MockElementRef }, GaService],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
