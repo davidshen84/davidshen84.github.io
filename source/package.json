@@ -33,7 +33,7 @@
     "ngx-markdown": "^10.0.0",
     "ngx-mathjax": "0.0.13",
     "ngx-store": "^2.1.0",
-    "ngx-webcam": "^0.3.0",
+    "@davidshen84/ngx-webcam": "^0.4.0",
     "normalize.css": "^8.0.1",
     "prismjs": "^1.20.0",
     "rxjs": "^6.5.5",
