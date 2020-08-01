@@ -1,6 +1,6 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgModule, SecurityContext } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -23,6 +23,9 @@ import { MaterialModules } from './material.modules';
 import { NavComponent } from './nav/nav.component';
 import { SettingsModule } from './settings/settings.module';
 import { MathJaxModule } from 'ngx-mathjax';
+import { RS256CryptoService } from './crypto/rs256-crypto.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthorizationInterceptorService } from './services/authorization-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -36,10 +39,13 @@ import { MathJaxModule } from 'ngx-mathjax';
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
+    HttpClientModule,
     MaterialModules,
     AppRoutingModule,
     MathJaxModule.forRoot(),
-    MarkdownModule.forRoot({ sanitize: SecurityContext.NONE }),
+    MarkdownModule.forRoot({
+      sanitize: SecurityContext.NONE,
+    }),
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production,
     }),
@@ -48,8 +54,16 @@ import { MathJaxModule } from 'ngx-mathjax';
     BlogModule,
     SettingsModule,
     MarkdownEditorModule,
+    HammerModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptorService,
+      multi: true,
+    },
+    RS256CryptoService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

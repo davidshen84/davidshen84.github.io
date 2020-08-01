@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import 'hammerjs';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MaterialModules } from '../material.modules';
 import { PasswordGeneratorComponent } from './password-generator.component';

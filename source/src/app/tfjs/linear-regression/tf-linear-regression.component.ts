@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import * as tf from '@tensorflow/tfjs';
 import {
   ChangeDetectionStrategy,
@@ -16,11 +17,13 @@ import { BaseComponent } from '../../base-component';
 
 /**
  * Maps @param {n} within range @param {in_min} to @param {in_max} to another number in the range @param {out_min} to @param {out_max}.
- * @param n input number
- * @param in_min The lower bound of the input number.
- * @param in_max The upper bound of the input number.
- * @param out_min The lower bound of the output number.
- * @param out_max The upper bound of the output number.
+ * @param {number} n input number
+ * @param {number} in_min The lower bound of the input number.
+ * @param {number} in_max The upper bound of the input number.
+ * @param {number} out_min The lower bound of the output number.
+ * @param {number} out_max The upper bound of the output number.
+ *
+ * @return {number}
  */
 const normalize = (
   n: number,

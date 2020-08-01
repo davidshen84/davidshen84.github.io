@@ -78,6 +78,6 @@ export class CanvasShowcaseComponent extends BaseComponent
   }
 
   ngOnDestroy(): void {
-    this._dragDropSubscription.unsubscribe();
+    this._dragDropSubscription?.unsubscribe();
   }
 }

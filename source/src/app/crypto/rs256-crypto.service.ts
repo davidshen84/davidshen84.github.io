@@ -39,7 +39,7 @@ export class RS256CryptoService implements CryptoService {
   public readonly algorithm: Algorithm = {
     name: 'RSASSA-PKCS1-v1_5',
   };
-  public readonly usage = ['sign'];
+  public readonly usage: KeyUsage[] = ['sign'];
   public readonly format = 'pkcs8';
   private readonly _keyImportParams: RsaHashedImportParams = {
     ...this.algorithm,
@@ -49,13 +49,14 @@ export class RS256CryptoService implements CryptoService {
     ...this.algorithm,
     saltLength: 256,
   };
-  private readonly _errorName = 'CryptoService Error';
 
   constructor(private _strUtlSvc: StringUtilityService) {}
 
   /**
    * Remove the header and footer section of a RSA private key output.
    * @param {string} k The private key text.
+   *
+   * @return {string} private key
    */
   private static cleanInputPrivateKey(k) {
     return k
@@ -71,7 +72,7 @@ export class RS256CryptoService implements CryptoService {
     try {
       dataBuf = this._strUtlSvc.EncodeString(data);
     } catch (e) {
-      return Promise.reject({ name: this._errorName, message: e });
+      return Promise.reject(new Error(e));
     }
 
     return crypto.subtle.sign(this._rsaPssParams, cryptoKey, dataBuf).then(
@@ -79,24 +80,22 @@ export class RS256CryptoService implements CryptoService {
         this._strUtlSvc.Base64UrlEncode(
           String.fromCharCode(...Array.from(new Uint8Array(buf)))
         ),
-      (r) => Promise.reject({ name: this._errorName, message: r })
+      (r) => Promise.reject(new Error(r))
     );
   }
 
   importKey(key: string): PromiseLike<CryptoKey> {
-    let keyBuf;
+    let keyBuf: ArrayBuffer;
 
     try {
       key = RS256CryptoService.cleanInputPrivateKey(key);
       keyBuf = this._strUtlSvc.FromBase64(key);
     } catch (e) {
-      return Promise.reject({ name: this._errorName, message: e });
+      return Promise.reject(new Error(e));
     }
 
     return crypto.subtle
       .importKey(this.format, keyBuf, this._keyImportParams, false, this.usage)
-      .then(undefined, (r) =>
-        Promise.reject({ name: this._errorName, message: r })
-      );
+      .then(undefined, (r) => Promise.reject(new Error(r)));
   }
 }

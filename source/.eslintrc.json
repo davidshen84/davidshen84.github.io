@@ -28,6 +28,10 @@
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "require-jsdoc": "off",
-    "new-cap": "off"
+    "new-cap": "off",
+    "no-invalid-this": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "camelcase": "off",
+    "valid-jsdoc": "off"
   }
 }

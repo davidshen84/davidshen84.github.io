@@ -104,7 +104,7 @@ describe('AuthorizationInterceptorService', () => {
       RS256CryptoService
     );
     const signSpy = spyOn(cryptoService, 'sign').and.returnValue(
-      Promise.reject('')
+      Promise.reject(new Error())
     );
     const service: AuthorizationInterceptorService = TestBed.inject(
       AuthorizationInterceptorService

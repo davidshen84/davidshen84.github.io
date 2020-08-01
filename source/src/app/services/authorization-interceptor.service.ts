@@ -31,7 +31,7 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
     private cryptoService: RS256CryptoService,
     private _strUtlSvc: StringUtilityService
   ) {
-    this.privateKeyData = localStorageService.get('private-key');
+    this.privateKeyData = localStorageService.get('private-key') || '';
   }
 
   intercept(

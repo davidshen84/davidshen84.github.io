@@ -80,7 +80,7 @@ export class CryptoRS256Component extends BaseComponent implements OnInit {
       this.encodedPayload$,
       this.signature$,
     ]).pipe(
-      filter(([_, __, s]) => s && s !== ''),
+      filter(([, , s]) => s && s !== ''),
       map(([h, p, s]) => `${h}.${p}.${s}`)
     ),
     this.signature$.pipe(

@@ -50,7 +50,7 @@ export class PasswordGeneratorComponent extends BaseComponent
       map((x) => (x ? '`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : ''))
     ),
   ]).pipe(
-    map(([ignore, n, ...args]) => [n, args.reduce((p, c) => p.concat(c), '')]),
+    map(([, n, ...args]) => [n, args.reduce((p, c) => p.concat(c), '')]),
     flatMap(([n, x]) =>
       of(x).pipe(
         // pick one character

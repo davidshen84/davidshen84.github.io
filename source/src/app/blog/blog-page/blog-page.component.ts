@@ -48,7 +48,8 @@ export class BlogPageComponent extends BaseComponent
     }
   }
 
-  onBlogLoadError(ignore: string) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onBlogLoadError(event: string) {
     this._paramIdSubscriptions.push(
       this._paramId$.subscribe((id) =>
         this.router.navigate(['blog/notfound', id])

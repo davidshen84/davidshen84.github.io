@@ -35,9 +35,11 @@ export class StringUtilityService {
 
   /**
    * Encode a JSON object into a Base64 Url encoded string.
-   * @param json The JSON object.
+   * @param {any} json The JSON object.
+   *
+   * @return {string} encoded JSON string
    */
-  public EncodeJSON(json: object): string {
+  public EncodeJSON(json: any): string {
     const buf = this.EncodeString(JSON.stringify(json));
 
     return this.Base64UrlEncode(String.fromCharCode(...Array.from(buf)));
