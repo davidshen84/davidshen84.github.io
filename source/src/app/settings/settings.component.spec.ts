@@ -6,10 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { WebStorageModule } from 'ngx-store';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 
 import { SettingsComponent } from './settings.component';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
@@ -25,7 +25,7 @@ describe('SettingsComponent', () => {
         MatIconModule,
         MatSnackBarModule,
         FormsModule,
-        WebStorageModule,
+        NgxWebstorageModule.forRoot(),
       ],
       providers: [RS256CryptoService],
       declarations: [SettingsComponent],

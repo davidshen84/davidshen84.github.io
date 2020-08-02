@@ -5,6 +5,8 @@ import { MarkdownModule } from 'ngx-markdown';
 import { CanvasShowcaseComponent } from './canvas-showcase.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GaService } from '../ga.service';
+import { HammerModule } from '@angular/platform-browser';
+import 'hammerjs';
 
 describe('CanvasShowcaseComponent', () => {
   let component: CanvasShowcaseComponent;
@@ -17,6 +19,7 @@ describe('CanvasShowcaseComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         MarkdownModule.forRoot(),
+        HammerModule,
       ],
       providers: [GaService],
     }).compileComponents();
