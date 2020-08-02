@@ -5,12 +5,12 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'ngx-store';
 import { merge, Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { filter, mergeMap, share } from 'rxjs/operators';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { StringUtilityService } from '../crypto/string.utility';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable()
 export class AuthorizationInterceptorService implements HttpInterceptor {
@@ -24,14 +24,15 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
   private readonly _encodedHeader = this._strUtlSvc.EncodeJSON(
     AuthorizationInterceptorService._jwtHeader
   );
+
   private readonly privateKeyData: string;
 
   constructor(
-    localStorageService: LocalStorageService,
     private cryptoService: RS256CryptoService,
-    private _strUtlSvc: StringUtilityService
+    private _strUtlSvc: StringUtilityService,
+    store: LocalStorageService
   ) {
-    this.privateKeyData = localStorageService.get('private-key') || '';
+    this.privateKeyData = store.retrieve('private-key');
   }
 
   intercept(

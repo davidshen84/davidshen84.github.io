@@ -26,6 +26,7 @@ import { MathJaxModule } from 'ngx-mathjax';
 import { RS256CryptoService } from './crypto/rs256-crypto.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthorizationInterceptorService } from './services/authorization-interceptor.service';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AuthorizationInterceptorService } from './services/authorization-interc
     LayoutModule,
     HttpClientModule,
     MaterialModules,
+    NgxWebstorageModule.forRoot(),
     AppRoutingModule,
     MathJaxModule.forRoot(),
     MarkdownModule.forRoot({

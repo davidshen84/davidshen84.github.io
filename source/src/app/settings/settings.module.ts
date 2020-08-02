@@ -5,16 +5,9 @@ import { MaterialModules } from '../material.modules';
 
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
-import { WebStorageModule } from 'ngx-store';
 
 @NgModule({
   declarations: [SettingsComponent],
-  imports: [
-    CommonModule,
-    MaterialModules,
-    FormsModule,
-    SettingsRoutingModule,
-    WebStorageModule,
-  ],
+  imports: [CommonModule, MaterialModules, FormsModule, SettingsRoutingModule],
 })
 export class SettingsModule {}

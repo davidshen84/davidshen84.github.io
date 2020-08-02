@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
-import { WebStorageModule } from 'ngx-store';
 import { MaterialModules } from '../material.modules';
 import { BlogHomePageComponent } from './blog-home-page/blog-home-page.component';
 import { BlogPageNotFoundComponent } from './blog-page-not-found/blog-page-not-found.component';
@@ -19,7 +18,6 @@ import { BlogRoutingModule } from './blog-routing.module';
     MaterialModules,
     MarkdownModule.forChild(),
     BlogRoutingModule,
-    WebStorageModule,
   ],
 })
 export class BlogModule {}
