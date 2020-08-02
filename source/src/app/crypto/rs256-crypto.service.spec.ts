@@ -94,7 +94,7 @@ describe('RS256CryptoService', () => {
       strUtlSvc.EncodeString('data')
     );
   });
-rxjs
+
   it('should return signature', async () => {
     const service: RS256CryptoService = TestBed.inject(RS256CryptoService);
     const signBuf = new TextEncoder().encode('sign');
