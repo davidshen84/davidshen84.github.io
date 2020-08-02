@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-store';
 import { merge, Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { filter, flatMap, share } from 'rxjs/operators';
+import { filter, mergeMap, share } from 'rxjs/operators';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { StringUtilityService } from '../crypto/string.utility';
 
@@ -56,7 +56,7 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
     return merge(
       signature$.pipe(
         filter((i) => i !== null),
-        flatMap((sig) => {
+        mergeMap((sig) => {
           const request = req.clone({
             setHeaders: {
               Authorization: `Bearer ${data}.${sig}`,
@@ -68,7 +68,7 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
       ),
       signature$.pipe(
         filter((i) => i === null),
-        flatMap(() => next.handle(req))
+        mergeMap(() => next.handle(req))
       )
     );
   }

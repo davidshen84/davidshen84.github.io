@@ -67,7 +67,7 @@ describe('RS256CryptoService', () => {
     try {
       await service.sign(key, 'data');
     } catch (e) {
-      expect(e.name).toBe('CryptoService Error');
+      expect(e.message).toBe('DataError');
     }
   });
 
@@ -94,7 +94,7 @@ describe('RS256CryptoService', () => {
       strUtlSvc.EncodeString('data')
     );
   });
-
+rxjs
   it('should return signature', async () => {
     const service: RS256CryptoService = TestBed.inject(RS256CryptoService);
     const signBuf = new TextEncoder().encode('sign');
@@ -121,7 +121,7 @@ describe('RS256CryptoService', () => {
     try {
       await service.sign('key', 'data');
     } catch (e) {
-      expect(e.name).toBe('CryptoService Error');
+      expect(e.message).toContain('TypeError');
     }
   });
 
@@ -148,7 +148,7 @@ describe('RS256CryptoService', () => {
     try {
       await service.importKey(key);
     } catch (e) {
-      expect(e.name).toBe('CryptoService Error');
+      expect(e.message).toBe('DataError');
     }
   });
 });

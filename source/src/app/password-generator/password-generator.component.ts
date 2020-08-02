@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { flatMap, map, repeat, scan, startWith } from 'rxjs/operators';
+import { mergeMap, map, repeat, scan, startWith } from 'rxjs/operators';
 import { TitleService } from '../title.service';
 import { GaService } from '../ga.service';
 import { BaseComponent } from '../base-component';
@@ -51,7 +51,7 @@ export class PasswordGeneratorComponent extends BaseComponent
     ),
   ]).pipe(
     map(([, n, ...args]) => [n, args.reduce((p, c) => p.concat(c), '')]),
-    flatMap(([n, x]) =>
+    mergeMap(([n, x]) =>
       of(x).pipe(
         // pick one character
         map((y) =>

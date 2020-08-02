@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ClipboardModule } from 'ngx-clipboard';
 import { MaterialModules } from '../material.modules';
 import { PasswordGeneratorComponent } from './password-generator.component';
 import { GaService } from '../ga.service';
@@ -20,7 +19,6 @@ describe('PasswordGeneratorComponent', () => {
         NoopAnimationsModule,
         ReactiveFormsModule,
         MaterialModules,
-        ClipboardModule,
         RouterTestingModule,
       ],
       declarations: [PasswordGeneratorComponent],

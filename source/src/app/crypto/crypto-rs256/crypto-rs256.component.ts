@@ -7,7 +7,7 @@ import {
   Subject,
 } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { filter, flatMap, map, mapTo, share } from 'rxjs/operators';
+import { filter, mergeMap, map, mapTo, share } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
 import { RS256CryptoService } from '../rs256-crypto.service';
 import { StringUtilityService } from '../string.utility';
@@ -65,7 +65,7 @@ export class CryptoRS256Component extends BaseComponent implements OnInit {
     this.encodedPayload$,
     this.privateKeyInputSubject,
   ]).pipe(
-    flatMap(([h, p, k]) =>
+    mergeMap(([h, p, k]) =>
       fromPromise(
         this.cryptoService.sign(k, `${h}.${p}`).then(undefined, () => '')
       )

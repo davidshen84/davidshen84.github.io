@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LocalStorageService } from 'ngx-store';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { filter, flatMap } from 'rxjs/operators';
+import { filter, mergeMap } from 'rxjs/operators';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { TitleService } from '../title.service';
 
@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit {
     this.pkInput = this._localStorageService.get(KEY_NAME);
     this.cryptoKey$ = merge(of(this.pkInput), this.pkChangedSubject).pipe(
       filter((x) => !!x),
-      flatMap((key) =>
+      mergeMap((key) =>
         fromPromise(
           this._cryptoService.importKey(key).then(
             () => {
