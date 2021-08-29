@@ -7,10 +7,9 @@
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2015",
-    "module": "es2020",
+    "module": "commonjs",
     "typeRoots": [
       "node_modules/@types"
     ],

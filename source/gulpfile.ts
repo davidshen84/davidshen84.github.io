@@ -19,7 +19,7 @@ export function deleteOld() {
 }
 
 export function ngBuild() {
-  return task('ng build --prod --aot')();
+  return task('ng build --configuration production --aot')();
 }
 
 export function copyDist() {
