@@ -1,5 +1,5 @@
 import { HttpHandler, HttpRequest } from '@angular/common/http';
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { StringUtilityService } from '../crypto/string.utility';
@@ -37,7 +37,7 @@ describe('AuthorizationInterceptorService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should add Authorization header to the request', async(() => {
+  it('should add Authorization header to the request', waitForAsync(() => {
     const cryptoService: RS256CryptoService = TestBed.inject(
       RS256CryptoService
     );
@@ -68,7 +68,7 @@ describe('AuthorizationInterceptorService', () => {
       });
   }));
 
-  it('should include exp & nbf in the payload', async(() => {
+  it('should include exp & nbf in the payload', waitForAsync(() => {
     const cryptoService: RS256CryptoService = TestBed.inject(
       RS256CryptoService
     );
@@ -99,7 +99,7 @@ describe('AuthorizationInterceptorService', () => {
       });
   }));
 
-  it('should not add Authorization header to the request when signature is not available', async(() => {
+  it('should not add Authorization header to the request when signature is not available', waitForAsync(() => {
     const cryptoService: RS256CryptoService = TestBed.inject(
       RS256CryptoService
     );

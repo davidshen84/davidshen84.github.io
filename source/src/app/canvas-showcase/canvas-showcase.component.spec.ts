@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { CanvasShowcaseComponent } from './canvas-showcase.component';
@@ -12,7 +12,7 @@ describe('CanvasShowcaseComponent', () => {
   let component: CanvasShowcaseComponent;
   let fixture: ComponentFixture<CanvasShowcaseComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CanvasShowcaseComponent],
       imports: [

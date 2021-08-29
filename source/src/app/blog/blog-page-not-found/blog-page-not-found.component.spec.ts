@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BlogPageNotFoundComponent } from './blog-page-not-found.component';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,7 @@ describe('BlogPageNotFoundComponent', () => {
   let component: BlogPageNotFoundComponent;
   let fixture: ComponentFixture<BlogPageNotFoundComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [
         {
