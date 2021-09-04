@@ -13,21 +13,23 @@ describe('PasswordGeneratorComponent', () => {
   let matSnackBar: MatSnackBar;
   let openSpy: jasmine.Spy;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        NoopAnimationsModule,
-        ReactiveFormsModule,
-        MaterialModules,
-        RouterTestingModule,
-      ],
-      declarations: [PasswordGeneratorComponent],
-      providers: [GaService],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          NoopAnimationsModule,
+          ReactiveFormsModule,
+          MaterialModules,
+          RouterTestingModule,
+        ],
+        declarations: [PasswordGeneratorComponent],
+        providers: [GaService],
+      }).compileComponents();
 
-    matSnackBar = TestBed.inject(MatSnackBar);
-    openSpy = spyOn(matSnackBar, 'open');
-  }));
+      matSnackBar = TestBed.inject(MatSnackBar);
+      openSpy = spyOn(matSnackBar, 'open');
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PasswordGeneratorComponent);

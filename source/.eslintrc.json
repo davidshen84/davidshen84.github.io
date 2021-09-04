@@ -1,37 +1,68 @@
 {
-  "env": {
-    "es2020": true,
-    "node": true,
-    "browser": true
-  },
-  "extends": [
-    "google",
-    "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 11
-  },
-  "plugins": [
-    "prettier",
-    "@typescript-eslint",
-    "@typescript-eslint/eslint-plugin"
-  ],
-  "rules": {
-    "prettier/prettier": ["error", {"singleQuote": true}],
-    "quotes": ["error", "single"],
-    "indent": ["error", 2],
-    "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "require-jsdoc": "off",
-    "new-cap": "off",
-    "no-invalid-this": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "camelcase": "off",
-    "valid-jsdoc": "off"
-  }
+  "root": true,
+  "overrides":[
+    {
+      "files": [
+        "*.ts"
+      ],
+      "env": {
+        "es2020": true,
+        "node": true,
+        "browser": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended",
+        "prettier",
+        "prettier/@typescript-eslint"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 11
+      },
+      "plugins": [
+        "prettier",
+        "@typescript-eslint",
+        "@typescript-eslint/eslint-plugin"
+      ],
+      "rules": {
+        "prettier/prettier": ["error", {"singleQuote": true}],
+        "quotes": ["error", "single"],
+        "indent": ["error", 2],
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "require-jsdoc": "off",
+        "new-cap": "off",
+        "no-invalid-this": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "camelcase": "off",
+        "valid-jsdoc": "off",
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
 }

@@ -1,4 +1,9 @@
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  inject,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
@@ -15,26 +20,27 @@ describe('BlogPageComponent', () => {
   let component: BlogPageComponent;
   let fixture: ComponentFixture<BlogPageComponent>;
   let router: Router;
-  let routerSpy: jasmine.Spy;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule.withRoutes([
-          { path: 'blog/:id', component: BlogPageComponent },
-        ]),
-        MarkdownModule.forRoot(),
-      ],
-      providers: [
-        { provide: ActivatedRoute, useValue: { params: of({ id: 'x' }) } },
-      ],
-      declarations: [BlogPageComponent],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule.withRoutes([
+            { path: 'blog/:id', component: BlogPageComponent },
+          ]),
+          MarkdownModule.forRoot(),
+        ],
+        providers: [
+          { provide: ActivatedRoute, useValue: { params: of({ id: 'x' }) } },
+        ],
+        declarations: [BlogPageComponent],
+      }).compileComponents();
 
-    router = TestBed.inject(Router);
-    routerSpy = spyOn(router, 'navigate');
-  }));
+      router = TestBed.inject(Router);
+      spyOn(router, 'navigate');
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogPageComponent);
@@ -43,7 +49,7 @@ describe('BlogPageComponent', () => {
 
   it('should create', inject(
     [HttpTestingController],
-    (httpMock: HttpTestingController) => {
+    (_: HttpTestingController) => {
       expect(component).toBeTruthy();
     }
   ));

@@ -14,20 +14,22 @@ describe('CryptoRS256Component', () => {
   let component: CryptoRS256Component;
   let fixture: ComponentFixture<CryptoRS256Component>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        NoopAnimationsModule,
-        FormsModule,
-        MaterialModules,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        MarkdownModule.forRoot(),
-      ],
-      declarations: [CryptoRS256Component],
-      providers: [RS256CryptoService, GaService],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          NoopAnimationsModule,
+          FormsModule,
+          MaterialModules,
+          RouterTestingModule,
+          HttpClientTestingModule,
+          MarkdownModule.forRoot(),
+        ],
+        declarations: [CryptoRS256Component],
+        providers: [RS256CryptoService, GaService],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CryptoRS256Component);

@@ -3,7 +3,7 @@
     #drawer
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)"
+    [opened]="(isHandset$ | async) === false"
     class="sidenav"
     fixedInViewport="true">
     <mat-toolbar color="primary">Menu</mat-toolbar>

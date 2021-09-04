@@ -1,4 +1,4 @@
-<div [class.device-desktop]="!(isHandset$ | async)" class="footer">
+<div [class.device-desktop]="(isHandset$ | async) === false" class="footer">
   <div class="qrcode-container">
     <a href="https://keys.gnupg.net/pks/lookup?search=davidshen84&fingerprint=on" target="_blank">
       <qrcode [level]="'M'" [qrdata]="'DC1E3599'" [width]="32"></qrcode>

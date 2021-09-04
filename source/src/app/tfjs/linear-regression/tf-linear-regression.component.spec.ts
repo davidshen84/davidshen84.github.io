@@ -14,18 +14,23 @@ describe('TfLinearRegressionComponent', () => {
   let component: TfLinearRegressionComponent;
   let fixture: ComponentFixture<TfLinearRegressionComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TfLinearRegressionComponent],
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MathJaxModule.forRoot(),
-        MarkdownModule.forRoot(),
-      ],
-      providers: [{ provide: ElementRef, useValue: MockElementRef }, GaService],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TfLinearRegressionComponent],
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          MathJaxModule.forRoot(),
+          MarkdownModule.forRoot(),
+        ],
+        providers: [
+          { provide: ElementRef, useValue: MockElementRef },
+          GaService,
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TfLinearRegressionComponent);

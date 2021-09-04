@@ -9,16 +9,18 @@ describe('MarkdownEditorComponent', () => {
   let component: MarkdownEditorComponent;
   let fixture: ComponentFixture<MarkdownEditorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        MatGridListModule,
-        MarkdownModule.forRoot(),
-      ],
-      declarations: [MarkdownEditorComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          ReactiveFormsModule,
+          MatGridListModule,
+          MarkdownModule.forRoot(),
+        ],
+        declarations: [MarkdownEditorComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MarkdownEditorComponent);

@@ -15,11 +15,10 @@ export class BlogPageNotFoundComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _titleService: TitleService
-  ) {
-    this.BlogId$ = _route.params.pipe(map((_) => _['id']));
+  ) {}
 
-    _titleService.setTitle('Blog Not Found!!! 😞');
+  ngOnInit(): void {
+    this.BlogId$ = this._route.params.pipe(map((_) => _['id']));
+    this._titleService.setTitle('Blog Not Found!!! 😞');
   }
-
-  ngOnInit() {}
 }

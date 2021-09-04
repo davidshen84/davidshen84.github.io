@@ -9,9 +9,9 @@ import { GaService } from '../../ga.service';
   providers: [GaService],
 })
 export class BlogHomePageComponent implements OnInit {
-  constructor(private _titleService: TitleService) {
-    _titleService.setTitle('Blog Home');
-  }
+  constructor(private _titleService: TitleService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this._titleService.setTitle('Blog Home');
+  }
 }

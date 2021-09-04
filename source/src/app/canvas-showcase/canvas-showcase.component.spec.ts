@@ -12,18 +12,20 @@ describe('CanvasShowcaseComponent', () => {
   let component: CanvasShowcaseComponent;
   let fixture: ComponentFixture<CanvasShowcaseComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [CanvasShowcaseComponent],
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MarkdownModule.forRoot(),
-        HammerModule,
-      ],
-      providers: [GaService],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [CanvasShowcaseComponent],
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          MarkdownModule.forRoot(),
+          HammerModule,
+        ],
+        providers: [GaService],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CanvasShowcaseComponent);

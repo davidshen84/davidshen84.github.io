@@ -9,13 +9,15 @@ describe('WebcamComponent', () => {
   let component: WebcamComponent;
   let fixture: ComponentFixture<WebcamComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [WebcamComponent],
-      imports: [WebcamModule, RouterTestingModule],
-      providers: [GaService],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [WebcamComponent],
+        imports: [WebcamModule, RouterTestingModule],
+        providers: [GaService],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WebcamComponent);

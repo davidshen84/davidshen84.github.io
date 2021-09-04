@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { mergeMap, map, repeat, scan, startWith } from 'rxjs/operators';
+import { map, mergeMap, repeat, scan, startWith } from 'rxjs/operators';
 import { TitleService } from '../title.service';
 import { GaService } from '../ga.service';
 import { BaseComponent } from '../base-component';
@@ -64,16 +64,17 @@ export class PasswordGeneratorComponent extends BaseComponent
   );
 
   constructor(
-    titleService: TitleService,
     ga: GaService,
+    private _titleService: TitleService,
     private breakpointObserver: BreakpointObserver,
     private matSnackBar: MatSnackBar
   ) {
     super(ga);
-    titleService.setTitle('Password Generator');
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this._titleService.setTitle('Password Generator');
+  }
 
   public openSnackBar() {
     return this.matSnackBar.open('Copied to clipboard!', '😆', {

@@ -10,17 +10,19 @@ describe('BlogHomePageComponent', () => {
   let component: BlogHomePageComponent;
   let fixture: ComponentFixture<BlogHomePageComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MarkdownModule.forRoot(),
-        MatListModule,
-      ],
-      declarations: [BlogHomePageComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          MarkdownModule.forRoot(),
+          MatListModule,
+        ],
+        declarations: [BlogHomePageComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogHomePageComponent);

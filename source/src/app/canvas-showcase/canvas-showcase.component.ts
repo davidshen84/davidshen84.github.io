@@ -30,14 +30,15 @@ export class CanvasShowcaseComponent extends BaseComponent
 
   constructor(
     private canvasDraw: CanvasDrawService,
-    titleService: TitleService,
+    private _titleService: TitleService,
     ga: GaService
   ) {
     super(ga);
-    titleService.setTitle('Canvas Showcase');
   }
 
   ngOnInit() {
+    this._titleService.setTitle('Canvas Showcase');
+
     this._canvas = this._canvasRef.nativeElement;
     this.canvasDraw.setCanvas(this._canvas);
 
