@@ -3,25 +3,22 @@ jobs:
   build:
     working_directory: ~/project/source
     docker:
-      - image: circleci/node:12-browsers
+    - image: circleci/node:14.14-browsers
     steps:
-      - checkout:
-          path: ~/project
-      - restore_cache:
-          key: node-modules-cache-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - save_cache:
-          key: node-modules-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
-      - run:
-          name: build
-          command: ./node_modules/.bin/ng build
-      - run:
-          name: unit test
-          command: ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
-      - run:
-          name: e2e test
-          command: ./node_modules/.bin/ng e2e --protractor-config=./e2e/protractor.ci.conf.js
+    - checkout:
+        path: ~/project
+    - restore_cache:
+        key: node-modules-cache-{{ checksum "package-lock.json" }}
+    - run:
+        name: Install dependencies
+        command: npm install
+    - save_cache:
+        key: node-modules-cache-{{ checksum "package-lock.json" }}
+        paths:
+        - ./node_modules
+    - run:
+        name: build
+        command: ./node_modules/.bin/ng build
+    - run:
+        name: unit test
+        command: ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
