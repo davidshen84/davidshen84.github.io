@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TitleService } from '../../title.service';
 import { GaService } from '../../ga.service';
 
@@ -8,10 +8,8 @@ import { GaService } from '../../ga.service';
   styleUrls: ['./blog-home-page.component.scss'],
   providers: [GaService],
 })
-export class BlogHomePageComponent implements OnInit {
-  constructor(private _titleService: TitleService) {}
-
-  ngOnInit(): void {
+export class BlogHomePageComponent {
+  constructor(private _titleService: TitleService) {
     this._titleService.setTitle('Blog Home');
   }
 }

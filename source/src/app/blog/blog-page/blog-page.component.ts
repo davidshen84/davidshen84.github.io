@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -12,8 +12,7 @@ import { BaseComponent } from '../../base-component';
   styleUrls: ['./blog-page.component.scss'],
   providers: [GaService],
 })
-export class BlogPageComponent extends BaseComponent
-  implements OnInit, OnDestroy {
+export class BlogPageComponent extends BaseComponent implements OnDestroy {
   public blogPath$: Observable<string>;
   private _paramIdSubscriptions: Subscription[] = [];
   private _paramId$: Observable<string>;
@@ -25,9 +24,6 @@ export class BlogPageComponent extends BaseComponent
     ga: GaService
   ) {
     super(ga);
-  }
-
-  ngOnInit(): void {
     this._paramId$ = this._route.params.pipe(map((p) => p['id']));
 
     this._paramIdSubscriptions.push(
@@ -38,7 +34,6 @@ export class BlogPageComponent extends BaseComponent
         )
         .subscribe((t) => this._titleService.setTitle(t))
     );
-
     this.blogPath$ = this._paramId$.pipe(map((p) => `assets/blogs/${p}.md`));
   }
 
@@ -48,7 +43,6 @@ export class BlogPageComponent extends BaseComponent
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onBlogLoadError(_: string) {
     this._paramIdSubscriptions.push(
       this._paramId$.subscribe((id) =>

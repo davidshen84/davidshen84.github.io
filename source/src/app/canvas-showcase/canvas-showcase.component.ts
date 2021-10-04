@@ -34,11 +34,11 @@ export class CanvasShowcaseComponent extends BaseComponent
     ga: GaService
   ) {
     super(ga);
+
+    this._titleService.setTitle('Canvas Showcase');
   }
 
   ngOnInit() {
-    this._titleService.setTitle('Canvas Showcase');
-
     this._canvas = this._canvasRef.nativeElement;
     this.canvasDraw.setCanvas(this._canvas);
 

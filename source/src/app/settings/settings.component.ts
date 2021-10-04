@@ -24,12 +24,12 @@ export class SettingsComponent implements OnInit {
   constructor(
     private _cryptoService: RS256CryptoService,
     private _snackBar: MatSnackBar,
-    private title: TitleService
-  ) {}
+    private _title: TitleService
+  ) {
+    this._title.setTitle('Settings');
+  }
 
   ngOnInit() {
-    this.title.setTitle('Settings');
-
     this.cryptoKey$ = merge(of(this.pkInput), this.pkChangedSubject).pipe(
       filter((x) => !!x),
       mergeMap((key) =>

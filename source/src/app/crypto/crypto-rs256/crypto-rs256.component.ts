@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   BehaviorSubject,
   combineLatest,
@@ -21,7 +21,7 @@ import { BaseComponent } from '../../base-component';
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CryptoRS256Component extends BaseComponent implements OnInit {
+export class CryptoRS256Component extends BaseComponent {
   // Define header
   public header = JSON.stringify(
     {
@@ -96,9 +96,7 @@ export class CryptoRS256Component extends BaseComponent implements OnInit {
     ga: GaService
   ) {
     super(ga);
-  }
 
-  ngOnInit() {
     this.titleService.setTitle('Encryption using RS256');
   }
 }

@@ -17,8 +17,7 @@ const prime = 21001;
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordGeneratorComponent extends BaseComponent
-  implements OnInit {
+export class PasswordGeneratorComponent extends BaseComponent {
   public isHandset$ = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
@@ -70,9 +69,6 @@ export class PasswordGeneratorComponent extends BaseComponent
     private matSnackBar: MatSnackBar
   ) {
     super(ga);
-  }
-
-  ngOnInit(): void {
     this._titleService.setTitle('Password Generator');
   }
 
