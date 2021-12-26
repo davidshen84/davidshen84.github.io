@@ -27,6 +27,14 @@ import { RS256CryptoService } from './crypto/rs256-crypto.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthorizationInterceptorService } from './services/authorization-interceptor.service';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import {
+  PomodoroComponent,
+  PomodoroTimePipe,
+} from './pomodoro/pomodoro.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -35,6 +43,8 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     HomePageComponent,
     FooterComponent,
     CanvasShowcaseComponent,
+    PomodoroComponent,
+    PomodoroTimePipe,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +67,10 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     SettingsModule,
     MarkdownEditorModule,
     HammerModule,
+    ReactiveFormsModule,
+    MatTooltipModule,
+    MatButtonToggleModule,
+    MatGridListModule,
   ],
   providers: [
     {

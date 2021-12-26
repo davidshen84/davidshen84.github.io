@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CanvasShowcaseComponent } from './canvas-showcase/canvas-showcase.component';
+import { PomodoroComponent } from './pomodoro/pomodoro.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -43,6 +44,10 @@ export const routes: Routes = [
       import('./markdown-editor/markdown-editor.module').then(
         (m) => m.MarkdownEditorModule
       ),
+  },
+  {
+    path: 'pomodoro',
+    component: PomodoroComponent,
   },
 ];
 

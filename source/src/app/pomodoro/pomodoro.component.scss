@@ -1,0 +1,56 @@
+.big-pomodoro {
+  font-size: large;
+}
+
+.small-pomodoro {
+  font-size: x-small;
+}
+
+.center > * {
+  width: 50%;
+  margin: auto;
+}
+
+.clock {
+  font-size: xxx-large;
+  text-align: center;
+}
+
+.note {
+  font-size: xxx-large;
+  text-align: center;
+}
+
+.input-panel {
+  .group {
+    margin-top: 2em;
+  }
+
+  .pomodoro-picker {
+    span {
+      margin-left: 1em;
+      cursor: pointer;
+    }
+  }
+
+  .fill-width {
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .narrow {
+    mat-form-field {
+      width: 30%;
+    }
+  }
+}
+
+.pomodoro-list {
+  width: 100%;
+  height: 100%;
+
+  .pomodoro-list-item {
+    font-size: x-large;
+  }
+}

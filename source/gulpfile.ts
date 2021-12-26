@@ -14,7 +14,7 @@ export function deleteOld() {
       '../*.json',
       '../*.css',
     ],
-    { force: true }
+    { force: true },
   );
 }
 
