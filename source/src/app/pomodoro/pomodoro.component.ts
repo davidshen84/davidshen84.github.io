@@ -19,7 +19,7 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 const ONE_SECOND = 1000; // milliseconds
-const ONE_MINUTE = 1; // seconds
+const ONE_MINUTE = 60; // seconds
 
 const POMODORO_SIZE_SEQUENCES = {
   five: [5, 10, 15, 20, 25],
