@@ -23,15 +23,17 @@
     </div>
 
     <div class='pomodoro-picker group'>
-      <span *ngFor='let p of this.selectedPomodoroSequence$ | async; index as i'
+      <span *ngFor='let p of this.selectedPomodoroSequence$ | async;'
             [ngStyle]="{'font-size': (this.calcPomodoroFontSize(p)) + 'em' }"
             [matTooltip]="p + ' minutes'"
-            (click)='addPomodoro(p,note.value)'>🍅</span>
+            (click)='addPomodoro(p,note.value)'>
+        🍅
+      </span>
     </div>
   </mat-card-content>
 </mat-card>
 
-<mat-grid-list cols='2' rowHeight='2:1'>
+<mat-grid-list cols='2' rowHeight='3:1'>
   <mat-grid-tile>
     <mat-card class='pomodoro-list'>
       <mat-card-title>Next 🍅</mat-card-title>

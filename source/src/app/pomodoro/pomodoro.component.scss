@@ -6,24 +6,26 @@
   font-size: x-small;
 }
 
-.center > * {
-  width: 50%;
+.center {
+  //width: 50%;
   margin: auto;
+
+  .clock {
+    font-size: xxx-large;
+    text-align: center;
+  }
+
+  .note {
+    font-size: xxx-large;
+    text-align: center;
+  }
 }
 
-.clock {
-  font-size: xxx-large;
-  text-align: center;
-}
-
-.note {
-  font-size: xxx-large;
-  text-align: center;
-}
 
 .input-panel {
   .group {
     margin-top: 2em;
+    margin-bottom: 2em;
   }
 
   .pomodoro-picker {
