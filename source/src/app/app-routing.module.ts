@@ -15,7 +15,7 @@ export const routes: Routes = [
     path: 'password-generator',
     loadChildren: () =>
       import('./password-generator/password-generator.module').then(
-        (m) => m.PasswordGeneratorModule
+        (m) => m.PasswordGeneratorModule,
       ),
   },
   {
@@ -37,13 +37,6 @@ export const routes: Routes = [
     path: 'settings',
     loadChildren: () =>
       import('./settings/settings.module').then((m) => m.SettingsModule),
-  },
-  {
-    path: 'mdeditor',
-    loadChildren: () =>
-      import('./markdown-editor/markdown-editor.module').then(
-        (m) => m.MarkdownEditorModule
-      ),
   },
   {
     path: 'pomodoro',

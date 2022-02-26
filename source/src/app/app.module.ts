@@ -17,7 +17,6 @@ import { CanvasShowcaseComponent } from './canvas-showcase/canvas-showcase.compo
 import { CryptoModule } from './crypto/crypto.module';
 import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { MarkdownEditorModule } from './markdown-editor/markdown-editor.module';
 import { MaterialModules } from './material.modules';
 
 import { NavComponent } from './nav/nav.component';
@@ -65,7 +64,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
     CryptoModule,
     BlogModule,
     SettingsModule,
-    MarkdownEditorModule,
     HammerModule,
     ReactiveFormsModule,
     MatTooltipModule,
