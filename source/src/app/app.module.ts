@@ -1,74 +1,62 @@
-import { LayoutModule } from '@angular/cdk/layout';
+import { environment } from '../environments/environment';
 import { NgModule, SecurityContext } from '@angular/core';
-import { BrowserModule, HammerModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MaterialModules } from './material.modules';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { QRCodeModule } from 'angularx-qrcode';
 
 import { MarkdownModule } from 'ngx-markdown';
-import { environment } from '../environments/environment';
-
-import { AppRoutingModule } from './app-routing.module';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { AppComponent } from './app.component';
-import { BlogModule } from './blog/blog.module';
 import { CanvasShowcaseComponent } from './canvas-showcase/canvas-showcase.component';
-import { CryptoModule } from './crypto/crypto.module';
 import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { MaterialModules } from './material.modules';
-
 import { NavComponent } from './nav/nav.component';
-import { SettingsModule } from './settings/settings.module';
+
+import { AppRoutingModule } from './app-routing.module';
+import { BlogModule } from './blog/blog.module';
+import { CryptoModule } from './crypto/crypto.module';
 import { MathJaxModule } from 'ngx-mathjax';
-import { RS256CryptoService } from './crypto/rs256-crypto.service';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { PomodoroModule } from './pomodoro/pomodoro.module';
+import { SettingsModule } from './settings/settings.module';
+
 import { AuthorizationInterceptorService } from './services/authorization-interceptor.service';
-import { NgxWebstorageModule } from 'ngx-webstorage';
-import {
-  PomodoroComponent,
-  PomodoroTimePipe,
-} from './pomodoro/pomodoro.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { RS256CryptoService } from './crypto/rs256-crypto.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
-    HomePageComponent,
-    FooterComponent,
     CanvasShowcaseComponent,
-    PomodoroComponent,
-    PomodoroTimePipe,
+    FooterComponent,
+    HomePageComponent,
+    NavComponent,
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    HttpClientModule,
-    MaterialModules,
-    NgxWebstorageModule.forRoot(),
     AppRoutingModule,
+    BlogModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    CryptoModule,
+    HammerModule,
+    HttpClientModule,
+    LayoutModule,
+    MarkdownModule.forRoot({ sanitize: SecurityContext.NONE }),
+    MaterialModules,
     MathJaxModule.forRoot(),
-    MarkdownModule.forRoot({
-      sanitize: SecurityContext.NONE,
-    }),
+    NgxWebstorageModule.forRoot(),
+    PomodoroModule,
+    QRCodeModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production,
     }),
-    QRCodeModule,
-    CryptoModule,
-    BlogModule,
     SettingsModule,
-    HammerModule,
-    ReactiveFormsModule,
-    MatTooltipModule,
-    MatButtonToggleModule,
-    MatGridListModule,
   ],
   providers: [
     {
