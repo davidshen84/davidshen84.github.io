@@ -20,8 +20,10 @@ import { GaService } from '../ga.service';
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CanvasShowcaseComponent extends BaseComponent
-  implements OnInit, OnDestroy {
+export class CanvasShowcaseComponent
+  extends BaseComponent
+  implements OnInit, OnDestroy
+{
   public _points: Array<{ x; y }> = [];
   @ViewChild('canvas', { static: true })
   private _canvasRef: ElementRef;
@@ -31,7 +33,7 @@ export class CanvasShowcaseComponent extends BaseComponent
   constructor(
     private canvasDraw: CanvasDrawService,
     private _titleService: TitleService,
-    ga: GaService
+    ga: GaService,
   ) {
     super(ga);
 
@@ -49,7 +51,7 @@ export class CanvasShowcaseComponent extends BaseComponent
       255,
       0,
       0,
-      255
+      255,
     );
 
     // Define the drag & drop observable.
@@ -61,10 +63,10 @@ export class CanvasShowcaseComponent extends BaseComponent
       switchMap(() =>
         fromEvent(target, 'panmove').pipe(
           throttleTime(500),
-          takeUntil(fromEvent(target, 'panend'))
-        )
+          takeUntil(fromEvent(target, 'panend')),
+        ),
       ),
-      map((e: HammerInput) => e.changedPointers[0] as PointerEvent)
+      map((e: HammerInput) => e.changedPointers[0] as PointerEvent),
     );
 
     this._dragDropSubscription = _dragDrop$.subscribe(
@@ -74,7 +76,7 @@ export class CanvasShowcaseComponent extends BaseComponent
         }
         this._points.push({ x: Math.floor(x), y: Math.floor(y) });
         this.canvasDraw.setPointOnCanvas(x, y, 255, 0, 0, 255);
-      }
+      },
     );
   }
 

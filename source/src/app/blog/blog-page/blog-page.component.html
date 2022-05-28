@@ -1,4 +1,3 @@
 <div class="markdown-container">
-  <markdown (error)="onBlogLoadError($event)" [src]="blogPath$ | async" ngPreserveWhitespaces>
-  </markdown>
+  <app-remarkable [src]='blogPath$ | async'></app-remarkable>
 </div>

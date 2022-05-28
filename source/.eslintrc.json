@@ -37,13 +37,6 @@
           "error",
           "single"
         ],
-        "indent": [
-          "error",
-          2,
-          {
-            "SwitchCase": 1
-          }
-        ],
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "require-jsdoc": "off",
@@ -52,15 +45,6 @@
         "@typescript-eslint/no-explicit-any": "off",
         "camelcase": "off",
         "valid-jsdoc": "off",
-        "comma-dangle": [
-          "error",
-          {
-            "functions": "always-multiline",
-            "arrays": "always-multiline",
-            "objects": "always-multiline",
-            "imports": "always-multiline"
-          }
-        ],
         "@angular-eslint/directive-selector": [
           "error",
           {

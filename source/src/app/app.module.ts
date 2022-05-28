@@ -1,5 +1,5 @@
 import { environment } from '../environments/environment';
-import { NgModule, SecurityContext } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
@@ -9,7 +9,6 @@ import { MaterialModules } from './material.modules';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { MarkdownModule } from 'ngx-markdown';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { QRCodeModule } from 'angularx-qrcode';
 
@@ -22,12 +21,12 @@ import { NavComponent } from './nav/nav.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BlogModule } from './blog/blog.module';
 import { CryptoModule } from './crypto/crypto.module';
-import { MathJaxModule } from 'ngx-mathjax';
 import { PomodoroModule } from './pomodoro/pomodoro.module';
 import { SettingsModule } from './settings/settings.module';
 
 import { AuthorizationInterceptorService } from './services/authorization-interceptor.service';
 import { RS256CryptoService } from './crypto/rs256-crypto.service';
+import { RemarkableModule } from './remarkable/remarkable.module';
 
 @NgModule({
   declarations: [
@@ -46,9 +45,7 @@ import { RS256CryptoService } from './crypto/rs256-crypto.service';
     HammerModule,
     HttpClientModule,
     LayoutModule,
-    MarkdownModule.forRoot({ sanitize: SecurityContext.NONE }),
     MaterialModules,
-    MathJaxModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     PomodoroModule,
     QRCodeModule,
@@ -57,6 +54,7 @@ import { RS256CryptoService } from './crypto/rs256-crypto.service';
       enabled: environment.production,
     }),
     SettingsModule,
+    RemarkableModule,
   ],
   providers: [
     {

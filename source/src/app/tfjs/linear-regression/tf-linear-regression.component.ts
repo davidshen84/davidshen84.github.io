@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import * as tf from '@tensorflow/tfjs';
 import {
   ChangeDetectionStrategy,
@@ -11,7 +10,6 @@ import { CanvasDrawService } from '../../canvas-showcase/canvas-draw.service';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { auditTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
-import { MathJaxDirective } from 'ngx-mathjax';
 import { GaService } from '../../ga.service';
 import { BaseComponent } from '../../base-component';
 
@@ -30,7 +28,7 @@ const normalize = (
   in_min: number,
   in_max: number,
   out_min: number,
-  out_max: number
+  out_max: number,
 ): number => ((n - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
 
 @Component({
@@ -40,27 +38,28 @@ const normalize = (
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TfLinearRegressionComponent extends BaseComponent
-  implements OnInit {
-  @ViewChild('article', { read: MathJaxDirective, static: true })
-  mathJax: MathJaxDirective;
-
+export class TfLinearRegressionComponent
+  extends BaseComponent
+  implements OnInit
+{
   private modelSubject = new BehaviorSubject<{ a: number; b: number }>({
     a: NaN,
     b: NaN,
   });
+
   public readonly model$ = this.modelSubject.pipe(
     auditTime(1000),
     map(({ a, b }) => ({ a: a.toFixed(3), b: b.toFixed(3) })),
     map(({ a, b }) => `Y = ${a}X + ${b}`),
-    distinctUntilChanged()
+    distinctUntilChanged(),
   );
 
   private costSubject: Subject<number> = new BehaviorSubject<number>(NaN);
   public readonly cost$ = this.costSubject.pipe(
     auditTime(1000),
     map((v) => v.toFixed(3)),
-    distinctUntilChanged()
+    distinctUntilChanged(),
+    // tap(console.log),
   );
 
   // Input data normalized between 0 and 1.
@@ -75,7 +74,7 @@ export class TfLinearRegressionComponent extends BaseComponent
   constructor(
     titleService: TitleService,
     ga: GaService,
-    private canvasDraw: CanvasDrawService
+    private canvasDraw: CanvasDrawService,
   ) {
     super(ga);
     titleService.setTitle('Linear Regression with TensorFlow');
@@ -111,7 +110,7 @@ export class TfLinearRegressionComponent extends BaseComponent
       255,
       0,
       0,
-      255
+      255,
     );
     this.xs.push(x);
     this.ys.push(y);
@@ -125,13 +124,13 @@ export class TfLinearRegressionComponent extends BaseComponent
       () =>
         this._a
           .mul(tf.tensor1d(x)) // a * x
-          .add(this._b) // + b
+          .add(this._b), // + b
     );
   }
 
-  public typeset() {
-    this.mathJax.MathJaxTypeset();
-  }
+  // public typeset() {
+  //   this.mathJax.MathJaxTypeset();
+  // }
 
   private normalizeX(offsetX: number): number {
     return normalize(offsetX, 0, this.canvas.clientWidth, 0, 1);
@@ -151,7 +150,7 @@ export class TfLinearRegressionComponent extends BaseComponent
 
   private drawPredictions(
     xs: ArrayLike<number>,
-    ys: ArrayLike<number>
+    ys: ArrayLike<number>,
   ): Promise<void> {
     return new Promise<void>((resolve) => {
       for (let i = 0; i < xs.length; i++) {
@@ -174,11 +173,11 @@ export class TfLinearRegressionComponent extends BaseComponent
     this.canvasDraw.cleanCanvas();
     this.drawPoint();
     const xs = Array.from(Array(this.canvas.clientWidth).keys()).filter(
-      (x) => x % 2 === 0
+      (x) => x % 2 === 0,
     );
-    const ys = (this.predict(
-      xs.map(this.normalizeX, this)
-    ).dataSync() as Float32Array).map(this.denormalizeY, this);
+    const ys = (
+      this.predict(xs.map(this.normalizeX, this)).dataSync() as Float32Array
+    ).map(this.denormalizeY, this);
     await this.drawPredictions(xs, ys);
   }
 

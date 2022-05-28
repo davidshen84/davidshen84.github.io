@@ -1,11 +1,15 @@
-<div class="markdown-container">
-  <markdown #article (load)="typeset()" mathjax src="assets/blogs/tf-linear-regression.md"></markdown>
+<div class='markdown-container'>
+  <app-remarkable src='assets/blogs/tf-linear-regression.md'></app-remarkable>
 </div>
 
-<div [mathjax]="[model$ | async, cost$ | async]">
-  <div class="fixed-height">model: \( {{ '{}' }} \)</div>
-  <div class="fixed-height">cost = \( {{ '{}' }} \)</div>
+<div>
+  <app-remarkable>
+    <pre #content>
+$model: {{ model$ | async }}$
+$cost = {{ cost$ | async }}$
+    </pre>
+  </app-remarkable>
 </div>
 <div>
-  <canvas #canvas (click)="onMouseClick($event)"></canvas>
+  <canvas #canvas (click)='onMouseClick($event)'></canvas>
 </div>

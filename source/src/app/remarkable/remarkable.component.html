@@ -1,0 +1,4 @@
+<span>
+  <ng-content select='#content'></ng-content>
+  <div [innerHTML]='markdown$ | async'></div>
+</span>
