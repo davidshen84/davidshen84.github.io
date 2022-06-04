@@ -7,7 +7,6 @@ $$
 Y = aX + b
 $$
 
-
 Users can provide training examples by clicking in the box blow.
-The x-coordinates of the points will be used as the training data, \\( X \\);
-while the y-coordinates will be used as training labels, \\( Y \\).
+The x-coordinates of the points will be used as the training data, $X$;
+while the y-coordinates will be used as training labels, $Y$ .
