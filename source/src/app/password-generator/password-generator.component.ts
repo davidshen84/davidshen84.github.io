@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { map, mergeMap, repeat, scan, startWith } from 'rxjs/operators';
@@ -21,14 +21,14 @@ export class PasswordGeneratorComponent extends BaseComponent {
   public isHandset$ = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
-  LowerCaseControl = new FormControl(true);
-  UpperCaseControl = new FormControl(true);
-  DigitControl = new FormControl(true);
-  SpecialControl = new FormControl(true);
+  LowerCaseControl = new UntypedFormControl(true);
+  UpperCaseControl = new UntypedFormControl(true);
+  DigitControl = new UntypedFormControl(true);
+  SpecialControl = new UntypedFormControl(true);
   GenerateSubject = new BehaviorSubject(undefined);
   // Default length of characters to generate.
   private length = 16;
-  SliderControl = new FormControl(this.length);
+  SliderControl = new UntypedFormControl(this.length);
   public result$ = combineLatest([
     this.GenerateSubject,
     this.SliderControl.valueChanges.pipe(startWith(this.length)),
