@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { RS256CryptoService } from './rs256-crypto.service';
 import { StringUtilityService } from './string.utility';
+import { RemarkableModule } from '../remarkable/remarkable.module';
 
 describe('RS256CryptoService', () => {
   const key = 'key';
@@ -16,6 +17,7 @@ describe('RS256CryptoService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [RemarkableModule],
       providers: [RS256CryptoService, StringUtilityService],
     });
 
@@ -30,10 +32,10 @@ describe('RS256CryptoService', () => {
   it('should import key', async () => {
     const service: RS256CryptoService = TestBed.inject(RS256CryptoService);
     const fromBase64Spy = spyOn(strUtlSvc, 'FromBase64').and.returnValue(
-      keyBuf
+      keyBuf,
     );
     const importKeySpy = spyOn(crypto.subtle, 'importKey').and.returnValue(
-      Promise.resolve(cryptoKeyMock)
+      Promise.resolve(cryptoKeyMock),
     );
 
     spyOn(crypto.subtle, 'sign').and.returnValue(Promise.resolve(keyBuf));
@@ -45,7 +47,7 @@ describe('RS256CryptoService', () => {
       keyBuf,
       importParams,
       false,
-      ['sign']
+      ['sign'],
     );
   });
 
@@ -75,7 +77,7 @@ describe('RS256CryptoService', () => {
     const service: RS256CryptoService = TestBed.inject(RS256CryptoService);
     const signBuf = new TextEncoder().encode('sign');
     const signSpy = spyOn(crypto.subtle, 'sign').and.returnValue(
-      Promise.resolve(signBuf)
+      Promise.resolve(signBuf),
     );
     const pssParams = {
       name: 'RSASSA-PKCS1-v1_5',
@@ -84,14 +86,14 @@ describe('RS256CryptoService', () => {
 
     spyOn(strUtlSvc, 'FromBase64').and.returnValue(keyBuf);
     spyOn(crypto.subtle, 'importKey').and.returnValue(
-      Promise.resolve(cryptoKeyMock)
+      Promise.resolve(cryptoKeyMock),
     );
 
     await service.sign('key', 'data');
     expect(signSpy).toHaveBeenCalledWith(
       pssParams,
       cryptoKeyMock,
-      strUtlSvc.EncodeString('data')
+      strUtlSvc.EncodeString('data'),
     );
   });
 
@@ -102,7 +104,7 @@ describe('RS256CryptoService', () => {
     spyOn(crypto.subtle, 'sign').and.returnValue(Promise.resolve(signBuf));
     spyOn(strUtlSvc, 'FromBase64').and.returnValue(keyBuf);
     spyOn(crypto.subtle, 'importKey').and.returnValue(
-      Promise.resolve(cryptoKeyMock)
+      Promise.resolve(cryptoKeyMock),
     );
 
     const sign = await service.sign('key', 'data');
@@ -115,7 +117,7 @@ describe('RS256CryptoService', () => {
 
     spyOn(strUtlSvc, 'FromBase64').and.returnValue(keyBuf);
     spyOn(crypto.subtle, 'importKey').and.returnValue(
-      Promise.resolve(cryptoKeyMock)
+      Promise.resolve(cryptoKeyMock),
     );
 
     try {
@@ -128,7 +130,7 @@ describe('RS256CryptoService', () => {
   it('should return crypto key', async () => {
     const service: RS256CryptoService = TestBed.inject(RS256CryptoService);
     const importKeySpy = spyOn(crypto.subtle, 'importKey').and.returnValue(
-      Promise.resolve(cryptoKeyMock)
+      Promise.resolve(cryptoKeyMock),
     );
 
     const cryptoKey = await service.importKey(key);
@@ -137,7 +139,7 @@ describe('RS256CryptoService', () => {
       keyBuf,
       importParams,
       false,
-      ['sign']
+      ['sign'],
     );
     expect(cryptoKey).not.toBeUndefined();
   });

@@ -18,7 +18,7 @@ describe('TitleService', () => {
       service.getTitle().subscribe({
         next: (v) => expect(v).toBe(''),
       });
-    }
+    },
   ));
 
   it('should update title', inject([TitleService], (service: TitleService) => {

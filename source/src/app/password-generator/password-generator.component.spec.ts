@@ -6,6 +6,7 @@ import { MaterialModules } from '../material.modules';
 import { PasswordGeneratorComponent } from './password-generator.component';
 import { GaService } from '../ga.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 describe('PasswordGeneratorComponent', () => {
   let component: PasswordGeneratorComponent;
@@ -13,23 +14,22 @@ describe('PasswordGeneratorComponent', () => {
   let matSnackBar: MatSnackBar;
   let openSpy: jasmine.Spy;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          ReactiveFormsModule,
-          MaterialModules,
-          RouterTestingModule,
-        ],
-        declarations: [PasswordGeneratorComponent],
-        providers: [GaService],
-      }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        ReactiveFormsModule,
+        MaterialModules,
+        RouterTestingModule,
+        ClipboardModule,
+      ],
+      declarations: [PasswordGeneratorComponent],
+      providers: [GaService],
+    }).compileComponents();
 
-      matSnackBar = TestBed.inject(MatSnackBar);
-      openSpy = spyOn(matSnackBar, 'open');
-    })
-  );
+    matSnackBar = TestBed.inject(MatSnackBar);
+    openSpy = spyOn(matSnackBar, 'open');
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PasswordGeneratorComponent);
@@ -46,7 +46,7 @@ describe('PasswordGeneratorComponent', () => {
     expect(openSpy).toHaveBeenCalledWith(
       jasmine.any(String),
       jasmine.any(String),
-      { duration: 500 }
+      { duration: 500 },
     );
   });
 });
