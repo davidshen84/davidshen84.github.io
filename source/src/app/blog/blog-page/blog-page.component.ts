@@ -21,7 +21,7 @@ export class BlogPageComponent extends BaseComponent implements OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router,
     private _titleService: TitleService,
-    ga: GaService
+    ga: GaService,
   ) {
     super(ga);
     this._paramId$ = this._route.params.pipe(map((p) => p['id']));
@@ -30,9 +30,9 @@ export class BlogPageComponent extends BaseComponent implements OnDestroy {
       this._paramId$
         .pipe(
           filter((p) => p !== undefined),
-          map((p) => p.replace(/-/g, ' '))
+          map((p) => p.replace(/-/g, ' ')),
         )
-        .subscribe((t) => this._titleService.setTitle(t))
+        .subscribe((t) => this._titleService.setTitle(t)),
     );
     this.blogPath$ = this._paramId$.pipe(map((p) => `assets/blogs/${p}.md`));
   }
@@ -46,8 +46,8 @@ export class BlogPageComponent extends BaseComponent implements OnDestroy {
   onBlogLoadError(_: string) {
     this._paramIdSubscriptions.push(
       this._paramId$.subscribe((id) =>
-        this._router.navigate(['blog/notfound', id])
-      )
+        this._router.navigate(['blog/notfound', id]),
+      ),
     );
   }
 }

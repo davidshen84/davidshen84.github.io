@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RemarkableComponent } from './remarkable.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('RemarkableComponent', () => {
   let component: RemarkableComponent;
@@ -8,9 +9,9 @@ describe('RemarkableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RemarkableComponent ]
-    })
-    .compileComponents();
+      declarations: [RemarkableComponent],
+      imports: [HttpClientModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,3 +1,3 @@
 <div class="markdown-container">
-  <app-remarkable [src]='blogPath$ | async'></app-remarkable>
+  <app-remarkable [src]='blogPath$ | async' (errorEvent)="onBlogLoadError($event.statusText)"></app-remarkable>
 </div>

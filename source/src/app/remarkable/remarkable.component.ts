@@ -6,13 +6,22 @@ import {
   ElementRef,
   Input,
   OnChanges,
+  Output,
   SimpleChanges,
 } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Remarkable } from 'remarkable';
 import rkatex from 'remarkable-katex';
-import { race, Subject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { of, race, Subject } from 'rxjs';
+import {
+  catchError,
+  filter,
+  map,
+  publish,
+  share,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import hljs from 'highlight.js';
 
@@ -44,7 +53,7 @@ import hljs from 'highlight.js';
   styleUrls: ['./remarkable.component.scss'],
 })
 export class RemarkableComponent
-  implements AfterViewInit, OnChanges, AfterContentChecked
+  implements OnChanges, AfterContentChecked, AfterViewInit
 {
   private readonly md: Remarkable;
 
@@ -55,11 +64,25 @@ export class RemarkableComponent
   private content!: ElementRef;
 
   private srcSubject = new Subject<string>();
+  private srcHttpResponse$ = this.srcSubject.pipe(
+    switchMap((x) =>
+      this.http
+        .get(x, { observe: 'response', responseType: 'text' })
+        .pipe(catchError((x) => of(x as HttpResponse<string>))),
+    ),
+    share(),
+  );
   private contentSubject = new Subject<string>();
 
+  @Output()
+  public errorEvent = this.srcHttpResponse$.pipe(
+    filter((x) => x.status !== 200),
+  );
+
   public markdown$ = race(
-    this.srcSubject.pipe(
-      switchMap((x) => this.http.get(x, { responseType: 'text' })),
+    this.srcHttpResponse$.pipe(
+      filter((x) => x.status === 200),
+      map((x) => x.body),
     ),
     this.contentSubject.asObservable(),
   ).pipe(
@@ -94,7 +117,7 @@ export class RemarkableComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.src) {
+    if (changes.src && !changes.src.isFirstChange()) {
       this.srcSubject.next(changes.src.currentValue);
     }
   }
