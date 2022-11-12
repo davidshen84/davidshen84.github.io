@@ -22,7 +22,7 @@ export class CanvasDrawService {
     in_min: number,
     in_max: number,
     out_min: number,
-    out_max: number
+    out_max: number,
   ): number {
     return ((n - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
   }
@@ -51,13 +51,13 @@ export class CanvasDrawService {
     r: number,
     g: number,
     b: number,
-    a: number
+    a: number,
   ): void {
     const imageData = this._context2d.getImageData(
       0,
       0,
       this._canvas.width,
-      this._canvas.height
+      this._canvas.height,
     );
     const { x, y } = this.getCanvasCoordinates({ x: mouseX, y: mouseY });
     const position: number = (x + y * imageData.width) * 4;
@@ -76,7 +76,7 @@ export class CanvasDrawService {
   public cleanCanvas(): void {
     const imageData = new ImageData(
       this._canvas.clientWidth,
-      this._canvas.clientHeight
+      this._canvas.clientHeight,
     );
     this._context2d.putImageData(imageData, 0, 0);
   }
@@ -87,7 +87,7 @@ export class CanvasDrawService {
       0,
       this._canvas.clientWidth,
       0,
-      this._canvas.width
+      this._canvas.width,
     );
 
   private mapY = (offsetY: number) =>
@@ -96,7 +96,7 @@ export class CanvasDrawService {
       0,
       this._canvas.clientHeight,
       0,
-      this._canvas.height
+      this._canvas.height,
     );
 
   /**

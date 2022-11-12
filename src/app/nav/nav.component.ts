@@ -18,7 +18,7 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private _titleService: TitleService
+    private _titleService: TitleService,
   ) {
     this.title$ = this._titleService.getTitle();
   }

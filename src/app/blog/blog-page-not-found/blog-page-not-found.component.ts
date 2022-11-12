@@ -14,7 +14,7 @@ export class BlogPageNotFoundComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
-    private _titleService: TitleService
+    private _titleService: TitleService,
   ) {
     this._titleService.setTitle('Blog Not Found!!! 😞');
   }

@@ -24,7 +24,7 @@ export class SettingsComponent implements OnInit {
   constructor(
     private _cryptoService: RS256CryptoService,
     private _snackBar: MatSnackBar,
-    private _title: TitleService
+    private _title: TitleService,
   ) {
     this._title.setTitle('Settings');
   }
@@ -41,10 +41,10 @@ export class SettingsComponent implements OnInit {
             (r: Error) => {
               this._snackBar.open(r.message, '❌', { duration: 1000 });
               return false;
-            }
-          )
-        )
-      )
+            },
+          ),
+        ),
+      ),
     );
   }
 }

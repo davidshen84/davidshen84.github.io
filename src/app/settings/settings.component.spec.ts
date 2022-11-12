@@ -15,24 +15,22 @@ describe('SettingsComponent', () => {
   let component: SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          MatExpansionModule,
-          MatFormFieldModule,
-          MatInputModule,
-          MatIconModule,
-          MatSnackBarModule,
-          FormsModule,
-          NgxWebstorageModule.forRoot(),
-        ],
-        providers: [RS256CryptoService],
-        declarations: [SettingsComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatSnackBarModule,
+        FormsModule,
+        NgxWebstorageModule.forRoot(),
+      ],
+      providers: [RS256CryptoService],
+      declarations: [SettingsComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SettingsComponent);

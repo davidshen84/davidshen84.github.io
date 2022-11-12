@@ -22,7 +22,7 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
     typ: 'JWT',
   };
   private readonly _encodedHeader = this._strUtlSvc.EncodeJSON(
-    AuthorizationInterceptorService._jwtHeader
+    AuthorizationInterceptorService._jwtHeader,
   );
 
   private readonly privateKeyData: string;
@@ -30,14 +30,14 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
   constructor(
     private cryptoService: RS256CryptoService,
     private _strUtlSvc: StringUtilityService,
-    store: LocalStorageService
+    store: LocalStorageService,
   ) {
     this.privateKeyData = store.retrieve('private-key');
   }
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const ts = Math.floor(Date.now() / 1000);
     const halfMin = 30;
@@ -51,7 +51,7 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
     const signature$ = fromPromise(
       this.cryptoService
         .sign(this.privateKeyData, data)
-        .then(undefined, () => null)
+        .then(undefined, () => null),
     ).pipe(share());
 
     return merge(
@@ -65,12 +65,12 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
           });
 
           return next.handle(request);
-        })
+        }),
       ),
       signature$.pipe(
         filter((i) => i === null),
-        mergeMap(() => next.handle(req))
-      )
+        mergeMap(() => next.handle(req)),
+      ),
     );
   }
 }

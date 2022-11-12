@@ -34,19 +34,19 @@ export class PasswordGeneratorComponent extends BaseComponent {
     this.SliderControl.valueChanges.pipe(startWith(this.length)),
     this.LowerCaseControl.valueChanges.pipe(
       startWith(true),
-      map((x) => (x ? 'abcdefghijklmnopqrstuvwxyz' : ''))
+      map((x) => (x ? 'abcdefghijklmnopqrstuvwxyz' : '')),
     ),
     this.UpperCaseControl.valueChanges.pipe(
       startWith(true),
-      map((x) => (x ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : ''))
+      map((x) => (x ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '')),
     ),
     this.DigitControl.valueChanges.pipe(
       startWith(true),
-      map((x) => (x ? '0123456789' : ''))
+      map((x) => (x ? '0123456789' : '')),
     ),
     this.SpecialControl.valueChanges.pipe(
       startWith(true),
-      map((x) => (x ? '`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : ''))
+      map((x) => (x ? '`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : '')),
     ),
   ]).pipe(
     map(([, n, ...args]) => [n, args.reduce((p, c) => p.concat(c), '')]),
@@ -54,19 +54,19 @@ export class PasswordGeneratorComponent extends BaseComponent {
       of(x).pipe(
         // pick one character
         map((y) =>
-          y.length > 0 ? y[Math.ceil(Math.random() * prime) % y.length] : '😂'
+          y.length > 0 ? y[Math.ceil(Math.random() * prime) % y.length] : '😂',
         ),
         repeat(n),
-        scan((acc: string, value: string) => acc + value, '')
-      )
-    )
+        scan((acc: string, value: string) => acc + value, ''),
+      ),
+    ),
   );
 
   constructor(
     ga: GaService,
     private _titleService: TitleService,
     private breakpointObserver: BreakpointObserver,
-    private matSnackBar: MatSnackBar
+    private matSnackBar: MatSnackBar,
   ) {
     super(ga);
     this._titleService.setTitle('Password Generator');

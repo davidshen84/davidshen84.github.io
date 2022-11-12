@@ -29,13 +29,13 @@ export class CryptoRS256Component extends BaseComponent {
       typ: 'JWT',
     },
     null,
-    2
+    2,
   );
   public headerSubject = new BehaviorSubject<string>(this.header);
   public encodedHeader$ = this.headerSubject.pipe(
     map((s) => this.strUtlSvc.EncodeString(s)),
     map((a) => String.fromCharCode(...Array.from(a))),
-    map(this.strUtlSvc.Base64UrlEncode)
+    map(this.strUtlSvc.Base64UrlEncode),
   );
   // Define payload
   public payload = JSON.stringify(
@@ -46,13 +46,13 @@ export class CryptoRS256Component extends BaseComponent {
       iat: 1516239022,
     },
     null,
-    2
+    2,
   );
   public payloadSubject = new BehaviorSubject<string>(this.payload);
   public encodedPayload$ = this.payloadSubject.pipe(
     map((s) => this.strUtlSvc.EncodeString(s)),
     map((a) => String.fromCharCode(...Array.from(a))),
-    map(this.strUtlSvc.Base64UrlEncode)
+    map(this.strUtlSvc.Base64UrlEncode),
   );
 
   // Define private key
@@ -67,10 +67,10 @@ export class CryptoRS256Component extends BaseComponent {
   ]).pipe(
     mergeMap(([h, p, k]) =>
       fromPromise(
-        this.cryptoService.sign(k, `${h}.${p}`).then(undefined, () => '')
-      )
+        this.cryptoService.sign(k, `${h}.${p}`).then(undefined, () => ''),
+      ),
     ),
-    share()
+    share(),
   );
 
   // Define JWT
@@ -81,19 +81,19 @@ export class CryptoRS256Component extends BaseComponent {
       this.signature$,
     ]).pipe(
       filter(([, , s]) => s && s !== ''),
-      map(([h, p, s]) => `${h}.${p}.${s}`)
+      map(([h, p, s]) => `${h}.${p}.${s}`),
     ),
     this.signature$.pipe(
       filter((s) => !s),
-      mapTo('')
-    )
+      mapTo(''),
+    ),
   );
 
   constructor(
     private cryptoService: RS256CryptoService,
     private titleService: TitleService,
     private strUtlSvc: StringUtilityService,
-    ga: GaService
+    ga: GaService,
   ) {
     super(ga);
 

@@ -25,7 +25,7 @@ export class StringUtilityService {
       `${s}====`
         .slice(0, s.length + (s.length % 4))
         .replace(/-/g, '+')
-        .replace(/_/g, '/')
+        .replace(/_/g, '/'),
     );
   }
 

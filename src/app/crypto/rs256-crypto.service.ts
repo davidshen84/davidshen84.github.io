@@ -78,9 +78,9 @@ export class RS256CryptoService implements CryptoService {
     return crypto.subtle.sign(this._rsaPssParams, cryptoKey, dataBuf).then(
       (buf) =>
         this._strUtlSvc.Base64UrlEncode(
-          String.fromCharCode(...Array.from(new Uint8Array(buf)))
+          String.fromCharCode(...Array.from(new Uint8Array(buf))),
         ),
-      (r) => Promise.reject(new Error(r))
+      (r) => Promise.reject(new Error(r)),
     );
   }
 
