@@ -6,40 +6,43 @@
 <form #form="ngForm">
 
   <mat-card>
-    <mat-form-field>
-      <textarea (ngModelChange)="headerSubject.next(header)" [(ngModel)]="header" matInput matTextareaAutosize
-                name="header"
-                placeholder="Header"></textarea>
+    <mat-form-field appearance="fill">
+      <mat-label>Header</mat-label>
+      <textarea (ngModelChange)="headerSubject.next(header)" [(ngModel)]="header"
+                cdkTextareaAutosize matInput name="header"></textarea>
       <input [value]="encodedHeader$ | async" matInput readonly/>
     </mat-form-field>
   </mat-card>
 
   <mat-card>
     <mat-form-field>
-      <textarea (ngModelChange)="payloadSubject.next(payload)" [(ngModel)]="payload" matInput matTextareaAutosize
-                name="payload"
-                placeholder="Payload"></textarea>
+      <mat-label>Payload</mat-label>
+      <textarea (ngModelChange)="payloadSubject.next(payload)" [(ngModel)]="payload"
+                cdkTextareaAutosize
+                matInput name="payload"></textarea>
       <input [value]="encodedPayload$ | async" matInput readonly/>
     </mat-form-field>
   </mat-card>
 
   <mat-card>
     <mat-form-field>
-        <textarea (ngModelChange)="privateKeyInputSubject.next(privateKeyInput)" [(ngModel)]="privateKeyInput" matInput
-                  matTextareaAutosize
-                  name="base64Input" placeholder="Private Key"></textarea>
+      <mat-label>Private Key</mat-label>
+      <textarea (ngModelChange)="privateKeyInputSubject.next(privateKeyInput)" [(ngModel)]="privateKeyInput"
+                cdkTextareaAutosize matInput name="base64Input"></textarea>
     </mat-form-field>
   </mat-card>
 
   <mat-card>
     <mat-form-field>
-      <input [value]="signature$ | async" matInput placeholder="Signature" readonly/>
+      <mat-label>Signature</mat-label>
+      <input [value]="signature$ | async" matInput readonly/>
     </mat-form-field>
   </mat-card>
 
   <mat-card>
     <mat-form-field>
-      <input [value]="jwt$ | async" matInput placeholder="Json Web Token" readonly/>
+      <mat-label>Json Web Token</mat-label>
+      <input [value]="jwt$ | async" matInput readonly/>
     </mat-form-field>
   </mat-card>
 

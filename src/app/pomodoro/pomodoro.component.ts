@@ -14,9 +14,9 @@ import {
 } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import * as moment from 'moment';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const ONE_SECOND = 1000; // milliseconds
 const ONE_MINUTE = 60; // seconds

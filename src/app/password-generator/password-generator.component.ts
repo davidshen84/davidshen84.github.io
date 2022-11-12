@@ -1,12 +1,12 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { map, mergeMap, repeat, scan, startWith } from 'rxjs/operators';
 import { TitleService } from '../title.service';
 import { GaService } from '../ga.service';
 import { BaseComponent } from '../base-component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const prime = 21001;
 
@@ -15,7 +15,7 @@ const prime = 21001;
   templateUrl: './password-generator.component.html',
   styleUrls: ['./password-generator.component.scss'],
   providers: [GaService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordGeneratorComponent extends BaseComponent {
   public isHandset$ = this.breakpointObserver
@@ -66,14 +66,14 @@ export class PasswordGeneratorComponent extends BaseComponent {
     ga: GaService,
     private _titleService: TitleService,
     private breakpointObserver: BreakpointObserver,
-    private matSnackBar: MatSnackBar,
+    private _matSnackBar: MatSnackBar,
   ) {
     super(ga);
     this._titleService.setTitle('Password Generator');
   }
 
   public openSnackBar() {
-    return this.matSnackBar.open('Copied to clipboard!', '😆', {
+    return this._matSnackBar.open('Copied to clipboard!', '😆', {
       duration: 500,
     });
   }
