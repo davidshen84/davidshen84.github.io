@@ -15,7 +15,7 @@ export class GaService {
     this.router.events
       .pipe(
         filter((e) => e instanceof NavigationEnd),
-        takeUntil(this.done$)
+        takeUntil(this.done$),
       )
       .subscribe((event: NavigationEnd) => {
         ga('set', 'page', event.urlAfterRedirects);

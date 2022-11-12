@@ -8,19 +8,17 @@ describe('BlogPageNotFoundComponent', () => {
   let component: BlogPageNotFoundComponent;
   let fixture: ComponentFixture<BlogPageNotFoundComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        providers: [
-          {
-            provide: ActivatedRoute,
-            useValue: { params: of({ id: 'notfound' }) },
-          },
-        ],
-        declarations: [BlogPageNotFoundComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: { params: of({ id: 'notfound' }) },
+        },
+      ],
+      declarations: [BlogPageNotFoundComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogPageNotFoundComponent);

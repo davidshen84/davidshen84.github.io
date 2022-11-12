@@ -12,21 +12,19 @@ describe('PomodoroComponent', () => {
   let component: PomodoroComponent;
   let fixture: ComponentFixture<PomodoroComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          MaterialModules,
-          NoopAnimationsModule,
-          MatButtonToggleModule,
-          MatGridListModule,
-          MatTooltipModule,
-        ],
-        declarations: [PomodoroComponent, PomodoroTimePipe],
-      }).compileComponents();
-      TestBed.inject(MatSnackBar);
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        MaterialModules,
+        NoopAnimationsModule,
+        MatButtonToggleModule,
+        MatGridListModule,
+        MatTooltipModule,
+      ],
+      declarations: [PomodoroComponent, PomodoroTimePipe],
+    }).compileComponents();
+    TestBed.inject(MatSnackBar);
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PomodoroComponent);
