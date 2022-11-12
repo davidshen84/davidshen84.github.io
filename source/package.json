@@ -6,8 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
-    "release": "gulp"
+    "lint": "ng lint"
   },
   "private": true,
   "browser": {
@@ -54,8 +53,6 @@
     "@angular/cli": "^14.0.0",
     "@angular/compiler-cli": "^14.0.0",
     "@angular/language-service": "^14.0.0",
-    "@types/gulp": "^4.0.9",
-    "@types/gulp-shell": "0.7.0",
     "@types/hammerjs": "^2.0.41",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.10",
@@ -71,8 +68,6 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "gulp": "^4.0.2",
-    "gulp-shell": "^0.8.0",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.16",

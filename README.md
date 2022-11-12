@@ -9,7 +9,6 @@ Welcome to my blog repository!
 ## Features
 
 - [x] Support Markdown content.
-  - [x] Fix 404 error: Handle the *(error)* event.
 - [x] Support PWA.
 - [ ] Animation support!
 - [x] Implement Password Generator component.
