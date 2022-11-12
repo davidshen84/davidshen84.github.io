@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { filter, mergeMap } from 'rxjs/operators';

@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MaterialModules } from './material.modules';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -27,6 +26,11 @@ import { SettingsModule } from './settings/settings.module';
 import { AuthorizationInterceptorService } from './services/authorization-interceptor.service';
 import { RS256CryptoService } from './crypto/rs256-crypto.service';
 import { RemarkableModule } from './remarkable/remarkable.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,7 @@ import { RemarkableModule } from './remarkable/remarkable.module';
     HammerModule,
     HttpClientModule,
     LayoutModule,
-    MaterialModules,
+
     NgxWebstorageModule.forRoot(),
     PomodoroModule,
     QRCodeModule,
@@ -55,6 +59,11 @@ import { RemarkableModule } from './remarkable/remarkable.module';
     }),
     SettingsModule,
     RemarkableModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [
     {

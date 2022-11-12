@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from '../material.modules';
 import { PasswordGeneratorComponent } from './password-generator.component';
