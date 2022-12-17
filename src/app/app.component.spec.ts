@@ -2,7 +2,6 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModules } from './material.modules';
 import { RouterTestingModule } from '@angular/router/testing';
 import { QRCodeModule } from 'angularx-qrcode';
 import { FooterComponent } from './footer/footer.component';
@@ -10,12 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        MaterialModules,
-        RouterTestingModule,
-        QRCodeModule,
-      ],
+      imports: [BrowserAnimationsModule, RouterTestingModule, QRCodeModule],
       declarations: [AppComponent, NavComponent, FooterComponent],
     }).compileComponents();
   }));

@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { map, mergeMap, repeat, scan, startWith } from 'rxjs/operators';
@@ -15,7 +15,6 @@ const prime = 21001;
   templateUrl: './password-generator.component.html',
   styleUrls: ['./password-generator.component.scss'],
   providers: [GaService],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordGeneratorComponent extends BaseComponent {
   public isHandset$ = this.breakpointObserver
