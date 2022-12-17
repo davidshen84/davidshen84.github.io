@@ -2,7 +2,6 @@ name: Deploy gh-pages
 
 on:
   push:
-  pull_request:
     branches:
       - $default-branch
 
