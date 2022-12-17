@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PomodoroComponent, PomodoroTimePipe } from './pomodoro.component';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
-import { MaterialModules } from '../material.modules';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 describe('PomodoroComponent', () => {
   let component: PomodoroComponent;
@@ -15,11 +14,11 @@ describe('PomodoroComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModules,
         NoopAnimationsModule,
         MatButtonToggleModule,
         MatGridListModule,
         MatTooltipModule,
+        MatSnackBarModule,
       ],
       declarations: [PomodoroComponent, PomodoroTimePipe],
     }).compileComponents();

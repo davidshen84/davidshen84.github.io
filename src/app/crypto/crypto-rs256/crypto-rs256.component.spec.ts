@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModules } from '../../material.modules';
 import { RS256CryptoService } from '../rs256-crypto.service';
 
 import { CryptoRS256Component } from './crypto-rs256.component';
@@ -19,7 +18,6 @@ describe('CryptoRS256Component', () => {
       imports: [
         NoopAnimationsModule,
         FormsModule,
-        MaterialModules,
         RouterTestingModule,
         HttpClientTestingModule,
         RemarkableModule,

@@ -1,12 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModules } from '../material.modules';
 import { PasswordGeneratorComponent } from './password-generator.component';
 import { GaService } from '../ga.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('PasswordGeneratorComponent', () => {
   let component: PasswordGeneratorComponent;
@@ -18,10 +23,10 @@ describe('PasswordGeneratorComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
-        ReactiveFormsModule,
-        MaterialModules,
         RouterTestingModule,
-        ClipboardModule,
+        MatSnackBarModule,
+        MatInputModule,
+        MatCheckboxModule,
       ],
       declarations: [PasswordGeneratorComponent],
       providers: [GaService],
