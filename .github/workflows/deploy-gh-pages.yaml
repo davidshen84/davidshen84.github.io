@@ -21,7 +21,9 @@ jobs:
         with:
           key: node-modules-${{ hashFiles('./package-lock.json') }}
           path: |
-            ./node_modules-
+            ./node_modules
+          restore-keys: |
+            node-modules-
       - run: |
           npm install
           ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
