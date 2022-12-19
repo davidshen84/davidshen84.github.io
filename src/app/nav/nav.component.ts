@@ -16,6 +16,8 @@ export class NavComponent {
 
   public title$: Observable<string>;
 
+  public pubKey = '7E927F94CC52AA1A';
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private _titleService: TitleService,

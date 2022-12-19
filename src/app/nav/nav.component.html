@@ -16,6 +16,11 @@
       <a [routerLink]="['crypto']" mat-list-item><span>🔒</span>&nbsp;Crypto Showcase</a>
       <a [routerLink]="['pomodoro']" mat-list-item><span>🍅</span>&nbsp;Pomodoro</a>
       <a [routerLink]="['settings']" mat-list-item><span>⚙</span>&nbsp;️Settings</a>
+      <a [href]="'https://keys.openpgp.org/search?q=' + pubKey" target="_blank">
+        <div class="qrcode-container">
+        <qrcode [errorCorrectionLevel]="'M'" margin="0" [qrdata]="pubKey" width="128"></qrcode>
+        </div>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
