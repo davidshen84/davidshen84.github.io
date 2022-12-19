@@ -13,7 +13,6 @@ import { QRCodeModule } from 'angularx-qrcode';
 
 import { AppComponent } from './app.component';
 import { CanvasShowcaseComponent } from './canvas-showcase/canvas-showcase.component';
-import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavComponent } from './nav/nav.component';
 
@@ -36,7 +35,6 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     AppComponent,
     CanvasShowcaseComponent,
-    FooterComponent,
     HomePageComponent,
     NavComponent,
   ],

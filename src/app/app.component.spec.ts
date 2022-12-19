@@ -4,13 +4,12 @@ import { NavComponent } from './nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { QRCodeModule } from 'angularx-qrcode';
-import { FooterComponent } from './footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [BrowserAnimationsModule, RouterTestingModule, QRCodeModule],
-      declarations: [AppComponent, NavComponent, FooterComponent],
+      declarations: [AppComponent, NavComponent],
     }).compileComponents();
   }));
 
