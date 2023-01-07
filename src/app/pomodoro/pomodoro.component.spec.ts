@@ -6,6 +6,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 describe('PomodoroComponent', () => {
   let component: PomodoroComponent;
@@ -19,6 +23,10 @@ describe('PomodoroComponent', () => {
         MatGridListModule,
         MatTooltipModule,
         MatSnackBarModule,
+        MatCardModule,
+        MatListModule,
+        MatFormFieldModule,
+        MatInputModule,
       ],
       declarations: [PomodoroComponent, PomodoroTimePipe],
     }).compileComponents();
