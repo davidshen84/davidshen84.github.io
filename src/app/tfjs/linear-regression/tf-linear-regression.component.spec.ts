@@ -1,3 +1,4 @@
+import * as tf from '@tensorflow/tfjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TfLinearRegressionComponent } from './tf-linear-regression.component';
@@ -21,6 +22,7 @@ describe('TfLinearRegressionComponent', () => {
   }));
 
   beforeEach(() => {
+    tf.setBackend('cpu');
     fixture = TestBed.createComponent(TfLinearRegressionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

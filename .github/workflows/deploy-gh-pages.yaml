@@ -21,7 +21,7 @@ jobs:
       - run: |
           npm install
           ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
-      - run: ./node_modules/.bin/ng build --configuration production --aot
+      - run: ./node_modules/.bin/ng build --configuration production
       - uses: actions/upload-pages-artifact@v1
         with:
           path: dist/blog

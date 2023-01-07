@@ -8,6 +8,9 @@ import { CryptoRS256Component } from './crypto-rs256.component';
 import { GaService } from '../../ga.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RemarkableModule } from '../../remarkable/remarkable.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
 describe('CryptoRS256Component', () => {
   let component: CryptoRS256Component;
@@ -21,6 +24,9 @@ describe('CryptoRS256Component', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         RemarkableModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule,
       ],
       declarations: [CryptoRS256Component],
       providers: [RS256CryptoService, GaService],

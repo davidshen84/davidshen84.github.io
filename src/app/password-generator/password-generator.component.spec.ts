@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 describe('PasswordGeneratorComponent', () => {
   let component: PasswordGeneratorComponent;
@@ -27,6 +27,12 @@ describe('PasswordGeneratorComponent', () => {
         MatSnackBarModule,
         MatInputModule,
         MatCheckboxModule,
+        ClipboardModule,
+        MatListModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatSliderModule,
       ],
       declarations: [PasswordGeneratorComponent],
       providers: [GaService],
