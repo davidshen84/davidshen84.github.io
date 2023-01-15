@@ -5,7 +5,6 @@ import { PasswordGeneratorRoutingModule } from './password-generator-routing.mod
 import { PasswordGeneratorComponent } from './password-generator.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
@@ -22,7 +21,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatCardModule,
     MatListModule,
-    MatFormFieldModule,
     MatCheckboxModule,
     MatSliderModule,
     MatInputModule,

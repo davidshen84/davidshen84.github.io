@@ -1,17 +1,22 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PasswordGeneratorComponent } from './password-generator.component';
 import { GaService } from '../ga.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ClipboardModule } from '@angular/cdk/clipboard';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
+import { MatSliderModule } from '@angular/material/slider';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { By } from '@angular/platform-browser';
+import { MatDividerModule } from '@angular/material/divider';
 
 describe('PasswordGeneratorComponent', () => {
   let component: PasswordGeneratorComponent;
@@ -28,11 +33,10 @@ describe('PasswordGeneratorComponent', () => {
         MatInputModule,
         MatCheckboxModule,
         ClipboardModule,
-        MatListModule,
-        MatFormFieldModule,
         ReactiveFormsModule,
         MatCardModule,
         MatSliderModule,
+        MatDividerModule,
       ],
       declarations: [PasswordGeneratorComponent],
       providers: [GaService],
@@ -60,4 +64,19 @@ describe('PasswordGeneratorComponent', () => {
       { duration: 500 },
     );
   });
+
+  it('should generate new password', fakeAsync(() => {
+    const copyTarget = fixture.debugElement.query(By.css('#copyTarget'));
+    const generateButton = fixture.debugElement.query(By.css('#generate'));
+
+    expect(copyTarget).toBeTruthy();
+    expect(generateButton).toBeTruthy();
+
+    const oldValue = copyTarget.nativeElement.value;
+
+    generateButton.triggerEventHandler('click');
+    fixture.detectChanges();
+
+    expect(copyTarget.nativeElement.value).not.toEqual(oldValue);
+  }));
 });
