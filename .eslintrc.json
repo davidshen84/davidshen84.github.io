@@ -6,9 +6,9 @@
         "*.ts"
       ],
       "env": {
-        "es2020": true,
         "node": true,
-        "browser": true
+        "browser": true,
+        "es2022": true
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
