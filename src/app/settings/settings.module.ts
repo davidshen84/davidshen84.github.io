@@ -7,6 +7,7 @@ import { SettingsComponent } from './settings.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [SettingsComponent],
@@ -17,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
   ],
 })
 export class SettingsModule {}
