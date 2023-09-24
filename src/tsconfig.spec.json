@@ -5,8 +5,7 @@
     "types": [
       "jasmine",
       "node"
-    ],
-    "module": "nodenext"
+    ]
   },
   "files": [
     "test.ts",
