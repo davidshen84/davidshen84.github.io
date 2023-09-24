@@ -6,7 +6,7 @@
       "jasmine",
       "node"
     ],
-    "module": "es2020"
+    "module": "nodenext"
   },
   "files": [
     "test.ts",
