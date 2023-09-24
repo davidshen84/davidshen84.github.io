@@ -17,6 +17,7 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import moment from 'moment';
+import {TitleService} from "../title.service";
 
 const ONE_SECOND = 1000; // milliseconds
 const ONE_MINUTE = 60; // seconds
@@ -101,7 +102,10 @@ export class PomodoroComponent implements OnInit, OnDestroy {
   constructor(
     private snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
-  ) {}
+    private _titleService: TitleService,
+  ) {
+    _titleService.setTitle("🍅 Pomodoro 🍅")
+  }
 
   async ngOnInit() {
     try {
