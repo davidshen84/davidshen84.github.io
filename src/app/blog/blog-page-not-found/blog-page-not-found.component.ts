@@ -10,7 +10,7 @@ import { TitleService } from '../../title.service';
   styleUrls: ['./blog-page-not-found.component.scss'],
 })
 export class BlogPageNotFoundComponent implements OnInit {
-  public BlogId$: Observable<string>;
+  public BlogId$!: Observable<string>;
 
   constructor(
     private _route: ActivatedRoute,

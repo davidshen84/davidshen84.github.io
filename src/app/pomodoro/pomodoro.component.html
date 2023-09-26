@@ -1,6 +1,6 @@
 <mat-card #message class='center'>
   <mat-card-content>
-    <div class='clock'>{{ this.clock$ | async | pomodoroTime  }}</div>
+    <div class='clock'>{{ (this.clock$ | async)! | pomodoroTime  }}</div>
     <div class='note'>{{ (this.note$ | async) || '🍅'}}</div>
   </mat-card-content>
 </mat-card>
@@ -8,25 +8,26 @@
   <mat-card-title>Choose your 🍅 style</mat-card-title>
   <mat-card-content class='input-panel'>
     <div class='group'>
-      <mat-button-toggle-group #pomodoroSequence (change)='pomodoroSequenceChanged.next($event)' value='five'>
+      <mat-button-toggle-group #pomodoroSequence (change)='pomodoroSequenceChanged.next($event.value)' value='five'>
         <mat-button-toggle value='five'>5 minutes</mat-button-toggle>
         <mat-button-toggle value='fib'>Fibonacci</mat-button-toggle>
         <mat-button-toggle value='prime'>Prime</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
 
-    <div class='group' [class.fill-width]="(isHandset$ | async) === true" [class.narrow]="(isHandset$ | async) === false">
+    <div [class.fill-width]="(isHandset$ | async) === true" [class.narrow]="(isHandset$ | async) === false"
+         class='group'>
       <mat-form-field>
         <mat-label>Note:</mat-label>
-        <input #note matInput type='text' placeholder='🍅'>
+        <input #note matInput placeholder='🍅' type='text'>
       </mat-form-field>
     </div>
 
     <div class='pomodoro-picker group'>
-      <span *ngFor='let p of this.selectedPomodoroSequence$ | async;'
-            [ngStyle]="{'font-size': (this.calcPomodoroFontSize(p)) + 'em' }"
+      <span (click)='addPomodoro(p,note.value)'
+            *ngFor='let p of this.selectedPomodoroSequence$ | async;'
             [matTooltip]="p + ' minutes'"
-            (click)='addPomodoro(p,note.value)'>
+            [ngStyle]="{'font-size': (this.calcPomodoroFontSize(p)) + 'em' }">
         🍅
       </span>
     </div>
@@ -39,7 +40,7 @@
       <mat-card-title>Next 🍅</mat-card-title>
       <mat-card-content>
         <mat-list>
-          <mat-list-item role='list' *ngFor='let p of this.pomodoroStack; first as h' class='pomodoro-list-item'>
+          <mat-list-item *ngFor='let p of this.pomodoroStack; first as h' class='pomodoro-list-item' role='list'>
             <span matLine>🍅
               {{ p.seconds | pomodoroTime }} -- {{ p.note }}
             </span>
@@ -53,7 +54,7 @@
     <mat-card class='pomodoro-list'>
       <mat-card-title>Finished 🍅</mat-card-title>
       <mat-card-content>
-        <mat-list-item role='list' *ngFor='let p of this.finishedPomodoroStack; first as h' class='pomodoro-list-item'>
+        <mat-list-item *ngFor='let p of this.finishedPomodoroStack; first as h' class='pomodoro-list-item' role='list'>
             <span matLine>🍅
               {{ p.seconds | pomodoroTime }} -- {{ p.note }}
             </span>

@@ -68,7 +68,7 @@ describe('RS256CryptoService', () => {
 
     try {
       await service.sign(key, 'data');
-    } catch (e) {
+    } catch (e: any) {
       expect(e.message).toBe('DataError');
     }
   });
@@ -122,7 +122,7 @@ describe('RS256CryptoService', () => {
 
     try {
       await service.sign('key', 'data');
-    } catch (e) {
+    } catch (e: any) {
       expect(e.message).toContain('TypeError');
     }
   });
@@ -149,7 +149,7 @@ describe('RS256CryptoService', () => {
 
     try {
       await service.importKey(key);
-    } catch (e) {
+    } catch (e: any) {
       expect(e.message).toBe('DataError');
     }
   });

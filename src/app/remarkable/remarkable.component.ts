@@ -11,17 +11,10 @@ import {
 } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Remarkable } from 'remarkable';
+// @ts-ignore
 import rkatex from 'remarkable-katex';
 import { of, race, Subject } from 'rxjs';
-import {
-  catchError,
-  filter,
-  map,
-  publish,
-  share,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
+import { catchError, filter, map, share, switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import hljs from 'highlight.js';
 
@@ -55,11 +48,9 @@ import hljs from 'highlight.js';
 export class RemarkableComponent
   implements OnChanges, AfterContentChecked, AfterViewInit
 {
-  private readonly md: Remarkable;
-
   @Input()
-  public src: string;
-
+  public src: string | null = null;
+  private readonly md: Remarkable;
   @ContentChild('content', { static: true })
   private content!: ElementRef;
 
@@ -72,13 +63,11 @@ export class RemarkableComponent
     ),
     share(),
   );
-  private contentSubject = new Subject<string>();
-
   @Output()
   public errorEvent = this.srcHttpResponse$.pipe(
     filter((x) => x.status !== 200),
   );
-
+  private contentSubject = new Subject<string>();
   public markdown$ = race(
     this.srcHttpResponse$.pipe(
       filter((x) => x.status === 200),
@@ -86,7 +75,7 @@ export class RemarkableComponent
     ),
     this.contentSubject.asObservable(),
   ).pipe(
-    map((x) => this.md.render(x)),
+    map((x) => this.md.render(x!)),
     map(this.sanitizer.bypassSecurityTrustHtml),
   );
 

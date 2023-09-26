@@ -19,12 +19,12 @@ import { BaseComponent } from '../base-component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WebcamComponent extends BaseComponent implements OnInit {
-  private _snapshotTrigger = new Subject();
+  private _snapshotTrigger = new Subject<void>();
   public snapshotTrigger$ = this._snapshotTrigger.asObservable();
-  private _image: WebcamImage;
+  private _image?: WebcamImage;
   @ViewChild('canvas', { static: true })
-  private _canvasRef: ElementRef;
-  private _canvas: HTMLCanvasElement;
+  private _canvasRef!: ElementRef;
+  private _canvas!: HTMLCanvasElement;
 
   constructor(titleService: TitleService, ga: GaService) {
     super(ga);
@@ -36,7 +36,7 @@ export class WebcamComponent extends BaseComponent implements OnInit {
   }
 
   public get imageUrl() {
-    return this._image.imageAsDataUrl;
+    return this._image?.imageAsDataUrl;
   }
 
   ngOnInit() {
@@ -51,7 +51,7 @@ export class WebcamComponent extends BaseComponent implements OnInit {
     this._image = image;
 
     // Invert the color for fun!!!
-    const context2d = this._canvas.getContext('2d');
+    const context2d = this._canvas.getContext('2d')!;
     this._canvas.height = image.imageData.height;
     this._canvas.width = image.imageData.width;
 

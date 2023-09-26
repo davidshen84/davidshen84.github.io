@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-declare function ga(...args: any);
+declare function ga(...args: any): void;
 
 @Injectable()
 export class GaService {
@@ -15,6 +15,7 @@ export class GaService {
     this.router.events
       .pipe(
         filter((e) => e instanceof NavigationEnd),
+        map((e) => e as NavigationEnd),
         takeUntil(this.done$),
       )
       .subscribe((event: NavigationEnd) => {

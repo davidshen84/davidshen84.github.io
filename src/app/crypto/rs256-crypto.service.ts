@@ -58,7 +58,7 @@ export class RS256CryptoService implements CryptoService {
    *
    * @return {string} private key
    */
-  private static cleanInputPrivateKey(k) {
+  private static cleanInputPrivateKey(k: string): string {
     return k
       .replace('-----BEGIN PRIVATE KEY-----', '')
       .replace('-----END PRIVATE KEY-----', '')
@@ -71,8 +71,8 @@ export class RS256CryptoService implements CryptoService {
     let dataBuf;
     try {
       dataBuf = this._strUtlSvc.EncodeString(data);
-    } catch (e) {
-      return Promise.reject(new Error(e));
+    } catch (e: any) {
+      return Promise.reject(new Error(e ?? 'unknown error', { cause: e }));
     }
 
     return crypto.subtle.sign(this._rsaPssParams, cryptoKey, dataBuf).then(
@@ -90,8 +90,8 @@ export class RS256CryptoService implements CryptoService {
     try {
       key = RS256CryptoService.cleanInputPrivateKey(key);
       keyBuf = this._strUtlSvc.FromBase64(key);
-    } catch (e) {
-      return Promise.reject(new Error(e));
+    } catch (e: any) {
+      return Promise.reject(new Error(e ?? 'unknown error', { cause: e }));
     }
 
     return crypto.subtle

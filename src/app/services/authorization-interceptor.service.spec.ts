@@ -5,8 +5,8 @@ import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { StringUtilityService } from '../crypto/string.utility';
 
 import { AuthorizationInterceptorService } from './authorization-interceptor.service';
-import createSpy = jasmine.createSpy;
 import { LocalStorageService } from 'ngx-webstorage';
+import createSpy = jasmine.createSpy;
 
 describe('AuthorizationInterceptorService', () => {
   let strUtlSvc: StringUtilityService;
@@ -61,7 +61,7 @@ describe('AuthorizationInterceptorService', () => {
       .subscribe(() => {
         expect(signSpy).toHaveBeenCalled();
         expect(
-          cloneSpy.calls.mostRecent().args[0].setHeaders.Authorization,
+          cloneSpy.calls.mostRecent().args[0].setHeaders!.Authorization,
         ).toMatch(/Bearer .*\.sign/);
         expect(handleSpy).toHaveBeenCalledWith(reqClone);
       });

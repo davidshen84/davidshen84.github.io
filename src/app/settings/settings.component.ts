@@ -17,9 +17,9 @@ const KEY_NAME = 'private-key';
 })
 export class SettingsComponent implements OnInit {
   @LocalStorage(KEY_NAME, '')
-  public pkInput: string;
+  public pkInput: string = '';
   public pkChangedSubject: Subject<string> = new Subject<string>();
-  public cryptoKey$: Observable<boolean>;
+  public cryptoKey$!: Observable<boolean>;
 
   constructor(
     private _cryptoService: RS256CryptoService,

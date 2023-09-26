@@ -1,4 +1,4 @@
 <webcam (imageCapture)="captureSnapshot($event)" (imageClick)="takeSnapshot()" [trigger]="snapshotTrigger$"
-        captureImageData="true"></webcam>
+        [captureImageData]=true></webcam>
 <img #snapshot *ngIf="showSnapshot" [src]="imageUrl"/>
 <canvas #canvas></canvas>

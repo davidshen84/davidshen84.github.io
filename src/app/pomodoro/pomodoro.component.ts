@@ -13,16 +13,15 @@ import {
   Subscription,
 } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import moment from 'moment';
-import {TitleService} from "../title.service";
+import * as moment from 'moment';
+import { TitleService } from '../title.service';
 
 const ONE_SECOND = 1000; // milliseconds
 const ONE_MINUTE = 60; // seconds
 
-const POMODORO_SIZE_SEQUENCES = {
+const POMODORO_SIZE_SEQUENCES: { [key: string]: number[] } = {
   five: [5, 10, 15, 20, 25],
   fib: [5, 8, 13, 21, 34], // fibonacci
   prime: [5, 11, 17, 23, 31],
@@ -59,13 +58,9 @@ export class PomodoroComponent implements OnInit, OnDestroy {
   public finishedPomodoroStack = new Array<Pomodoro>();
   public clock$ = new Subject<number>();
   public note$ = new Subject<string>();
-  public pomodoroSequenceChanged = new BehaviorSubject<MatButtonToggleChange>({
-    value: 'five',
-    source: undefined,
-  });
+  public pomodoroSequenceChanged = new BehaviorSubject<string>('five');
 
   public selectedPomodoroSequence$ = this.pomodoroSequenceChanged.pipe(
-    map((e) => e.value),
     map((v) => POMODORO_SIZE_SEQUENCES[v]),
   );
   public pomodoroStack = new Array<Pomodoro>();
@@ -87,24 +82,24 @@ export class PomodoroComponent implements OnInit, OnDestroy {
         tap((c) => {
           this.clock$.next(seconds - c - 1);
           // reset message card
-          if (seconds - c - 1 === 0) this.note$.next(null);
+          if (seconds - c - 1 === 0) this.note$.next(undefined);
         }),
         filter((c) => c + 1 === seconds),
         map(() => this.pomodoroFinished$.next({ seconds, note })),
       ),
     ),
   );
-  private pomodoroSubscription: Subscription;
-  private pomodoroFinishedSubscription: Subscription;
+  private pomodoroSubscription!: Subscription;
+  private pomodoroFinishedSubscription!: Subscription;
   private pomodoroLoopRunning = false;
-  private notificationPermission: 'default' | 'denied' | 'granted';
+  private notificationPermission: 'default' | 'denied' | 'granted' = 'default';
 
   constructor(
     private snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
     private _titleService: TitleService,
   ) {
-    _titleService.setTitle("🍅 Pomodoro 🍅")
+    _titleService.setTitle('🍅 Pomodoro 🍅');
   }
 
   async ngOnInit() {

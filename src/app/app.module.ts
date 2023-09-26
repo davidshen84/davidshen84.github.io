@@ -47,7 +47,6 @@ import { MatButtonModule } from '@angular/material/button';
     HammerModule,
     HttpClientModule,
     LayoutModule,
-
     NgxWebstorageModule.forRoot(),
     PomodoroModule,
     QRCodeModule,

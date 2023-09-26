@@ -24,11 +24,11 @@ export class CanvasShowcaseComponent
   extends BaseComponent
   implements OnInit, OnDestroy
 {
-  public _points: Array<{ x; y }> = [];
+  public _points: Array<{ x: number; y: number }> = [];
   @ViewChild('canvas', { static: true })
-  private _canvasRef: ElementRef;
-  private _canvas: HTMLCanvasElement;
-  private _dragDropSubscription: Subscription;
+  private _canvasRef!: ElementRef;
+  private _canvas!: HTMLCanvasElement;
+  private _dragDropSubscription!: Subscription;
 
   constructor(
     private canvasDraw: CanvasDrawService,
@@ -59,10 +59,15 @@ export class CanvasShowcaseComponent
       recognizers: [[Hammer.Pan, { direction: Hammer.DIRECTION_ALL }]],
     });
 
+    // todo define a custom event source wrapper
+    // @ts-ignore
     const _dragDrop$ = fromEvent(target, 'panstart').pipe(
+      // @ts-ignore
       switchMap(() =>
+        // @ts-ignore
         fromEvent(target, 'panmove').pipe(
           throttleTime(500),
+          // @ts-ignore
           takeUntil(fromEvent(target, 'panend')),
         ),
       ),

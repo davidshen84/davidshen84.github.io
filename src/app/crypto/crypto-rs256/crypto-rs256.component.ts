@@ -7,7 +7,7 @@ import {
   Subject,
 } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { filter, mergeMap, map, mapTo, share } from 'rxjs/operators';
+import { filter, map, mapTo, mergeMap, share } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
 import { RS256CryptoService } from '../rs256-crypto.service';
 import { StringUtilityService } from '../string.utility';
@@ -56,7 +56,7 @@ export class CryptoRS256Component extends BaseComponent {
   );
 
   // Define private key
-  public privateKeyInput: string;
+  public privateKeyInput: string = '';
   public privateKeyInputSubject = new Subject<string>();
 
   // Define signature
@@ -80,7 +80,7 @@ export class CryptoRS256Component extends BaseComponent {
       this.encodedPayload$,
       this.signature$,
     ]).pipe(
-      filter(([, , s]) => s && s !== ''),
+      filter(([, , s]) => !!s && s !== ''),
       map(([h, p, s]) => `${h}.${p}.${s}`),
     ),
     this.signature$.pipe(

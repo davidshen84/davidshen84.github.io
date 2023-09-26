@@ -12,8 +12,8 @@ export interface MouseXY {
   providedIn: 'root',
 })
 export class CanvasDrawService {
-  private _canvas: HTMLCanvasElement;
-  private _context2d: CanvasRenderingContext2D;
+  private _canvas!: HTMLCanvasElement;
+  private _context2d!: CanvasRenderingContext2D;
 
   constructor() {}
 
@@ -33,7 +33,7 @@ export class CanvasDrawService {
    */
   public setCanvas(canvas: HTMLCanvasElement): void {
     this._canvas = canvas;
-    this._context2d = this._canvas.getContext('2d');
+    this._context2d = this._canvas.getContext('2d')!;
   }
 
   /**
@@ -103,7 +103,7 @@ export class CanvasDrawService {
    * Compute the canvas coordinates from offset coordinates which is relative to the element.
    * @param xy MouseXY instance
    */
-  private getCanvasCoordinates(xy: MouseXY): { x; y } {
+  private getCanvasCoordinates(xy: MouseXY): { x: number; y: number } {
     return {
       /*      x: Math.floor(e.x / this._canvas.clientWidth * this._canvas.width),
             y: Math.floor(e.y / this._canvas.clientHeight * this._canvas.height)*/

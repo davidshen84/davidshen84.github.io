@@ -68,8 +68,8 @@ export class TfLinearRegressionComponent
   private ys: number[] = [];
 
   @ViewChild('canvas', { static: true })
-  private canvasRef: ElementRef;
-  private canvas: HTMLCanvasElement;
+  private canvasRef!: ElementRef;
+  private canvas!: HTMLCanvasElement;
 
   constructor(
     titleService: TitleService,
