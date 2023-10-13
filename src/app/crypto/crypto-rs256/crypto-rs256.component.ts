@@ -13,6 +13,13 @@ import { RS256CryptoService } from '../rs256-crypto.service';
 import { StringUtilityService } from '../string.utility';
 import { GaService } from '../../ga.service';
 import { BaseComponent } from '../../base-component';
+import { AsyncPipe } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RemarkableComponent } from '../../remarkable/remarkable.component';
 
 @Component({
   selector: 'app-crypto-rs256',
@@ -20,6 +27,17 @@ import { BaseComponent } from '../../base-component';
   styleUrls: ['./crypto-rs256.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    RemarkableComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    TextFieldModule,
+    MatInputModule,
+    AsyncPipe,
+  ],
 })
 export class CryptoRS256Component extends BaseComponent {
   // Define header

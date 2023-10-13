@@ -5,11 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { WebcamImage } from 'ngx-webcam';
+import { WebcamImage, WebcamModule } from 'ngx-webcam';
 import { Subject } from 'rxjs';
 import { TitleService } from '../title.service';
 import { GaService } from '../ga.service';
 import { BaseComponent } from '../base-component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-webcam',
@@ -17,6 +18,8 @@ import { BaseComponent } from '../base-component';
   styleUrls: ['./webcam.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [WebcamModule, NgIf],
 })
 export class WebcamComponent extends BaseComponent implements OnInit {
   private _snapshotTrigger = new Subject<void>();

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { RS256CryptoService } from './rs256-crypto.service';
 import { StringUtilityService } from './string.utility';
-import { RemarkableModule } from '../remarkable/remarkable.module';
+import { RemarkableComponent } from '../remarkable/remarkable.component';
 
 describe('RS256CryptoService', () => {
   const key = 'key';
@@ -17,7 +17,7 @@ describe('RS256CryptoService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RemarkableModule],
+      imports: [RemarkableComponent],
       providers: [RS256CryptoService, StringUtilityService],
     });
 

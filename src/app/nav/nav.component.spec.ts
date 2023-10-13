@@ -24,8 +24,8 @@ describe('NavComponent', () => {
         QRCodeModule,
         MatListModule,
         MatIconModule,
+        NavComponent,
       ],
-      declarations: [NavComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavComponent);

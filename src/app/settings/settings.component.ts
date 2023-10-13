@@ -6,6 +6,13 @@ import { filter, mergeMap } from 'rxjs/operators';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { TitleService } from '../title.service';
 import { LocalStorage } from 'ngx-webstorage';
+import { AsyncPipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const KEY_NAME = 'private-key';
 
@@ -14,6 +21,17 @@ const KEY_NAME = 'private-key';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    TextFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatIconModule,
+    AsyncPipe,
+  ],
 })
 export class SettingsComponent implements OnInit {
   @LocalStorage(KEY_NAME, '')

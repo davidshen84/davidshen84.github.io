@@ -11,8 +11,7 @@ describe('WebcamComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WebcamComponent],
-      imports: [WebcamModule, RouterTestingModule],
+      imports: [WebcamModule, RouterTestingModule, WebcamComponent],
       providers: [GaService],
     }).compileComponents();
   }));

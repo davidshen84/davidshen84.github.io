@@ -12,6 +12,8 @@ import { TitleService } from '../title.service';
 import { CanvasDrawService } from './canvas-draw.service';
 import { BaseComponent } from '../base-component';
 import { GaService } from '../ga.service';
+import { NgFor, JsonPipe } from '@angular/common';
+import { RemarkableComponent } from '../remarkable/remarkable.component';
 
 @Component({
   selector: 'app-canvas-showcase',
@@ -19,6 +21,8 @@ import { GaService } from '../ga.service';
   styleUrls: ['./canvas-showcase.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [RemarkableComponent, NgFor, JsonPipe],
 })
 export class CanvasShowcaseComponent
   extends BaseComponent

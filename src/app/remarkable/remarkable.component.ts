@@ -17,6 +17,7 @@ import { of, race, Subject } from 'rxjs';
 import { catchError, filter, map, share, switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import hljs from 'highlight.js';
+import { AsyncPipe } from '@angular/common';
 
 /** An Angular component for the reMarkable library
  *
@@ -44,6 +45,8 @@ import hljs from 'highlight.js';
   selector: 'app-remarkable',
   templateUrl: './remarkable.component.html',
   styleUrls: ['./remarkable.component.scss'],
+  standalone: true,
+  imports: [AsyncPipe],
 })
 export class RemarkableComponent
   implements OnChanges, AfterContentChecked, AfterViewInit

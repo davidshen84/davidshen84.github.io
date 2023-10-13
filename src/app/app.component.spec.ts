@@ -18,8 +18,9 @@ describe('AppComponent', () => {
         MatToolbarModule,
         MatListModule,
         MatSidenavModule,
+        NavComponent,
+        AppComponent,
       ],
-      declarations: [AppComponent, NavComponent],
     }).compileComponents();
   }));
 

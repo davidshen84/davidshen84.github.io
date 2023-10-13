@@ -27,8 +27,9 @@ describe('PomodoroComponent', () => {
         MatListModule,
         MatFormFieldModule,
         MatInputModule,
+        PomodoroComponent,
+        PomodoroTimePipe,
       ],
-      declarations: [PomodoroComponent, PomodoroTimePipe],
     }).compileComponents();
     TestBed.inject(MatSnackBar);
   }));

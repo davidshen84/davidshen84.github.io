@@ -26,9 +26,9 @@ describe('SettingsComponent', () => {
         MatSnackBarModule,
         FormsModule,
         NgxWebstorageModule.forRoot(),
+        SettingsComponent,
       ],
       providers: [RS256CryptoService],
-      declarations: [SettingsComponent],
     }).compileComponents();
   }));
 

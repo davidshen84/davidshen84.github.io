@@ -5,12 +5,16 @@ import { filter, map } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
 import { GaService } from '../../ga.service';
 import { BaseComponent } from '../../base-component';
+import { AsyncPipe } from '@angular/common';
+import { RemarkableComponent } from '../../remarkable/remarkable.component';
 
 @Component({
   selector: 'app-blog-page',
   templateUrl: './blog-page.component.html',
   styleUrls: ['./blog-page.component.scss'],
   providers: [GaService],
+  standalone: true,
+  imports: [RemarkableComponent, AsyncPipe],
 })
 export class BlogPageComponent extends BaseComponent implements OnDestroy {
   public blogPath$: Observable<string>;

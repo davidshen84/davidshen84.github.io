@@ -11,8 +11,12 @@ describe('BlogHomePageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, MatListModule],
-      declarations: [BlogHomePageComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MatListModule,
+        BlogHomePageComponent,
+      ],
     }).compileComponents();
   }));
 

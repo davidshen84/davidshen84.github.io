@@ -5,7 +5,7 @@ import { TfLinearRegressionComponent } from './tf-linear-regression.component';
 import { ElementRef } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GaService } from '../../ga.service';
-import { RemarkableModule } from '../../remarkable/remarkable.module';
+import { RemarkableComponent } from '../../remarkable/remarkable.component';
 
 class MockElementRef extends ElementRef {}
 
@@ -15,8 +15,12 @@ describe('TfLinearRegressionComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TfLinearRegressionComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule, RemarkableModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        RemarkableComponent,
+        TfLinearRegressionComponent,
+      ],
       providers: [{ provide: ElementRef, useValue: MockElementRef }, GaService],
     }).compileComponents();
   }));

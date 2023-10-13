@@ -37,8 +37,8 @@ describe('PasswordGeneratorComponent', () => {
         MatCardModule,
         MatSliderModule,
         MatDividerModule,
+        PasswordGeneratorComponent,
       ],
-      declarations: [PasswordGeneratorComponent],
       providers: [GaService],
     }).compileComponents();
 

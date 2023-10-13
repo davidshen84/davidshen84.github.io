@@ -14,8 +14,7 @@ describe('RemarkableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RemarkableComponent],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RemarkableComponent],
     }).compileComponents();
   });
 

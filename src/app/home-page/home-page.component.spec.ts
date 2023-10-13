@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HomePageComponent } from './home-page.component';
-import { RemarkableModule } from '../remarkable/remarkable.module';
+import { RemarkableComponent } from '../remarkable/remarkable.component';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -10,8 +10,11 @@ describe('HomePageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RemarkableModule],
-      declarations: [HomePageComponent],
+      imports: [
+        HttpClientTestingModule,
+        RemarkableComponent,
+        HomePageComponent,
+      ],
     }).compileComponents();
   }));
 

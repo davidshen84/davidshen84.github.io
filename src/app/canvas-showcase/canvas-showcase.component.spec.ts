@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { GaService } from '../ga.service';
 import { HammerModule } from '@angular/platform-browser';
 import 'hammerjs';
-import { RemarkableModule } from '../remarkable/remarkable.module';
+import { RemarkableComponent } from '../remarkable/remarkable.component';
 
 describe('CanvasShowcaseComponent', () => {
   let component: CanvasShowcaseComponent;
@@ -13,12 +13,12 @@ describe('CanvasShowcaseComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CanvasShowcaseComponent],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
         HammerModule,
-        RemarkableModule,
+        RemarkableComponent,
+        CanvasShowcaseComponent,
       ],
       providers: [GaService],
     }).compileComponents();

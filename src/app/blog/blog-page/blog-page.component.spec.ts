@@ -14,8 +14,7 @@ import {
 } from '@angular/common/http/testing';
 
 import { BlogPageComponent } from './blog-page.component';
-import { RemarkableModule } from '../../remarkable/remarkable.module';
-import * as http from 'http';
+import { RemarkableComponent } from '../../remarkable/remarkable.component';
 
 describe('BlogPageComponent', () => {
   let component: BlogPageComponent;
@@ -29,12 +28,12 @@ describe('BlogPageComponent', () => {
         RouterTestingModule.withRoutes([
           { path: 'blog/:id', component: BlogPageComponent },
         ]),
-        RemarkableModule,
+        RemarkableComponent,
+        BlogPageComponent,
       ],
       providers: [
         { provide: ActivatedRoute, useValue: { params: of({ id: 'x' }) } },
       ],
-      declarations: [BlogPageComponent],
     }).compileComponents();
 
     router = TestBed.inject(Router);

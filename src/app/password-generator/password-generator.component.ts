@@ -1,12 +1,22 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { filter, map, mergeMap, repeat, scan, startWith } from 'rxjs/operators';
 import { TitleService } from '../title.service';
 import { GaService } from '../ga.service';
 import { BaseComponent } from '../base-component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AsyncPipe } from '@angular/common';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
 
 const prime = 21001;
 
@@ -15,6 +25,20 @@ const prime = 21001;
   templateUrl: './password-generator.component.html',
   styleUrls: ['./password-generator.component.scss'],
   providers: [GaService],
+  standalone: true,
+  imports: [
+    MatCardModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatSliderModule,
+    MatTooltipModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ClipboardModule,
+    AsyncPipe,
+  ],
 })
 export class PasswordGeneratorComponent extends BaseComponent {
   public isHandset$ = this.breakpointObserver

@@ -14,7 +14,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [PomodoroComponent, PomodoroTimePipe],
   imports: [
     PomodoroRoutingModule,
     CommonModule,
@@ -27,6 +26,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatListModule,
     MatInputModule,
     MatSnackBarModule,
+    PomodoroComponent,
+    PomodoroTimePipe,
   ],
 })
 export class PomodoroModule {}

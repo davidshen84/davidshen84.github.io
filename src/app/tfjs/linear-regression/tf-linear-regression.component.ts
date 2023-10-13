@@ -12,6 +12,8 @@ import { auditTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
 import { GaService } from '../../ga.service';
 import { BaseComponent } from '../../base-component';
+import { AsyncPipe } from '@angular/common';
+import { RemarkableComponent } from '../../remarkable/remarkable.component';
 
 /**
  * Maps @param {n} within range @param {in_min} to @param {in_max} to another number in the range @param {out_min} to @param {out_max}.
@@ -37,6 +39,8 @@ const normalize = (
   styleUrls: ['./tf-linear-regression.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [RemarkableComponent, AsyncPipe],
 })
 export class TfLinearRegressionComponent
   extends BaseComponent
