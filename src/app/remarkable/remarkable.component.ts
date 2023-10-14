@@ -86,7 +86,7 @@ export class RemarkableComponent
     this.md = new Remarkable('full', {
       breaks: true,
       // typographer: true,
-      highlight: function (str, lang) {
+      highlight: function (str: string, lang: string): string {
         if (lang && hljs.getLanguage(lang)) {
           try {
             return hljs.highlight(str, { language: lang }).value;

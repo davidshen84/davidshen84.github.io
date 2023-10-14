@@ -19,14 +19,14 @@ jobs:
           node-version: 18.x
           cache: npm
       - run: |
-          npm install
+          npm ci
           ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
       - run: ./node_modules/.bin/ng build --configuration production
       - uses: actions/upload-pages-artifact@v1
         with:
           path: dist/blog
   deploy:
-    needs: [build]
+    needs: [ build ]
     if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     permissions:
