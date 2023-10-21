@@ -21,7 +21,7 @@ jobs:
       - run: |
           npm ci
           ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
-      - run: ./node_modules/.bin/ng build --configuration production
+      - run: ./node_modules/.bin/ng build
       - uses: actions/upload-pages-artifact@v1
         with:
           path: dist/blog
@@ -36,4 +36,4 @@ jobs:
     environment:
       name: github-pages
     steps:
-      - uses: actions/deploy-pages@v1
+      - uses: actions/deploy-pages@v2
