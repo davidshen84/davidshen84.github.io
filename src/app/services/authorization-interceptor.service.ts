@@ -6,11 +6,11 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { merge, Observable } from 'rxjs';
-import { fromPromise } from 'rxjs/internal-compatibility';
 import { filter, mergeMap, share } from 'rxjs/operators';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { StringUtilityService } from '../crypto/string.utility';
 import { LocalStorageService } from 'ngx-webstorage';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 @Injectable()
 export class AuthorizationInterceptorService implements HttpInterceptor {

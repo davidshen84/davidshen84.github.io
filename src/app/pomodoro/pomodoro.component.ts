@@ -21,7 +21,7 @@ import { MatLineModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgFor, NgStyle, AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgFor, NgStyle } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -101,7 +101,7 @@ export class PomodoroComponent implements OnInit, OnDestroy {
     // update message card
     tap((p) => {
       this.clock$.next(p.seconds);
-      this.note$.next(p.note);
+      this.note$.next(p.note || '');
     }),
     switchMap(({ seconds, note }) =>
       interval(ONE_SECOND).pipe(
@@ -109,7 +109,7 @@ export class PomodoroComponent implements OnInit, OnDestroy {
         tap((c) => {
           this.clock$.next(seconds - c - 1);
           // reset message card
-          if (seconds - c - 1 === 0) this.note$.next(undefined);
+          if (seconds - c - 1 === 0) this.note$.next('');
         }),
         filter((c) => c + 1 === seconds),
         map(() => this.pomodoroFinished$.next({ seconds, note })),
@@ -137,7 +137,7 @@ export class PomodoroComponent implements OnInit, OnDestroy {
     }
 
     this.pomodoroSubscription = this.pomodoroLoop$.subscribe(() => {
-      this.pomodoroTrigger$.next();
+      this.pomodoroTrigger$.next(undefined);
     });
 
     this.pomodoroFinishedSubscription = this.pomodoroFinished$.subscribe(
@@ -174,7 +174,7 @@ export class PomodoroComponent implements OnInit, OnDestroy {
     });
     if (!this.pomodoroLoopRunning) {
       this.pomodoroLoopRunning = true;
-      this.pomodoroTrigger$.next();
+      this.pomodoroTrigger$.next(undefined);
     }
   }
 

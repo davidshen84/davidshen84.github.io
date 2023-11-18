@@ -6,8 +6,8 @@ import {
   Observable,
   Subject,
 } from 'rxjs';
-import { fromPromise } from 'rxjs/internal-compatibility';
-import { filter, map, mapTo, mergeMap, share } from 'rxjs/operators';
+
+import { filter, map, mergeMap, share } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
 import { RS256CryptoService } from '../rs256-crypto.service';
 import { StringUtilityService } from '../string.utility';
@@ -18,8 +18,9 @@ import { MatInputModule } from '@angular/material/input';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RemarkableComponent } from '../../remarkable/remarkable.component';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 @Component({
   selector: 'app-crypto-rs256',
@@ -103,7 +104,7 @@ export class CryptoRS256Component extends BaseComponent {
     ),
     this.signature$.pipe(
       filter((s) => !s),
-      mapTo(''),
+      map(() => ''),
     ),
   );
 

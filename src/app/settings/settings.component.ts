@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { merge, Observable, of, Subject } from 'rxjs';
-import { fromPromise } from 'rxjs/internal-compatibility';
 import { filter, mergeMap } from 'rxjs/operators';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { TitleService } from '../title.service';
 import { LocalStorage } from 'ngx-webstorage';
 import { AsyncPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 const KEY_NAME = 'private-key';
 

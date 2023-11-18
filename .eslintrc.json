@@ -11,11 +11,10 @@
         "es2022": true
       },
       "extends": [
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended",
         "prettier",
-        "prettier/@typescript-eslint"
+        "plugin:prettier/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "parserOptions": {
         "ecmaVersion": 11

@@ -21,7 +21,7 @@ export class GaService {
       .subscribe((event: NavigationEnd) => {
         ga('set', 'page', event.urlAfterRedirects);
         ga('send', 'pageview');
-        this.done$.next();
+        this.done$.next(undefined);
         this.done$.complete();
       });
   }
