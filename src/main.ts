@@ -10,7 +10,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QRCodeModule } from 'angularx-qrcode';
-import { PomodoroModule } from './app/pomodoro/pomodoro.module';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { LayoutModule } from '@angular/cdk/layout';
 import {
@@ -42,7 +41,6 @@ bootstrapApplication(AppComponent, {
       HammerModule,
       LayoutModule,
       NgxWebstorageModule.forRoot(),
-      PomodoroModule,
       QRCodeModule,
       ReactiveFormsModule,
       ServiceWorkerModule.register('/ngsw-worker.js', {
