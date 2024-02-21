@@ -1,8 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
-import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
-import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { filter, map, mergeMap, repeat, scan, startWith } from 'rxjs/operators';
+import { Component, computed, signal } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+import { filter, map, repeat, scan } from 'rxjs/operators';
 import { TitleService } from '../title.service';
 import { GaService } from '../ga.service';
 import { BaseComponent } from '../base-component';
@@ -38,56 +38,47 @@ const prime = 21001;
     MatButtonModule,
     ClipboardModule,
     AsyncPipe,
+    FormsModule,
   ],
 })
 export class PasswordGeneratorComponent extends BaseComponent {
   public isHandset$ = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
-  LowerCaseControl = new UntypedFormControl(true);
-  UpperCaseControl = new UntypedFormControl(true);
-  DigitControl = new UntypedFormControl(true);
-  SpecialControl = new UntypedFormControl(true);
-  GenerateSubject = new BehaviorSubject(undefined);
-  // Default length of characters to generate.
-  private length = 16;
-  SliderControl = new UntypedFormControl(this.length);
-  public result$ = combineLatest([
-    this.GenerateSubject,
-    this.SliderControl.valueChanges.pipe(startWith(this.length)),
-    this.LowerCaseControl.valueChanges.pipe(
-      startWith(true),
-      map((x) => (x ? 'abcdefghijklmnopqrstuvwxyz' : '')),
-    ),
-    this.UpperCaseControl.valueChanges.pipe(
-      startWith(true),
-      map((x) => (x ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '')),
-    ),
-    this.DigitControl.valueChanges.pipe(
-      startWith(true),
-      map((x) => (x ? '0123456789' : '')),
-    ),
-    this.SpecialControl.valueChanges.pipe(
-      startWith(true),
-      map((x) => (x ? '`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : '')),
-    ),
-  ]).pipe(
-    map(([, n, ...args]) => [
-      n,
-      args.reduce((p: string, c) => p.concat(c), ''),
-    ]),
-    mergeMap(([n, x]) =>
-      of(x).pipe(
-        // pick one character
-        map((y: string) =>
-          y.length > 0 ? y[Math.ceil(Math.random() * prime) % y.length] : '😂',
-        ),
-        repeat(n),
-        scan((acc: string, value: string) => acc + value, ''),
-        filter((s) => s.length == n),
+
+  public lowerCaseInput = signal(true);
+
+  public digitInput = signal(true);
+
+  public specialInput = signal(true);
+
+  public upperCaseInput = signal(true);
+
+  public sliderInput = signal(16);
+
+  public generateInput = signal(<MouseEvent>(<unknown>null));
+
+  public result_ = computed(() => {
+    const length = this.sliderInput();
+
+    return of([
+      this.generateInput()?.toString(),
+      this.lowerCaseInput() ? 'abcdefghijklmnopqrstuvwxyz' : '',
+      this.upperCaseInput() ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '',
+      this.digitInput() ? '0123456789' : '',
+      this.specialInput() ? '`~!@#$%^&*()_+-={}|[]\\:";\'<>?,./' : '',
+    ]).pipe(
+      map(([, ...x]) => x.reduce((p, c) => `${p}${c}`)),
+      // pick one character
+      map((y: string) =>
+        y.length > 0 ? y[Math.ceil(Math.random() * prime) % y.length] : '😂',
       ),
-    ),
-  );
+      repeat(length),
+      scan((acc: string, value: string) => `${acc}${value}`, ''),
+      // only return the last accumulated value
+      filter((s) => s.length == length),
+    );
+  });
 
   constructor(
     ga: GaService,

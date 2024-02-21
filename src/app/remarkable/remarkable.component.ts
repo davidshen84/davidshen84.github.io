@@ -82,7 +82,10 @@ export class RemarkableComponent
     map(this.sanitizer.bypassSecurityTrustHtml),
   );
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
+  constructor(
+    private http: HttpClient,
+    private sanitizer: DomSanitizer,
+  ) {
     this.md = new Remarkable('full', {
       breaks: true,
       // typographer: true,
