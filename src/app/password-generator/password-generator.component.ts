@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { filter, map, mergeMap, repeat, scan, startWith } from 'rxjs/operators';
 import { TitleService } from '../title.service';
@@ -79,7 +79,7 @@ export class PasswordGeneratorComponent extends BaseComponent {
     mergeMap(([n, x]) =>
       of(x).pipe(
         // pick one character
-        map((y) =>
+        map((y: string) =>
           y.length > 0 ? y[Math.ceil(Math.random() * prime) % y.length] : '😂',
         ),
         repeat(n),
