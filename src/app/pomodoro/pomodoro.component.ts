@@ -1,14 +1,18 @@
 import {
   Component,
+  computed,
   OnDestroy,
   OnInit,
   Pipe,
   PipeTransform,
+  signal,
 } from '@angular/core';
 import {
   BehaviorSubject,
+  concatMap,
   interval,
   Observable,
+  of,
   Subject,
   Subscription,
 } from 'rxjs';
@@ -27,7 +31,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 
-const ONE_SECOND = 1000; // milliseconds
+const ONE_SECOND = 1_000; // milliseconds
 const ONE_MINUTE = 60; // seconds
 
 const POMODORO_SIZE_SEQUENCES: { [key: string]: number[] } = {
@@ -40,10 +44,6 @@ interface Pomodoro {
   seconds: number;
   note?: string;
 }
-
-const RottenPomodoro: Pomodoro = {
-  seconds: 0,
-};
 
 /** Pipe to format a number into the 'mm:ss' time format
  */
@@ -82,7 +82,15 @@ export class PomodoroComponent implements OnInit, OnDestroy {
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
 
-  public finishedPomodoroStack = new Array<Pomodoro>();
+  public freshPomodoroBasket = signal(new Array<Pomodoro>());
+  public totalFreshPomodoroTime = computed(() =>
+    this.freshPomodoroBasket().reduce((p, c) => p + c.seconds, 0),
+  );
+  public rottenPomodoroBasket = signal(new Array<Pomodoro>());
+  public totalRottenPomodoroTime = computed(() =>
+    this.rottenPomodoroBasket().reduce((p, c) => p + c.seconds, 0),
+  );
+
   public clock$ = new Subject<number>();
   public note$ = new Subject<string>();
   public pomodoroSequenceChanged = new BehaviorSubject<string>('five');
@@ -90,41 +98,42 @@ export class PomodoroComponent implements OnInit, OnDestroy {
   public selectedPomodoroSequence$ = this.pomodoroSequenceChanged.pipe(
     map((v) => POMODORO_SIZE_SEQUENCES[v]),
   );
-  public pomodoroStack = new Array<Pomodoro>();
-  private pomodoroTrigger$ = new Subject();
-  private pomodoroFinished$ = new Subject<Pomodoro>();
 
-  // main loop that consumes a 🍅
-  private pomodoroLoop$ = this.pomodoroTrigger$.pipe(
-    filter(() => this.pomodoroStack.length > 0),
-    map(() => this.pomodoroStack.shift() || RottenPomodoro),
-    // update message card
-    tap((p) => {
-      this.clock$.next(p.seconds);
-      this.note$.next(p.note || '');
-    }),
-    switchMap(({ seconds, note }) =>
-      interval(ONE_SECOND).pipe(
-        take(seconds),
-        tap((c) => {
-          this.clock$.next(seconds - c - 1);
-          // reset message card
-          if (seconds - c - 1 === 0) this.note$.next('');
-        }),
-        filter((c) => c + 1 === seconds),
-        map(() => this.pomodoroFinished$.next({ seconds, note })),
+  public newPomodoro$ = new Subject<Pomodoro>();
+  private rottenPomodoro$ = new Subject<Pomodoro>();
+
+  private pomodoroLoop$ = this.newPomodoro$.pipe(
+    tap((p) => this.freshPomodoroBasket.update((v) => [...v, p])),
+    concatMap(({ seconds, note }) =>
+      of(undefined).pipe(
+        tap(() =>
+          this.freshPomodoroBasket.update((v) => v.filter((_, i) => i > 0)),
+        ),
+        switchMap(() =>
+          // main loop that consumes a 🍅
+          interval(ONE_SECOND).pipe(
+            take(seconds),
+            tap((c) => {
+              this.clock$.next(seconds - c - 1);
+              // reset message card
+              if (seconds - c - 1 === 0) this.note$.next('');
+            }),
+            filter((c) => c + 1 === seconds),
+            tap(() => this.rottenPomodoro$.next({ seconds, note })),
+          ),
+        ),
       ),
     ),
   );
+
   private pomodoroSubscription!: Subscription;
   private pomodoroFinishedSubscription!: Subscription;
-  private pomodoroLoopRunning = false;
   private notificationPermission: 'default' | 'denied' | 'granted' = 'default';
 
   constructor(
     private snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
-    private _titleService: TitleService,
+    _titleService: TitleService,
   ) {
     _titleService.setTitle('🍅 Pomodoro 🍅');
   }
@@ -136,24 +145,18 @@ export class PomodoroComponent implements OnInit, OnDestroy {
       this.notificationPermission = 'default';
     }
 
-    this.pomodoroSubscription = this.pomodoroLoop$.subscribe(() => {
-      this.pomodoroTrigger$.next(undefined);
+    // start the loop
+    this.pomodoroSubscription = this.pomodoroLoop$.subscribe();
+
+    this.pomodoroFinishedSubscription = this.rottenPomodoro$.subscribe((p) => {
+      this.rottenPomodoroBasket.update((value) => [p, ...value]);
+
+      if (this.notificationPermission === 'granted') {
+        new Notification('Pomodoro Finished', {
+          body: p.note,
+        });
+      }
     });
-
-    this.pomodoroFinishedSubscription = this.pomodoroFinished$.subscribe(
-      (p) => {
-        if (this.pomodoroStack.length === 0) {
-          this.pomodoroLoopRunning = false;
-        }
-        this.finishedPomodoroStack.unshift(p);
-
-        if (this.notificationPermission === 'granted') {
-          new Notification('Pomodoro Finished', {
-            body: p.note,
-          });
-        }
-      },
-    );
   }
 
   ngOnDestroy(): void {
@@ -161,10 +164,11 @@ export class PomodoroComponent implements OnInit, OnDestroy {
     this.pomodoroFinishedSubscription?.unsubscribe();
   }
 
-  addPomodoro(value: number, note: string): void {
+  public addPomodoro(value: number, note: string): void {
     const minutes = value * ONE_MINUTE;
     note = note === '' ? '🍅' : note;
-    this.pomodoroStack.push({
+
+    this.newPomodoro$.next({
       seconds: minutes,
       note: note,
     });
@@ -172,10 +176,6 @@ export class PomodoroComponent implements OnInit, OnDestroy {
     this.snackBar.open(`Added a 🍅 for ${note}`, undefined, {
       duration: ONE_SECOND,
     });
-    if (!this.pomodoroLoopRunning) {
-      this.pomodoroLoopRunning = true;
-      this.pomodoroTrigger$.next(undefined);
-    }
   }
 
   public calcPomodoroFontSize(x: number) {

@@ -1,7 +1,7 @@
 <mat-card #message class='center'>
   <mat-card-content>
-    <div class='clock'>{{ (this.clock$ | async)! | pomodoroTime  }}</div>
-    <div class='note'>{{ (this.note$ | async) || '🍅'}}</div>
+    <div class='clock'>{{ (this.clock$ | async)! | pomodoroTime }}</div>
+    <div class='note'>{{ (this.note$ | async) || '🍅' }}</div>
   </mat-card-content>
 </mat-card>
 <mat-card>
@@ -37,29 +37,38 @@
 <mat-grid-list cols='2' rowHeight='3:1'>
   <mat-grid-tile>
     <mat-card class='pomodoro-list'>
-      <mat-card-title>Next 🍅</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>Fresh 🍅</mat-card-title>
+        <mat-card-subtitle>Total: {{ totalFreshPomodoroTime() | pomodoroTime }}</mat-card-subtitle>
+      </mat-card-header>
       <mat-card-content>
         <mat-list>
-          <mat-list-item *ngFor='let p of this.pomodoroStack; first as h' class='pomodoro-list-item' role='list'>
+          <mat-list-item *ngFor='let p of this.freshPomodoroBasket(); first as h' class='pomodoro-list-item'
+                         role='list'>
             <span matLine>🍅
               {{ p.seconds | pomodoroTime }} -- {{ p.note }}
             </span>
           </mat-list-item>
         </mat-list>
+
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
 
   <mat-grid-tile>
     <mat-card class='pomodoro-list'>
-      <mat-card-title>Finished 🍅</mat-card-title>
+      <mat-card-title>Rotten 🍅</mat-card-title>
       <mat-card-content>
-        <mat-list-item *ngFor='let p of this.finishedPomodoroStack; first as h' class='pomodoro-list-item' role='list'>
+        <mat-list-item *ngFor='let p of this.rottenPomodoroBasket(); first as h' class='pomodoro-list-item' role='list'>
             <span matLine>🍅
               {{ p.seconds | pomodoroTime }} -- {{ p.note }}
             </span>
         </mat-list-item>
+
       </mat-card-content>
+      <mat-card-footer>
+        Total: {{ this.totalRottenPomodoroTime() | pomodoroTime }}
+      </mat-card-footer>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
