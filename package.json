@@ -35,7 +35,7 @@
     "emoji-toolkit": "^6.6.0",
     "hammerjs": "^2.0.8",
     "highlight.js": "^11.6.0",
-    "katex": "^0.15.6",
+    "katex": "^0.16.10",
     "moment": "^2.29.4",
     "ngx-webcam": "^0.4.1",
     "ngx-webstorage": "^13.0.1",
