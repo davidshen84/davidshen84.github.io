@@ -19,7 +19,6 @@ import {
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as moment from 'moment';
 import { TitleService } from '../title.service';
 import { MatLineModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
@@ -30,6 +29,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
+import { format } from 'date-fns/fp/format';
+import { addMilliseconds } from 'date-fns';
+import { curry, flip } from 'rambda/immutable';
 
 const ONE_SECOND = 1_000; // milliseconds
 const ONE_MINUTE = 60; // seconds
@@ -52,8 +54,11 @@ interface Pomodoro {
   standalone: true,
 })
 export class PomodoroTimePipe implements PipeTransform {
+  private formatter = format('mm:ss');
+  private addToMilliseconds = curry(flip(addMilliseconds))(0);
+
   transform(value: number): string {
-    return moment(value * ONE_SECOND).format('mm:ss');
+    return this.formatter(this.addToMilliseconds(value * ONE_SECOND));
   }
 }
 
