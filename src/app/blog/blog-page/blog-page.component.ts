@@ -12,7 +12,6 @@ import { RemarkableComponent } from '../../remarkable/remarkable.component';
   selector: 'app-blog-page',
   templateUrl: './blog-page.component.html',
   styleUrls: ['./blog-page.component.scss'],
-  providers: [GaService],
   standalone: true,
   imports: [RemarkableComponent, AsyncPipe],
 })

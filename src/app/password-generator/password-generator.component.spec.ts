@@ -9,7 +9,6 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PasswordGeneratorComponent } from './password-generator.component';
 import { GaService } from '../ga.service';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
@@ -17,6 +16,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { By } from '@angular/platform-browser';
 import { MatDividerModule } from '@angular/material/divider';
+import { provideRouter } from '@angular/router';
+import { routes } from '../app.routes';
 
 describe('PasswordGeneratorComponent', () => {
   let component: PasswordGeneratorComponent;
@@ -28,7 +29,6 @@ describe('PasswordGeneratorComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
-        RouterTestingModule,
         MatSnackBarModule,
         MatInputModule,
         MatCheckboxModule,
@@ -39,7 +39,7 @@ describe('PasswordGeneratorComponent', () => {
         MatDividerModule,
         PasswordGeneratorComponent,
       ],
-      providers: [GaService],
+      providers: [GaService, provideRouter(routes)],
     }).compileComponents();
 
     matSnackBar = TestBed.inject(MatSnackBar);

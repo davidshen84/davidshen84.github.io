@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { WebcamComponent } from './webcam.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { GaService } from '../ga.service';
 import { WebcamModule } from 'ngx-webcam';
+import { provideRouter } from '@angular/router';
+import { routes } from '../app.routes';
 
 describe('WebcamComponent', () => {
   let component: WebcamComponent;
@@ -11,8 +11,8 @@ describe('WebcamComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [WebcamModule, RouterTestingModule, WebcamComponent],
-      providers: [GaService],
+      imports: [WebcamModule, WebcamComponent],
+      providers: [GaService, provideRouter(routes)],
     }).compileComponents();
   }));
 

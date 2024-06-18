@@ -15,11 +15,12 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/blog",
+            "outputPath": {
+              "base": "dist/blog"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -42,12 +43,16 @@
               "moment",
               "remarkable-katex"
             ],
-            "vendorChunk": false,
             "extractLicenses": false,
-            "buildOptimizer": true,
             "optimization": true,
             "namedChunks": true,
-            "serviceWorker": true
+            "serviceWorker": "ngsw-config.json",
+            "browser": "src/main.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "."
+              ]
+            }
           },
           "defaultConfiguration": "production",
           "configurations": {
@@ -61,9 +66,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true
             }

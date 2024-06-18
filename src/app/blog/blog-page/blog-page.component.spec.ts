@@ -1,49 +1,49 @@
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
 import {
-  ComponentFixture,
-  inject,
-  TestBed,
-  waitForAsync,
-} from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
-
-import {
-  HttpClientTestingModule,
   HttpTestingController,
+  provideHttpClientTesting,
 } from '@angular/common/http/testing';
-
 import { BlogPageComponent } from './blog-page.component';
 import { RemarkableComponent } from '../../remarkable/remarkable.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { RouterTestingHarness } from '@angular/router/testing';
+import { GaService } from '../../ga.service';
 
 describe('BlogPageComponent', () => {
   let component: BlogPageComponent;
-  let fixture: ComponentFixture<BlogPageComponent>;
   let router: Router;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule.withRoutes([
-          { path: 'blog/:id', component: BlogPageComponent },
-        ]),
-        RemarkableComponent,
-        BlogPageComponent,
-      ],
+  beforeEach(waitForAsync(async () => {
+    await TestBed.configureTestingModule({
+      imports: [RemarkableComponent, BlogPageComponent],
       providers: [
-        { provide: ActivatedRoute, useValue: { params: of({ id: 'x' }) } },
+        GaService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+        provideRouter([
+          {
+            path: 'blog/:id',
+            component: BlogPageComponent,
+          },
+        ]),
       ],
     }).compileComponents();
 
+    const mock = TestBed.inject(GaService);
+    spyOn(mock, 'SetPageView').and.callFake(() => {});
     router = TestBed.inject(Router);
     spyOn(router, 'navigate');
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BlogPageComponent);
-    component = fixture.componentInstance;
-  });
+  beforeEach(waitForAsync(async () => {
+    const harness = await RouterTestingHarness.create();
+    component = await harness.navigateByUrl('blog/x', BlogPageComponent);
+    harness.detectChanges();
+  }));
 
   it('should create', inject(
     [HttpTestingController],
@@ -55,8 +55,6 @@ describe('BlogPageComponent', () => {
   it('should make http request to x.md file', inject(
     [HttpTestingController],
     (httpMock: HttpTestingController) => {
-      fixture.detectChanges();
-
       httpMock.expectOne('assets/blogs/x.md');
 
       httpMock.verify();
@@ -67,8 +65,6 @@ describe('BlogPageComponent', () => {
   it('should redirect to blog/notfound/x', inject(
     [HttpTestingController],
     (httpMock: HttpTestingController) => {
-      fixture.detectChanges();
-
       httpMock
         .expectOne('assets/blogs/x.md')
         .error(new ProgressEvent('error'), { status: 404 });
