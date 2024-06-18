@@ -1,8 +1,11 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { HomePageComponent } from './home-page.component';
 import { RemarkableComponent } from '../remarkable/remarkable.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -10,10 +13,10 @@ describe('HomePageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RemarkableComponent,
-        HomePageComponent,
+      imports: [RemarkableComponent, HomePageComponent],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
       ],
     }).compileComponents();
   }));

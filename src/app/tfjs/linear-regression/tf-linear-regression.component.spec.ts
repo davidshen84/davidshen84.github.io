@@ -1,13 +1,15 @@
 import * as tf from '@tensorflow/tfjs';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TfLinearRegressionComponent } from './tf-linear-regression.component';
-import { ElementRef } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { GaService } from '../../ga.service';
 import { RemarkableComponent } from '../../remarkable/remarkable.component';
-
-class MockElementRef extends ElementRef {}
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { routes } from '../tfjs.routes';
 
 describe('TfLinearRegressionComponent', () => {
   let component: TfLinearRegressionComponent;
@@ -15,13 +17,13 @@ describe('TfLinearRegressionComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        RemarkableComponent,
-        TfLinearRegressionComponent,
+      imports: [RemarkableComponent, TfLinearRegressionComponent],
+      providers: [
+        GaService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+        provideRouter(routes),
       ],
-      providers: [{ provide: ElementRef, useValue: MockElementRef }, GaService],
     }).compileComponents();
   }));
 

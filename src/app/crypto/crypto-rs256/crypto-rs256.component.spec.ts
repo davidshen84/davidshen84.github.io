@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { RemarkableComponent } from '../../remarkable/remarkable.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('CryptoRS256Component', () => {
   let component: CryptoRS256Component;
@@ -23,14 +27,18 @@ describe('CryptoRS256Component', () => {
         NoopAnimationsModule,
         FormsModule,
         RouterTestingModule,
-        HttpClientTestingModule,
         RemarkableComponent,
         MatFormFieldModule,
         MatInputModule,
         MatCardModule,
         CryptoRS256Component,
       ],
-      providers: [RS256CryptoService, GaService],
+      providers: [
+        RS256CryptoService,
+        GaService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
     }).compileComponents();
   }));
 

@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NavComponent } from './nav.component';
-
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { QRCodeModule } from 'angularx-qrcode';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { routes } from '../app.routes';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -18,7 +18,6 @@ describe('NavComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
-        RouterTestingModule,
         MatSidenavModule,
         MatToolbarModule,
         QRCodeModule,
@@ -26,6 +25,7 @@ describe('NavComponent', () => {
         MatIconModule,
         NavComponent,
       ],
+      providers: [provideRouter(routes)],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavComponent);

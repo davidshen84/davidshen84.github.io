@@ -10,7 +10,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QRCodeModule } from 'angularx-qrcode';
-import { NgxWebstorageModule } from 'ngx-webstorage';
+import {
+  provideNgxWebstorage,
+  withLocalStorage,
+  withNgxWebstorageConfig,
+  withSessionStorage,
+} from 'ngx-webstorage';
 import { LayoutModule } from '@angular/cdk/layout';
 import {
   bootstrapApplication,
@@ -40,7 +45,6 @@ bootstrapApplication(AppComponent, {
       BrowserModule,
       HammerModule,
       LayoutModule,
-      NgxWebstorageModule.forRoot(),
       QRCodeModule,
       ReactiveFormsModule,
       ServiceWorkerModule.register('/ngsw-worker.js', {
@@ -60,5 +64,10 @@ bootstrapApplication(AppComponent, {
     RS256CryptoService,
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
+    provideNgxWebstorage(
+      withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),
+      withLocalStorage(),
+      withSessionStorage(),
+    ),
   ],
 }).catch((err) => console.log(err));

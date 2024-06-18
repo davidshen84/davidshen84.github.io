@@ -1,9 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { BlogHomePageComponent } from './blog-home-page.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatListModule } from '@angular/material/list';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { routes } from '../blog.routes';
 
 describe('BlogHomePageComponent', () => {
   let component: BlogHomePageComponent;
@@ -11,11 +14,10 @@ describe('BlogHomePageComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MatListModule,
-        BlogHomePageComponent,
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+        provideRouter(routes),
       ],
     }).compileComponents();
   }));

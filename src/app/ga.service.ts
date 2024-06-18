@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 declare function ga(...args: any): void;
 
