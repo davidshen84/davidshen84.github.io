@@ -66,7 +66,6 @@ export class PomodoroTimePipe implements PipeTransform {
   selector: 'app-pomodoro',
   templateUrl: './pomodoro.component.html',
   styleUrls: ['./pomodoro.component.scss'],
-  standalone: true,
   imports: [
     MatCardModule,
     MatButtonToggleModule,

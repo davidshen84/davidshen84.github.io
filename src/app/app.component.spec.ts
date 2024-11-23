@@ -2,25 +2,27 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { QRCodeModule } from 'angularx-qrcode';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { QRCodeComponent } from 'angularx-qrcode';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
-        RouterTestingModule,
-        QRCodeModule,
+        QRCodeComponent,
         MatToolbarModule,
         MatListModule,
         MatSidenavModule,
         NavComponent,
         AppComponent,
       ],
+      providers: [provideRouter(routes)],
     }).compileComponents();
   }));
 

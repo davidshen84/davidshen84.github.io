@@ -6,7 +6,6 @@ import { RemarkableComponent } from '../remarkable/remarkable.component';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  standalone: true,
   imports: [RemarkableComponent],
 })
 export class HomePageComponent {

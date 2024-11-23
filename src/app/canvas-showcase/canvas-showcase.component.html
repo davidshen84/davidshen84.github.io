@@ -1,12 +1,14 @@
-<div class="markdown-container">
-  <app-remarkable src="assets/blogs/how-to-compute-coordinates-in-a-canvas-element.md"></app-remarkable>
-</div>
-
 <div>
-  <div>Drag & Drop in this box.</div>
-  <canvas #canvas></canvas>
-</div>
+  <div class="markdown-container">
+    <app-remarkable src="assets/blogs/how-to-compute-coordinates-in-a-canvas-element.md"></app-remarkable>
+  </div>
 
-<ul>
-  <li *ngFor="let p of _points.slice().reverse()">{{ p | json }}</li>
-</ul>
+  <div>
+    <div>Drag & Drop in this box.</div>
+    <canvas #canvas></canvas>
+  </div>
+
+  <ul>
+    <li *ngFor="let p of _points.slice().reverse()">{{ p | json }}</li>
+  </ul>
+</div>

@@ -45,7 +45,6 @@ import { AsyncPipe } from '@angular/common';
   selector: 'app-remarkable',
   templateUrl: './remarkable.component.html',
   styleUrls: ['./remarkable.component.scss'],
-  standalone: true,
   imports: [AsyncPipe],
 })
 export class RemarkableComponent

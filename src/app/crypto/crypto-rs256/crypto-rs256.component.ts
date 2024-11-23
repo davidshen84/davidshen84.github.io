@@ -28,7 +28,6 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
   styleUrls: ['./crypto-rs256.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     RemarkableComponent,
     ReactiveFormsModule,

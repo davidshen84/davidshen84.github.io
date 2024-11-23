@@ -39,7 +39,6 @@ const normalize = (
   styleUrls: ['./tf-linear-regression.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [RemarkableComponent, AsyncPipe],
 })
 export class TfLinearRegressionComponent

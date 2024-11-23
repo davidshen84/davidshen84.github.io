@@ -21,7 +21,6 @@ const KEY_NAME = 'private-key';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     MatExpansionModule,
     MatFormFieldModule,

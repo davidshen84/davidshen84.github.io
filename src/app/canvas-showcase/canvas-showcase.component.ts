@@ -21,7 +21,6 @@ import { RemarkableComponent } from '../remarkable/remarkable.component';
   styleUrls: ['./canvas-showcase.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [RemarkableComponent, NgFor, JsonPipe],
 })
 export class CanvasShowcaseComponent

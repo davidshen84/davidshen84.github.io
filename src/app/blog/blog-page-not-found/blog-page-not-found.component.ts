@@ -9,7 +9,6 @@ import { AsyncPipe } from '@angular/common';
   selector: 'app-blog-page-not-found',
   templateUrl: './blog-page-not-found.component.html',
   styleUrls: ['./blog-page-not-found.component.scss'],
-  standalone: true,
   imports: [AsyncPipe],
 })
 export class BlogPageNotFoundComponent implements OnInit {

@@ -9,7 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ReactiveFormsModule } from '@angular/forms';
-import { QRCodeModule } from 'angularx-qrcode';
+
 import {
   provideNgxWebstorage,
   withLocalStorage,
@@ -45,7 +45,6 @@ bootstrapApplication(AppComponent, {
       BrowserModule,
       HammerModule,
       LayoutModule,
-      QRCodeModule,
       ReactiveFormsModule,
       ServiceWorkerModule.register('/ngsw-worker.js', {
         enabled: environment.production,

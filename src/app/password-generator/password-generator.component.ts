@@ -25,7 +25,6 @@ const prime = 21001;
   templateUrl: './password-generator.component.html',
   styleUrls: ['./password-generator.component.scss'],
   providers: [GaService],
-  standalone: true,
   imports: [
     MatCardModule,
     MatCheckboxModule,

@@ -18,7 +18,6 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./webcam.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [WebcamModule, NgIf],
 })
 export class WebcamComponent extends BaseComponent implements OnInit {

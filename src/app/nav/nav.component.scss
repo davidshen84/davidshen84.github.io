@@ -1,11 +1,11 @@
-@import "../app-variables";
+@use "../app-variables";
 
 .sidenav-container {
   height: 100%;
 }
 
 .sidenav {
-  width: $sidenav-width;
+  width: app-variables.$sidenav-width;
 }
 
 .mat-toolbar.mat-primary {

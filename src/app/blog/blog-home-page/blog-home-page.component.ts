@@ -8,7 +8,6 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './blog-home-page.component.html',
   styleUrls: ['./blog-home-page.component.scss'],
   providers: [GaService],
-  standalone: true,
   imports: [MatListModule],
 })
 export class BlogHomePageComponent {

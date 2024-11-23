@@ -2,13 +2,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NavComponent } from './nav.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { QRCodeModule } from 'angularx-qrcode';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { routes } from '../app.routes';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -20,7 +20,7 @@ describe('NavComponent', () => {
         NoopAnimationsModule,
         MatSidenavModule,
         MatToolbarModule,
-        QRCodeModule,
+        QRCodeComponent,
         MatListModule,
         MatIconModule,
         NavComponent,
