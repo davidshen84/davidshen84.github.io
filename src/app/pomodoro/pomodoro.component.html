@@ -1,40 +1,48 @@
-<mat-card #message class='center'>
-  <mat-card-content>
-    <div class='clock'>{{ (this.clock$ | async)! | pomodoroTime }}</div>
-    <div class='note'>{{ (this.note$ | async) || '🍅' }}</div>
-  </mat-card-content>
-</mat-card>
-<mat-card>
-  <mat-card-title>Choose your 🍅 style</mat-card-title>
-  <mat-card-content class='input-panel'>
-    <div class='group'>
-      <mat-button-toggle-group #pomodoroSequence (change)='pomodoroSequenceChanged.next($event.value)' value='five'>
-        <mat-button-toggle value='five'>5 minutes</mat-button-toggle>
-        <mat-button-toggle value='fib'>Fibonacci</mat-button-toggle>
-        <mat-button-toggle value='prime'>Prime</mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
+<mat-grid-list [cols]="(isHandset$ | async) ? 1 : 2" rowHeight="400px">
 
-    <div [class.fill-width]="(isHandset$ | async) === true" [class.narrow]="(isHandset$ | async) === false"
-         class='group'>
-      <mat-form-field>
-        <mat-label>Note:</mat-label>
-        <input #note matInput placeholder='🍅' type='text'>
-      </mat-form-field>
-    </div>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-content #message class="center">
+        <div class='clock'>{{ (this.clock$ | async)! | pomodoroTime }}</div>
+        <div class='note'>{{ (this.note$ | async) || '🍅' }}</div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
 
-    <div class='pomodoro-picker group'>
-      <span (click)='addPomodoro(p,note.value)'
-            *ngFor='let p of this.selectedPomodoroSequence$ | async;'
-            [matTooltip]="p + ' minutes'"
-            [ngStyle]="{'font-size': (this.calcPomodoroFontSize(p)) + 'em' }">
-        🍅
-      </span>
-    </div>
-  </mat-card-content>
-</mat-card>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>
+        Choose your 🍅 style
+      </mat-card-title>
+      <mat-card-content class='input-panel'>
+        <div class='group'>
+          <mat-button-toggle-group #pomodoroSequence (change)='pomodoroSequenceChanged.next($event.value)' value='five'>
+            <mat-button-toggle value='five'>5 minutes</mat-button-toggle>
+            <mat-button-toggle value='fib'>Fibonacci</mat-button-toggle>
+            <mat-button-toggle value='prime'>Prime</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
 
-<mat-grid-list cols='2' rowHeight='3:1'>
+        <div [class.fill-width]="(isHandset$ | async) === true" [class.narrow]="(isHandset$ | async) === false"
+             class='group'>
+          <mat-form-field>
+            <mat-label>Note:</mat-label>
+            <input #note matInput placeholder='🍅' type='text'>
+          </mat-form-field>
+        </div>
+
+        <div class='pomodoro-picker group'>
+          <span (click)='addPomodoro(p,note.value)'
+                *ngFor='let p of this.selectedPomodoroSequence$ | async;'
+                [matTooltip]="p + ' minutes'"
+                [ngStyle]="{'font-size': (this.calcPomodoroFontSize(p)) + 'em' }">
+            🍅
+          </span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
   <mat-grid-tile>
     <mat-card class='pomodoro-list'>
       <mat-card-header>
@@ -59,7 +67,8 @@
     <mat-card class='pomodoro-list'>
       <mat-card-title>Rotten 🍅</mat-card-title>
       <mat-card-content>
-        <mat-list-item *ngFor='let p of this.rottenPomodoroBasket(); first as h' class='pomodoro-list-item' role='list'>
+        <mat-list-item *ngFor='let p of this.rottenPomodoroBasket(); first as h' class='pomodoro-list-item'
+                       role='list'>
             <span matLine>🍅
               {{ p.seconds | pomodoroTime }} -- {{ p.note }}
             </span>
@@ -71,4 +80,5 @@
       </mat-card-footer>
     </mat-card>
   </mat-grid-tile>
+
 </mat-grid-list>

@@ -14,6 +14,7 @@ import { GaService } from '../../ga.service';
 import { BaseComponent } from '../../base-component';
 import { AsyncPipe } from '@angular/common';
 import { RemarkableComponent } from '../../remarkable/remarkable.component';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 
 /**
  * Maps @param {n} within range @param {in_min} to @param {in_max} to another number in the range @param {out_min} to @param {out_max}.
@@ -39,7 +40,7 @@ const normalize = (
   styleUrls: ['./tf-linear-regression.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RemarkableComponent, AsyncPipe],
+  imports: [RemarkableComponent, AsyncPipe, MatGridList, MatGridTile],
 })
 export class TfLinearRegressionComponent
   extends BaseComponent

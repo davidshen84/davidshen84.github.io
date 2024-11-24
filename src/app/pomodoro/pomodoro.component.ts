@@ -155,7 +155,8 @@ export class PomodoroComponent implements OnInit, OnDestroy {
     this.pomodoroFinishedSubscription = this.rottenPomodoro$.subscribe((p) => {
       this.rottenPomodoroBasket.update((value) => [p, ...value]);
 
-      if (this.notificationPermission === 'granted') {
+      if (this.notificationPermission === 'granted' || true) {
+        // todo fix this
         new Notification('Pomodoro Finished', {
           body: p.note,
         });

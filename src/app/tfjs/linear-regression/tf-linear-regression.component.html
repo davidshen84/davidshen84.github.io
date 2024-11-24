@@ -1,15 +1,25 @@
-<div class='markdown-container'>
-  <app-remarkable src='assets/blogs/tf-linear-regression.md'></app-remarkable>
-</div>
+<mat-grid-list cols="2" rowHeight="500px">
 
-<div>
-  <app-remarkable>
-    <pre #content>
+  <mat-grid-tile colspan="2">
+    <div class="markdown-container">
+      <app-remarkable src='assets/blogs/tf-linear-regression.md'></app-remarkable>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <div>
+      <app-remarkable>
+        <pre #content>
 $model: {{ model$ | async }}$
 $cost = {{ cost$ | async }}$
-    </pre>
-  </app-remarkable>
-</div>
-<div>
-  <canvas #canvas (click)='onMouseClick($event)'></canvas>
-</div>
+        </pre>
+      </app-remarkable>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <canvas #canvas (click)='onMouseClick($event)'></canvas>
+  </mat-grid-tile>
+
+</mat-grid-list>
