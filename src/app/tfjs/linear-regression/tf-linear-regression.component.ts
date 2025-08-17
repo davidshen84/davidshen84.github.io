@@ -5,6 +5,7 @@ import {
   ElementRef,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { CanvasDrawService } from '../../canvas-showcase/canvas-draw.service';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -46,6 +47,8 @@ export class TfLinearRegressionComponent
   extends BaseComponent
   implements OnInit
 {
+  private canvasDraw = inject(CanvasDrawService);
+
   private modelSubject = new BehaviorSubject<{ a: number; b: number }>({
     a: NaN,
     b: NaN,
@@ -75,11 +78,10 @@ export class TfLinearRegressionComponent
   private canvasRef!: ElementRef;
   private canvas!: HTMLCanvasElement;
 
-  constructor(
-    titleService: TitleService,
-    ga: GaService,
-    private canvasDraw: CanvasDrawService,
-  ) {
+  constructor() {
+    const titleService = inject(TitleService);
+    const ga = inject(GaService);
+
     super(ga);
     titleService.setTitle('Linear Regression with TensorFlow');
   }

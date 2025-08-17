@@ -24,7 +24,7 @@
         </div>
 
         <div [class.fill-width]="(isHandset$ | async) === true" [class.narrow]="(isHandset$ | async) === false"
-             class='group'>
+          class='group'>
           <mat-form-field>
             <mat-label>Note:</mat-label>
             <input #note matInput placeholder='🍅' type='text'>
@@ -32,12 +32,13 @@
         </div>
 
         <div class='pomodoro-picker group'>
-          <span (click)='addPomodoro(p,note.value)'
-                *ngFor='let p of this.selectedPomodoroSequence$ | async;'
-                [matTooltip]="p + ' minutes'"
-                [ngStyle]="{'font-size': (this.calcPomodoroFontSize(p)) + 'em' }">
-            🍅
-          </span>
+          @for (p of this.selectedPomodoroSequence$ | async; track p) {
+            <span (click)='addPomodoro(p,note.value)'
+              [matTooltip]="p + ' minutes'"
+              [ngStyle]="{'font-size': (this.calcPomodoroFontSize(p)) + 'em' }">
+              🍅
+            </span>
+          }
         </div>
       </mat-card-content>
     </mat-card>
@@ -51,12 +52,14 @@
       </mat-card-header>
       <mat-card-content>
         <mat-list>
-          <mat-list-item *ngFor='let p of this.freshPomodoroBasket(); first as h' class='pomodoro-list-item'
-                         role='list'>
-            <span matLine>🍅
-              {{ p.seconds | pomodoroTime }} -- {{ p.note }}
-            </span>
-          </mat-list-item>
+          @for (p of this.freshPomodoroBasket(); track p; let h = $first) {
+            <mat-list-item class='pomodoro-list-item'
+              role='list'>
+              <span matLine>🍅
+                {{ p.seconds | pomodoroTime }} -- {{ p.note }}
+              </span>
+            </mat-list-item>
+          }
         </mat-list>
 
       </mat-card-content>
@@ -67,12 +70,14 @@
     <mat-card class='pomodoro-list'>
       <mat-card-title>Rotten 🍅</mat-card-title>
       <mat-card-content>
-        <mat-list-item *ngFor='let p of this.rottenPomodoroBasket(); first as h' class='pomodoro-list-item'
-                       role='list'>
+        @for (p of this.rottenPomodoroBasket(); track p; let h = $first) {
+          <mat-list-item class='pomodoro-list-item'
+            role='list'>
             <span matLine>🍅
               {{ p.seconds | pomodoroTime }} -- {{ p.note }}
             </span>
-        </mat-list-item>
+          </mat-list-item>
+        }
 
       </mat-card-content>
       <mat-card-footer>

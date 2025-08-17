@@ -4,7 +4,7 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { merge, Observable } from 'rxjs';
 import { filter, mergeMap, share } from 'rxjs/operators';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
@@ -14,6 +14,9 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 @Injectable()
 export class AuthorizationInterceptorService implements HttpInterceptor {
+  private cryptoService = inject(RS256CryptoService);
+  private _strUtlSvc = inject(StringUtilityService);
+
   /**
    * RSA-SHA256 JWT Header
    */
@@ -27,11 +30,9 @@ export class AuthorizationInterceptorService implements HttpInterceptor {
 
   private readonly privateKeyData: string;
 
-  constructor(
-    private cryptoService: RS256CryptoService,
-    private _strUtlSvc: StringUtilityService,
-    store: LocalStorageService,
-  ) {
+  constructor() {
+    const store = inject(LocalStorageService);
+
     this.privateKeyData = store.retrieve('private-key');
   }
 

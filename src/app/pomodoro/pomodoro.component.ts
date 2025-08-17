@@ -6,6 +6,7 @@ import {
   Pipe,
   PipeTransform,
   signal,
+  inject,
 } from '@angular/core';
 import {
   BehaviorSubject,
@@ -24,7 +25,7 @@ import { MatLineModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AsyncPipe, NgFor, NgStyle } from '@angular/common';
+import { AsyncPipe, NgStyle } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -71,7 +72,6 @@ export class PomodoroTimePipe implements PipeTransform {
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
-    NgFor,
     MatTooltipModule,
     NgStyle,
     MatGridListModule,
@@ -82,6 +82,9 @@ export class PomodoroTimePipe implements PipeTransform {
   ],
 })
 export class PomodoroComponent implements OnInit, OnDestroy {
+  private snackBar = inject(MatSnackBar);
+  private breakpointObserver = inject(BreakpointObserver);
+
   public isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
@@ -134,11 +137,9 @@ export class PomodoroComponent implements OnInit, OnDestroy {
   private pomodoroFinishedSubscription!: Subscription;
   private notificationPermission: 'default' | 'denied' | 'granted' = 'default';
 
-  constructor(
-    private snackBar: MatSnackBar,
-    private breakpointObserver: BreakpointObserver,
-    _titleService: TitleService,
-  ) {
+  constructor() {
+    const _titleService = inject(TitleService);
+
     _titleService.setTitle('🍅 Pomodoro 🍅');
   }
 

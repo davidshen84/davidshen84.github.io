@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { filter, mergeMap } from 'rxjs/operators';
@@ -33,16 +38,16 @@ const KEY_NAME = 'private-key';
   ],
 })
 export class SettingsComponent implements OnInit {
+  private _cryptoService = inject(RS256CryptoService);
+  private _snackBar = inject(MatSnackBar);
+  private _title = inject(TitleService);
+
   @LocalStorage(KEY_NAME, '')
   public pkInput: string = '';
   public pkChangedSubject: Subject<string> = new Subject<string>();
   public cryptoKey$!: Observable<boolean>;
 
-  constructor(
-    private _cryptoService: RS256CryptoService,
-    private _snackBar: MatSnackBar,
-    private _title: TitleService,
-  ) {
+  constructor() {
     this._title.setTitle('Settings');
   }
 

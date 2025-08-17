@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -15,16 +15,17 @@ import { RemarkableComponent } from '../../remarkable/remarkable.component';
   imports: [RemarkableComponent, AsyncPipe],
 })
 export class BlogPageComponent extends BaseComponent implements OnDestroy {
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  private _titleService = inject(TitleService);
+
   public blogPath$: Observable<string>;
   private _paramIdSubscriptions: Subscription[] = [];
   private _paramId$: Observable<string>;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _titleService: TitleService,
-    ga: GaService,
-  ) {
+  constructor() {
+    const ga = inject(GaService);
+
     super(ga);
     this._paramId$ = this._route.params.pipe(map((p) => p['id']));
 

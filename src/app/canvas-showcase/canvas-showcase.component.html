@@ -2,7 +2,7 @@
   <mat-grid-tile colspan="2">
 
     <app-remarkable class="markdown-container"
-                    src="assets/blogs/how-to-compute-coordinates-in-a-canvas-element.md"></app-remarkable>
+    src="assets/blogs/how-to-compute-coordinates-in-a-canvas-element.md"></app-remarkable>
 
   </mat-grid-tile>
 
@@ -15,7 +15,9 @@
 
   <mat-grid-tile>
     <ol>
-      <li *ngFor="let p of _points().slice().reverse()">{{ p | json }}</li>
+      @for (p of _points().slice().reverse(); track p) {
+        <li>{{ p | json }}</li>
+      }
     </ol>
   </mat-grid-tile>
 </mat-grid-list>

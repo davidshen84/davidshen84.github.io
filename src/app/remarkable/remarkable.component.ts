@@ -8,6 +8,7 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
+  inject,
 } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Remarkable } from 'remarkable';
@@ -50,6 +51,9 @@ import { AsyncPipe } from '@angular/common';
 export class RemarkableComponent
   implements OnChanges, AfterContentChecked, AfterViewInit
 {
+  private http = inject(HttpClient);
+  private sanitizer = inject(DomSanitizer);
+
   @Input()
   public src: string | null = null;
   private readonly md: Remarkable;
@@ -81,10 +85,7 @@ export class RemarkableComponent
     map(this.sanitizer.bypassSecurityTrustHtml),
   );
 
-  constructor(
-    private http: HttpClient,
-    private sanitizer: DomSanitizer,
-  ) {
+  constructor() {
     this.md = new Remarkable('full', {
       breaks: true,
       // typographer: true,

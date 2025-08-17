@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TitleService } from '../../title.service';
 import { GaService } from '../../ga.service';
 import { MatListModule } from '@angular/material/list';
@@ -11,7 +11,9 @@ import { MatListModule } from '@angular/material/list';
   imports: [MatListModule],
 })
 export class BlogHomePageComponent {
-  constructor(private _titleService: TitleService) {
+  private _titleService = inject(TitleService);
+
+  constructor() {
     this._titleService.setTitle('Blog Home');
   }
 }

@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TitleService } from '../title.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AsyncPipe, NgIf, TitleCasePipe } from '@angular/common';
+import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,7 +22,6 @@ import { QRCodeComponent } from 'angularx-qrcode';
     MatListModule,
     RouterLink,
     QRCodeComponent,
-    NgIf,
     MatButtonModule,
     MatIconModule,
     RouterOutlet,
@@ -31,6 +30,9 @@ import { QRCodeComponent } from 'angularx-qrcode';
   ],
 })
 export class NavComponent {
+  private breakpointObserver = inject(BreakpointObserver);
+  private _titleService = inject(TitleService);
+
   public isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
@@ -39,10 +41,7 @@ export class NavComponent {
 
   public pubKey = '7E927F94CC52AA1A';
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private _titleService: TitleService,
-  ) {
+  constructor() {
     this.title$ = this._titleService.getTitle();
   }
 }

@@ -4,13 +4,13 @@ import {
   ElementRef,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { WebcamImage, WebcamModule } from 'ngx-webcam';
 import { Subject } from 'rxjs';
 import { TitleService } from '../title.service';
 import { GaService } from '../ga.service';
 import { BaseComponent } from '../base-component';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-webcam',
@@ -18,7 +18,7 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./webcam.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [WebcamModule, NgIf],
+  imports: [WebcamModule],
 })
 export class WebcamComponent extends BaseComponent implements OnInit {
   private _snapshotTrigger = new Subject<void>();
@@ -28,7 +28,10 @@ export class WebcamComponent extends BaseComponent implements OnInit {
   private _canvasRef!: ElementRef;
   private _canvas!: HTMLCanvasElement;
 
-  constructor(titleService: TitleService, ga: GaService) {
+  constructor() {
+    const titleService = inject(TitleService);
+    const ga = inject(GaService);
+
     super(ga);
     titleService.setTitle('Webcam');
   }

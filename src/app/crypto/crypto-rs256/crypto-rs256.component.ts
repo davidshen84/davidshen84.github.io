@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   BehaviorSubject,
   combineLatest,
@@ -40,6 +40,10 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom';
   ],
 })
 export class CryptoRS256Component extends BaseComponent {
+  private cryptoService = inject(RS256CryptoService);
+  private titleService = inject(TitleService);
+  private strUtlSvc = inject(StringUtilityService);
+
   // Define header
   public header = JSON.stringify(
     {
@@ -107,12 +111,9 @@ export class CryptoRS256Component extends BaseComponent {
     ),
   );
 
-  constructor(
-    private cryptoService: RS256CryptoService,
-    private titleService: TitleService,
-    private strUtlSvc: StringUtilityService,
-    ga: GaService,
-  ) {
+  constructor() {
+    const ga = inject(GaService);
+
     super(ga);
 
     this.titleService.setTitle('Encryption using RS256');

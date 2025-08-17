@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { filter, map, repeat, scan } from 'rxjs/operators';
@@ -41,6 +41,10 @@ const prime = 21001;
   ],
 })
 export class PasswordGeneratorComponent extends BaseComponent {
+  private _titleService = inject(TitleService);
+  private breakpointObserver = inject(BreakpointObserver);
+  private _matSnackBar = inject(MatSnackBar);
+
   public isHandset$ = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
@@ -79,12 +83,9 @@ export class PasswordGeneratorComponent extends BaseComponent {
     );
   });
 
-  constructor(
-    ga: GaService,
-    private _titleService: TitleService,
-    private breakpointObserver: BreakpointObserver,
-    private _matSnackBar: MatSnackBar,
-  ) {
+  constructor() {
+    const ga = inject(GaService);
+
     super(ga);
     this._titleService.setTitle('Password Generator');
   }

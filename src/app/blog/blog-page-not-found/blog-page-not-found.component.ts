@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,12 +12,12 @@ import { AsyncPipe } from '@angular/common';
   imports: [AsyncPipe],
 })
 export class BlogPageNotFoundComponent implements OnInit {
+  private _route = inject(ActivatedRoute);
+  private _titleService = inject(TitleService);
+
   public BlogId$!: Observable<string>;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _titleService: TitleService,
-  ) {
+  constructor() {
     this._titleService.setTitle('Blog Not Found!!! 😞');
   }
 

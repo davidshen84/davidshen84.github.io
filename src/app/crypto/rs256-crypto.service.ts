@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { StringUtilityService } from './string.utility';
 
 /**
@@ -36,6 +36,8 @@ interface CryptoService {
 
 @Injectable()
 export class RS256CryptoService implements CryptoService {
+  private _strUtlSvc = inject(StringUtilityService);
+
   public readonly algorithm: Algorithm = {
     name: 'RSASSA-PKCS1-v1_5',
   };
@@ -50,7 +52,7 @@ export class RS256CryptoService implements CryptoService {
     saltLength: 256,
   };
 
-  constructor(private _strUtlSvc: StringUtilityService) {}
+  constructor() {}
 
   /**
    * Remove the header and footer section of a RSA private key output.

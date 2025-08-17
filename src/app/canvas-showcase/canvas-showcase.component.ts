@@ -6,6 +6,7 @@ import {
   OnInit,
   signal,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
@@ -13,7 +14,7 @@ import { TitleService } from '../title.service';
 import { CanvasDrawService } from './canvas-draw.service';
 import { BaseComponent } from '../base-component';
 import { GaService } from '../ga.service';
-import { JsonPipe, NgFor } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { RemarkableComponent } from '../remarkable/remarkable.component';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 
@@ -23,23 +24,24 @@ import { MatGridList, MatGridTile } from '@angular/material/grid-list';
   styleUrls: ['./canvas-showcase.component.scss'],
   providers: [GaService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RemarkableComponent, NgFor, JsonPipe, MatGridList, MatGridTile],
+  imports: [RemarkableComponent, JsonPipe, MatGridList, MatGridTile],
 })
 export class CanvasShowcaseComponent
   extends BaseComponent
   implements OnInit, OnDestroy
 {
+  private canvasDraw = inject(CanvasDrawService);
+  private _titleService = inject(TitleService);
+
   public _points = signal(<Array<{ x: number; y: number }>>[]);
   @ViewChild('canvas', { static: true })
   private _canvasRef!: ElementRef;
   private _canvas!: HTMLCanvasElement;
   private _dragDropSubscription!: Subscription;
 
-  constructor(
-    private canvasDraw: CanvasDrawService,
-    private _titleService: TitleService,
-    ga: GaService,
-  ) {
+  constructor() {
+    const ga = inject(GaService);
+
     super(ga);
 
     this._titleService.setTitle('Canvas Showcase');
