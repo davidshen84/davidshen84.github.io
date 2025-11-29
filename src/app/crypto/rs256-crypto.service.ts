@@ -21,7 +21,7 @@ interface CryptoService {
   usage: string[];
 
   /**
-   * Sign the input data using the provide key.
+   * Sign the input data using the provided key.
    * @param key {string} A RS256 private key in the PKCS8 format.
    * @param data {string} Data to be signed.
    */
@@ -55,7 +55,7 @@ export class RS256CryptoService implements CryptoService {
   constructor() {}
 
   /**
-   * Remove the header and footer section of a RSA private key output.
+   * Remove the header and footer section of an RSA private key output.
    * @param {string} k The private key text.
    *
    * @return {string} private key
@@ -72,7 +72,7 @@ export class RS256CryptoService implements CryptoService {
 
     let dataBuf;
     try {
-      dataBuf = this._strUtlSvc.EncodeString(data);
+      dataBuf = new Uint8Array(this._strUtlSvc.EncodeString(data));
     } catch (e: any) {
       return Promise.reject(new Error(e ?? 'unknown error', { cause: e }));
     }
@@ -86,7 +86,7 @@ export class RS256CryptoService implements CryptoService {
     );
   }
 
-  importKey(key: string): PromiseLike<CryptoKey> {
+  async importKey(key: string): Promise<CryptoKey> {
     let keyBuf: ArrayBuffer;
 
     try {
@@ -96,8 +96,16 @@ export class RS256CryptoService implements CryptoService {
       return Promise.reject(new Error(e ?? 'unknown error', { cause: e }));
     }
 
-    return crypto.subtle
-      .importKey(this.format, keyBuf, this._keyImportParams, false, this.usage)
-      .then(undefined, (r) => Promise.reject(new Error(r)));
+    try {
+      return await crypto.subtle.importKey(
+        this.format,
+        keyBuf,
+        this._keyImportParams,
+        false,
+        this.usage,
+      );
+    } catch (r) {
+      throw new Error(r?.toString() ?? 'unknown error', { cause: r });
+    }
   }
 }
