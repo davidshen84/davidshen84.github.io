@@ -15,14 +15,12 @@ describe('TitleService', () => {
   it('should return empty title', inject(
     [TitleService],
     (service: TitleService) => {
-      service.getTitle().subscribe({
-        next: (v) => expect(v).toBe(''),
-      });
+      expect(service.title()).toBe('');
     },
   ));
 
   it('should update title', inject([TitleService], (service: TitleService) => {
     service.setTitle('new title');
-    service.getTitle().subscribe((v) => expect(v).toBe('new title'));
+    expect(service.title()).toBe('new title');
   }));
 });

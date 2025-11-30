@@ -37,11 +37,9 @@ export class NavComponent {
     .observe(Breakpoints.Handset)
     .pipe(map((result) => result.matches));
 
-  public title$: Observable<string>;
+  public title = this._titleService.title;
 
   public pubKey = '7E927F94CC52AA1A';
 
-  constructor() {
-    this.title$ = this._titleService.getTitle();
-  }
+  constructor() {}
 }
