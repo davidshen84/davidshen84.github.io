@@ -1,27 +1,24 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
-import { AsyncPipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-blog-page-not-found',
   templateUrl: './blog-page-not-found.component.html',
   styleUrls: ['./blog-page-not-found.component.scss'],
-  imports: [AsyncPipe],
 })
-export class BlogPageNotFoundComponent implements OnInit {
+export class BlogPageNotFoundComponent {
   private _route = inject(ActivatedRoute);
   private _titleService = inject(TitleService);
 
-  public BlogId$!: Observable<string>;
+  public readonly blogId = toSignal(
+    this._route.params.pipe(map((params) => params['id'] as string)),
+    { initialValue: '' },
+  );
 
   constructor() {
     this._titleService.setTitle('Blog Not Found!!! 😞');
-  }
-
-  ngOnInit(): void {
-    this.BlogId$ = this._route.params.pipe(map((_) => _['id']));
   }
 }
