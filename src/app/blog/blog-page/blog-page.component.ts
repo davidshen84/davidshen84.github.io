@@ -1,56 +1,46 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { TitleService } from '../../title.service';
 import { GaService } from '../../ga.service';
 import { BaseComponent } from '../../base-component';
-import { AsyncPipe } from '@angular/common';
 import { RemarkableComponent } from '../../remarkable/remarkable.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-blog-page',
   templateUrl: './blog-page.component.html',
   styleUrls: ['./blog-page.component.scss'],
-  imports: [RemarkableComponent, AsyncPipe],
+  imports: [RemarkableComponent],
 })
-export class BlogPageComponent extends BaseComponent implements OnDestroy {
+export class BlogPageComponent extends BaseComponent {
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _titleService = inject(TitleService);
 
-  public blogPath$: Observable<string>;
-  private _paramIdSubscriptions: Subscription[] = [];
-  private _paramId$: Observable<string>;
+  private readonly _paramsSig = toSignal(this._route.params, {
+    initialValue: { id: '' },
+  });
+  private readonly _idSig = computed(() => this._paramsSig().id as string);
+  public readonly blogPath = computed<string | null>(() => {
+    const id = this._idSig();
+    return id ? `assets/blogs/${id}.md` : null;
+  });
 
   constructor() {
     const ga = inject(GaService);
 
     super(ga);
-    this._paramId$ = this._route.params.pipe(map((p) => p['id']));
 
-    this._paramIdSubscriptions.push(
-      this._paramId$
-        .pipe(
-          filter((p) => p !== undefined),
-          map((p) => p.replace(/-/g, ' ')),
-        )
-        .subscribe((t) => this._titleService.setTitle(t)),
-    );
-    this.blogPath$ = this._paramId$.pipe(map((p) => `assets/blogs/${p}.md`));
-  }
-
-  ngOnDestroy() {
-    if (this._paramIdSubscriptions.length > 0) {
-      this._paramIdSubscriptions.forEach((s) => s.unsubscribe());
-    }
+    effect(() => {
+      const id = this._idSig();
+      if (id) {
+        this._titleService.setTitle(id.replace(/-/g, ' '));
+      }
+    });
   }
 
   onBlogLoadError(_: string) {
-    this._paramIdSubscriptions.push(
-      this._paramId$.subscribe((id) =>
-        this._router.navigate(['blog/notfound', id]),
-      ),
-    );
+    const id = this._idSig();
+    this._router.navigate(['blog/notfound', id]);
   }
 }
