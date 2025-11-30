@@ -40,6 +40,4 @@ export class NavComponent {
   public title = this._titleService.title;
 
   public pubKey = '7E927F94CC52AA1A';
-
-  constructor() {}
 }
