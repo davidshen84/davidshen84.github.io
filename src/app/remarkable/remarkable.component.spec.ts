@@ -42,11 +42,6 @@ describe('RemarkableComponent', () => {
   });
 
   it('should render markdown content', () => {
-    component.markdown$.subscribe((x) => {
-      expect(x).not.toBeNull();
-      expect(x.toString()).toContain('<h1>test</h1>');
-    });
-
     component.ngOnChanges({
       src: {
         currentValue: 'mock://test',
@@ -54,5 +49,9 @@ describe('RemarkableComponent', () => {
       } as SimpleChange,
     });
     httpController.expectOne('mock://test').flush('# test');
+
+    const markdown = component.markdown();
+    expect(markdown).not.toBeNull();
+    expect(markdown.toString()).toContain('<h1>test</h1>');
   });
 });
