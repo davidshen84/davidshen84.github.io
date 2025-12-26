@@ -39,7 +39,7 @@ export class BlogPageComponent extends BaseComponent {
     });
   }
 
-  onBlogLoadError(_: string) {
+  onBlogLoadError(_: any) {
     const id = this._idSig();
     this._router.navigate(['blog/notfound', id]);
   }

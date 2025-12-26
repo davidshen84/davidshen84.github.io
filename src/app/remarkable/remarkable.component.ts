@@ -1,44 +1,44 @@
 import {
   AfterContentChecked,
-  AfterViewInit,
   Component,
+  computed,
   ContentChild,
+  effect,
   ElementRef,
-  Input,
+  inject,
+  input,
   OnChanges,
   Output,
+  signal,
   SimpleChanges,
-  inject,
 } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Remarkable } from 'remarkable';
 // @ts-ignore
 import rkatex from 'remarkable-katex';
-import { of, race, Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { catchError, filter, map, share, switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import hljs from 'highlight.js';
-import { AsyncPipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 /** An Angular component for the reMarkable library
  *
  * # Usage:
  *
- * You can use the `src` attribute to download the markdown content*
+ * You can use the `src` attribute to download the markdown contentRef*
  *
  * ```html
  * <app-remarkable src='../readme.md'></app-remarkable>
  * ```
  *
- * If you want to use inline markdown content, you need to:
- * - wrap the content in a `pre` element with the `#content` id
- * - modify the indentation of the content
+ * If you want to use inline markdown contentRef, you need to:
+ * - wrap the contentRef in a `pre` element with the `#contentRef` id
+ * - modify the indentation of the contentRef
  *
  * ```html
  * <app-remarkable>
- *   <pre #content>
  * |<- markdown indentation starts here
- *   </pre
  * </app-remarkable
  * ```
  */
@@ -46,19 +46,17 @@ import { AsyncPipe } from '@angular/common';
   selector: 'app-remarkable',
   templateUrl: './remarkable.component.html',
   styleUrls: ['./remarkable.component.scss'],
-  imports: [AsyncPipe],
+  imports: [],
 })
-export class RemarkableComponent
-  implements OnChanges, AfterContentChecked, AfterViewInit
-{
+export class RemarkableComponent implements OnChanges, AfterContentChecked {
+  public src = input<string | null>(null);
+
+  @ContentChild('content', { static: true })
+  private contentRef!: ElementRef;
+
   private http = inject(HttpClient);
   private sanitizer = inject(DomSanitizer);
-
-  @Input()
-  public src: string | null = null;
   private readonly md: Remarkable;
-  @ContentChild('content', { static: true })
-  private content!: ElementRef;
 
   private srcSubject = new Subject<string>();
   private srcHttpResponse$ = this.srcSubject.pipe(
@@ -69,21 +67,30 @@ export class RemarkableComponent
     ),
     share(),
   );
-  @Output()
-  public errorEvent = this.srcHttpResponse$.pipe(
-    filter((x) => x.status !== 200),
-  );
-  private contentSubject = new Subject<string>();
-  public markdown$ = race(
+
+  private responseBody = toSignal(
     this.srcHttpResponse$.pipe(
       filter((x) => x.status === 200),
       map((x) => x.body),
     ),
-    this.contentSubject.asObservable(),
-  ).pipe(
-    map((x) => this.md.render(x!)),
-    map(this.sanitizer.bypassSecurityTrustHtml),
+    { initialValue: '' },
   );
+
+  @Output()
+  public errorEvent = this.srcHttpResponse$.pipe(
+    filter((x) => x.status !== 200),
+  );
+  private content = signal<string>('');
+
+  public markdown = computed(() => {
+    return this.renderMarkdown(this.content() || this.responseBody() || '');
+  });
+
+  private renderMarkdown(markdown: string | null) {
+    return this.sanitizer.bypassSecurityTrustHtml(
+      this.md.render(markdown || ''),
+    );
+  }
 
   constructor() {
     this.md = new Remarkable('full', {
@@ -103,12 +110,13 @@ export class RemarkableComponent
         return ''; // use external default escaping
       },
     }).use(rkatex);
-  }
 
-  ngAfterViewInit(): void {
-    if (this.src) {
-      this.srcSubject.next(this.src);
-    }
+    effect(() => {
+      const src = this.src() || '';
+      if (src) {
+        this.srcSubject.next(src);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -118,8 +126,8 @@ export class RemarkableComponent
   }
 
   ngAfterContentChecked(): void {
-    if (this.content) {
-      this.contentSubject.next(this.content.nativeElement.textContent);
+    if (this.contentRef) {
+      this.content.set(this.contentRef.nativeElement.textContent);
     }
   }
 }
