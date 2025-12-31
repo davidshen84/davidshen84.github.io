@@ -28,14 +28,14 @@ jobs:
           npm ci
           ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
       - run: ./node_modules/.bin/ng build
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         with:
           release-type: node
-      - if: ${{ steps.release.outputs.releases_created }}
+      - if: github.event_name == 'push' && steps.release.outputs.releases_created
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/blog/browser
-      - if: ${{ steps.release.outputs.releases_created }}
+      - if: github.event_name == 'push' && steps.release.outputs.releases_created
         uses: actions/deploy-pages@v4
