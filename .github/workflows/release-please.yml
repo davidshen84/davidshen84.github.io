@@ -33,9 +33,9 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         with:
           release-type: node
-      - if: ${{ steps.release.outputs.releases_created }}
+      - if: github.event_name == 'push' && steps.release.outputs.releases_created
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/blog/browser
-      - if: ${{ steps.release.outputs.releases_created }}
+      - if: github.event_name == 'push' && steps.release.outputs.releases_created
         uses: actions/deploy-pages@v4
