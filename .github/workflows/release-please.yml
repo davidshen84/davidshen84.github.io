@@ -28,7 +28,7 @@ jobs:
           npm ci
           ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
       - run: ./node_modules/.bin/ng build
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         with:
