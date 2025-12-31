@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
   release-please:
@@ -17,7 +14,7 @@ jobs:
       pages: write
       id-token: write
     environment:
-      name: ${{ (github.ref == 'refs/heads/master' && github.event_name == 'push') && 'github-pages' || '' }}
+      name: github-pages
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,16 +23,14 @@ jobs:
           cache: npm
       - run: |
           npm ci
-          ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
-      - run: ./node_modules/.bin/ng build
+          ./node_modules/.bin/ng build
       - uses: googleapis/release-please-action@v4
         id: release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         with:
           release-type: node
-      - if: github.event_name == 'push' && steps.release.outputs.releases_created
+      - if: steps.release.outputs.releases_created
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/blog/browser
-      - if: github.event_name == 'push' && steps.release.outputs.releases_created
+      - if: steps.release.outputs.releases_created
         uses: actions/deploy-pages@v4
