@@ -28,14 +28,14 @@
       @if (isHandset$ | async) {
 <button
         (click)="drawer.toggle()"
-       
+
         aria-label="Toggle sidenav"
         mat-icon-button
         type="button">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 }
-      <span>{{ title$ | async | titlecase }}</span>
+      <span>{{ title() | titlecase }}</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
