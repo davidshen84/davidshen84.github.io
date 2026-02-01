@@ -1,9 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
+    [attr.role]="isHandset().matches ? 'dialog' : 'navigation'"
+    [mode]="isHandset().matches ? 'over' : 'side'"
+    [opened]="!isHandset().matches"
     class="sidenav"
     fixedInViewport="true">
     <mat-toolbar color="primary">Menu</mat-toolbar>
@@ -18,24 +18,24 @@
       <a [routerLink]="['settings']" mat-list-item><span>⚙</span>&nbsp;️Settings</a>
       <a [href]="'https://keys.openpgp.org/search?q=' + pubKey" target="_blank">
         <div class="qrcode-container">
-        <qrcode [errorCorrectionLevel]="'M'" [margin]=0 [qrdata]="pubKey" [width]=128></qrcode>
+          <qrcode [errorCorrectionLevel]="'M'" [margin]=0 [qrdata]="pubKey" [width]=128></qrcode>
         </div>
       </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      @if (isHandset$ | async) {
-<button
-        (click)="drawer.toggle()"
-       
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        type="button">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-}
-      <span>{{ title$ | async | titlecase }}</span>
+      @if (isHandset().matches) {
+        <button
+          (click)="drawer.toggle()"
+
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          type="button">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
+      <span>{{ title() | titlecase }}</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

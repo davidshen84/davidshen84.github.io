@@ -8,26 +8,26 @@
   <mat-card>
     <mat-form-field appearance="fill">
       <mat-label>Header</mat-label>
-      <textarea (ngModelChange)="headerSubject.next(header)" [(ngModel)]="header"
+      <textarea (ngModelChange)="header.set($event)" [ngModel]="header()"
                 cdkTextareaAutosize matInput name="header"></textarea>
-      <input [value]="encodedHeader$ | async" matInput readonly/>
+      <input [value]="encodedHeader()" matInput readonly/>
     </mat-form-field>
   </mat-card>
 
   <mat-card>
     <mat-form-field>
       <mat-label>Payload</mat-label>
-      <textarea (ngModelChange)="payloadSubject.next(payload)" [(ngModel)]="payload"
+      <textarea (ngModelChange)="payload.set($event)" [ngModel]="payload()"
                 cdkTextareaAutosize
                 matInput name="payload"></textarea>
-      <input [value]="encodedPayload$ | async" matInput readonly/>
+      <input [value]="encodedPayload()" matInput readonly/>
     </mat-form-field>
   </mat-card>
 
   <mat-card>
     <mat-form-field>
       <mat-label>Private Key</mat-label>
-      <textarea (ngModelChange)="privateKeyInputSubject.next(privateKeyInput)" [(ngModel)]="privateKeyInput"
+      <textarea (ngModelChange)="privateKeyInput.set($event)" [ngModel]="privateKeyInput()"
                 cdkTextareaAutosize matInput name="base64Input"></textarea>
     </mat-form-field>
   </mat-card>
@@ -35,14 +35,14 @@
   <mat-card>
     <mat-form-field>
       <mat-label>Signature</mat-label>
-      <input [value]="signature$ | async" matInput readonly/>
+      <input [value]="signature()" matInput readonly/>
     </mat-form-field>
   </mat-card>
 
   <mat-card>
     <mat-form-field>
       <mat-label>Json Web Token</mat-label>
-      <input [value]="jwt$ | async" matInput readonly/>
+      <input [value]="jwt()" matInput readonly/>
     </mat-form-field>
   </mat-card>
 
