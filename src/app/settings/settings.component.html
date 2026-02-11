@@ -6,7 +6,7 @@
     </mat-expansion-panel-header>
 
     <mat-form-field>
-      <textarea matInput cdkTextareaAutosize [(ngModel)]="privateKey" placeholder="RS256 Private Key"></textarea>
+      <textarea matInput cdkTextareaAutosize [ngModel]="privateKey()" (ngModelChange)="privateKey.set($event)" placeholder="RS256 Private Key"></textarea>
       <mat-icon [color]="keySaved() ? 'primary' : 'warn'">save</mat-icon>
     </mat-form-field>
   </mat-expansion-panel>
