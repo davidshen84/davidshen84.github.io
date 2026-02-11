@@ -26,7 +26,6 @@ import {
   BrowserModule,
   HammerModule,
 } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app/app.routes';
 import { RS256CryptoService } from './app/crypto/rs256-crypto.service';
 import { AuthorizationInterceptorService } from './app/services/authorization-interceptor.service';
@@ -66,7 +65,6 @@ bootstrapApplication(AppComponent, {
       multi: true,
     },
     RS256CryptoService,
-    provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
     provideNgxWebstorage(
       withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),

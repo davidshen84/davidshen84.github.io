@@ -6,9 +6,8 @@
     </mat-expansion-panel-header>
 
     <mat-form-field>
-      <textarea (ngModelChange)="pkChangedSubject.next(pkInput)" [(ngModel)]="pkInput" matInput cdkTextareaAutosize
-                name="pkInput" placeholder="RS256 Private Key"></textarea>
-      <mat-icon [color]="(cryptoKey$ | async) ? 'primary' : 'warn'">save</mat-icon>
+      <textarea matInput cdkTextareaAutosize [ngModel]="privateKey()" (ngModelChange)="privateKey.set($event)" placeholder="RS256 Private Key"></textarea>
+      <mat-icon [color]="keySaved() ? 'primary' : 'warn'">save</mat-icon>
     </mat-form-field>
   </mat-expansion-panel>
 </mat-accordion>

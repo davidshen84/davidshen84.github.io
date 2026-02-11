@@ -1,23 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
+  effect,
   inject,
+  signal,
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { merge, Observable, of, Subject } from 'rxjs';
-import { filter, mergeMap } from 'rxjs/operators';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { TitleService } from '../title.service';
-import { LocalStorage } from 'ngx-webstorage';
-import { AsyncPipe } from '@angular/common';
+import { LocalStorageService } from 'ngx-webstorage';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 const KEY_NAME = 'private-key';
 
@@ -34,39 +31,36 @@ const KEY_NAME = 'private-key';
     ReactiveFormsModule,
     FormsModule,
     MatIconModule,
-    AsyncPipe,
   ],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
   private _cryptoService = inject(RS256CryptoService);
   private _snackBar = inject(MatSnackBar);
   private _title = inject(TitleService);
+  private _localStorage = inject(LocalStorageService);
 
-  @LocalStorage(KEY_NAME, '')
-  public pkInput: string = '';
-  public pkChangedSubject: Subject<string> = new Subject<string>();
-  public cryptoKey$!: Observable<boolean>;
+  public privateKey = signal(this._localStorage.retrieve(KEY_NAME));
+
+  public keySaved = signal(false);
 
   constructor() {
     this._title.setTitle('Settings');
-  }
 
-  ngOnInit() {
-    this.cryptoKey$ = merge(of(this.pkInput), this.pkChangedSubject).pipe(
-      filter((x) => !!x),
-      mergeMap((key) =>
-        fromPromise(
-          this._cryptoService.importKey(key).then(
-            () => {
-              return !!(this.pkInput = key);
-            },
-            (r: Error) => {
-              this._snackBar.open(r.message, '❌', { duration: 1000 });
-              return false;
-            },
-          ),
-        ),
-      ),
-    );
+    effect(async () => {
+      const pk = this.privateKey();
+
+      await this._cryptoService.importKey(pk).then(
+        () => {
+          this._localStorage.store(KEY_NAME, pk);
+          this.keySaved.set(true);
+        },
+
+        (r: Error) => {
+          this._localStorage.store(KEY_NAME, '');
+          this._snackBar.open(r.message, '❌', { duration: 1000 });
+          this.keySaved.set(false);
+        },
+      );
+    });
   }
 }

@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, Signal, signal } from '@angular/core';
 
 /**
  * A service to update the app title (not the browser title).
@@ -8,11 +7,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TitleService {
-  private _title$: BehaviorSubject<string> = new BehaviorSubject('');
+  private _title = signal<string>('');
+  public readonly title: Signal<string> = this._title.asReadonly();
 
   constructor() {}
 
-  public getTitle = (): Observable<string> => this._title$.asObservable();
-
-  public setTitle = (s: string) => this._title$.next(s);
+  public setTitle = (s: string) => this._title.set(s);
 }
