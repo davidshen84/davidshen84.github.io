@@ -7,7 +7,7 @@ Build and configuration
 - Commands (package.json):
   - Install: npm ci (preferred) or npm install
   - Local dev: npm start → ng serve (dev configuration)
-  - Build: npm run build (production by default via architect defaultConfiguration). Use --configuration=development for non‑optimized builds.
+  - Build: npm run build (production by default via architect defaultConfiguration). Use --configuration=development for non-optimized builds.
   - Lint: npm run lint
   - Test: npm test → Karma/Jasmine via @angular/build:karma
 - Builder options (angular.json):
