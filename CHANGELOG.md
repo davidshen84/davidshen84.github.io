@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/davidshen84/davidshen84.github.io/compare/v0.1.0...v0.1.1) (2026-03-07)
+
+
+### Bug Fixes
+
+* add token ([f85b5cd](https://github.com/davidshen84/davidshen84.github.io/commit/f85b5cdad9b2d0717e1f9cce0865d936cd5a4e93))
+
 ## [0.1.0](https://github.com/davidshen84/davidshen84.github.io/compare/v0.0.17...v0.1.0) (2025-12-31)
 
 
