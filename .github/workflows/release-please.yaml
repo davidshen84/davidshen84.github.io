@@ -16,25 +16,25 @@ jobs:
     environment:
       name: github-pages
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         id: release
         with:
           token: ${{ github.token }}
           release-type: node
       - if: steps.release.outputs.releases_created
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - if: steps.release.outputs.releases_created
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.x
+          node-version: 24
           cache: npm
       - if: steps.release.outputs.releases_created
         run: |
           npm ci
           ./node_modules/.bin/ng build
       - if: steps.release.outputs.releases_created
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist/blog/browser
       - if: steps.release.outputs.releases_created
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
