@@ -1,6 +1,6 @@
 import { HttpHandler, HttpRequest } from '@angular/common/http';
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
+import { firstValueFrom, of } from 'rxjs';
 import { RS256CryptoService } from '../crypto/rs256-crypto.service';
 import { StringUtilityService } from '../crypto/string.utility';
 
@@ -37,7 +37,7 @@ describe('AuthorizationInterceptorService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should add Authorization header to the request', waitForAsync(() => {
+  it('should add Authorization header to the request', async () => {
     const cryptoService: RS256CryptoService =
       TestBed.inject(RS256CryptoService);
     const signSpy = spyOn(cryptoService, 'sign').and.returnValue(
@@ -54,20 +54,17 @@ describe('AuthorizationInterceptorService', () => {
     };
     const cloneSpy = spyOn(req, 'clone').and.returnValue(reqClone);
 
-    service
-      .intercept(req, <HttpHandler>{
-        handle: handleSpy,
-      })
-      .subscribe(() => {
-        expect(signSpy).toHaveBeenCalled();
-        expect(
-          cloneSpy.calls.mostRecent().args[0].setHeaders!.Authorization,
-        ).toMatch(/Bearer .*\.sign/);
-        expect(handleSpy).toHaveBeenCalledWith(reqClone);
-      });
-  }));
+    await firstValueFrom(
+      service.intercept(req, <HttpHandler>{ handle: handleSpy }),
+    );
+    expect(signSpy).toHaveBeenCalled();
+    expect(
+      cloneSpy.calls.mostRecent().args[0].setHeaders!.Authorization,
+    ).toMatch(/Bearer .*\.sign/);
+    expect(handleSpy).toHaveBeenCalledWith(reqClone);
+  });
 
-  it('should include exp & nbf in the payload', waitForAsync(() => {
+  it('should include exp & nbf in the payload', async () => {
     const cryptoService: RS256CryptoService =
       TestBed.inject(RS256CryptoService);
     const signSpy = spyOn(cryptoService, 'sign').and.returnValue(
@@ -82,22 +79,19 @@ describe('AuthorizationInterceptorService', () => {
       clone: () => {},
     };
 
-    service
-      .intercept(req, <HttpHandler>{
-        handle: handleSpy,
-      })
-      .subscribe(() => {
-        expect(signSpy).toHaveBeenCalled();
-        let [, data] = signSpy.calls.mostRecent().args[1].split('.');
-        data = strUtlSvc.Base64UrlDecode(data);
-        const dataObj: any = JSON.parse(data);
-        expect(dataObj.exp).not.toBeUndefined();
-        expect(dataObj.nbf).not.toBeUndefined();
-        expect(dataObj.aud).not.toBeUndefined();
-      });
-  }));
+    await firstValueFrom(
+      service.intercept(req, <HttpHandler>{ handle: handleSpy }),
+    );
+    expect(signSpy).toHaveBeenCalled();
+    let [, data] = signSpy.calls.mostRecent().args[1].split('.');
+    data = strUtlSvc.Base64UrlDecode(data);
+    const dataObj: any = JSON.parse(data);
+    expect(dataObj.exp).not.toBeUndefined();
+    expect(dataObj.nbf).not.toBeUndefined();
+    expect(dataObj.aud).not.toBeUndefined();
+  });
 
-  it('should not add Authorization header to the request when signature is not available', waitForAsync(() => {
+  it('should not add Authorization header to the request when signature is not available', async () => {
     const cryptoService: RS256CryptoService =
       TestBed.inject(RS256CryptoService);
     const signSpy = spyOn(cryptoService, 'sign').and.returnValue(
@@ -114,14 +108,11 @@ describe('AuthorizationInterceptorService', () => {
     };
     const cloneSpy = spyOn(req, 'clone').and.returnValue(reqClone);
 
-    service
-      .intercept(req, <HttpHandler>{
-        handle: handleSpy,
-      })
-      .subscribe(() => {
-        expect(signSpy).toHaveBeenCalled();
-        expect(cloneSpy).not.toHaveBeenCalled();
-        expect(handleSpy).toHaveBeenCalledWith(req);
-      });
-  }));
+    await firstValueFrom(
+      service.intercept(req, <HttpHandler>{ handle: handleSpy }),
+    );
+    expect(signSpy).toHaveBeenCalled();
+    expect(cloneSpy).not.toHaveBeenCalled();
+    expect(handleSpy).toHaveBeenCalledWith(req);
+  });
 });

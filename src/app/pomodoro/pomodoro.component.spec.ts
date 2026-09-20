@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PomodoroComponent, PomodoroTimePipe } from './pomodoro.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,8 +14,8 @@ describe('PomodoroComponent', () => {
   let component: PomodoroComponent;
   let fixture: ComponentFixture<PomodoroComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
         MatButtonToggleModule,
@@ -31,7 +31,7 @@ describe('PomodoroComponent', () => {
       ],
     }).compileComponents();
     TestBed.inject(MatSnackBar);
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PomodoroComponent);

@@ -1,4 +1,4 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,8 +11,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
 describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
         QRCodeComponent,
@@ -24,18 +24,18 @@ describe('AppComponent', () => {
       ],
       providers: [provideRouter(routes)],
     }).compileComponents();
-  }));
+  });
 
-  it('should create the app', waitForAsync(() => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
+  });
 
-  it('should have title property set', waitForAsync(() => {
+  it('should have title property set', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).not.toBeNull();
     expect(app.title).not.toBe('');
-  }));
+  });
 });

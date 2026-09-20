@@ -1,5 +1,5 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CanvasShowcaseComponent } from './canvas-showcase.component';
 import { GaService } from '../ga.service';
 import 'hammerjs';
@@ -16,8 +16,8 @@ describe('CanvasShowcaseComponent', () => {
   let component: CanvasShowcaseComponent;
   let fixture: ComponentFixture<CanvasShowcaseComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [RemarkableComponent, CanvasShowcaseComponent],
       providers: [
         GaService,
@@ -26,7 +26,7 @@ describe('CanvasShowcaseComponent', () => {
         provideRouter(routes),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CanvasShowcaseComponent);

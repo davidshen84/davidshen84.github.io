@@ -1,4 +1,4 @@
-import { inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import {
   HttpTestingController,
@@ -18,7 +18,7 @@ describe('BlogPageComponent', () => {
   let component: BlogPageComponent;
   let router: Router;
 
-  beforeEach(waitForAsync(async () => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RemarkableComponent, BlogPageComponent],
       providers: [
@@ -38,13 +38,13 @@ describe('BlogPageComponent', () => {
     spyOn(mock, 'SetPageView').and.callFake(() => {});
     router = TestBed.inject(Router);
     spyOn(router, 'navigate');
-  }));
+  });
 
-  beforeEach(waitForAsync(async () => {
+  beforeEach(async () => {
     const harness = await RouterTestingHarness.create();
     component = await harness.navigateByUrl('blog/x', BlogPageComponent);
     harness.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

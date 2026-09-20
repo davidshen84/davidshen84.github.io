@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavComponent } from './nav.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,7 +17,7 @@ describe('NavComponent', () => {
   let fixture: ComponentFixture<NavComponent>;
   let breakpointObserverMock: jasmine.SpyObj<BreakpointObserver>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async () => {
     breakpointObserverMock = jasmine.createSpyObj('BreakpointObserver', [
       'observe',
     ]);
@@ -25,7 +25,7 @@ describe('NavComponent', () => {
       of({ matches: false, breakpoints: {} }),
     );
 
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
         MatSidenavModule,
@@ -44,7 +44,7 @@ describe('NavComponent', () => {
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should compile', () => {
     expect(component).toBeDefined();
