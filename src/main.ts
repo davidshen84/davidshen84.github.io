@@ -1,8 +1,4 @@
-import {
-  enableProdMode,
-  importProvidersFrom,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
 
 import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
@@ -21,11 +17,7 @@ import {
   withSessionStorage,
 } from 'ngx-webstorage';
 import { LayoutModule } from '@angular/cdk/layout';
-import {
-  bootstrapApplication,
-  BrowserModule,
-  HammerModule,
-} from '@angular/platform-browser';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { routes } from './app/app.routes';
 import { RS256CryptoService } from './app/crypto/rs256-crypto.service';
 import { AuthorizationInterceptorService } from './app/services/authorization-interceptor.service';
@@ -33,6 +25,7 @@ import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import 'hammerjs';
 import { provideRouter, withHashLocation } from '@angular/router';
@@ -43,11 +36,9 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideZoneChangeDetection(),
     provideRouter(routes, withHashLocation()),
     importProvidersFrom(
       BrowserModule,
-      HammerModule,
       LayoutModule,
       ReactiveFormsModule,
       ServiceWorkerModule.register('/ngsw-worker.js', {
@@ -65,7 +56,7 @@ bootstrapApplication(AppComponent, {
       multi: true,
     },
     RS256CryptoService,
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     provideNgxWebstorage(
       withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),
       withLocalStorage(),

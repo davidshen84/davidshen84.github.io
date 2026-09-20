@@ -1,4 +1,10 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService } from '../../title.service';
 import { GaService } from '../../ga.service';
@@ -10,6 +16,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'app-blog-page',
   templateUrl: './blog-page.component.html',
   styleUrls: ['./blog-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RemarkableComponent],
 })
 export class BlogPageComponent extends BaseComponent {
@@ -39,7 +46,7 @@ export class BlogPageComponent extends BaseComponent {
     });
   }
 
-  onBlogLoadError(_: any) {
+  onBlogLoadError() {
     const id = this._idSig();
     this._router.navigate(['blog/notfound', id]);
   }

@@ -1,9 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BlogHomePageComponent } from './blog-home-page.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from '../blog.routes';
@@ -12,15 +13,15 @@ describe('BlogHomePageComponent', () => {
   let component: BlogHomePageComponent;
   let fixture: ComponentFixture<BlogHomePageComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       providers: [
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
         provideRouter(routes),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogHomePageComponent);

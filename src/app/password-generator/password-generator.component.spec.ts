@@ -1,9 +1,4 @@
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  waitForAsync,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,8 +20,8 @@ describe('PasswordGeneratorComponent', () => {
   let matSnackBar: MatSnackBar;
   let openSpy: jasmine.Spy;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
         MatSnackBarModule,
@@ -44,7 +39,7 @@ describe('PasswordGeneratorComponent', () => {
 
     matSnackBar = TestBed.inject(MatSnackBar);
     openSpy = spyOn(matSnackBar, 'open');
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PasswordGeneratorComponent);
@@ -65,7 +60,7 @@ describe('PasswordGeneratorComponent', () => {
     );
   });
 
-  it('should generate new password', fakeAsync(() => {
+  it('should generate new password', () => {
     const copyTarget = fixture.debugElement.query(By.css('#copyTarget'));
     const generateButton = fixture.debugElement.query(By.css('#generate'));
 
@@ -78,5 +73,5 @@ describe('PasswordGeneratorComponent', () => {
     fixture.detectChanges();
 
     expect(copyTarget.nativeElement.value).not.toEqual(oldValue);
-  }));
+  });
 });

@@ -1,11 +1,5 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-  waitForAsync,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RS256CryptoService } from '../rs256-crypto.service';
@@ -21,6 +15,7 @@ import { RemarkableComponent } from '../../remarkable/remarkable.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 
 describe('CryptoRS256Component', () => {
@@ -28,8 +23,8 @@ describe('CryptoRS256Component', () => {
   let fixture: ComponentFixture<CryptoRS256Component>;
   let cryptoService: RS256CryptoService;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
         FormsModule,
@@ -43,11 +38,11 @@ describe('CryptoRS256Component', () => {
       providers: [
         RS256CryptoService,
         GaService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CryptoRS256Component);
@@ -113,39 +108,39 @@ describe('CryptoRS256Component', () => {
       expect(jwt).toContain('test-signature');
     });
 
-    it('should update signature when privateKeyInput changes', fakeAsync(() => {
+    it('should update signature when privateKeyInput changes', async () => {
       const mockSignature = 'mock-signature';
       spyOn(cryptoService, 'sign').and.returnValue(
         Promise.resolve(mockSignature),
       );
 
       component.privateKeyInput.set('test-private-key');
-      tick();
+      await fixture.whenStable();
       fixture.detectChanges();
 
       expect(cryptoService.sign).toHaveBeenCalled();
-    }));
+    });
 
-    it('should set empty signature when privateKeyInput is empty', fakeAsync(() => {
+    it('should set empty signature when privateKeyInput is empty', async () => {
       component.privateKeyInput.set('test-key');
-      tick();
+      await fixture.whenStable();
       fixture.detectChanges();
 
       component.privateKeyInput.set('');
-      tick();
+      await fixture.whenStable();
       fixture.detectChanges();
 
       expect(component.signature()).toBe('');
-    }));
+    });
 
-    it('should handle sign errors gracefully', fakeAsync(() => {
+    it('should handle sign errors gracefully', async () => {
       spyOn(cryptoService, 'sign').and.returnValue(Promise.resolve(''));
 
       component.privateKeyInput.set('invalid-key');
-      tick();
+      await fixture.whenStable();
       fixture.detectChanges();
 
       expect(component.signature()).toBe('');
-    }));
+    });
   });
 });

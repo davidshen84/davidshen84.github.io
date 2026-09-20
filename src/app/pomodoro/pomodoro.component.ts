@@ -7,6 +7,7 @@ import {
   PipeTransform,
   signal,
   inject,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   BehaviorSubject,
@@ -32,7 +33,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { format } from 'date-fns/fp/format';
 import { addMilliseconds } from 'date-fns';
-import { curry, flip } from 'rambda/immutable';
 
 const ONE_SECOND = 1_000; // milliseconds
 const ONE_MINUTE = 60; // seconds
@@ -56,10 +56,8 @@ interface Pomodoro {
 })
 export class PomodoroTimePipe implements PipeTransform {
   private formatter = format('mm:ss');
-  private addToMilliseconds = curry(flip(addMilliseconds))(0);
-
   transform(value: number): string {
-    return this.formatter(this.addToMilliseconds(value * ONE_SECOND));
+    return this.formatter(addMilliseconds(0, value * ONE_SECOND));
   }
 }
 
@@ -67,6 +65,7 @@ export class PomodoroTimePipe implements PipeTransform {
   selector: 'app-pomodoro',
   templateUrl: './pomodoro.component.html',
   styleUrls: ['./pomodoro.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MatCardModule,
     MatButtonToggleModule,

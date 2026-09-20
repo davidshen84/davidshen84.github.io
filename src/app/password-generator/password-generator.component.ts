@@ -1,5 +1,11 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TitleService } from '../title.service';
@@ -23,6 +29,7 @@ const prime = 21001;
   templateUrl: './password-generator.component.html',
   styleUrls: ['./password-generator.component.scss'],
   providers: [GaService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MatCardModule,
     MatCheckboxModule,

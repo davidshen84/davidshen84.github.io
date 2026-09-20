@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NavComponent } from './nav/nav.component';
 import { GaService } from './ga.service';
 
@@ -7,6 +7,7 @@ import { GaService } from './ga.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [GaService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NavComponent],
 })
 export class AppComponent {}

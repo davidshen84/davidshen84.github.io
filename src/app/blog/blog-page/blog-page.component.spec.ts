@@ -1,4 +1,4 @@
-import { inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import {
   HttpTestingController,
@@ -9,6 +9,7 @@ import { RemarkableComponent } from '../../remarkable/remarkable.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { GaService } from '../../ga.service';
@@ -17,12 +18,12 @@ describe('BlogPageComponent', () => {
   let component: BlogPageComponent;
   let router: Router;
 
-  beforeEach(waitForAsync(async () => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RemarkableComponent, BlogPageComponent],
       providers: [
         GaService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
         provideRouter([
           {
@@ -37,20 +38,17 @@ describe('BlogPageComponent', () => {
     spyOn(mock, 'SetPageView').and.callFake(() => {});
     router = TestBed.inject(Router);
     spyOn(router, 'navigate');
-  }));
+  });
 
-  beforeEach(waitForAsync(async () => {
+  beforeEach(async () => {
     const harness = await RouterTestingHarness.create();
     component = await harness.navigateByUrl('blog/x', BlogPageComponent);
     harness.detectChanges();
-  }));
+  });
 
-  it('should create', inject(
-    [HttpTestingController],
-    (_: HttpTestingController) => {
-      expect(component).toBeTruthy();
-    },
-  ));
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
   it('should make http request to x.md file', inject(
     [HttpTestingController],
