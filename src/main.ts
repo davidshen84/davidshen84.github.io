@@ -21,11 +21,7 @@ import {
   withSessionStorage,
 } from 'ngx-webstorage';
 import { LayoutModule } from '@angular/cdk/layout';
-import {
-  bootstrapApplication,
-  BrowserModule,
-  HammerModule,
-} from '@angular/platform-browser';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { routes } from './app/app.routes';
 import { RS256CryptoService } from './app/crypto/rs256-crypto.service';
 import { AuthorizationInterceptorService } from './app/services/authorization-interceptor.service';
@@ -33,6 +29,7 @@ import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import 'hammerjs';
 import { provideRouter, withHashLocation } from '@angular/router';
@@ -47,7 +44,6 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withHashLocation()),
     importProvidersFrom(
       BrowserModule,
-      HammerModule,
       LayoutModule,
       ReactiveFormsModule,
       ServiceWorkerModule.register('/ngsw-worker.js', {
@@ -65,7 +61,7 @@ bootstrapApplication(AppComponent, {
       multi: true,
     },
     RS256CryptoService,
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     provideNgxWebstorage(
       withNgxWebstorageConfig({ separator: ':', caseSensitive: true }),
       withLocalStorage(),

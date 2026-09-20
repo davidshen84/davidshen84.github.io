@@ -7,6 +7,7 @@ import { RemarkableComponent } from '../../remarkable/remarkable.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from '../tfjs.routes';
@@ -20,7 +21,7 @@ describe('TfLinearRegressionComponent', () => {
       imports: [RemarkableComponent, TfLinearRegressionComponent],
       providers: [
         GaService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
         provideRouter(routes),
       ],

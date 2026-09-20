@@ -7,6 +7,7 @@ import {
   PipeTransform,
   signal,
   inject,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   BehaviorSubject,
@@ -67,6 +68,7 @@ export class PomodoroTimePipe implements PipeTransform {
   selector: 'app-pomodoro',
   templateUrl: './pomodoro.component.html',
   styleUrls: ['./pomodoro.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MatCardModule,
     MatButtonToggleModule,

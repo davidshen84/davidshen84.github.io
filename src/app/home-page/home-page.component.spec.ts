@@ -5,6 +5,7 @@ import { RemarkableComponent } from '../remarkable/remarkable.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 
 describe('HomePageComponent', () => {
@@ -15,7 +16,7 @@ describe('HomePageComponent', () => {
     TestBed.configureTestingModule({
       imports: [RemarkableComponent, HomePageComponent],
       providers: [
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],
     }).compileComponents();

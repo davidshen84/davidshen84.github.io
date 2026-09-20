@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { TitleService } from '../title.service';
 import { RemarkableComponent } from '../remarkable/remarkable.component';
 
@@ -6,6 +6,7 @@ import { RemarkableComponent } from '../remarkable/remarkable.component';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RemarkableComponent],
 })
 export class HomePageComponent {

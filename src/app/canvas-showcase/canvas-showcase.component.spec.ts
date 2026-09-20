@@ -2,12 +2,12 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CanvasShowcaseComponent } from './canvas-showcase.component';
 import { GaService } from '../ga.service';
-import { HammerModule } from '@angular/platform-browser';
 import 'hammerjs';
 import { RemarkableComponent } from '../remarkable/remarkable.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from '../app.routes';
@@ -18,10 +18,10 @@ describe('CanvasShowcaseComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HammerModule, RemarkableComponent, CanvasShowcaseComponent],
+      imports: [RemarkableComponent, CanvasShowcaseComponent],
       providers: [
         GaService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
         provideRouter(routes),
       ],

@@ -21,6 +21,7 @@ import { RemarkableComponent } from '../../remarkable/remarkable.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 
 describe('CryptoRS256Component', () => {
@@ -43,7 +44,7 @@ describe('CryptoRS256Component', () => {
       providers: [
         RS256CryptoService,
         GaService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],
     }).compileComponents();

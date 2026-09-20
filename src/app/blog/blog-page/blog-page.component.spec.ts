@@ -9,6 +9,7 @@ import { RemarkableComponent } from '../../remarkable/remarkable.component';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { GaService } from '../../ga.service';
@@ -22,7 +23,7 @@ describe('BlogPageComponent', () => {
       imports: [RemarkableComponent, BlogPageComponent],
       providers: [
         GaService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
         provideRouter([
           {
@@ -45,12 +46,9 @@ describe('BlogPageComponent', () => {
     harness.detectChanges();
   }));
 
-  it('should create', inject(
-    [HttpTestingController],
-    (_: HttpTestingController) => {
-      expect(component).toBeTruthy();
-    },
-  ));
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
   it('should make http request to x.md file', inject(
     [HttpTestingController],

@@ -11,10 +11,11 @@ import {
   Output,
   signal,
   SimpleChanges,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Remarkable } from 'remarkable';
-// @ts-ignore
+// @ts-expect-error remarkable-katex does not provide TypeScript declarations.
 import rkatex from 'remarkable-katex';
 import { of, Subject } from 'rxjs';
 import { catchError, filter, map, share, switchMap } from 'rxjs/operators';
@@ -46,6 +47,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'app-remarkable',
   templateUrl: './remarkable.component.html',
   styleUrls: ['./remarkable.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [],
 })
 export class RemarkableComponent implements OnChanges, AfterContentChecked {
@@ -100,12 +102,12 @@ export class RemarkableComponent implements OnChanges, AfterContentChecked {
         if (lang && hljs.getLanguage(lang)) {
           try {
             return hljs.highlight(str, { language: lang }).value;
-          } catch (err) {}
+          } catch {}
         }
 
         try {
           return hljs.highlightAuto(str).value;
-        } catch (err) {}
+        } catch {}
 
         return ''; // use external default escaping
       },

@@ -9,6 +9,7 @@ import { SimpleChange } from '@angular/core';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 
 describe('RemarkableComponent', () => {
@@ -20,7 +21,7 @@ describe('RemarkableComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RemarkableComponent],
       providers: [
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting(),
       ],
     }).compileComponents();
