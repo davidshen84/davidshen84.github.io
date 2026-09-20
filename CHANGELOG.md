@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/davidshen84/davidshen84.github.io/compare/v0.1.1...v0.2.0) (2026-09-20)
+
+
+### Features
+
+* announce Angular 22 upgrade ([80ad9cd](https://github.com/davidshen84/davidshen84.github.io/commit/80ad9cd9c9eaefcb69a500c1dc41aeb3b65b6009))
+
 ## [0.1.1](https://github.com/davidshen84/davidshen84.github.io/compare/v0.1.0...v0.1.1) (2026-03-07)
 
 
