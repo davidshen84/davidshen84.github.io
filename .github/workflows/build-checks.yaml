@@ -10,10 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: npm
+          cache: pnpm
       - run: |
-          npm ci
-          ./node_modules/.bin/ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
+          pnpm install --frozen-lockfile
+          pnpm exec ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
